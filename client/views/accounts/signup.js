@@ -25,25 +25,3 @@ Template.signup.events = {
   }
 };
 
-Template.deviceManagerChoice.events = {
-  'click .create-device-manager': function() {
-    Session.set('accountType', 'device-manager');
-  }
-}
-Template.contentManagerChoice.events = {
-  'click .create-content-manager': function() {
-    Session.set('accountType', 'content-manager');
-  }
-}
-
-Template.signup.helpers({
-  chooseAccountType: function() {
-    return !Session.get('accountType');
-  },
-  createDeviceManagerAccount: function() {
-    return Session.equals('accountType', 'device-manager');
-  },
-  createContentManagerAccount: function() {
-    return Session.equals('accountType', 'content-manager');
-  }
-});

@@ -71,11 +71,17 @@ Router.map(function() {
 
   this.route('content');
 
-  // Users
+  // Accounts
 
   this.route('login'); 
 
-  this.route('signup'); 
+  this.route('signup');
+  this.route('createContentManagerAccount', {
+    path: '/signup/content-manager'
+  });
+  this.route('createDeviceManagerAccount', {
+    path: '/signup/device-manager'
+  });
 
   this.route('forgot'); 
 
