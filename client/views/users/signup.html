@@ -1,19 +1,85 @@
 <template name="signup">
-  <form>
-    <div class="control-group">
-      <label>Username</label>
-      <div class="controls"><input id="username" name="username" type="text" value="" /></div>
+  {{#if chooseAccountType}}
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="centered">
+          <h1>What is your role?</h1>
+        </div>
+      </div>
     </div>
-    <div class="control-group">
-      <label>Email</label>
-      <div class="controls"><input id="email" name="email" type="text" value="" /></div>
+    <div class="row account-type-choices">
+      <div class="col-sm-6">
+        {{> deviceManagerChoice}}
+      </div>
+      <div class="col-sm-6">
+        {{> contentManagerChoice}}
+      </div>
     </div>
-    <div class="control-group">
-      <label>Password</label>
-      <div class="controls"><input id="password" name="password" type="password" value="" /></div>
+  {{/if}}
+  {{#if createDeviceManagerAccount}}
+    <div class="centered">
+      <h1>Create Your Device Manager Account</h1>
+      <form>
+        <div class="control-group">
+          <label>Username</label>
+          <div class="controls"><input id="username" name="username" type="text" value="" /></div>
+        </div>
+        <div class="control-group">
+          <label>Email</label>
+          <div class="controls"><input id="email" name="email" type="text" value="" /></div>
+        </div>
+        <div class="control-group">
+          <label>Password</label>
+          <div class="controls"><input id="password" name="password" type="password" value="" /></div>
+        </div>
+        <div class="form-actions">
+          <input type="submit" class="button" value="Sign Up" />
+        </div>
+      </form>
     </div>
-    <div class="form-actions">
-      <input type="submit" class="button" value="Sign Up" />
-    </div>  
-  </form>
+  {{/if}}
+  {{#if createAdvertiserAccount}}
+    <div class="centered">
+      <h1>Create Your Advertiser Account</h1>
+      <form>
+        <div class="control-group">
+          <label>Username</label>
+          <div class="controls"><input id="username" name="username" type="text" value="" /></div>
+        </div>
+        <div class="control-group">
+          <label>Email</label>
+          <div class="controls"><input id="email" name="email" type="text" value="" /></div>
+        </div>
+        <div class="control-group">
+          <label>Password</label>
+          <div class="controls"><input id="password" name="password" type="password" value="" /></div>
+        </div>
+        <div class="form-actions">
+          <input type="submit" class="button" value="Sign Up" />
+        </div>
+      </form>
+    </div>
+  {{/if}}
+</template>
+
+<template name="deviceManagerChoice">
+  <div class="centered">
+    <h2>Device Manager</h2>
+    <p class="lead">
+      Operating a device at your business? Creating a device manager account will allow you to add
+      and control devices across all of the locations you manage.
+    </p>
+    <button class='btn btn-primary create-device-manager'>Create Device Manager Account</button>
+  </div>
+</template>
+
+<template name="contentManagerChoice">
+  <div class="centered">
+    <h2>Content Manager</h2>
+    <p class="lead">
+      Restaurant owner? Event Promoter? Local retail store? Reach your customers by creating content
+      to be distributed to our network of devices.
+    </p>
+    <button class='btn btn-primary create-content-manager'>Create Content Manager Account</button>
+  </div>
 </template>
