@@ -11,7 +11,7 @@ Client-side Router.
 Router.configure({
   layoutTemplate: 'layout',
   loadingTemplate: 'loading',
-  notFoundTemplate: 'notFound',
+  notFoundTemplate: 'notFound'
 });
 
 // Filters
