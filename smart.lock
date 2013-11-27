@@ -3,7 +3,8 @@
   "dependencies": {
     "basePackages": {
       "iron-router": {},
-      "bootstrap-3": {}
+      "bootstrap-3": {},
+      "roles": {}
     },
     "packages": {
       "iron-router": {
@@ -15,6 +16,11 @@
         "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
         "tag": "v0.3.6",
         "commit": "711dbcabe333c8714298b2fd1de97fdcdae6efa7"
+      },
+      "roles": {
+        "git": "https://github.com/alanning/meteor-roles.git",
+        "tag": "v1.0.6",
+        "commit": "f81cbf7c765a4ed7e16a580c288db6f10a90856b"
       }
     }
   }
