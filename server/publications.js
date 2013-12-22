@@ -17,3 +17,13 @@ Meteor.publish('allItems', function() {
 Meteor.publish('singleItem', function(id) {
   return Items.find(id);
 });
+
+// Experiences
+
+Meteor.publish('allExperiences', function() {
+  return Experiences.find();
+});
+
+Meteor.publish('singleExperience', function(id) {
+  return Experiences.find(id);
+});

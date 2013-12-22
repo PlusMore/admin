@@ -63,6 +63,32 @@ Router.map(function() {
   });
 
 
+  // Experiences
+
+  this.route('experiences', {
+    waitOn: function () {
+      return Meteor.subscribe('allExperiences');
+    },
+    data: function () {
+      return {
+        experiences: Experiences.find()
+      }
+    }
+  });
+
+  this.route('experiences', {
+    path: '/experience/:_id',
+    waitOn: function () {
+      return Meteor.subscribe('singleExperience', this.params._id);
+    },
+    data: function () {
+      return {
+        experience: Experiences.findOne(this.params._id)
+      }
+    }
+  });
+
+
   // Pages
 
   this.route('homepage', {
@@ -81,6 +107,10 @@ Router.map(function() {
   });
   this.route('createDeviceManagerAccount', {
     path: '/signup/device-manager'
+  });
+
+  this.route('deviceManager', {
+    path: 'device-manager'
   });
 
   this.route('forgot'); 
