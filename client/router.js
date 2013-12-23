@@ -76,7 +76,7 @@ Router.map(function() {
     }
   });
 
-  this.route('experiences', {
+  this.route('experience', {
     path: '/experience/:_id',
     waitOn: function () {
       return Meteor.subscribe('singleExperience', this.params._id);
@@ -94,8 +94,6 @@ Router.map(function() {
   this.route('homepage', {
     path: '/'
   });
-
-  this.route('content');
 
   // Accounts
 

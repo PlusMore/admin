@@ -30,17 +30,38 @@ if (Experiences.find().count() === 0) {
 
   Experiences.insert({
     title: "Eridanus",
-    body: "Eridanus is a constellation. It is represented as a river; its name is the Ancient Greek name for the Po River."
+    body: "Eridanus is a constellation. It is represented as a river; its name is the Ancient Greek name for the Po River.",
+    thumbnail: {
+      title: 'Eridanus',
+      lead: 'Eridanus is a constellation.',
+      location: 'Upper East Side',
+      price: 299,
+      imgSrc: ''
+    }
   });
 
   Experiences.insert({
     title: "Cassiopeia",
-    body: "Cassiopeia is a constellation in the northern sky, named after the vain queen Cassiopeia in Greek mythology, who boasted about her unrivalled beauty."
+    body: "Cassiopeia is a constellation in the northern sky, named after the vain queen Cassiopeia in Greek mythology, who boasted about her unrivalled beauty.",
+    thumbnail: {
+      title: 'Cassiopeia',
+      lead: 'Cassiopeia is a constellation.',
+      location: 'Upper East Side',
+      price: 299,
+      imgSrc: ''
+    }
   });
 
   Experiences.insert({
     title: "Scorpius",
-    body: "Scorpius, sometimes known as Scorpio, is one of the constellations of the zodiac."
+    body: "Scorpius, sometimes known as Scorpio, is one of the constellations of the zodiac.",
+    thumbnail: {
+      title: 'Scorpius',
+      lead: 'Scorpius is a constellation.',
+      location: 'Upper East Side',
+      price: 299,
+      imgSrc: ''
+    }
   });
 
 }
