@@ -1,6 +1,10 @@
 <template name="experienceThumbnail">
-  <h3>{{thumbnail.title}}</h3>
+  <h3>
+    {{thumbnail.title}}
+    <small>${{thumbnail.price}}</small>
+  </h3>
   <p class="lead">{{thumbnail.lead}}</p>
+  <div class="location">{{thumbnail.location}}</div>
   <a href="{{pathFor 'experience' this}}">
     <img src="{{thumbnail.imgSrc}}" class="img-responsive" alt="Responsive image">
   </a>
