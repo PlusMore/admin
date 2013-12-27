@@ -5,7 +5,6 @@
       "iron-router": {},
       "bootstrap-3": {},
       "roles": {},
-      "collection2": {},
       "autoform": {}
     },
     "packages": {
@@ -23,11 +22,6 @@
         "git": "https://github.com/alanning/meteor-roles.git",
         "tag": "v1.2.6",
         "commit": "f2a9058281f8f2fe028767841d7445aadd6893cf"
-      },
-      "collection2": {
-        "git": "https://github.com/aldeed/meteor-collection2.git",
-        "tag": "v0.2.15",
-        "commit": "0fe469aa0c01eda0563c8802e17914307960de79"
       },
       "autoform": {
         "git": "https://github.com/aldeed/meteor-autoform.git",

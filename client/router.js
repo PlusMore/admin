@@ -65,6 +65,15 @@ Router.map(function() {
 
   // Experiences
 
+  this.route('createExperience', {
+    path: '/create-experience',
+    data: function() {
+      return {
+        createExperienceSchema: new AutoForm(Schema.createExperience)
+      }
+    }
+  })
+
   this.route('experiences', {
     waitOn: function () {
       return Meteor.subscribe('allExperiences');
@@ -108,8 +117,12 @@ Router.map(function() {
   });
 
   this.route('deviceManager', {
-    path: 'device-manager'
+    path: '/device-manager'
   });
+
+  this.route('contentManager', {
+    path: '/content-manager'
+  })
 
   this.route('forgot'); 
 
