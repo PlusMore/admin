@@ -26,17 +26,16 @@ Template.experiences.events({
         $currentTarget = $(e.currentTarget);
 
     if (!$currentTarget.hasClass('selected')) {
-      $currentTarget.addClass('selected');
-      $currentTarget.removeClass('unselected');
-      Session.set('lastScrollPosition', $('body').scrollTop());
-      $('body').scrollTop(0);
-
       $(e.currentTarget)
         .css('position', 'absolute')
         .css('top', rect.top)
         .css('right', rect.right)
         .css('bottom', rect.bottom)
         .css('left', rect.left);
+      $currentTarget.addClass('selected');
+      $currentTarget.removeClass('unselected');
+      Session.set('lastScrollPosition', $('body').scrollTop());
+      $('body').scrollTop(0);
     }
     else {
       $currentTarget.addClass('unselected');
