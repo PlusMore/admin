@@ -28,6 +28,8 @@ Template.experiences.events({
     if (!$currentTarget.hasClass('selected')) {
       $currentTarget.addClass('selected');
       $currentTarget.removeClass('unselected');
+      Session.set('lastScrollPosition', $('body').scrollTop());
+      $('body').scrollTop(0);
 
       $(e.currentTarget)
         .css('position', 'absolute')
@@ -39,10 +41,8 @@ Template.experiences.events({
     else {
       $currentTarget.addClass('unselected');
       $currentTarget.removeClass('selected');
+      $('body').scrollTop(Session.get('lastScrollPosition'));
 
-      $currentTarget.bind("webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd", function(){
-        alert('hi');
-      });
 //      TODO: on animationend event remove .css() props
       $(e.currentTarget)
         .css('position', '')
