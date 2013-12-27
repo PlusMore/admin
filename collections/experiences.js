@@ -26,6 +26,8 @@ Experiences.allow({
 
 Meteor.methods({
   createExperience: function(experience){
+    check(experience, Schema.createExperience);
+
     if(can.createExperience(Meteor.user()))
       Experiences.insert(experience);
   },

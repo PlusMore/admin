@@ -3,6 +3,7 @@
   "packages": {
     "iron-router": {},
     "bootstrap-3": {},
-    "roles": {}
+    "roles": {},
+    "autoform": {}
   }
 }
