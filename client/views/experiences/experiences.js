@@ -19,5 +19,9 @@ Template.experiences.rendered = function () {
 };
 
 Template.experiences.events({
-  //
+  'click .experience-thumbnail-container': function(e) {
+    e.preventDefault();
+
+    $(e.currentTarget).toggleClass('selected');
+  }
 });

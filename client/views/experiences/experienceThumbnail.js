@@ -18,5 +18,5 @@ Template.experienceThumbnail.rendered = function () {
 };
 
 Template.experienceThumbnail.events({
-  //
+
 });
