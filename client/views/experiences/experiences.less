@@ -1,19 +1,47 @@
+@-webkit-keyframes zoom-in {
+  100% {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    bottom:0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+@-moz-keyframes zoom-in {
+  100% {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    bottom:0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+@-webkit-keyframes zoom-out {
+  0% {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    bottom:0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+
 .experiences {
   .experience-thumbnail-container {
     padding:3px;
     position: relative;
-
-    &.selected {
-      position: absolute;
-      z-index: 1000;
-      top: 0;
-      bottom:0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-    }
 
     .caption {
       position: absolute;
@@ -41,6 +69,31 @@
       .neighborhood {
 
       }
+    }
+
+    &.selected {
+      //      transition: all 1s;
+      //      position: absolute;
+      //      z-index: 1000;
+      //      top: 0;
+      //      bottom:0;
+      //      left: 0;
+      //      right: 0;
+      //      width: 100%;
+      //      margin: 0;
+      //      padding: 0;
+      // TODO: productionize with less mixins
+      -webkit-animation: zoom-in .5s;
+      -moz-animation: zoom-in .5s;
+      -webkit-animation-fill-mode: forwards;
+    }
+
+    &.unselected {
+//      TODO: make animation out, use animationend event
+//      TODO: productionize with less mixins
+//      -webkit-animation: zoom-out 1s;
+//      -moz-animation: zoom-out 1s;
+//      -webkit-animation-fill-mode: forwards;
     }
   }
 }
