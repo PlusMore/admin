@@ -16,14 +16,11 @@ Meteor.startup(function(){
     for(var x = 0; x < 20; x++) {
       Experiences.insert({
         title: "Ad " + x,
+        lead: 'Lorem ipsum dolor sit amit.',
+        imgSrc: 'http://upload.wikimedia.org/wikipedia/commons/c/c0/Hot_air_balloon_over_Brisbane.jpg',
         body: "Scorpius, sometimes known as Scorpio, is one of the constellations of the zodiac.",
         price: getRandomInt(20,300),
-        neighborhood: 'Upper East Side',
-        thumbnail: {
-          title: 'Ad ' + x,
-          lead: 'Scorpius is a constellation.',
-          imgSrc: 'http://upload.wikimedia.org/wikipedia/commons/c/c0/Hot_air_balloon_over_Brisbane.jpg'
-        }
+        neighborhood: 'Upper East Side'
       });
     }
 

@@ -1,0 +1,27 @@
+<template name="experienceDisplay">
+    <img src="{{imgSrc}}" class="img-responsive">
+    <div class="caption">
+      <div class="thumbnail-content">
+        <h2 class='title'>
+          {{title}}
+          <small class='price'>${{price}}</small>
+        </h2>
+        <p class="lead">{{lead}}</p>
+        <div class="neighborhood">
+          {{neighborhood}}
+        </div>
+      </div>
+      <div class="selected-content">
+        <h1>
+          {{title}}
+          <small>${{price}} per ticket</small>
+        </h1>
+        <p class="lead">{{lead}}</p>
+        <div class="neighborhood">
+          {{neighborhood}}
+        </div>
+        <p>{{body}}</p>
+        <button class="btn btn-primary">Buy Now</button>
+      </div>
+    </div>
+</template>
