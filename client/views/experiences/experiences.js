@@ -39,6 +39,7 @@ Template.experiences.events({
       $currentTarget.addClass('selected');
       $currentTarget.removeClass('unselected');
 
+      $currentTarget.find('.content').addClass('col-md-5');
 
       Session.set('lastScrollPosition', $('body').scrollTop());
       $('body').scrollTop(0);
@@ -48,6 +49,7 @@ Template.experiences.events({
       $currentTarget.removeClass('selected');
       $('body').scrollTop(Session.get('lastScrollPosition'));
 
+      $currentTarget.find('.content').removeClass('col-md-5');
 //      TODO: on animationend event remove .css() props
       $(e.currentTarget)
         .css('position', '')
@@ -55,6 +57,7 @@ Template.experiences.events({
         .css('right', '')
         .css('bottom', '')
         .css('left', '');
+
     }
 
   }

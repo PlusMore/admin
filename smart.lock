@@ -5,7 +5,8 @@
       "iron-router": {},
       "bootstrap-3": {},
       "roles": {},
-      "autoform": {}
+      "autoform": {},
+      "fastclick": {}
     },
     "packages": {
       "iron-router": {
@@ -25,8 +26,13 @@
       },
       "autoform": {
         "git": "https://github.com/aldeed/meteor-autoform.git",
-        "tag": "v0.4.5",
-        "commit": "256cc92673108bf31f9d81345e6f56da47993d23"
+        "tag": "v0.4.6",
+        "commit": "287c81d41a9422fb009a82b141256214cf2caa1e"
+      },
+      "fastclick": {
+        "git": "https://github.com/percolatestudio/meteor-fastclick",
+        "tag": "v0.6.7",
+        "commit": "fcb3bfd34d9f6874e626b4e24e8f54107938db41"
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
