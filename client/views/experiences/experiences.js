@@ -26,14 +26,20 @@ Template.experiences.events({
         $currentTarget = $(e.currentTarget);
 
     if (!$currentTarget.hasClass('selected')) {
+//    First we set position to absolute and the coordinate
+//    values from getBoundingRect. This makes the div stay in the
+//    same position, but is now absolute so the animation can expand
+//    to fill the screen.
       $(e.currentTarget)
-        .css('position', 'absolute')
+        .css('position', 'fixed')
         .css('top', rect.top)
         .css('right', rect.right)
         .css('bottom', rect.bottom)
         .css('left', rect.left);
       $currentTarget.addClass('selected');
       $currentTarget.removeClass('unselected');
+
+
       Session.set('lastScrollPosition', $('body').scrollTop());
       $('body').scrollTop(0);
     }
