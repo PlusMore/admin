@@ -11,7 +11,10 @@ Client-side Router.
 Router.configure({
   layoutTemplate: 'layout',
   loadingTemplate: 'loading',
-  notFoundTemplate: 'notFound'
+  notFoundTemplate: 'notFound',
+  yieldTemplates: {
+    'header': { to: 'header' }
+  }
 });
 
 // Filters
@@ -75,6 +78,9 @@ Router.map(function() {
   })
 
   this.route('experiences', {
+    yieldTemplates: {
+      'experienceHeader': { to: 'header' }
+    },
     waitOn: function () {
       return Meteor.subscribe('allExperiences');
     },
