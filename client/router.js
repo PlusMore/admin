@@ -134,14 +134,4 @@ Router.map(function() {
 
   this.route('forgot');
 
-  this.route('image', {
-    where: 'server',
-    path: '/cfs/:directory/:filename',
-    action:  function() {
-      var filename = this.params.filename;
-      this.response.writeHead(200, {'Content-Type': 'image'});
-      this.response.end('hello from server');
-    }
-  });
-
 });
