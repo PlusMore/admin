@@ -2,23 +2,98 @@
 
 ## Items ##
 
-All code related to the Items collection goes here. 
+All code related to the Items collection goes here.
 
 /+ ---------------------------------------------------- */
 
-Experiences = new Meteor.Collection('experiences');
+Experiences = new Meteor.Collection('experiences', {
+  schema: new SimpleSchema({
+    owner: {
+      type: String,
+      label: 'Owner Id'
+    },
+    title: {
+      type: String,
+      label: 'Title'
+    },
+    lead: {
+      type: String,
+      label: 'Lead'
+    },
+    price: {
+      type: Number,
+      label: "Price"
+    },
+    street: {
+      type: String,
+      max: 100
+    },
+    city: {
+      type: String,
+      max: 50
+    },
+    state: {
+      type: String,
+      regEx: /^A[LKSZRAEP]|C[AOT]|D[EC]|F[LM]|G[AU]|HI|I[ADLN]|K[SY]|LA|M[ADEHINOPST]|N[CDEHJMVY]|O[HKR]|P[ARW]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]$/
+    },
+    zip: {
+      type: String,
+      regEx: /^[0-9]{5}$/
+    },
+    phone: {
+      type: String,
+      label: 'Phone'
+    },
+    website: {
+      type: String,
+      label: 'Website'
+    },
+    description: {
+      type: String,
+      label: 'Description'
+    },
+    imgSrc: {
+      type: String,
+      label: 'Image URL'
+    },
+    thumbnailSrc: {
+      type: String,
+      label: 'Thumbnail URL'
+    }
+  })
+});
+ExperiencesFS = new CollectionFS('experiences');
+ExperiencesFS.filter({
+  allow: {
+    contentTypes: ['image/*']
+  }
+});
 
 // Allow/Deny
 
 Experiences.allow({
-  insert: function(userId, doc){
+  insert: function(userId, doc) {
     return can.createExperience(userId);
   },
-  update:  function(userId, doc, fieldNames, modifier){
+  update:  function(userId, doc, fieldNames, modifier) {
     return can.editExperience(userId, doc);
   },
-  remove:  function(userId, doc){
+  remove:  function(userId, doc) {
     return can.removeExperience(userId, doc);
+  }
+});
+
+ExperiencesFS.allow({
+  insert: function(userId, file) {
+    return can.createExperience(userId);
+  },
+  update: function (userId, files, fields, modifier) {
+    return _.all(files, function(file) {
+      return can.editExperience(userId, file);
+    });
+  },
+  remove: function(userId, file) {
+    return can.removeExperience(userId, file);
   }
 });
 

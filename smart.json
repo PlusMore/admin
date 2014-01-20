@@ -6,6 +6,8 @@
     "roles": {},
     "autoform": {},
     "fastclick": {},
-    "collection2": {}
+    "collection2": {},
+    "collectionFS": {},
+    "inspector": {}
   }
 }

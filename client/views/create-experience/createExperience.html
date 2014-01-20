@@ -1,0 +1,44 @@
+<template name="createExperience">
+  {{#autoForm schema=createExperienceSchema}}
+    <legend>Upload images to start</legend>
+    <div class="row">
+      <div class="col-md-6">
+        {{> uploadExperiencePhoto}}
+        {{> experiencePhotoPreview}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <a href="#" class="btn btn-primary">Create Experience</a>
+      </div>
+    </div>
+  {{/autoForm}}
+</template>
+
+<template name="uploadExperiencePhoto">
+    <div class="form-group">
+      <label for="image">Image</label>
+      <input type="file"
+             class="form-control experiencePhotoUploader"
+             id="image"
+             multiple>
+    </div>
+</template>
+
+<template name="experiencePhotoPreview">
+  {{#each photos}}
+    <li><p>{{_id}}</p>
+      <img src="{{cfsFileUrl 'default1'}}" alt="{{_id}}">
+    </li>
+  {{/each}}
+</template>
+
+<template name="enterExperienceDetails">
+  {{afQuickField 'title'}}
+  {{afQuickField 'lead'}}
+  {{afQuickField 'price'}}
+  {{afQuickField 'location'}}
+  {{afQuickField 'phone'}}
+  {{afQuickField 'website'}}
+  {{afQuickField 'description'}}
+</template>

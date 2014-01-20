@@ -15,3 +15,8 @@ roles
 autoform
 collection2
 fastclick
+collectionFS
+underscore
+jquery
+cfs-public-folder
+inspector

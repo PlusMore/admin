@@ -28,7 +28,7 @@ var filters = {
   isLoggedIn: function() {
     if (!(Meteor.loggingIn() || Meteor.user())) {
       alert('Please Log In First.')
-      this.stop(); 
+      this.stop();
     }
   }
 
@@ -71,8 +71,10 @@ Router.map(function() {
   this.route('createExperience', {
     path: '/create-experience',
     data: function() {
+      var createExperienceForm = new AutoForm(Experiences);
+      Session.set('createExperienceSessionId', Meteor.uuid());
       return {
-        createExperienceSchema: new AutoForm(Schema.createExperience)
+        createExperienceSchema: createExperienceForm
       }
     }
   })
@@ -112,7 +114,7 @@ Router.map(function() {
 
   // Accounts
 
-  this.route('login'); 
+  this.route('login');
 
   this.route('signup');
   this.route('createContentManagerAccount', {
@@ -130,6 +132,16 @@ Router.map(function() {
     path: '/content-manager'
   })
 
-  this.route('forgot'); 
+  this.route('forgot');
+
+  this.route('image', {
+    where: 'server',
+    path: '/cfs/:directory/:filename',
+    action:  function() {
+      var filename = this.params.filename;
+      this.response.writeHead(200, {'Content-Type': 'image'});
+      this.response.end('hello from server');
+    }
+  });
 
 });

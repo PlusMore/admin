@@ -2,7 +2,7 @@
 
 ## Publications ##
 
-All publications-related code. 
+All publications-related code.
 
 /+ ---------------------------------------------------- */
 
@@ -26,4 +26,12 @@ Meteor.publish('allExperiences', function() {
 
 Meteor.publish('singleExperience', function(id) {
   return Experiences.find(id);
+});
+
+Meteor.publish('experiencePhotos', function() {
+  return ExperiencesFS.find();
+});
+
+Meteor.publish('singleExperiencePhoto', function(id) {
+  return ExperiencesFS.find(id);
 });
