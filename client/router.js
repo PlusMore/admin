@@ -112,7 +112,24 @@ Router.map(function() {
     path: '/'
   });
 
-  // Accounts
+  // Accounts-entry
+  this.route('signUpContentManager', {
+    template: 'entrySignUp',
+    path: '/sign-up/content-manager',
+    before: function() {
+      Session.set('userSignUpType', 'content-manager');
+    }
+  });
+
+  this.route('signUpContentManager', {
+    template: 'entrySignUp',
+    path: '/sign-up/device-manager',
+    before: function() {
+      Session.set('userSignUpType', 'device-manager');
+    }
+  });
+
+  // // Accounts
 
   this.route('login');
 
@@ -120,9 +137,9 @@ Router.map(function() {
   this.route('createContentManagerAccount', {
     path: '/signup/content-manager'
   });
-  this.route('createDeviceManagerAccount', {
-    path: '/signup/device-manager'
-  });
+  // this.route('createDeviceManagerAccount', {
+  //   path: '/signup/device-manager'
+  // });
 
   this.route('deviceManager', {
     path: '/device-manager'
