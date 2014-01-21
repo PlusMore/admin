@@ -1,0 +1,11 @@
+<template name="dashboard">
+  {{#if isInRole 'admin'}}
+    <h1>Admin Dashboard</h1>
+  {{/if}}
+  {{#if isInRole 'content-manager'}}
+    <h1>Content Management Dashboard</h1>
+  {{/if}}
+  {{#if isInRole 'device-manager'}}
+    <h1>Device Management Dashboard</h1>
+  {{/if}}
+</template>
