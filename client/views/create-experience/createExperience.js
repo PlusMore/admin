@@ -2,11 +2,11 @@ Template.uploadExperiencePhoto.events({
   'change .experiencePhotoUploader': function(e) {
     var files = e.target.files,
         meta = {
-          owner: this.userId,
-          createSession: Session.get('createExperienceSessionId')
+          owner: Meteor.userId()
         },
         result = [];
 
+    debugger;
     if (files.length)
       for (var i = 0, f; f = files[i]; i++) {
         result.pop( ExperiencesFS.storeFile(f, meta) );
@@ -20,6 +20,7 @@ Template.experiencePhotoPreview.helpers({
     var query = {
       'metadata.createSession': Session.get('createExperienceSessionId')
     }
-    return ExperiencesFS.find(query);
+    debugger;
+    return ExperiencesFS.find({'metadata.owner': Meteor.userId()});
   }
 });

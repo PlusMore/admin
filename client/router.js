@@ -21,50 +21,59 @@ Router.configure({
 
 var filters = {
 
-  myFilter: function () {
-    // do something
-  },
-
   isLoggedIn: function() {
     if (!(Meteor.loggingIn() || Meteor.user())) {
-      alert('Please Log In First.')
+      this.stop();
+      Router.go('/404');
+    }
+  },
+  isLoggedOut: function() {
+    if (Meteor.user()) {
+      this.stop();
+      Router.go('dashboard');
+    }
+  }
+};
+
+var helpers = {
+  analyticsRequest: function() {
+    console.log('Make analytics request here', this, Meteor.user());
+  },
+  showLoadingBar: function() {
+    if (this.ready()) {
+      NProgress.done();
+    } else {
+      NProgress.start();
       this.stop();
     }
   }
+};
 
-}
+// If logged in, redirect requests to account pages to dashboard
+Router.before(filters.isLoggedOut, {only: [
+  "entrySignIn",
+  "entrySignUp",
+  "homepage"
+]});
 
-Router.before(filters.myFilter, {only: ['items']});
+// Check authenticated
+Router.before(filters.isLoggedIn, {only: [
+  'dashboard',
+  'createExperience'
+]});
+
+// Show loading bar for any route that loads a subscription
+Router.before(helpers.showLoadingBar, {only: [
+  'experiences',
+  'eperience'
+]});
+
+
+Router.after(helpers.analyticsRequest);
 
 // Routes
 
 Router.map(function() {
-
-  // Items
-
-  this.route('items', {
-    waitOn: function () {
-      return Meteor.subscribe('allItems');
-    },
-    data: function () {
-      return {
-        items: Items.find()
-      }
-    }
-  });
-
-  this.route('item', {
-    path: '/items/:_id',
-    waitOn: function () {
-      return Meteor.subscribe('singleItem', this.params._id);
-    },
-    data: function () {
-      return {
-        item: Items.findOne(this.params._id)
-      }
-    }
-  });
-
 
   // Experiences
 

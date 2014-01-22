@@ -8,6 +8,7 @@
     "fastclick": {},
     "collection2": {},
     "collectionFS": {},
-    "inspector": {}
+    "inspector": {},
+    "nprogress": {}
   }
 }
