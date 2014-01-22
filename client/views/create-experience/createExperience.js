@@ -6,7 +6,6 @@ Template.uploadExperiencePhoto.events({
         },
         result = [];
 
-    debugger;
     if (files.length)
       for (var i = 0, f; f = files[i]; i++) {
         result.pop( ExperiencesFS.storeFile(f, meta) );
@@ -20,7 +19,6 @@ Template.experiencePhotoPreview.helpers({
     var query = {
       'metadata.createSession': Session.get('createExperienceSessionId')
     }
-    debugger;
     return ExperiencesFS.find({'metadata.owner': Meteor.userId()});
   }
 });
