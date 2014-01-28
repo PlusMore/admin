@@ -16,8 +16,18 @@ Events.find({'name': 'experience photo uploaded'}).observe({
 });
 
 eventEmitter.on('event:experience photo uploaded', function(event) {
-  Experiences.insert({
+  var id = Experiences.insert({
     owner: event.payload.owner,
-    photoId: event.payload._id
+    photoId: event.payload._id,
+    active: false
+  }, {validate: false});
+
+  var experience = Experiences.findOne(id);
+  Meteor.call('insertEvent', {
+    name: 'experience created',
+    type: 'domain',
+    userId: event.userId,
+    payload: experience,
+    message: "Experience {0} created as a result of {1}".format(experience._id, event.name)
   });
 });

@@ -1,5 +1,9 @@
 <template name="experienceDisplay">
-    <img src="{{imgSrc}}" class="img-responsive">
+    {{#if photoId}}
+      <img src="{{cfsFileUrl 'default1' fileId=photoId collection='ExperiencesFS'}}" class="img-responsive" alt="{{photoId}}">
+    {{else}}
+      <img src="{{imgSrc}}" class="img-responsive">
+    {{/if}}
     <div class="content">
       <div class="thumbnail-content">
         <h2 class='title'>

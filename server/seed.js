@@ -80,8 +80,9 @@ Meteor.startup(function(){
           website: 'http://www.google.com',
           description: 'This is a description',
           imgSrc: 'http://upload.wikimedia.org/wikipedia/commons/c/c0/Hot_air_balloon_over_Brisbane.jpg',
-          thumbnailSrc: 'http://upload.wikimedia.org/wikipedia/commons/c/c0/Hot_air_balloon_over_Brisbane.jpg'
-        });
+          thumbnailSrc: 'http://upload.wikimedia.org/wikipedia/commons/c/c0/Hot_air_balloon_over_Brisbane.jpg',
+          active: true
+        }, {validate: false});
       }
       catch (err) {
         console.log(err);

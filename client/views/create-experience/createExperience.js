@@ -12,8 +12,7 @@ Template.uploadExperiencePhoto.events({
         var photoId = ExperiencesFS.storeFile(f, meta)
         result.pop(photoId);
 
-        photo = ExperiencesFS.findOne(photoId);
-        debugger;
+        var photo = ExperiencesFS.findOne(photoId);
 
         Meteor.call('insertEvent', {
           name: 'experience photo uploaded',
@@ -21,7 +20,7 @@ Template.uploadExperiencePhoto.events({
           userId: userId,
           payload: photo,
           message: "Photo {0} uploaded by {1}".format(photoId, userId)
-        })
+        });
       }
     }
     return result;
