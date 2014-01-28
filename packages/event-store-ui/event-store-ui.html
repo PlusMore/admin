@@ -1,0 +1,20 @@
+<template name="ESEvents">
+  {{#if hasEvents}}
+  <ul>
+    {{#each events}}
+      {{> ESEvent}}
+    {{/each}}
+  </ul>
+  {{else}}
+    <p class="lead">No Events.</p>
+  {{/if}}
+</template>
+
+<template name="ESEvent">
+  <li>
+    <div><strong>{{name}}</strong><span>Received: {{received}}</span></div>
+    <div><em>{{type}}</em></div>
+    <div>{{message}}</div>
+    <div>{{json payload}}
+  </li>
+</template>

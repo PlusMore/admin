@@ -22,9 +22,14 @@ Router.configure({
 var filters = {
 
   isLoggedIn: function() {
-    if (!(Meteor.loggingIn() || Meteor.user())) {
+    if (! Meteor.user()) {
+      if (Meteor.loggingIn()) {
+        this.render(this.loadingTemplate);
+      }
+      else {
+        this.render('entrySignIn');
+      }
       this.stop();
-      Router.go('/404');
     }
   },
   isLoggedOut: function() {

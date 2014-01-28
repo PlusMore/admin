@@ -1,18 +1,12 @@
 <template name="createExperience">
-  {{#autoForm schema=createExperienceSchema}}
-    <legend>Upload images to start</legend>
-    <div class="row">
-      <div class="col-md-6">
-        {{> uploadExperiencePhoto}}
-        {{> experiencePhotoPreview}}
-      </div>
+  <h1>Create Experience</h1>
+  <h3>Upload images to start</h3>
+  <div class="row">
+    <div class="col-md-6">
+      {{> uploadExperiencePhoto}}
     </div>
-    <div class="row">
-      <div class="col-md-6">
-        <a href="#" class="btn btn-primary">Create Experience</a>
-      </div>
-    </div>
-  {{/autoForm}}
+  </div>
+  {{> uploadedPhotos}}
 </template>
 
 <template name="uploadExperiencePhoto">
@@ -25,11 +19,13 @@
     </div>
 </template>
 
-<template name="experiencePhotoPreview">
+<template name="uploadedPhotos">
   {{#each photos}}
-    <li><p>{{_id}}</p>
-      <img src="{{cfsFileUrl 'default1'}}" alt="{{_id}}">
-    </li>
+    <div class="row">
+      <div class="col-xs-12">
+        <img src="{{cfsFileUrl 'default1'}}" class="img-responsive" alt="{{_id}}">
+      </div>
+    </div>
   {{/each}}
 </template>
 

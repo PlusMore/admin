@@ -52,13 +52,9 @@ Experiences = new Meteor.Collection('experiences', {
       type: String,
       label: 'Description'
     },
-    imgSrc: {
+    photoId: {
       type: String,
-      label: 'Image URL'
-    },
-    thumbnailSrc: {
-      type: String,
-      label: 'Thumbnail URL'
+      label: 'Photo Id'
     }
   })
 });
