@@ -64,13 +64,14 @@ Router.before(filters.isLoggedOut, {only: [
 // Check authenticated
 Router.before(filters.isLoggedIn, {only: [
   'dashboard',
-  'createExperience'
+  'manageExperiences'
 ]});
 
 // Show loading bar for any route that loads a subscription
 Router.before(helpers.showLoadingBar, {only: [
   'experiences',
-  'eperience'
+  'eperience',
+  'manageExperiences'
 ]});
 
 
@@ -82,8 +83,8 @@ Router.map(function() {
 
   // Experiences
 
-  this.route('createExperience', {
-    path: '/create-experience',
+  this.route('manageExperiences', {
+    path: '/manage-experiences',
     waitOn: function() {
       return Meteor.subscribe('myInProgressExperiences')
     }

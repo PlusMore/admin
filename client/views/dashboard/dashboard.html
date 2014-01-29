@@ -4,6 +4,7 @@
   {{/if}}
   {{#if isInRole 'content-manager'}}
     <h1>Content Management Dashboard</h1>
+    <a class="btn btn-primary" href="{{pathFor 'manageExperiences'}}">Manage Experiences</a>
   {{/if}}
   {{#if isInRole 'device-manager'}}
     <h1>Device Management Dashboard</h1>
