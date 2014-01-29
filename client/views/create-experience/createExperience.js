@@ -36,28 +36,15 @@ Template.uploadedPhotos.helpers({
   }
 });
 
-Template.inProgressExperiences.helpers({
+Template.myExperiences.helpers({
   experiences: function() {
-    return Experiences.find({owner: Meteor.userId(), inProgress: true});
+    return Experiences.find({owner: Meteor.userId()});
   }
 });
 
-Template.inProgressExperience.helpers({
+Template.editExperience.helpers({
   experienceSchema: function() {
     var experiencesForm = new AutoForm(Experiences);
-    experiencesForm.hooks({
-      //called when any operation succeeds, where operation will be
-      //"insert", "update", "remove", or the method name.
-      onSuccess: function(operation, result, template) {
-        debugger;
-      },
-
-      //called when any operation fails, where operation will be
-      //"insert", "update", "remove", or the method name.
-      onError: function(operation, error, template) {
-        debugger;
-      }
-    });
     return experiencesForm;
   }
 });

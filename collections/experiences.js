@@ -18,7 +18,12 @@ Experiences = new Meteor.Collection('experiences', {
     },
     price: {
       type: Number,
-      label: "Price"
+      label: "Price",
+      optional: true
+    },
+    venueName: {
+      type: String,
+      label: 'Venue Name'
     },
     street: {
       type: String,
@@ -47,6 +52,10 @@ Experiences = new Meteor.Collection('experiences', {
     description: {
       type: String,
       label: 'Description'
+    },
+    active: {
+      type: Boolean,
+      label: 'Is Active?'
     }
   })
 });
@@ -100,5 +109,8 @@ Meteor.methods({
     }else{
       throw new Meteor.Error(403, 'You do not have the rights to delete this experience.')
     }
+  },
+  enterExperienceDetails: function(experience) {
+    console.log(experience);
   }
 });
