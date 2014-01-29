@@ -43,6 +43,7 @@
           {{cfsQueueProgressBar "ExperiencesFS" fileId=photoId class="uploadBar"}}
         {{else}}
           <img src="{{cfsFileUrl 'default1' fileId=photoId collection='ExperiencesFS'}}" class="img-responsive" alt="{{photoId}}">
+          <em>{{photoName}}</em>
         {{/if}}
       </div>
       {{#autoForm schema=experienceSchema doc=this id=this._id}}

@@ -16,11 +16,32 @@ Events.find({'name': 'experience photo uploaded'}).observe({
 });
 
 eventEmitter.on('event:experience photo uploaded', function(event) {
+  /*
+    event.payload =
+      _id: "YG2uAxrJbCbfJsZbk"
+      chunkSize: 262144
+      complete: false
+      contentType: "image/jpeg"
+      countChunks: 4
+      currentChunk: -1
+      encoding: "utf-8"
+      fileHandler: Object
+      filename: "bagatelle.jpg"
+      handledAt: null
+      length: "1009864"
+      md5: null
+      metadata: Object
+      numChunks: 0
+      owner: "YRFK2FmeAWdWHtxPK"
+      uploadDate: 1391034442913
+  */
   var id = Experiences.insert({
     owner: event.payload.owner,
     photoId: event.payload._id,
+    photoName: event.payload.filename,
     active: false,
-    inProgress: true
+    inProgress: true,
+    created: new Date()
   }, {validate: false});
 
   var experience = Experiences.findOne(id);
