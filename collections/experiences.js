@@ -8,10 +8,6 @@ All code related to the Items collection goes here.
 
 Experiences = new Meteor.Collection('experiences', {
   schema: new SimpleSchema({
-    owner: {
-      type: String,
-      label: 'Owner Id'
-    },
     title: {
       type: String,
       label: 'Title'
@@ -51,10 +47,6 @@ Experiences = new Meteor.Collection('experiences', {
     description: {
       type: String,
       label: 'Description'
-    },
-    photoId: {
-      type: String,
-      label: 'Photo Id'
     }
   })
 });

@@ -6,27 +6,32 @@ All publications-related code.
 
 /+ ---------------------------------------------------- */
 
-// Publish all items
-
-Meteor.publish('allItems', function() {
-  return Items.find();
-});
-
-// Publish a single item
-
-Meteor.publish('singleItem', function(id) {
-  return Items.find(id);
-});
-
 // Experiences
 
 Meteor.publish('allExperiences', function() {
   return Experiences.find();
 });
 
+Meteor.publish('activeExperiences', function() {
+  return Experiences.find({active: true}, {
+    /*
+    sort: Sort specifier,
+    skip: Number,
+    limit: Number,
+    fields: Field specifier,
+    reactive: Boolean,
+    transform: Function
+    */
+  });
+})
+
 Meteor.publish('singleExperience', function(id) {
   return Experiences.find(id);
 });
+
+Meteor.publish('myInProgressExperiences', function() {
+  return Experiences.find({owner: this.userId, inProgress: true});
+})
 
 Meteor.publish('experiencePhotos', function() {
   return ExperiencesFS.find();

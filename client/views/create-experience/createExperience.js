@@ -35,3 +35,29 @@ Template.uploadedPhotos.helpers({
     return ExperiencesFS.find({'metadata.owner': Meteor.userId()});
   }
 });
+
+Template.inProgressExperiences.helpers({
+  experiences: function() {
+    return Experiences.find({owner: Meteor.userId(), inProgress: true});
+  }
+});
+
+Template.inProgressExperience.helpers({
+  experienceSchema: function() {
+    var experiencesForm = new AutoForm(Experiences);
+    experiencesForm.hooks({
+      //called when any operation succeeds, where operation will be
+      //"insert", "update", "remove", or the method name.
+      onSuccess: function(operation, result, template) {
+        debugger;
+      },
+
+      //called when any operation fails, where operation will be
+      //"insert", "update", "remove", or the method name.
+      onError: function(operation, error, template) {
+        debugger;
+      }
+    });
+    return experiencesForm;
+  }
+});

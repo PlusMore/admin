@@ -6,7 +6,7 @@
       {{> uploadExperiencePhoto}}
     </div>
   </div>
-  {{> uploadedPhotos}}
+  {{> inProgressExperiences}}
 </template>
 
 <template name="uploadExperiencePhoto">
@@ -29,12 +29,46 @@
   {{/each}}
 </template>
 
-<template name="enterExperienceDetails">
-  {{afQuickField 'title'}}
-  {{afQuickField 'lead'}}
-  {{afQuickField 'price'}}
-  {{afQuickField 'location'}}
-  {{afQuickField 'phone'}}
-  {{afQuickField 'website'}}
-  {{afQuickField 'description'}}
+<template name="inProgressExperiences">
+  {{#each experiences}}
+    {{> inProgressExperience}}
+  {{/each}}
+</template>
+
+<template name="inProgressExperience">
+    <div class="row in-progress-experience">
+      <div class="col-md-4">
+        <legend>Photo</legend>
+        <img src="{{cfsFileUrl 'default1' fileId=photoId collection='ExperiencesFS'}}" class="img-responsive" alt="{{photoId}}">
+      </div>
+      {{#autoForm schema=experienceSchema doc=this id=this._id}}
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-6">
+            <legend>Experience Details</legend>
+            {{afQuickField 'title'}}
+            {{afQuickField 'lead'}}
+            {{afQuickField 'price'}}
+            {{afQuickField 'description'}}
+            {{afQuickField 'website'}}
+          </div>
+          <div class="col-md-6">
+            <legend>Contact Info</legend>
+            {{afQuickField 'street'}}
+            {{afQuickField 'city'}}
+            {{afQuickField 'state'}}
+            {{afQuickField 'zip'}}
+            {{afQuickField 'phone'}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-offset-6 col-md-6">
+            <button type="reset" class="btn btn-default">Reset</button>
+            &nbsp;
+            <button type="submit" class="btn btn-primary update">Save Experience Details</button>
+          </div>
+        </div>
+      </div>
+    {{/autoForm}}
+  </div>
 </template>

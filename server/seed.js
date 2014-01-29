@@ -59,34 +59,33 @@ Meteor.startup(function(){
     _.each(users, createUser);
   }
 
-  if (Experiences.find().count() === 0) {
-    var admin = Meteor.users.findOne({'emails.address': 'admin@plusmore.com'});
-    var contentManager = Meteor.users.findOne({'emails.address': 'cm@plusmore.com'});
-    var deviceManager = Meteor.users.findOne({'emails.address': 'dm@plusmore.com'});
+  // if (Experiences.find().count() === 0) {
+  //   var admin = Meteor.users.findOne({'emails.address': 'admin@plusmore.com'});
+  //   var contentManager = Meteor.users.findOne({'emails.address': 'cm@plusmore.com'});
+  //   var deviceManager = Meteor.users.findOne({'emails.address': 'dm@plusmore.com'});
 
-    for(var x = 0; x < 20; x++) {
-      var ownerId = (x < 10) ? admin._id : contentManager._id;
-      try {
-        Experiences.insert({
-          owner: ownerId,
-          title: "Ad " + x,
-          lead: 'Lorem ipsum dolor sit amit.',
-          price: getRandomInt(20,300),
-          street: '123 Street st.',
-          city: 'New York',
-          state: 'NY',
-          zip: '10128',
-          phone: '555-555-5555',
-          website: 'http://www.google.com',
-          description: 'This is a description',
-          imgSrc: 'http://upload.wikimedia.org/wikipedia/commons/c/c0/Hot_air_balloon_over_Brisbane.jpg',
-          thumbnailSrc: 'http://upload.wikimedia.org/wikipedia/commons/c/c0/Hot_air_balloon_over_Brisbane.jpg',
-          active: true
-        }, {validate: false});
-      }
-      catch (err) {
-        console.log(err);
-      }
-    }
-  }
+  //   for(var x = 0; x < 20; x++) {
+  //     var ownerId = (x < 10) ? admin._id : contentManager._id;
+  //     try {
+  //       Experiences.insert({
+  //         owner: ownerId,
+  //         title: "Ad " + x,
+  //         lead: 'Lorem ipsum dolor sit amet.',
+  //         price: getRandomInt(20,300),
+  //         street: '123 Street st.',
+  //         city: 'New York',
+  //         state: 'NY',
+  //         zip: '10128',
+  //         phone: '555-555-5555',
+  //         website: 'http://www.google.com',
+  //         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, animi distinctio placeat dolorum excepturi vero magnam odit suscipit officia porro est nisi dolores repellat sequi aspernatur magni ab unde nulla.',
+  //         photoId: null,
+  //         active: true
+  //       }, {validate: false});
+  //     }
+  //     catch (err) {
+  //       console.log(err);
+  //     }
+  //   }
+  // }
 });

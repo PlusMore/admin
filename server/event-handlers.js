@@ -19,7 +19,8 @@ eventEmitter.on('event:experience photo uploaded', function(event) {
   var id = Experiences.insert({
     owner: event.payload.owner,
     photoId: event.payload._id,
-    active: false
+    active: false,
+    inProgress: true
   }, {validate: false});
 
   var experience = Experiences.findOne(id);
