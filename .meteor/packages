@@ -23,3 +23,5 @@ inspector
 accounts-ui
 accounts-entry
 nprogress
+event-store
+event-store-ui

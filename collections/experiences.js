@@ -8,10 +8,6 @@ All code related to the Items collection goes here.
 
 Experiences = new Meteor.Collection('experiences', {
   schema: new SimpleSchema({
-    owner: {
-      type: String,
-      label: 'Owner Id'
-    },
     title: {
       type: String,
       label: 'Title'
@@ -22,7 +18,12 @@ Experiences = new Meteor.Collection('experiences', {
     },
     price: {
       type: Number,
-      label: "Price"
+      label: "Price",
+      optional: true
+    },
+    venueName: {
+      type: String,
+      label: 'Venue Name'
     },
     street: {
       type: String,
@@ -52,13 +53,9 @@ Experiences = new Meteor.Collection('experiences', {
       type: String,
       label: 'Description'
     },
-    imgSrc: {
-      type: String,
-      label: 'Image URL'
-    },
-    thumbnailSrc: {
-      type: String,
-      label: 'Thumbnail URL'
+    active: {
+      type: Boolean,
+      label: 'Is Active?'
     }
   })
 });
@@ -112,5 +109,8 @@ Meteor.methods({
     }else{
       throw new Meteor.Error(403, 'You do not have the rights to delete this experience.')
     }
+  },
+  enterExperienceDetails: function(experience) {
+    console.log(experience);
   }
 });

@@ -22,9 +22,14 @@ Router.configure({
 var filters = {
 
   isLoggedIn: function() {
-    if (!(Meteor.loggingIn() || Meteor.user())) {
+    if (! Meteor.user()) {
+      if (Meteor.loggingIn()) {
+        this.render(this.loadingTemplate);
+      }
+      else {
+        this.render('entrySignIn');
+      }
       this.stop();
-      Router.go('/404');
     }
   },
   isLoggedOut: function() {
@@ -79,12 +84,8 @@ Router.map(function() {
 
   this.route('createExperience', {
     path: '/create-experience',
-    data: function() {
-      var createExperienceForm = new AutoForm(Experiences);
-      Session.set('createExperienceSessionId', Meteor.uuid());
-      return {
-        createExperienceSchema: createExperienceForm
-      }
+    waitOn: function() {
+      return Meteor.subscribe('myInProgressExperiences')
     }
   })
 
@@ -93,7 +94,7 @@ Router.map(function() {
       'experienceHeader': { to: 'header' }
     },
     waitOn: function () {
-      return Meteor.subscribe('allExperiences');
+      return Meteor.subscribe('activeExperiences');
     },
     data: function () {
       return {
