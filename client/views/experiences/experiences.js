@@ -45,20 +45,21 @@ Template.experiences.events({
       $('body').scrollTop(0);
     }
     else {
-      $currentTarget.addClass('unselected');
-      $currentTarget.removeClass('selected');
-      $('body').scrollTop(Session.get('lastScrollPosition'));
 
-      $currentTarget.find('.content').removeClass('col-md-5');
-//      TODO: on animationend event remove .css() props
-      $(e.currentTarget)
-        .css('position', '')
-        .css('top', '')
-        .css('right', '')
-        .css('bottom', '')
-        .css('left', '');
+      if (! $(e.target).closest('.content').length) {
+        $currentTarget.addClass('unselected');
+        $currentTarget.removeClass('selected');
+        $('body').scrollTop(Session.get('lastScrollPosition'));
 
+        $currentTarget.find('.content').removeClass('col-md-5');
+  //      TODO: on animationend event remove .css() props
+        $(e.currentTarget)
+          .css('position', '')
+          .css('top', '')
+          .css('right', '')
+          .css('bottom', '')
+          .css('left', '');
+      }
     }
-
   }
 });
