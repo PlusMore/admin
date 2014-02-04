@@ -19,7 +19,7 @@ Template.experiences.rendered = function () {
 };
 
 Template.experiences.events({
-  'click .experience-thumbnail-container': function(e) {
+  'click .experience': function(e) {
     e.preventDefault();
 
     var rect = e.currentTarget.getBoundingClientRect(),

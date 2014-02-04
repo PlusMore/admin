@@ -11,8 +11,12 @@
   }
 }
 
+.experiences-container {
+  width: 100%;
+}
+
 .experiences {
-  .experience-thumbnail-container {
+  .experience {
     padding:3px;
     position: relative;
     border-radius: 10px;
@@ -27,7 +31,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background-color: rgba(0,0,0,.5);
+      background-color: rgba(0,0,0,.91);
       margin: 3px;
       padding: 10px;
       color: white;
@@ -55,6 +59,65 @@
       }
       .selected-content {
         display: none;
+
+        h1 {
+          font-weight: 100;
+          font-size: 33pt;
+          margin-bottom: 5px;
+        }
+
+        p.lead {
+          font-weight: 100;
+          font-size: 16pt;
+          margin-bottom: 0;
+        }
+
+        .buy {
+          margin-bottom: 30px;
+
+          .price-container {
+            font-weight: 100;
+            font-size: 65pt;
+
+            small.currency {
+              vertical-align: super;
+              font-size: 25pt;
+            }
+
+            small.per-ticket {
+              font-size: 20pt;
+            }
+          }
+
+          button.btn {
+            font-size: 25pt;
+            font-weight: 200;
+            padding: 5px 40px;
+            margin-left: 5px;
+          }
+        }
+
+        .venue {
+          font-weight: 100;
+          font-size: 13pt;
+          margin-bottom: 20px;
+
+          a.get-directions {
+            text-transform: uppercase;
+            font-weight: 500;
+            color: rgb(0, 174, 239);
+          }
+
+          .name {
+            font-weight: 300;
+          }
+
+        }
+
+        .description {
+          font-weight: 100;
+          font-size: 13pt;
+        }
       }
 
       .selected-content > .close {
@@ -96,6 +159,7 @@
         bottom: 0;
         margin: 0;
         border-radius: 0;
+        padding: 20px;
 
         .thumbnail-content {
           display: none;

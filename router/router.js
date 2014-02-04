@@ -11,10 +11,7 @@ Client-side Router.
 Router.configure({
   layoutTemplate: 'layout',
   loadingTemplate: 'loading',
-  notFoundTemplate: 'notFound',
-  yieldTemplates: {
-    'header': { to: 'header' }
-  }
+  notFoundTemplate: 'notFound'
 });
 
 // Filters
@@ -91,9 +88,7 @@ Router.map(function() {
   })
 
   this.route('experiences', {
-    yieldTemplates: {
-      'experienceHeader': { to: 'header' }
-    },
+    layoutTemplate: 'experiencesLayout',
     waitOn: function () {
       return Meteor.subscribe('activeExperiences');
     },
@@ -106,6 +101,7 @@ Router.map(function() {
 
   this.route('experience', {
     path: '/experience/:_id',
+    layoutTemplate: 'experiencesLayout',
     waitOn: function () {
       return Meteor.subscribe('singleExperience', this.params._id);
     },

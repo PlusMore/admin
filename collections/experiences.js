@@ -1,8 +1,8 @@
 /* ---------------------------------------------------- +/
 
-## Items ##
+## Experiences ##
 
-All code related to the Items collection goes here.
+All code related to the Experiences collection goes here.
 
 /+ ---------------------------------------------------- */
 

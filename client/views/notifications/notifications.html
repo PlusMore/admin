@@ -1,0 +1,35 @@
+<template name="notifications">
+  <div class="list-group">
+    {{#if notificationCount}}
+      {{#each notifications}}
+        {{> notification}}
+      {{/each}}
+    {{else}}
+      <a href="#" class="list-group-item">
+        <h4 class="list-group-item-heading">No notifications</h4>
+        <p class="list-group-item-text">Create some more interests to get more matches.</p>
+      </a>
+    {{/if}}
+  </div>
+</template>
+
+<template name="notification">
+  {{#if isInquiry}}
+    <a href="{{pathForInquiryShow}}" class="list-group-item {{type}} {{additionalClasses}} notification">
+      <div class="media">
+        <span class="pull-left" href="#">
+          <i class="media-object icon-envelope"></i>
+        </span>
+        <div class="media-body">
+          <h4 class="media-heading">{{symbol}}</h4>
+          {{#if inquiryForSellInterest}}
+            An Institutional Buyer is inquiring about your interest to {{interest.type}} {{interest.quantity}} {{interest.unit}} at ${{interest.price}}
+          {{/if}}
+          {{#if inquiryForBuyInterest}}
+            An Institutional Seller is inquiring about your interest to {{interest.type}} {{interest.quantity}} {{interest.unit}} at ${{interest.price}}
+          {{/if}}
+        </div>
+      </div>
+    </a>
+  {{/if}}
+</template>

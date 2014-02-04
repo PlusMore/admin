@@ -1,35 +1,50 @@
 <template name="experienceDisplay">
-    {{#if photoId}}
-      <img src="{{cfsFileUrl 'default1' fileId=photoId collection='ExperiencesFS'}}" class="img-responsive" alt="{{photoId}}">
-    {{else}}
-      <img src="{{imgSrc}}" class="img-responsive">
-    {{/if}}
+    <img src="{{cfsFileUrl 'default1' fileId=photoId collection='ExperiencesFS'}}" class="img-responsive" alt="{{photoId}}">
     <div class="content">
       <div class="thumbnail-content">
-        <h2 class='title'>
-          {{title}}
-          <small class='price'>${{price}}</small>
-        </h2>
-        <p class="lead">{{lead}}</p>
-        <div class="neighborhood">
-          {{neighborhood}}
-        </div>
+        {{> thumbnailContent}}
       </div>
       <div class="selected-content">
-        <button type="button" class="close" aria-hidden="true">&times;</button>
-        <h1>
-          {{title}}
-          <small>${{price}} per ticket</small>
-        </h1>
-        <p class="lead">{{lead}}</p>
-        <div class="address">
-          <div>{{street}}</div>
-          <div>{{city}}, {{state}} {{zip}}<div>
-        </div>
-        <div class="phone">{{phone}}</div>
-        <div class="website">{{website}}</div>
-        <p>{{description}}</p>
-        <button class="btn btn-primary btn-lg">Buy Now</button>
+        {{> selectedContent}}
       </div>
     </div>
+</template>
+
+<template name="thumbnailContent">
+  <h2 class='title'>
+    {{title}}
+    {{#if price}}
+    <small class='price'>${{price}}</small>
+    {{/if}}
+  </h2>
+  <p class="lead">{{lead}}</p>
+  <div class="neighborhood">
+    {{neighborhood}}
+  </div>
+</template>
+
+<template name="selectedContent">
+  <button type="button" class="close" aria-hidden="true">&times;</button>
+  <h1>
+    {{title}}
+  </h1>
+  <p class="lead">{{lead}}</p>
+  {{#if price}}
+    <div class="buy">
+      <div class="price-container">
+        <small class="currency">$&nbsp;</small><span class="price">{{price}}</span><small class="per-ticket">&nbsp;per ticket</small>
+      </div>
+      <button class="btn">buy now!</button>
+    </div>
+  {{/if}}
+  <div class="venue">
+    <a href="#" class="get-directions">Get Directions</a>
+
+    <div class="name">{{venueName}}</div>
+    <div>{{street}}</div>
+    <div>{{city}}, {{state}} {{zip}}</div>
+    <div>{{phone}}</div>
+    <a href="{{website}}">{{website}}</a>
+  </div>
+  <p class="description">{{description}}</p>
 </template>
