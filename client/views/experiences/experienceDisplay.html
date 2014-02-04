@@ -2,15 +2,15 @@
     <img src="{{cfsFileUrl 'default1' fileId=photoId collection='ExperiencesFS'}}" class="img-responsive" alt="{{photoId}}">
     <div class="content">
       <div class="thumbnail-content">
-        {{> thumbnailContent}}
+        {{> experienceThumbailDetails}}
       </div>
       <div class="selected-content">
-        {{> selectedContent}}
+        {{> experienceDetails}}
       </div>
     </div>
 </template>
 
-<template name="thumbnailContent">
+<template name="experienceThumbailDetails">
   <h2 class='title'>
     {{title}}
     {{#if price}}
@@ -23,19 +23,14 @@
   </div>
 </template>
 
-<template name="selectedContent">
+<template name="experienceDetails">
   <button type="button" class="close" aria-hidden="true">&times;</button>
   <h1>
     {{title}}
   </h1>
   <p class="lead">{{lead}}</p>
   {{#if price}}
-    <div class="buy">
-      <div class="price-container">
-        <small class="currency">$&nbsp;</small><span class="price">{{price}}</span><small class="per-ticket">&nbsp;per ticket</small>
-      </div>
-      <button class="btn">buy now!</button>
-    </div>
+    {{> buyExperience}}
   {{/if}}
   <div class="venue">
     <a href="#" class="get-directions">Get Directions</a>
@@ -46,4 +41,13 @@
     <a href="{{website}}">{{website}}</a>
   </div>
   <p class="description">{{description}}</p>
+</template>
+
+<template name="buyExperience">
+  <div class="buy">
+    <div class="price-container">
+      <small class="currency">$&nbsp;</small><span class="price">{{price}}</span><small class="per-ticket">&nbsp;per ticket</small>
+    </div>
+    <button class="btn">buy now!</button>
+  </div>
 </template>
