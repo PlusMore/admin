@@ -1,36 +1,17 @@
-/* ---------------------------------------------------- +/
-
-## Item ##
-
-Code related to the item template
-
-/+ ---------------------------------------------------- */
-
-Template.experience.created = function () {
-  //
-};
-
-Template.experience.helpers({
-  
-  myHelper: function () {
-    //
+Template.buyExperience.helpers({
+  showConfirmation: function() {
+    return Session.get('showConfirmation');
   }
-
 });
 
-Template.experience.rendered = function () {
-  //
-};
+Template.buyExperience.events({
+  'click .btn': function () {
+    Meteor.call('buyExperience', this, function (error, result) {
+      if (error)
+        throw new Meteor.error(error);
 
-Template.experience.events({
+      Session.set('showConfirmation', true);
 
-  'click .delete': function(e, instance){
-    var experience = this;
-    e.preventDefault();
-    Meteor.call('removeExperience', experience, function(error, result){
-      alert('Experience deleted.');
-      Router.go('/experiences');
     });
   }
-
 });

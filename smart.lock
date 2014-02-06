@@ -10,7 +10,8 @@
       "collection2": {},
       "collectionFS": {},
       "inspector": {},
-      "nprogress": {}
+      "nprogress": {},
+      "font-awesome": {}
     },
     "packages": {
       "iron-router": {
@@ -20,8 +21,8 @@
       },
       "bootstrap-3": {
         "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
-        "tag": "v0.3.7",
-        "commit": "5dd0d142c870647b910be80bc777b96f0dd45e5e"
+        "tag": "v3.1.0-1",
+        "commit": "329dccb08bfc18c635676dea600ac9953162cda9"
       },
       "roles": {
         "git": "https://github.com/alanning/meteor-roles.git",
@@ -30,8 +31,8 @@
       },
       "autoform": {
         "git": "https://github.com/aldeed/meteor-autoform.git",
-        "tag": "v0.4.10",
-        "commit": "6f02c8f8f97ae82b7b4d1e2a529edfa3700b6e9b"
+        "tag": "v0.4.13",
+        "commit": "105803e4d42308893fbda30585dbdb4a38077e9a"
       },
       "fastclick": {
         "git": "https://github.com/percolatestudio/meteor-fastclick",
@@ -40,8 +41,8 @@
       },
       "collection2": {
         "git": "https://github.com/aldeed/meteor-collection2.git",
-        "tag": "v0.3.3",
-        "commit": "d5c99b1c0fe30778e683175ecb0dd36529e6271e"
+        "tag": "v0.3.7",
+        "commit": "4c6c2dfd87af8cda321c80e1baea72842ad5c542"
       },
       "collectionFS": {
         "git": "https://github.com/raix/Meteor-CollectionFS.git",
@@ -58,15 +59,20 @@
         "tag": "v0.0.3",
         "commit": "ffd1c5dd400af64121197f4e637a215c4b6b1fc7"
       },
+      "font-awesome": {
+        "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
+        "tag": "v4.0.3",
+        "commit": "61e9361384347547ae144f8228faa4deffda23db"
+      },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.2.30",
-        "commit": "40f983129da6e82b3ab2fa1f9e73111d818ee71e"
+        "tag": "v0.2.36",
+        "commit": "d01745787de0711ffd095dcd212749d94a3fe0eb"
       },
       "moment": {
         "git": "https://github.com/acreeger/meteor-moment.git",
-        "tag": "v2.2.1",
-        "commit": "9ee12e714afe56b189f53076447b7b54f3012065"
+        "tag": "v2.5.1",
+        "commit": "8c9bc5d3fc96705057737cb9743d555417f6e551"
       },
       "cfs-public-folder": {
         "git": "https://github.com/nooitaf/meteor-cfs-public-folder.git",

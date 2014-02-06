@@ -101,7 +101,7 @@ Router.map(function() {
 
   this.route('experience', {
     path: '/experience/:_id',
-    layoutTemplate: 'experiencesLayout',
+    layoutTemplate: 'experienceLayout',
     waitOn: function () {
       return Meteor.subscribe('singleExperience', this.params._id);
     },
