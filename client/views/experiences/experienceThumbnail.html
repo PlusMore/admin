@@ -2,9 +2,7 @@
     <a href="{{pathFor 'experience' this}}">
       <img src="{{cfsFileUrl 'default1' fileId=photoId collection='ExperiencesFS'}}" class="img-responsive" alt="{{photoId}}">
       <div class="content">
-        <div class="thumbnail-content">
-          {{> experienceThumbailDetails}}
-        </div>
+        {{> experienceThumbailDetails}}
       </div>
     </a>
 </template>
@@ -12,13 +10,15 @@
 <template name="experienceThumbailDetails">
   <h2 class='title'>
     {{title}}
-    {{#if price}}
-    <small class='price'>${{price}}</small>
-    {{/if}}
   </h2>
   <p class="lead">{{lead}}</p>
   <div class="neighborhood">
     {{neighborhood}}
   </div>
+  {{#if price}}
+    <div class="price">
+      ${{price}}
+    </div>
+  {{/if}}
 </template>
 
