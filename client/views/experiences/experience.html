@@ -1,10 +1,47 @@
 <template name="experience">
-  <a href="{{pathFor 'experiences'}}">← Back</a>
-  {{#with experience}}
-    <div class="item">
-      <h3>{{title}}</h3>
-      <p>{{body}}</p>
-      <h5><a href="#" class="delete">Delete</a></h5>
+  <div class="experience">
+    {{#with experience}}
+      <div class="back">
+        <a href="{{pathFor 'experiences'}}"><i class="fa fa-arrow-left"></i>&nbsp;Back</a>
+      </div>
+      <img src="{{cfsFileUrl 'default1' fileId=photoId collection='ExperiencesFS'}}" class="img-responsive" alt="{{photoId}}">
+      <div class="content col-xs-12 col-md-5">
+        {{> experienceDetails}}
+      </div>
+    {{/with}}
+  </div>
+</template>
+
+<template name="experienceDetails">
+  <h1>
+    {{title}}
+  </h1>
+  <p class="lead">{{lead}}</p>
+  {{#if price}}
+    {{> buyExperience}}
+  {{/if}}
+  <div class="venue">
+    <a href="#" class="get-directions">Get Directions</a>
+    <div class="name">{{venueName}}</div>
+    <div>{{street}}</div>
+    <div>{{city}}, {{state}} {{zip}}</div>
+    <div>{{phone}}</div>
+    <a href="{{website}}">{{website}}</a>
+  </div>
+  <p class="description">{{description}}</p>
+</template>
+
+<template name="buyExperience">
+  {{#if showConfirmation}}
+    <div class="confirmation">
+      <p>Your request has been sent to our reservation specialists. Please allow up to 30 minutes for confirmation.</p>
     </div>
-  {{/with}}
+  {{else}}
+    <div class="buy">
+      <div class="price-container">
+        <small class="currency">$&nbsp;</small><span class="price">{{price}}</span><small class="per-ticket">&nbsp;per ticket</small>
+      </div>
+      <button class="btn">buy now!</button>
+    </div>
+  {{/if}}
 </template>

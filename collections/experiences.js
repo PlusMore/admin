@@ -56,6 +56,10 @@ Experiences = new Meteor.Collection('experiences', {
     active: {
       type: Boolean,
       label: 'Is Active?'
+    },
+    category: {
+      type: String,
+      label: 'Category'
     }
   })
 });
@@ -112,5 +116,16 @@ Meteor.methods({
   },
   enterExperienceDetails: function(experience) {
     console.log(experience);
-  }
+  },
+  buyExperience: function(experience) {
+    console.log('Attempting to buy {0}'.format(experience));
+
+    Meteor.call('insertEvent', {
+      name: 'bought experience',
+      type: 'domain',
+      userId: 'tablet',
+      payload: experience,
+      message: "Experience {0} bought".format(experience.title)
+    });
+  },
 });

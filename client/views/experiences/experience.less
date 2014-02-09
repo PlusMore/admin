@@ -1,0 +1,124 @@
+.experience {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 3000;
+
+  & > .back {
+    & > a {
+      color: rgb(255, 255, 255);
+      font-size: 17pt;
+      font-weight: 200;
+
+      position: fixed;
+      right: 39px;
+      top: 22px;
+
+      & > i.fa {
+        font-size: 15px;
+        position: relative;
+        bottom: 3px;
+      }
+    }
+  }
+
+  & > .content {
+    background-color: rgba(0,0,0,.91);
+    color: #fff;
+    padding: 20px 30.5px;
+
+
+    h1 {
+      font-weight: 100;
+      font-size: 33pt;
+      margin-bottom: 5px;
+    }
+
+    p.lead {
+      font-weight: 100;
+      font-size: 16pt;
+      margin-bottom: 0;
+    }
+
+    .buy {
+      .price-container {
+        font-weight: 100;
+        font-size: 65pt;
+
+        small.currency {
+          vertical-align: super;
+          font-size: 25pt;
+        }
+
+        small.per-ticket {
+          font-size: 20pt;
+        }
+      }
+
+      button.btn {
+        font-size: 25pt;
+        font-weight: 200;
+        padding: 5px 40px;
+        margin-left: 5px;
+        background-color: white;
+        color: rgb(0, 0, 0);
+      }
+    }
+
+    .confirmation {
+      & > p {
+        margin-top: 15px;
+        font-weight: 100;
+        font-size: 16px;
+      }
+    }
+
+    .venue {
+      margin-top: 30px;
+      font-weight: 100;
+      font-size: 13pt;
+      margin-bottom: 20px;
+
+      a.get-directions {
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      .name {
+        font-weight: 300;
+      }
+
+    }
+
+    .description {
+      font-weight: 100;
+      font-size: 13pt;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .experience {
+    & > .content {
+      background-color: rgba(0, 0, 0, 1);
+    }
+  }
+}
+
+@media (min-width: 768px) {}
+
+@media (min-width: 992px) {
+  .experience {
+    & > .content {
+      position: absolute;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      overflow: scroll;
+    }
+  }
+}
+
+@media (min-width: 1200px) {}
