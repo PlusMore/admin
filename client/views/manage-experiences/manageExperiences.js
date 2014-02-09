@@ -48,3 +48,17 @@ Template.editExperience.helpers({
     return experiencesForm;
   }
 });
+
+Handlebars.registerHelper("categoryOptions", function() {
+  var categories = Categories.find().fetch();
+  var categoryOptions = [];
+
+  _.each(categories, function(category) {
+    categoryOptions.push({
+      label: category.name,
+      value: category.name
+    });
+  });
+
+  return categoryOptions;
+});

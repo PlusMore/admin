@@ -12,8 +12,11 @@ Meteor.publish('allExperiences', function() {
   return Experiences.find();
 });
 
-Meteor.publish('activeExperiences', function() {
-  return Experiences.find({active: true}, {
+Meteor.publish('activeExperiences', function(options) {
+  options = _.extend(options, {
+    active: true
+  });
+  return Experiences.find(options, {
     /*
     sort: Sort specifier,
     skip: Number,
@@ -39,4 +42,10 @@ Meteor.publish('experiencePhotos', function() {
 
 Meteor.publish('singleExperiencePhoto', function(id) {
   return ExperiencesFS.find(id);
+});
+
+// Categories
+
+Meteor.publish('categories', function() {
+  return Categories.find();
 });

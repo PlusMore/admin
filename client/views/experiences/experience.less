@@ -1,9 +1,10 @@
-body > .experience {
+.experience {
   position: absolute;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
+  z-index: 3000;
 
   & > .back {
     & > a {
@@ -99,21 +100,17 @@ body > .experience {
 }
 
 @media (max-width: 767px) {
-  body > .experience {
+  .experience {
     & > .content {
       background-color: rgba(0, 0, 0, 1);
     }
   }
 }
 
-@media (min-width: 768px) {
-  body > .experience {
-
-  }
-}
+@media (min-width: 768px) {}
 
 @media (min-width: 992px) {
-    body > .experience {
+  .experience {
     & > .content {
       position: absolute;
       position: absolute;

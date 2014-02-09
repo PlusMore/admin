@@ -13,12 +13,12 @@
     </ul>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li>
-          <a class="menu-item category">NightLife</a>
+        <li class="{{activeRouteClass 'experiences'}}">
+          <a href='{{pathFor 'experiences'}}' class="menu-item category">All</a>
         </li>
-        <li>
-          <a class="menu-item category">Wine & Dine</a>
-        </li>
+        {{#each categories}}
+          {{> categoryLink}}
+        {{/each}}
       </ul>
     </div><!--/.nav-collapse -->
   </div>
@@ -27,4 +27,10 @@
     <p class="message message-{{type}}">{{message}}</p>
     {{/each}}
   </div>
+</template>
+
+<template name="categoryLink">
+  <li class="{{activeRouteClass name}}">
+    <a href='{{categoryLink}}' class="menu-item category">{{name}}</a>
+  </li>
 </template>

@@ -34,12 +34,18 @@ var filters = {
       this.stop();
       Router.go('dashboard');
     }
+  },
+  isAdmin: function() {
+    if (!Roles.userIsInRole(Meteor.userId(), ['admin'])) {
+      this.render('notFound');
+      this.stop();
+    }
   }
 };
 
 var helpers = {
   analyticsRequest: function() {
-    console.log('Make analytics request here', this, Meteor.user());
+    // console.log('Make analytics request here', this, Meteor.user());
   },
   showLoadingBar: function() {
     if (this.ready()) {
@@ -61,7 +67,13 @@ Router.before(filters.isLoggedOut, {only: [
 // Check authenticated
 Router.before(filters.isLoggedIn, {only: [
   'dashboard',
-  'manageExperiences'
+  'manageExperiences',
+  'categories'
+]});
+
+// Check admin
+Router.before(filters.isAdmin, {only: [
+  'categories'
 ]});
 
 // Show loading bar for any route that loads a subscription
@@ -83,35 +95,65 @@ Router.map(function() {
   this.route('manageExperiences', {
     path: '/manage-experiences',
     waitOn: function() {
-      return Meteor.subscribe('myInProgressExperiences')
+      return [
+        Meteor.subscribe('myInProgressExperiences'),
+        Meteor.subscribe('categories')
+      ]
     }
   })
 
   this.route('experiences', {
+    path: '/experiences/:category?',
     layoutTemplate: 'experiencesLayout',
     waitOn: function () {
-      return Meteor.subscribe('activeExperiences');
+      var options = {};
+      if (this.params.category) {
+        options.category = this.params.category;
+      }
+      return [
+        Meteor.subscribe('activeExperiences', options),
+        Meteor.subscribe('categories')
+      ];
     },
     data: function () {
       return {
         experiences: Experiences.find()
-      }
+      };
     }
   });
 
   this.route('experience', {
     path: '/experience/:_id',
-    layoutTemplate: 'experienceLayout',
+    layoutTemplate: 'experiencesLayout',
     waitOn: function () {
-      return Meteor.subscribe('singleExperience', this.params._id);
+      return [
+        Meteor.subscribe('singleExperience', this.params._id),
+        Meteor.subscribe('categories')
+      ];
     },
     data: function () {
       return {
         experience: Experiences.findOne(this.params._id)
-      }
+      };
     }
   });
 
+  // Categories
+
+  this.route('categories', {
+    waitOn: function() {
+      return [
+        Meteor.subscribe('categories')
+      ]
+    },
+    data: function () {
+      return {
+        categories: function() {
+          return Categories.find();
+        }
+      }
+    }
+  });
 
   // Pages
 
@@ -142,7 +184,6 @@ Router.map(function() {
     }
   });
 
-  // // Accounts
+  // Accounts
   this.route('signup');
-
 });

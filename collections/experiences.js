@@ -56,6 +56,10 @@ Experiences = new Meteor.Collection('experiences', {
     active: {
       type: Boolean,
       label: 'Is Active?'
+    },
+    category: {
+      type: String,
+      label: 'Category'
     }
   })
 });

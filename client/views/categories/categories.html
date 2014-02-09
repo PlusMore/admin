@@ -1,0 +1,28 @@
+<template name="categories">
+  {{> addCategory}}
+  {{> categoriesList}}
+</template>
+
+<template name="categoriesList">
+  <h3>Categories: </h3>
+    <div class="row categories">
+      {{#each categories}}
+        {{> category}}
+      {{/each}}
+    </div>
+</template>
+
+<template name="category">
+  <div class="category">
+    {{quickForm schema=categorySchema doc=this type="update" buttonClasses="btn btn-primary" buttonContent="Update Category"}}
+    {{#autoForm schema=categorySchema doc=this}}
+      <button type="submit" class="btn btn-danger remove">
+      <i class="fa fa-trash-o"></i> Delete</button>
+    {{/autoForm}}
+  </div>
+</template>
+
+<template name="addCategory">
+  <h3>Add Category</h3>
+  {{quickForm schema=categorySchema type="insert" buttonClasses="btn btn-primary" buttonContent="Add Category"}}
+</template>
