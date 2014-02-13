@@ -49,3 +49,7 @@ Meteor.publish('singleExperiencePhoto', function(id) {
 Meteor.publish('categories', function() {
   return Categories.find();
 });
+
+Meteor.publish('hotels', function() {
+  return Hotels.find();
+});

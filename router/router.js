@@ -90,6 +90,31 @@ Router.after(helpers.analyticsRequest);
 
 Router.map(function() {
 
+
+
+  // Device Manager
+  this.route('manageDevices', {
+    path: '/manage-devices',
+    waitOn: function() {
+      return [
+        Meteor.subscribe('myDevices')
+      ]
+    }
+  });
+
+  // Device
+  this.route('deviceDashboard', {
+    path: '/device/:_id',
+    waitOn: function() {
+      return [
+        Meteor.subscribe('device', this.params._id)
+      ]
+    },
+    load: function() {
+      Session.set('device')
+    }
+  });
+
   // Experiences
 
   this.route('manageExperiences', {
@@ -100,7 +125,7 @@ Router.map(function() {
         Meteor.subscribe('categories')
       ]
     }
-  })
+  });
 
   this.route('experiences', {
     path: '/experiences/:category?',
@@ -150,6 +175,23 @@ Router.map(function() {
       return {
         categories: function() {
           return Categories.find();
+        }
+      }
+    }
+  });
+
+  // Hotels
+
+  this.route('hotels', {
+    waitOn: function() {
+      return [
+        Meteor.subscribe('hotels')
+      ]
+    },
+    data: function () {
+      return {
+        hotels: function() {
+          return Hotels.find();
         }
       }
     }

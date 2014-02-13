@@ -1,9 +1,8 @@
 <template name="dashboard">
   {{#if isInRole 'admin'}}
-    <h1>Admin Dashboard</h1>
   {{/if}}
-  {{#if isInRole 'content-manager'}}
-    <h1>Content Management Dashboard</h1>
+  {{#if canManageExperiences}}
+    <h3>Manage Your Experiences</h3>
     <a class="btn btn-primary" href="{{pathFor 'manageExperiences'}}">Manage Experiences</a>
   {{/if}}
   {{#if isInRole 'device-manager'}}
