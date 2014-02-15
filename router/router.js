@@ -70,7 +70,8 @@ Router.before(filters.isLoggedIn, {only: [
   'manageExperiences',
   'categories',
   'hotel',
-  'hotels'
+  'hotels',
+  'setupDevice'
 ]});
 
 // Check admin
@@ -94,15 +95,16 @@ Router.after(helpers.analyticsRequest);
 
 Router.map(function() {
 
-
-
   // Device Manager
-  this.route('manageDevices', {
-    path: '/manage-devices',
+  this.route('setupDevice', {
+    path: '/setup-device',
     waitOn: function() {
       return [
-        Meteor.subscribe('myDevices')
-      ]
+        Meteor.subscribe('userHotel')      ]
+    },
+    after: function() {
+      var hotel = Hotels.findOne(Meteor.user().hotelId);
+      Session.set('hotel', hotel)
     }
   });
 
@@ -113,9 +115,6 @@ Router.map(function() {
       return [
         Meteor.subscribe('device', this.params._id)
       ]
-    },
-    load: function() {
-      Session.set('device')
     }
   });
 

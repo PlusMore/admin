@@ -35,6 +35,14 @@ Template.header.helpers({
   },
   canSeeDeviceManagerPages: function() {
     return Roles.userIsInRole(Meteor.userId(), ['device-manager', 'admin']);
+  },
+  isHotelStaff: function() {
+    return Roles.userIsInRole(Meteor.userId(), ['hotel-staff']);
+  },
+  hotelName: function() {
+    hotel = Session.get('hotel');
+    if (hotel)
+      return hotel.name;
   }
 })
 

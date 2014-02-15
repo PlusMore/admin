@@ -50,6 +50,24 @@ Meteor.publish('categories', function() {
   return Categories.find();
 });
 
+// Hotels
+
+/**
+ * Always publish logged-in user's hotelId
+ *
+ */
+Meteor.publish('userHotel', function () {
+  var userId = this.userId,
+      fields = {hotelId:1},
+      user = Meteor.users.findOne({_id:userId}),
+      hotelId = user.hotelId;
+
+  return [
+    Meteor.users.find({_id:userId}, {fields: fields}),
+    Hotels.find({_id:hotelId})
+  ]
+});
+
 Meteor.publish('hotels', function() {
   if(Roles.userIsInRole(this.userId, 'admin')) {
     return Hotels.find();

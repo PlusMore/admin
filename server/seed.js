@@ -60,7 +60,7 @@ Meteor.startup(function(){
   }
 
   if (Hotels.find().count() === 0) {
-    Hotels.insert({
+    hotelId = Hotels.insert({
       name: "Hugo",
       street: "123 1st Ave",
       city: "New York",
@@ -68,18 +68,18 @@ Meteor.startup(function(){
       zip: "10128",
       phone: "555-555-5555"
     });
-  }
 
-  if (Devices.find().count() === 0) {
     Devices.insert({
-      hotel: 'Hugo',
+      hotelId: hotelId,
       type: 'room',
-      roomNumber: 131
+      location: 'Room 131'
     });
 
     Devices.insert({
-      hotel: 'Hugo',
-      type: 'lobby'
+      hotelId: hotelId,
+      type: 'lobby',
+      location: 'Lobby'
     });
   }
+
 });

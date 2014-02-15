@@ -13,3 +13,24 @@ Devices.allow({
     return Roles.userIsInRole(userId, ['device-manager', 'admin']);
   }
 });
+
+Schema.setupDevice = new SimpleSchema({
+  type: {
+    type: String,
+    label: 'Device Type'
+  },
+  location: {
+    type: String,
+    label: "Location"
+  },
+  hotelId: {
+    type: String
+  }
+});
+
+Meteor.methods({
+  setupDevice: function(device) {
+    check(device, Schema.setupDevice);
+    return Devices.insert(device);
+  }
+});

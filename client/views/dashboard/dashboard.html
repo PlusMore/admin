@@ -5,7 +5,8 @@
     <h3>Manage Your Experiences</h3>
     <a class="btn btn-primary" href="{{pathFor 'manageExperiences'}}">Manage Experiences</a>
   {{/if}}
-  {{#if isInRole 'device-manager'}}
-    <h1>Device Management Dashboard</h1>
+  {{#if isInRole 'hotel-staff'}}
+    <h3>Setup this Device</h3>
+    <a class="btn btn-primary" href="{{pathFor 'setupDevice'}}">Device Setup</a>
   {{/if}}
 </template>
