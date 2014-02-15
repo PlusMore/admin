@@ -32,8 +32,8 @@ Meteor.publish('singleExperience', function(id) {
   return Experiences.find(id);
 });
 
-Meteor.publish('myInProgressExperiences', function() {
-  return Experiences.find({owner: this.userId, inProgress: true});
+Meteor.publish('myExperiences', function() {
+  return Experiences.find({owner: this.userId});
 })
 
 Meteor.publish('experiencePhotos', function() {
@@ -51,5 +51,18 @@ Meteor.publish('categories', function() {
 });
 
 Meteor.publish('hotels', function() {
-  return Hotels.find();
+  if(Roles.userIsInRole(this.userId, 'admin')) {
+    return Hotels.find();
+  } else {
+    return Hotels.find({owner: this.userId});
+  }
+});
+
+Meteor.publish('hotel', function(id) {
+  return Hotels.find(id);
+});
+
+Meteor.publish('hotelUsers', function(options) {
+  hotelId = options.hotelId;
+  return Meteor.users.find({hotelId: hotelId}, {fields:{emails:1, roles:1, hotelId:1, profile:1}});
 });

@@ -59,6 +59,17 @@ Meteor.startup(function(){
     _.each(users, createUser);
   }
 
+  if (Hotels.find().count() === 0) {
+    Hotels.insert({
+      name: "Hugo",
+      street: "123 1st Ave",
+      city: "New York",
+      state: "NY",
+      zip: "10128",
+      phone: "555-555-5555"
+    });
+  }
+
   if (Devices.find().count() === 0) {
     Devices.insert({
       hotel: 'Hugo',

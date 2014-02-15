@@ -68,12 +68,16 @@ Router.before(filters.isLoggedOut, {only: [
 Router.before(filters.isLoggedIn, {only: [
   'dashboard',
   'manageExperiences',
-  'categories'
+  'categories',
+  'hotel',
+  'hotels'
 ]});
 
 // Check admin
 Router.before(filters.isAdmin, {only: [
-  'categories'
+  'categories',
+  'hotel',
+  'hotels'
 ]});
 
 // Show loading bar for any route that loads a subscription
@@ -121,7 +125,7 @@ Router.map(function() {
     path: '/manage-experiences',
     waitOn: function() {
       return [
-        Meteor.subscribe('myInProgressExperiences'),
+        Meteor.subscribe('myExperiences'),
         Meteor.subscribe('categories')
       ]
     }
@@ -193,6 +197,22 @@ Router.map(function() {
         hotels: function() {
           return Hotels.find();
         }
+      }
+    }
+  });
+
+  this.route('hotel', {
+    path: '/hotel/:_id',
+    waitOn: function() {
+      return [
+        Meteor.subscribe('hotel', this.params._id),
+        Meteor.subscribe('hotelUsers', {hotelId: this.params._id})
+      ]
+    },
+    data: function() {
+      return {
+        hotel: Hotels.findOne(this.params._id),
+        hotelStaff: Meteor.users.find({hotelId: this.params._id})
       }
     }
   });
