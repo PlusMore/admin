@@ -100,21 +100,38 @@ Router.map(function() {
     path: '/setup-device',
     waitOn: function() {
       return [
-        Meteor.subscribe('userHotel')      ]
+        Meteor.subscribe('userHotel')
+      ]
     },
     after: function() {
       var hotel = Hotels.findOne(Meteor.user().hotelId);
-      Session.set('hotel', hotel)
+      Session.set('hotelName', hotel.name);
+      Session.set('hotelId', hotel.id);
+    },
+    data: function () {
+      return {
+        hotel: Hotels.findOne(Meteor.user().hotelId)
+      }
     }
   });
 
   // Device
-  this.route('deviceDashboard', {
+  this.route('device', {
     path: '/device/:_id',
     waitOn: function() {
       return [
-        Meteor.subscribe('device', this.params._id)
+        Meteor.subscribe('userHotel')
       ]
+    },
+    after: function() {
+      var hotel = Hotels.findOne(Meteor.user().hotelId);
+      Session.set('hotelName', hotel.name);
+      Session.set('hotelId', hotel.id);
+    },
+    data: function () {
+      return {
+        hotel: Hotels.findOne(Meteor.user().hotelId)
+      }
     }
   });
 

@@ -40,9 +40,7 @@ Template.header.helpers({
     return Roles.userIsInRole(Meteor.userId(), ['hotel-staff']);
   },
   hotelName: function() {
-    hotel = Session.get('hotel');
-    if (hotel)
-      return hotel.name;
+    return Session.get('hotelName');
   }
 })
 

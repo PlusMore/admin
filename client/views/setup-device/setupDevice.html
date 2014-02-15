@@ -1,5 +1,18 @@
 <template name="setupDevice">
-  <h3>Setup Your Device</h3>
-  Hotel: {{hotelName}}
+  <h3>Setup This Device</h3>
 
+  {{#autoForm schema=setupDeviceSchema id="setupDeviceForm"}}
+    <fieldset>
+      {{afFieldInput 'hotelId' type="hidden" value=hotelId }}
+
+      {{afQuickField "type" firstOption="(Select Device Type)" options=deviceTypes}}
+
+      {{afQuickField 'location'}}
+
+      <div>
+        <button type="reset" class="btn btn-default">Reset</button>
+        <button type="submit" data-meteor-method="setupDevice" class="btn btn-primary">Next</button>
+      </div>
+    </fieldset>
+  {{/autoForm}}
 </template>

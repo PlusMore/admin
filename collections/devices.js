@@ -17,11 +17,11 @@ Devices.allow({
 Schema.setupDevice = new SimpleSchema({
   type: {
     type: String,
-    label: 'Device Type'
+    label: 'Will this device be placed in a room or a lobby?'
   },
   location: {
     type: String,
-    label: "Location"
+    label: "Where will this this be device located? (Ex. 'Room 131', 'Lobby Entrance')"
   },
   hotelId: {
     type: String
@@ -30,6 +30,7 @@ Schema.setupDevice = new SimpleSchema({
 
 Meteor.methods({
   setupDevice: function(device) {
+    console.log('hey from setupDevice');
     check(device, Schema.setupDevice);
     return Devices.insert(device);
   }
