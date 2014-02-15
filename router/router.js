@@ -120,7 +120,8 @@ Router.map(function() {
     path: '/device/:_id',
     waitOn: function() {
       return [
-        Meteor.subscribe('userHotel')
+        Meteor.subscribe('userHotel'),
+        Meteor.subscribe('device', this.params._id)
       ]
     },
     after: function() {
@@ -130,7 +131,8 @@ Router.map(function() {
     },
     data: function () {
       return {
-        hotel: Hotels.findOne(Meteor.user().hotelId)
+        hotel: Hotels.findOne(Meteor.user().hotelId),
+        device: Devices.findOne({_id:this.params._id})
       }
     }
   });

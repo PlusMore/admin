@@ -50,6 +50,12 @@ Meteor.publish('categories', function() {
   return Categories.find();
 });
 
+// Devices
+
+Meteor.publish('device', function (id) {
+  return Devices.find(id);
+});
+
 // Hotels
 
 /**

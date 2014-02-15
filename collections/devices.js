@@ -30,7 +30,6 @@ Schema.setupDevice = new SimpleSchema({
 
 Meteor.methods({
   setupDevice: function(device) {
-    console.log('hey from setupDevice');
     check(device, Schema.setupDevice);
     return Devices.insert(device);
   }
