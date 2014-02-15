@@ -51,7 +51,11 @@ Meteor.publish('categories', function() {
 });
 
 Meteor.publish('hotels', function() {
-  return Hotels.find();
+  if(Roles.userIsInRole(this.userId, 'admin')) {
+    return Hotels.find();
+  } else {
+    return Hotels.find({owner: this.userId});
+  }
 });
 
 Meteor.publish('hotel', function(id) {
@@ -60,7 +64,5 @@ Meteor.publish('hotel', function(id) {
 
 Meteor.publish('hotelUsers', function(options) {
   hotelId = options.hotelId;
-  console.log('publish hotel users for hotelId: ' + hotelId)
-  console.log(Meteor.users.find({hotelId: hotelId}, {fields:{emails:1, roles:1, hotelId:1}}).count());
   return Meteor.users.find({hotelId: hotelId}, {fields:{emails:1, roles:1, hotelId:1, profile:1}});
 });
