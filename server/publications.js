@@ -32,8 +32,8 @@ Meteor.publish('singleExperience', function(id) {
   return Experiences.find(id);
 });
 
-Meteor.publish('myInProgressExperiences', function() {
-  return Experiences.find({owner: this.userId, inProgress: true});
+Meteor.publish('myExperiences', function() {
+  return Experiences.find({owner: this.userId});
 })
 
 Meteor.publish('experiencePhotos', function() {
@@ -52,4 +52,15 @@ Meteor.publish('categories', function() {
 
 Meteor.publish('hotels', function() {
   return Hotels.find();
+});
+
+Meteor.publish('hotel', function(id) {
+  return Hotels.find(id);
+});
+
+Meteor.publish('hotelUsers', function(options) {
+  hotelId = options.hotelId;
+  console.log('publish hotel users for hotelId: ' + hotelId)
+  console.log(Meteor.users.find({hotelId: hotelId}, {fields:{emails:1, roles:1, hotelId:1}}).count());
+  return Meteor.users.find({hotelId: hotelId}, {fields:{emails:1, roles:1, hotelId:1, profile:1}});
 });

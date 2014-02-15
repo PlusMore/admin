@@ -1,0 +1,76 @@
+<template name="hotels">
+  {{> addHotel}}
+  {{> hotelsList}}
+</template>
+
+<template name="hotelsList">
+  <h3>Hotels: </h3>
+    <ul class="hotels">
+      {{#each hotels}}
+        <li>
+          <a href="{{pathFor 'hotel' this}}">{{name}}</a>
+        </li>
+      {{/each}}
+    </ul>
+</template>
+
+<template name="hotel">
+  <a href="{{pathFor 'hotels'}}">Back to Hotels</a>
+  {{#with hotel}}
+    <div class="hotel">
+      <h3>{{name}}</h3>
+      {{> editHotel}}
+      {{> hotelStaff}}
+      <br />
+      {{#autoForm schema=hotelSchema doc=this}}
+        <button type="submit" class="btn btn-danger remove">
+        <i class="fa fa-trash-o"></i> Delete Hotel</button>
+      {{/autoForm}}
+    </div>
+  {{/with}}
+</template>
+
+<template name="editHotel">
+  <h4>Edit Hotel Details</h4>
+  {{quickForm schema=hotelSchema doc=this type="update" buttonClasses="btn btn-primary" buttonContent="Update hotel"}}
+</template>
+
+<template name="addHotel">
+  <h3>Add Hotel</h3>
+  {{quickForm schema=hotelSchema type="insert" buttonClasses="btn btn-primary" buttonContent="Add hotel"}}
+</template>
+
+<template name="hotelStaff">
+  <h3>Hotel Staff</h3>
+  {{> addHotelStaff}}
+
+  <ul>
+    {{#each hotelStaff}}
+      {{> hotelStaffItem}}
+    {{/each}}
+  </ul>
+</template>
+
+<template name="hotelStaffItem">
+  <li>{{emailAddress}}</li>
+</template>
+
+<template name="addHotelStaff">
+  <h4>Add Hotel Users</h4>
+  {{#autoForm schema=addHotelStaffSchema id="addHotelStaffForm"}}
+    <fieldset>
+      {{afFieldInput 'hotelId' type="hidden" value=hotelId }}
+      <div class="form-group{{#if afFieldIsInvalid 'email'}} has-error{{/if}}">
+            {{afFieldLabel "email"}}
+            {{afFieldInput "email"}}
+            {{#if afFieldIsInvalid "email"}}
+            <span class="help-block">{{afFieldMessage "email"}}</span>
+            {{/if}}
+        </div>
+        <div>
+          <button type="submit" data-meteor-method="addHotelStaff" class="btn btn-primary">Add Hotel Staff</button>
+          <button type="reset" class="btn btn-default">Reset</button>
+        </div>
+    </fieldset>
+  {{/autoForm}}
+</template>
