@@ -28,7 +28,7 @@ Meteor.methods({
       var userId = Accounts.createUser({
         email: user.email,
         roles: roles,
-        password: Meteor.uuid()
+        password: 'plusmore'
       });
 
       Meteor.users.update(userId, {$set: {hotelId: user.hotelId}});
