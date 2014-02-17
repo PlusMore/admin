@@ -1,9 +1,11 @@
 <template name="experiences">
-  <div class="row experiences">
-    {{#each experiences}}
-      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 experienceThumbnail">
-        {{> experienceThumbnail}}
-      </div>
-    {{/each}}
+  <div class="container experiences-container">
+    <div class="row experiences">
+      {{#each experiences}}
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 experienceThumbnail">
+          {{> experienceThumbnail}}
+        </div>
+      {{/each}}
+    </div>
   </div>
 </template>

@@ -163,7 +163,7 @@ Router.map(function() {
 
   this.route('experiences', {
     path: '/experiences/:category?',
-    layoutTemplate: 'experiencesLayout',
+    layoutTemplate: 'deviceLayout',
     waitOn: function () {
       var options = {};
       if (this.params.category) {
@@ -184,7 +184,7 @@ Router.map(function() {
 
   this.route('experience', {
     path: '/experience/:_id',
-    layoutTemplate: 'experiencesLayout',
+    layoutTemplate: 'deviceLayout',
     waitOn: function () {
       return [
         Meteor.subscribe('singleExperience', this.params._id),
