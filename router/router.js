@@ -118,29 +118,8 @@ Router.map(function() {
   // Device
   this.route('device', {
     path: '/device/:_id',
-    layoutTemplate: 'deviceLayout',
-    before: function() {
-      Session.set('deviceId', this.params._id);
-    },
-    waitOn: function() {
-      return [
-        Meteor.subscribe('userHotel'),
-        Meteor.subscribe('device', this.params._id),
-        Meteor.subscribe('categories', this.params._id)
-      ]
-    },
-    after: function() {
-      var hotel = Hotels.findOne(Meteor.user().hotelId);
-      Session.set('hotelName', hotel.name);
-      Session.set('hotelId', hotel.id);
-    },
-    data: function () {
-      return {
-        categories: Categories.find(),
-        hotel: Hotels.findOne(Meteor.user().hotelId),
-        device: Devices.findOne({_id:this.params._id})
-      }
-    }
+    controller: 'DeviceController',
+    layoutTemplate: 'deviceLayout'
   });
 
   this.route('devices', {
@@ -162,6 +141,13 @@ Router.map(function() {
       }
     }
   });
+
+  // Orders
+
+  this.route('orders', {
+    controller: 'DeviceController',
+    layoutTemplate: 'deviceLayout'
+  })
 
   // Experiences
 
@@ -190,7 +176,8 @@ Router.map(function() {
     },
     data: function () {
       return {
-        experiences: Experiences.find()
+        experiences: Experiences.find(),
+        categories: Categories.find()
       };
     }
   });
@@ -261,14 +248,26 @@ Router.map(function() {
     }
   });
 
+  // Front Desk
+
+  this.route('frontDesk', {
+    controller: 'DeviceController',
+    layoutTemplate: 'deviceLayout'
+  });
+
+  // Transportation
+
+  this.route('transportation', {
+    controller: 'DeviceController',
+    layoutTemplate: 'deviceLayout'
+  });
+
   // Pages
 
   this.route('homepage', {
     path: '/'
   });
 
-  this.route('frontDesk');
-  this.route('transportation');
 
   // Dashboard
 
