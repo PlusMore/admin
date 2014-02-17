@@ -32,8 +32,10 @@
             </li>
           {{/if}}
 
-          {{#if canSeeDeviceManagerPages}}
-
+          {{#if isHotelStaff}}
+            <li class="{{activeRouteClass 'devices'}}">
+              <a href="{{pathFor 'devices'}}">Devices</a>
+            </li>
           {{/if}}
 
           <li class="{{activeRouteClass 'experiences'}}">

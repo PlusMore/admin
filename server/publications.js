@@ -52,6 +52,10 @@ Meteor.publish('categories', function() {
 
 // Devices
 
+Meteor.publish('devices', function(hotelId) {
+  return Devices.find({hotelId: hotelId});
+});
+
 Meteor.publish('device', function (id) {
   return Devices.find(id);
 });

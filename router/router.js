@@ -118,10 +118,15 @@ Router.map(function() {
   // Device
   this.route('device', {
     path: '/device/:_id',
+    layoutTemplate: 'deviceLayout',
+    before: function() {
+      Session.set('deviceId', this.params._id);
+    },
     waitOn: function() {
       return [
         Meteor.subscribe('userHotel'),
-        Meteor.subscribe('device', this.params._id)
+        Meteor.subscribe('device', this.params._id),
+        Meteor.subscribe('categories', this.params._id)
       ]
     },
     after: function() {
@@ -131,8 +136,29 @@ Router.map(function() {
     },
     data: function () {
       return {
+        categories: Categories.find(),
         hotel: Hotels.findOne(Meteor.user().hotelId),
         device: Devices.findOne({_id:this.params._id})
+      }
+    }
+  });
+
+  this.route('devices', {
+    path: '/devices',
+    waitOn: function() {
+      return [
+        Meteor.subscribe('userHotel'),
+        Meteor.subscribe('devices', Meteor.user().hotelId)
+      ]
+    },
+    after: function() {
+      var hotel = Hotels.findOne(Meteor.user().hotelId);
+      Session.set('hotelName', hotel.name);
+      Session.set('hotelId', hotel.id);
+    },
+    data: function () {
+      return {
+        devices: Devices.find({hotelId: Meteor.user().hotelId})
       }
     }
   });
@@ -240,6 +266,9 @@ Router.map(function() {
   this.route('homepage', {
     path: '/'
   });
+
+  this.route('frontDesk');
+  this.route('transportation');
 
   // Dashboard
 
