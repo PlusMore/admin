@@ -1,5 +1,8 @@
 <template name="device">
-  {{#with device}}
-    <h1>{{location}}</h1>
-  {{/with}}
+  <div class="device-welcome-container ">
+    {{#with device}}
+      <h1>Welcome to {{location}}</h1>
+      <p class="lead">Select one of the services above to begin</p>
+    {{/with}}
+  </div>
 </template>

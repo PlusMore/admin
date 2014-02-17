@@ -118,10 +118,16 @@ Router.map(function() {
   // Device
   this.route('device', {
     path: '/device/:_id',
+    controller: 'DeviceController',
+    layoutTemplate: 'deviceLayout'
+  });
+
+  this.route('devices', {
+    path: '/devices',
     waitOn: function() {
       return [
         Meteor.subscribe('userHotel'),
-        Meteor.subscribe('device', this.params._id)
+        Meteor.subscribe('devices', Meteor.user().hotelId)
       ]
     },
     after: function() {
@@ -131,11 +137,17 @@ Router.map(function() {
     },
     data: function () {
       return {
-        hotel: Hotels.findOne(Meteor.user().hotelId),
-        device: Devices.findOne({_id:this.params._id})
+        devices: Devices.find({hotelId: Meteor.user().hotelId})
       }
     }
   });
+
+  // Orders
+
+  this.route('orders', {
+    controller: 'DeviceController',
+    layoutTemplate: 'deviceLayout'
+  })
 
   // Experiences
 
@@ -151,7 +163,7 @@ Router.map(function() {
 
   this.route('experiences', {
     path: '/experiences/:category?',
-    layoutTemplate: 'experiencesLayout',
+    layoutTemplate: 'deviceLayout',
     waitOn: function () {
       var options = {};
       if (this.params.category) {
@@ -164,14 +176,15 @@ Router.map(function() {
     },
     data: function () {
       return {
-        experiences: Experiences.find()
+        experiences: Experiences.find(),
+        categories: Categories.find()
       };
     }
   });
 
   this.route('experience', {
     path: '/experience/:_id',
-    layoutTemplate: 'experiencesLayout',
+    layoutTemplate: 'deviceLayout',
     waitOn: function () {
       return [
         Meteor.subscribe('singleExperience', this.params._id),
@@ -235,11 +248,26 @@ Router.map(function() {
     }
   });
 
+  // Front Desk
+
+  this.route('frontDesk', {
+    controller: 'DeviceController',
+    layoutTemplate: 'deviceLayout'
+  });
+
+  // Transportation
+
+  this.route('transportation', {
+    controller: 'DeviceController',
+    layoutTemplate: 'deviceLayout'
+  });
+
   // Pages
 
   this.route('homepage', {
     path: '/'
   });
+
 
   // Dashboard
 
