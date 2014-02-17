@@ -11,4 +11,37 @@
   &.experiences-container {
     background-color: white;
   }
+
+  & .side-menu {
+    background-color: #fff;
+    padding-right: 0;
+    height: 90%;
+    margin-top: 2.5%;
+
+    & .nav {
+      padding-top: 15px;
+      text-transform: uppercase;
+      font-weight: 100;
+
+      & > li {
+        margin: 0 auto;
+
+        & > a {
+          border-radius: 0;
+          color: #000;
+          font-size: 1.3em;
+          font-weight: 100;
+          letter-spacing: .1em;
+          padding-left: 30px;
+        }
+
+        &.active > a {
+          color: #fff;
+          background-color: #000;
+        }
+
+
+      }
+    }
+  }
 }
