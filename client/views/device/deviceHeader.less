@@ -1,9 +1,10 @@
 .navbar-device {
+  background-color: purple;
   .nav {
-    line-height: 30px;
+    line-height: 15px;
     li {
       a {
-        color: #666;
+        color: #FFF;
         &:hover {
           transition: all .5s;
           color: #000;
@@ -16,6 +17,18 @@
           text-transform: uppercase;
           letter-spacing: .1em;
           cursor: pointer;
+          width: 120px;
+
+          & > .icon {
+            display: block;
+            margin: 0 auto;
+            font-size: 70px;
+          }
+
+          &.orders > .text {
+            margin-left: 9px;
+          }
+
         }
       }
       &.back {
