@@ -4,13 +4,13 @@ DeviceController = RouteController.extend({
   },
   waitOn: function() {
     return [
-      Meteor.subscribe('userHotel'),
-      Meteor.subscribe('device', this.params._id),
-      Meteor.subscribe('categories', this.params._id)
+      Meteor.subscribe('categories'),
+      Meteor.subscribe('device', this.params._id)
     ]
   },
   after: function() {
-    var hotel = Hotels.findOne(Meteor.user().hotelId);
+    var device = Devices.findOne(this.params._id);
+    var hotel = Hotels.findOne(device.hotelId);
     Session.set('hotelName', hotel.name);
     Session.set('hotelId', hotel.id);
   },

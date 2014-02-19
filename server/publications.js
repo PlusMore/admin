@@ -6,6 +6,23 @@ All publications-related code.
 
 /+ ---------------------------------------------------- */
 
+/**
+ * Always publish logged-in user's hotelId
+ *
+ */
+ Meteor.publish(null, function () {
+  var userId = this.userId,
+      fields = {hotelId:1},
+      user = Meteor.users.findOne({_id:userId}),
+      hotelId = user && user.hotelId || null;
+  if (hotelId) {
+    return [
+      Meteor.users.find({_id: userId}, {fields: fields}),
+      Hotels.find({_id: hotelId})
+    ]
+  }
+});
+
 // Experiences
 
 Meteor.publish('allExperiences', function() {
@@ -53,6 +70,10 @@ Meteor.publish('categories', function() {
 // Devices
 
 Meteor.publish('devices', function(hotelId) {
+  var userId = this.userId,
+      user = Meteor.users.findOne({_id:userId}),
+      hotelId = user.hotelId;
+
   return Devices.find({hotelId: hotelId});
 });
 
@@ -60,23 +81,13 @@ Meteor.publish('device', function (id) {
   return Devices.find(id);
 });
 
+// Orders
+
+Meteor.publish('deviceOrders', function(deviceId) {
+  return Orders.find({deviceId: deviceId});
+})
+
 // Hotels
-
-/**
- * Always publish logged-in user's hotelId
- *
- */
-Meteor.publish('userHotel', function () {
-  var userId = this.userId,
-      fields = {hotelId:1},
-      user = Meteor.users.findOne({_id:userId}),
-      hotelId = user.hotelId;
-
-  return [
-    Meteor.users.find({_id:userId}, {fields: fields}),
-    Hotels.find({_id:hotelId})
-  ]
-});
 
 Meteor.publish('hotels', function() {
   if(Roles.userIsInRole(this.userId, 'admin')) {

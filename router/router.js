@@ -115,19 +115,14 @@ Router.map(function() {
     }
   });
 
-  // Device
-  this.route('device', {
-    path: '/device/:_id',
-    controller: 'DeviceController',
-    layoutTemplate: 'deviceLayout'
-  });
-
   this.route('devices', {
     path: '/devices',
+    before: function() {
+
+    },
     waitOn: function() {
       return [
-        Meteor.subscribe('userHotel'),
-        Meteor.subscribe('devices', Meteor.user().hotelId)
+        Meteor.subscribe('devices')
       ]
     },
     after: function() {
@@ -140,6 +135,13 @@ Router.map(function() {
         devices: Devices.find({hotelId: Meteor.user().hotelId})
       }
     }
+  });
+
+  // Device
+  this.route('device', {
+    path: '/device/:_id',
+    controller: DeviceController,
+    layoutTemplate: 'deviceLayout'
   });
 
   // Orders
