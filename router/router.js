@@ -164,8 +164,8 @@ Router.map(function() {
   // Device
   this.route('device', {
     path: '/device',
-    controller: DeviceController,
-    layoutTemplate: 'deviceLayout'
+    layoutTemplate: 'deviceLayout',
+    controller: DeviceController
   });
 
   // Orders
@@ -173,7 +173,21 @@ Router.map(function() {
   this.route('orders', {
     controller: DeviceController,
     layoutTemplate: 'deviceLayout'
-  })
+  });
+
+  // Front Desk
+
+  this.route('frontDesk', {
+    controller: 'DeviceController',
+    layoutTemplate: 'deviceLayout'
+  });
+
+  // Transportation
+
+  this.route('transportation', {
+    controller: 'DeviceController',
+    layoutTemplate: 'deviceLayout'
+  });
 
   // Experiences
 
@@ -259,20 +273,6 @@ Router.map(function() {
         hotelStaff: Meteor.users.find({hotelId: this.params._id})
       }
     }
-  });
-
-  // Front Desk
-
-  this.route('frontDesk', {
-    controller: 'DeviceController',
-    layoutTemplate: 'deviceLayout'
-  });
-
-  // Transportation
-
-  this.route('transportation', {
-    controller: 'DeviceController',
-    layoutTemplate: 'deviceLayout'
   });
 
   // Pages

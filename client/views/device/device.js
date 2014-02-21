@@ -1,6 +1,14 @@
-Deps.autorun(function () {
-  var deviceId = Session.get('deviceId');
-  Meteor.subscribe('deviceData');
+Meteor.startup(function() {
+  Deps.autorun(function () {
+    // var devices = Devices.find();
+    var deviceId = Session.get('deviceId'),
+        device = Devices.findOne(deviceId);
+
+    if (device) {
+      Meteor.subscribe('deviceData');
+
+    }
+  });
 });
 
 Template.device.helpers({
