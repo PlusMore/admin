@@ -40,6 +40,24 @@ var filters = {
       this.render('notFound');
       this.stop();
     }
+  },
+  isDevice: function() {
+    if (!Roles.userIsInRole(Meteor.userId(), ['device', 'admin'])) {
+      this.render('notFound');
+      this.stop();
+    }
+  },
+  isHotelStaff: function() {
+    if (!Roles.userIsInRole(Meteor.userId(), ['hotel-staff', 'admin'])) {
+      this.render('notFound');
+      this.stop();
+    }
+  },
+  isContentManager: function() {
+    if (!Roles.userIsInRole(Meteor.userId(), ['content-manager', 'admin'])) {
+      this.render('notFound');
+      this.stop();
+    }
   }
 };
 
@@ -81,6 +99,15 @@ Router.before(filters.isAdmin, {only: [
   'hotels'
 ]});
 
+// Ensure user has a device account, otherwise,
+// redirect to device list?
+// TODO: Need to think about this.. Can we get patron's
+// information somehow? Maybe can change from auto login
+// to a form.
+Router.before(filters.ensureDeviceAccount, {only: [
+  'device'
+]});
+
 // Show loading bar for any route that loads a subscription
 Router.before(helpers.showLoadingBar, {only: [
   'experiences',
@@ -98,11 +125,6 @@ Router.map(function() {
   // Device Manager
   this.route('setupDevice', {
     path: '/setup-device',
-    waitOn: function() {
-      return [
-        Meteor.subscribe('userHotel')
-      ]
-    },
     after: function() {
       var hotel = Hotels.findOne(Meteor.user().hotelId);
       Session.set('hotelName', hotel.name);
@@ -117,9 +139,6 @@ Router.map(function() {
 
   this.route('devices', {
     path: '/devices',
-    before: function() {
-
-    },
     waitOn: function() {
       return [
         Meteor.subscribe('devices')
@@ -139,7 +158,7 @@ Router.map(function() {
 
   // Device
   this.route('device', {
-    path: '/device/:_id',
+    path: '/device',
     controller: DeviceController,
     layoutTemplate: 'deviceLayout'
   });
@@ -147,7 +166,7 @@ Router.map(function() {
   // Orders
 
   this.route('orders', {
-    controller: 'DeviceController',
+    controller: DeviceController,
     layoutTemplate: 'deviceLayout'
   })
 

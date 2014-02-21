@@ -10,7 +10,7 @@ All publications-related code.
  * Always publish logged-in user's hotelId
  *
  */
- Meteor.publish(null, function () {
+Meteor.publish(null, function () {
   var userId = this.userId,
       fields = {hotelId:1},
       user = Meteor.users.findOne({_id:userId}),
@@ -19,6 +19,23 @@ All publications-related code.
     return [
       Meteor.users.find({_id: userId}, {fields: fields}),
       Hotels.find({_id: hotelId})
+    ]
+  }
+});
+
+/**
+ * Always publish logged-in user's hotelId
+ *
+ */
+Meteor.publish(null, function () {
+  var userId = this.userId,
+      fields = {deviceId:1},
+      user = Meteor.users.findOne({_id:userId}),
+      deviceId = user && user.deviceId || null;
+  if (deviceId) {
+    return [
+      Meteor.users.find({_id: userId}, {fields: fields}),
+      Devices.find({_id: deviceId})
     ]
   }
 });
