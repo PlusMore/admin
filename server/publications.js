@@ -24,7 +24,7 @@ Meteor.publish(null, function () {
 });
 
 /**
- * Always publish logged-in user's hotelId
+ * Always publish logged-in user's deviceId
  *
  */
 Meteor.publish(null, function () {
