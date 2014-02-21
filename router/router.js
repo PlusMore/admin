@@ -99,6 +99,11 @@ Router.before(filters.isAdmin, {only: [
   'hotels'
 ]});
 
+Router.before(filters.isHotelStaff, {only: [
+  'devices',
+  'setup-device'
+]});
+
 // Ensure user has a device account, otherwise,
 // redirect to device list?
 // TODO: Need to think about this.. Can we get patron's
@@ -172,6 +177,30 @@ Router.map(function() {
 
   // Experiences
 
+  this.route('experiences', {
+    path: '/experiences/:category?',
+    controller: DeviceController,
+    layoutTemplate: 'deviceLayout',
+    data: function () {
+      return {
+        experiences: Experiences.find({category: this.params.category})
+      };
+    }
+  });
+
+  this.route('experience', {
+    path: '/experience/:_id',
+    controller: DeviceController,
+    layoutTemplate: 'deviceLayout',
+    data: function () {
+      return {
+        experience: Experiences.findOne(this.params._id)
+      };
+    }
+  });
+
+  // Manage Experiences
+
   this.route('manageExperiences', {
     path: '/manage-experiences',
     waitOn: function() {
@@ -179,43 +208,6 @@ Router.map(function() {
         Meteor.subscribe('myExperiences'),
         Meteor.subscribe('categories')
       ]
-    }
-  });
-
-  this.route('experiences', {
-    path: '/experiences/:category?',
-    layoutTemplate: 'deviceLayout',
-    waitOn: function () {
-      var options = {};
-      if (this.params.category) {
-        options.category = this.params.category;
-      }
-      return [
-        Meteor.subscribe('activeExperiences', options),
-        Meteor.subscribe('categories')
-      ];
-    },
-    data: function () {
-      return {
-        experiences: Experiences.find(),
-        categories: Categories.find()
-      };
-    }
-  });
-
-  this.route('experience', {
-    path: '/experience/:_id',
-    layoutTemplate: 'deviceLayout',
-    waitOn: function () {
-      return [
-        Meteor.subscribe('singleExperience', this.params._id),
-        Meteor.subscribe('categories')
-      ];
-    },
-    data: function () {
-      return {
-        experience: Experiences.findOne(this.params._id)
-      };
     }
   });
 

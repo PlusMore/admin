@@ -1,18 +1,13 @@
 DeviceController = RouteController.extend({
-  before: function() {
-    Session.set('deviceId', this.params._id);
-  },
   waitOn: function() {
     return [
-      Meteor.subscribe('categories'),
-      Meteor.subscribe('device', this.params._id)
+      Meteor.subscribe('deviceData')
     ]
   },
-  data: function () {
-    return {
-      categories: Categories.find(),
-      hotel: Hotels.findOne(Meteor.user().hotelId),
-      device: Devices.findOne({_id:this.params._id})
-    }
+  load: function() {
+    var deviceId = Meteor.user().deviceId;
+    Session.set('deviceId', deviceId);
+    var device = Devices.findOne(deviceId);
+    Session.set('hotelId', device.hotelId);
   }
 });

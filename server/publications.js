@@ -88,20 +88,27 @@ Meteor.publish('categories', function() {
 
 Meteor.publish('devices', function(hotelId) {
   var userId = this.userId,
-      user = Meteor.users.findOne({_id:userId}),
+      user = Meteor.users.findOne(userId),
       hotelId = user.hotelId;
 
   return Devices.find({hotelId: hotelId});
 });
 
-Meteor.publish('device', function (id) {
-  return Devices.find(id);
-});
-
 // Orders
 
-Meteor.publish('deviceOrders', function(deviceId) {
-  return Orders.find({deviceId: deviceId});
+Meteor.publish('deviceData', function(deviceId) {
+  var userId = this.userId,
+      user = Meteor.users.findOne(userId),
+      deviceId = user.deviceId;
+
+  var device = Devices.findOne(deviceId);
+  return [
+    Devices.find(deviceId),
+    Hotels.find(device.hotelId),
+    Orders.find({userId: this.userId}),
+    Categories.find(),
+    Experiences.find({active: true})
+  ]
 })
 
 // Hotels
@@ -122,3 +129,5 @@ Meteor.publish('hotelUsers', function(options) {
   hotelId = options.hotelId;
   return Meteor.users.find({hotelId: hotelId}, {fields:{emails:1, roles:1, hotelId:1, profile:1}});
 });
+
+
