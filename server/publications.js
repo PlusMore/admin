@@ -98,17 +98,22 @@ Meteor.publish('devices', function(hotelId) {
 
 Meteor.publish('deviceData', function(deviceId) {
   var userId = this.userId,
-      user = Meteor.users.findOne(userId),
-      deviceId = user.deviceId;
+      user = Meteor.users.findOne(userId);
 
-  var device = Devices.findOne(deviceId);
-  return [
-    Devices.find(deviceId),
-    Hotels.find(device.hotelId),
-    Orders.find({userId: this.userId}),
-    Categories.find(),
-    Experiences.find({active: true})
-  ]
+  if (user) {
+    var deviceId = user.deviceId;
+    var device = Devices.findOne(deviceId);
+
+    if (device) {
+      return [
+        Devices.find(deviceId),
+        Hotels.find(device.hotelId),
+        Orders.find({userId: this.userId}),
+        Categories.find(),
+        Experiences.find({active: true})
+      ]
+    }
+  }
 })
 
 // Hotels

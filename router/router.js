@@ -58,6 +58,15 @@ var filters = {
       this.render('notFound');
       this.stop();
     }
+  },
+  ensureDeviceAccount: function() {
+    if (!Roles.userIsInRole(Meteor.userId(), ['device'])) {
+      Session.set('deviceIsRegistered', false);
+      this.render('registerDevice');
+      this.stop();
+    } else {
+      Session.set('deviceIsRegistered', true);
+    }
   }
 };
 
@@ -88,8 +97,7 @@ Router.before(filters.isLoggedIn, {only: [
   'manageExperiences',
   'categories',
   'hotel',
-  'hotels',
-  'setupDevice'
+  'hotels'
 ]});
 
 // Check admin
@@ -130,6 +138,12 @@ Router.map(function() {
   // Device Manager
   this.route('setupDevice', {
     path: '/setup-device',
+    layoutTemplate: 'deviceLayout',
+    before: function() {
+      if (Meteor.isClient) {
+        AccountsEntry.signInRequired(this);
+      }
+    },
     after: function() {
       var hotel = Hotels.findOne(Meteor.user().hotelId);
       Session.set('hotelName', hotel.name);

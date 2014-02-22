@@ -11,7 +11,8 @@
       "collectionFS": {},
       "inspector": {},
       "nprogress": {},
-      "font-awesome": {}
+      "font-awesome": {},
+      "accounts-entry": {}
     },
     "packages": {
       "iron-router": {
@@ -31,8 +32,8 @@
       },
       "autoform": {
         "git": "https://github.com/aldeed/meteor-autoform.git",
-        "tag": "v0.4.14",
-        "commit": "bd256edffecae7152a2d4644dbaba092ed5f3ad3"
+        "tag": "v0.4.16",
+        "commit": "314a85e982e228e35d193019441f208a95645189"
       },
       "fastclick": {
         "git": "https://github.com/percolatestudio/meteor-fastclick",
@@ -41,8 +42,8 @@
       },
       "collection2": {
         "git": "https://github.com/aldeed/meteor-collection2.git",
-        "tag": "v0.3.7",
-        "commit": "4c6c2dfd87af8cda321c80e1baea72842ad5c542"
+        "tag": "v0.3.8",
+        "commit": "69aff2a21ba3c382f915e1f9dbcca2ad38edb6d5"
       },
       "collectionFS": {
         "git": "https://github.com/raix/Meteor-CollectionFS.git",
@@ -64,10 +65,15 @@
         "tag": "v4.0.3",
         "commit": "61e9361384347547ae144f8228faa4deffda23db"
       },
+      "accounts-entry": {
+        "git": "https://github.com/BeDifferential/accounts-entry.git",
+        "tag": "v0.6.0",
+        "commit": "54cd9585ea58c88f3dc2d736f3ae7a6fa8432c13"
+      },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.2.37",
-        "commit": "4531fc43dea7bab04e4647e9820fa52631408909"
+        "tag": "v0.2.38",
+        "commit": "2deec0041fc6cb2666df8cd6a51914e499e95683"
       },
       "moment": {
         "git": "https://github.com/acreeger/meteor-moment.git",
@@ -78,6 +84,16 @@
         "git": "https://github.com/nooitaf/meteor-cfs-public-folder.git",
         "tag": "v0.0.3",
         "commit": "581c716424b374efb6f611110002621f9cc9212b"
+      },
+      "just-i18n": {
+        "git": "https://github.com/subhog/meteor-just-i18n.git",
+        "tag": "v0.1.1",
+        "commit": "ce88ac66c0dc107dc2da93ce152616115838101f"
+      },
+      "accounts-t9n": {
+        "git": "https://github.com/softwarerero/meteor-accounts-t9n.git",
+        "tag": "v0.0.2",
+        "commit": "408e3a037114cb72163073110e2121e3d548c1a2"
       }
     }
   }
