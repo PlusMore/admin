@@ -6,7 +6,8 @@ Template.setupDevice.helpers({
         // log out the current hotel staff
         Meteor.logout()
         // attempts to create and login as new device user
-        Meteor.loginDevice(deviceId, function() {
+        Meteor.loginDevice(deviceId, function(err) {
+          debugger;
           Router.go('device');
         });
       },

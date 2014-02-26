@@ -26,7 +26,7 @@ Accounts.registerLoginHandler(function (options) {
 
   var stampedLoginToken = Accounts._generateStampedLoginToken();
   Meteor.users.update(
-    meteorUserId, {$push: {'services.resume.loginTokens': stampedLoginToken}});
+    meteorUserId, {$push: {'services.resume.loginTokens': Accounts._hashStampedToken(stampedLoginToken)}});
 
   return {
     token: stampedLoginToken.token,
