@@ -1,3 +1,20 @@
 <template name="orders">
-  <h1>Orders</h1>
+  {{#if orders}}
+  <div class="orders">
+    {{#each orders}}
+      {{> order}}
+    {{/each}}
+  </div>
+  {{else}}
+  <div class="no-orders">
+    <h1>You have no open orders</h1>
+  </div>
+  {{/if}}
+</template>
+
+<template name="order">
+  <div class="order">
+    <h1>Title</h1>
+    <p>Stuff</p>
+  </div>
 </template>

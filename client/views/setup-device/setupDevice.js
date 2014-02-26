@@ -2,8 +2,14 @@ Template.setupDevice.helpers({
   setupDeviceSchema: function() {
     var setupDeviceSchema = new AutoForm(Schema.setupDevice);
     setupDeviceSchema.hooks({
-      onSuccess: function(operation, result, template) {
-        Router.go('device', {_id: result});
+      onSuccess: function(operation, deviceId, template) {
+        // log out the current hotel staff
+        Meteor.logout()
+        // attempts to create and login as new device user
+        Meteor.loginDevice(deviceId, function(err) {
+          debugger;
+          Router.go('device');
+        });
       },
       onError: function(operation, error, template) {
         console.log(error);

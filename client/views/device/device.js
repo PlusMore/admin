@@ -1,5 +1,19 @@
-Deps.autorun(function () {
-  var deviceId = Session.get('deviceId');
+Meteor.startup(function() {
+  Deps.autorun(function () {
+    // var devices = Devices.find();
+    var deviceId = Session.get('deviceId'),
+        device = Devices.findOne(deviceId);
 
-  // Meteor.subscribe("deviceOrders", {deviceId: Session.get("deviceId")});
+    if (device) {
+      Meteor.subscribe('deviceData');
+
+    }
+  });
+});
+
+Template.device.helpers({
+  device: function() {
+    var deviceId = Session.get('deviceId');
+    return Devices.findOne(deviceId);
+  }
 });

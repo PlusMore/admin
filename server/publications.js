@@ -6,6 +6,40 @@ All publications-related code.
 
 /+ ---------------------------------------------------- */
 
+/**
+ * Always publish logged-in user's hotelId
+ *
+ */
+Meteor.publish(null, function () {
+  var userId = this.userId,
+      fields = {hotelId:1},
+      user = Meteor.users.findOne({_id:userId}),
+      hotelId = user && user.hotelId || null;
+  if (hotelId) {
+    return [
+      Meteor.users.find({_id: userId}, {fields: fields}),
+      Hotels.find({_id: hotelId})
+    ]
+  }
+});
+
+/**
+ * Always publish logged-in user's deviceId
+ *
+ */
+Meteor.publish(null, function () {
+  var userId = this.userId,
+      fields = {deviceId:1},
+      user = Meteor.users.findOne({_id:userId}),
+      deviceId = user && user.deviceId || null;
+  if (deviceId) {
+    return [
+      Meteor.users.find({_id: userId}, {fields: fields}),
+      Devices.find({_id: deviceId})
+    ]
+  }
+});
+
 // Experiences
 
 Meteor.publish('allExperiences', function() {
@@ -53,30 +87,36 @@ Meteor.publish('categories', function() {
 // Devices
 
 Meteor.publish('devices', function(hotelId) {
+  var userId = this.userId,
+      user = Meteor.users.findOne(userId),
+      hotelId = user.hotelId;
+
   return Devices.find({hotelId: hotelId});
 });
 
-Meteor.publish('device', function (id) {
-  return Devices.find(id);
-});
+// Orders
+
+Meteor.publish('deviceData', function(deviceId) {
+  var userId = this.userId,
+      user = Meteor.users.findOne(userId);
+
+  if (user) {
+    var deviceId = user.deviceId;
+    var device = Devices.findOne(deviceId);
+
+    if (device) {
+      return [
+        Devices.find(deviceId),
+        Hotels.find(device.hotelId),
+        Orders.find({userId: this.userId}),
+        Categories.find(),
+        Experiences.find({active: true})
+      ]
+    }
+  }
+})
 
 // Hotels
-
-/**
- * Always publish logged-in user's hotelId
- *
- */
-Meteor.publish('userHotel', function () {
-  var userId = this.userId,
-      fields = {hotelId:1},
-      user = Meteor.users.findOne({_id:userId}),
-      hotelId = user.hotelId;
-
-  return [
-    Meteor.users.find({_id:userId}, {fields: fields}),
-    Hotels.find({_id:hotelId})
-  ]
-});
 
 Meteor.publish('hotels', function() {
   if(Roles.userIsInRole(this.userId, 'admin')) {
@@ -94,3 +134,5 @@ Meteor.publish('hotelUsers', function(options) {
   hotelId = options.hotelId;
   return Meteor.users.find({hotelId: hotelId}, {fields:{emails:1, roles:1, hotelId:1, profile:1}});
 });
+
+

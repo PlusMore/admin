@@ -68,18 +68,6 @@ Meteor.startup(function(){
       zip: "10128",
       phone: "555-555-5555"
     });
-
-    Devices.insert({
-      hotelId: hotelId,
-      type: 'room',
-      location: 'Room 131'
-    });
-
-    Devices.insert({
-      hotelId: hotelId,
-      type: 'lobby',
-      location: 'Lobby'
-    });
   }
 
 });
