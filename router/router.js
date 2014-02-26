@@ -60,12 +60,22 @@ var filters = {
     }
   },
   ensureDeviceAccount: function() {
-    if (!Roles.userIsInRole(Meteor.userId(), ['device'])) {
-      Session.set('deviceIsRegistered', false);
-      this.render('registerDevice');
-      this.stop();
+    if (! Meteor.user()) {
+      if (Meteor.loggingIn()) {
+        this.render('loadingTemplate')
+      } else {
+        Session.set('deviceIsRegistered', false);
+        this.render('registerDevice');
+        this.stop();
+      }
     } else {
-      Session.set('deviceIsRegistered', true);
+      if (!Roles.userIsInRole(Meteor.userId(), ['device'])) {
+        Session.set('deviceIsRegistered', false);
+        this.render('registerDevice');
+        this.stop();
+      } else {
+        Session.set('deviceIsRegistered', true);
+      }
     }
   }
 };
