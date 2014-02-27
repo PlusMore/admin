@@ -18,7 +18,17 @@ Experiences = new Meteor.Collection('experiences', {
     },
     price: {
       type: Number,
-      label: "Price",
+      label: "Price (Optional)",
+      optional: true
+    },
+    callToAction: {
+      type: String,
+      label: 'Call to Action',
+      optional: true
+    },
+    maxPartySize: {
+      type: Number,
+      label: 'Max Party Size',
       optional: true
     },
     venueName: {

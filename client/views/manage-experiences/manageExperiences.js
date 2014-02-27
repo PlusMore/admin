@@ -27,38 +27,8 @@ Template.uploadExperiencePhoto.events({
   }
 });
 
-Template.uploadedPhotos.helpers({
-  photos: function() {
-    var query = {
-      'metadata.createSession': Session.get('createExperienceSessionId')
-    }
-    return ExperiencesFS.find({'metadata.owner': Meteor.userId()});
-  }
-});
-
 Template.myExperiences.helpers({
   experiences: function() {
     return Experiences.find({owner: Meteor.userId()});
   }
-});
-
-Template.editExperience.helpers({
-  experienceSchema: function() {
-    var experiencesForm = new AutoForm(Experiences);
-    return experiencesForm;
-  }
-});
-
-Handlebars.registerHelper("categoryOptions", function() {
-  var categories = Categories.find().fetch();
-  var categoryOptions = [];
-
-  _.each(categories, function(category) {
-    categoryOptions.push({
-      label: category.name,
-      value: category.name
-    });
-  });
-
-  return categoryOptions;
 });

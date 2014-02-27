@@ -29,65 +29,8 @@
     </div>
 </template>
 
-<template name="uploadedPhotos">
-  {{#each photos}}
-    <div class="row">
-      <div class="col-xs-12">
-        <img src="{{cfsFileUrl 'default1'}}" class="img-responsive" alt="{{_id}}">
-      </div>
-    </div>
-  {{/each}}
-</template>
-
 <template name="myExperiences">
   {{#each experiences}}
     {{> editExperience}}
   {{/each}}
-</template>
-
-<template name="editExperience">
-    <div class="row in-progress-experience">
-      <div class="col-md-4">
-        <legend>Photo</legend>
-        {{#if cfsIsUploading "Songs"}}
-          {{cfsQueueProgressBar "ExperiencesFS" fileId=photoId class="uploadBar"}}
-        {{else}}
-          <img src="{{cfsFileUrl 'default1' fileId=photoId collection='ExperiencesFS'}}" class="img-responsive" alt="{{photoId}}">
-          <em>{{photoName}}</em>
-        {{/if}}
-      </div>
-      {{#autoForm schema=experienceSchema doc=this id=this._id}}
-      <div class="col-md-8">
-        <div class="row">
-          <div class="col-md-6">
-            <legend>Experience Details</legend>
-            {{afQuickField "category" firstOption="--Select a Category--" options=categoryOptions}}
-
-            {{afQuickField 'active'}}
-            {{afQuickField 'title'}}
-            {{afQuickField 'lead'}}
-            {{afQuickField 'price'}}
-            {{afQuickField 'description'}}
-            {{afQuickField 'website'}}
-          </div>
-          <div class="col-md-6">
-            <legend>Venue Info</legend>
-            {{afQuickField 'venueName'}}
-            {{afQuickField 'street'}}
-            {{afQuickField 'city'}}
-            {{afQuickField 'state'}}
-            {{afQuickField 'zip'}}
-            {{afQuickField 'phone'}}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-offset-6 col-md-6">
-            <button type="reset" class="btn btn-default">Reset</button>
-            &nbsp;
-            <button type="submit" class="btn btn-primary update">Update Experience Details</button>
-          </div>
-        </div>
-      </div>
-    {{/autoForm}}
-  </div>
 </template>

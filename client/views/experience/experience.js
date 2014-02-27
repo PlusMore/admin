@@ -1,3 +1,12 @@
+Template.experienceDetails.helpers({
+  callToActionIsReserve: function() {
+    return this.callToAction === "reserve";
+  },
+  callToActionIsPurchase: function() {
+    return this.callToAction === "purchase";
+  }
+});
+
 Template.buyExperience.helpers({
   showConfirmation: function() {
     return Session.get('showConfirmation');

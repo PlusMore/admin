@@ -11,6 +11,10 @@ Categories = new Meteor.Collection('categories', {
     name: {
       type: String,
       label: 'Name'
+    },
+    active: {
+      type: Boolean,
+      label: 'Show this category in device dashboard'
     }
   })
 });
