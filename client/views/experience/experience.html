@@ -36,29 +36,3 @@
   <p class="description">{{description}}</p>
 </template>
 
-<template name="makeReservation">
-  {{#if showConfirmation}}
-    <div class="confirmation">
-      <p>Your request has been sent to our reservation specialists. Please allow up to 30 minutes for confirmation. You can check the status of your reservation in <a href="{{pathFor 'orders'}}">Orders</a></p>
-    </div>
-  {{else}}
-    <div class="reserve">
-      <button class="btn btn-default btn-lg">Make a reservation</button>
-    </div>
-  {{/if}}
-</template>
-
-<template name="buyExperience">
-  {{#if showConfirmation}}
-    <div class="confirmation">
-      <p>Your request has been sent to our reservation specialists. Please allow up to 30 minutes for confirmation. You can check the status of your reservation in <a href="{{pathFor 'orders'}}">Orders</a></p>
-    </div>
-  {{else}}
-    <div class="buy">
-      <div class="price-container">
-        <small class="currency">$&nbsp;</small><span class="price">{{price}}</span><small class="per-ticket">&nbsp;per ticket</small>
-      </div>
-      <button class="btn">buy now!</button>
-    </div>
-  {{/if}}
-</template>

@@ -1,7 +1,9 @@
 <template name="deviceLayout">
-  {{> deviceHeader}}
-  <div class="device-container {{deviceContainerClass}}">
-    {{yield}}
+  <div class="deviceLayout">
+    {{> deviceHeader}}
+    <div class="device-container {{deviceContainerClass}}">
+      {{yield}}
+    </div>
+    {{> footer}}
   </div>
-  {{> footer}}
 </template>

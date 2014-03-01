@@ -1,0 +1,11 @@
+<template name="makeReservation">
+  {{#if showConfirmation}}
+    <div class="confirmation">
+      <p>Your request has been sent to our reservation specialists. Please allow up to 30 minutes for confirmation. You can check the status of your reservation in <a href="{{pathFor 'orders'}}">Orders</a></p>
+    </div>
+  {{else}}
+    <div class="reserve">
+      <button class="btn btn-default btn-lg">Make a reservation</button>
+    </div>
+  {{/if}}
+</template>
