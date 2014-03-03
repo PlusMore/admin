@@ -133,7 +133,10 @@ Router.before(filters.isHotelStaff, {only: [
 // information somehow? Maybe can change from auto login
 // to a form.
 Router.before(filters.ensureDeviceAccount, {only: [
-  'device'
+  'device',
+  'experiences',
+  'experience',
+  'orders'
 ]});
 
 // Show loading bar for any route that loads a subscription
@@ -200,30 +203,33 @@ Router.map(function() {
   // Orders
 
   this.route('orders', {
-    controller: DeviceController,
-    layoutTemplate: 'deviceLayout'
+    layoutTemplate: 'deviceLayout',
+    controller: DeviceController
   });
 
   // Front Desk
 
   this.route('frontDesk', {
-    controller: 'DeviceController',
-    layoutTemplate: 'deviceLayout'
+    layoutTemplate: 'deviceLayout',
+    controller: DeviceController,
   });
 
   // Transportation
 
   this.route('transportation', {
-    controller: 'DeviceController',
-    layoutTemplate: 'deviceLayout'
+    layoutTemplate: 'deviceLayout',
+    controller: DeviceController
   });
 
   // Experiences
 
   this.route('experiences', {
     path: '/experiences/:category?',
-    controller: DeviceController,
+    before: function() {
+      Session.set('experienceState', '');
+    },
     layoutTemplate: 'deviceLayout',
+    controller: DeviceController,
     data: function () {
       return {
         experiences: Experiences.find({category: this.params.category})

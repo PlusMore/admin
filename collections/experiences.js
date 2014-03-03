@@ -108,6 +108,28 @@ ExperiencesFS.allow({
   }
 });
 
+// Schemas
+
+Schema.makeReservation = new SimpleSchema({
+  partySize: {
+    type: Number,
+    label: 'How many people in your party?',
+    min: 1
+  },
+  partyName: {
+    type: String,
+    label: 'Your Party\'s name'
+  },
+  phoneNumber: {
+    type: String,
+    label: 'Phone number (for confirmation)'
+  },
+  emailAddress: {
+    type: String,
+    label: "Email address"
+  }
+});
+
 // Methods
 
 Meteor.methods({
@@ -138,4 +160,47 @@ Meteor.methods({
       message: "Experience {0} bought".format(experience.title)
     });
   },
+  makeReservation: function(reservation) {
+    var experienceId = reservation.experienceId;
+    var experience = Experiences.findOne(experienceId);
+    if (!experience) {
+      throw new Meteor.Error(403, 'Invalid Experience');
+    }
+
+    // get some validation rules from experience
+    var schema = Schema.makeReservation._schema;
+    if (experience.maxPartySize) {
+      schema.partySize.max = experience.maxPartySize;
+    }
+    schema.experienceId = {
+      type: String
+    }
+    var extendedReservationSchema = new SimpleSchema(schema);
+    check(reservation, extendedReservationSchema);
+
+    var user = Meteor.user();
+    var deviceId = user.deviceId;
+    var device = Devices.findOne(deviceId);
+    if (!device) {
+      throw new Meteor.Error(403, 'Not a proper device');
+    }
+
+    var hotel = Hotels.findOne(device.hotelId);
+    if (!hotel) {
+      throw new Meteor.Error(403, 'Not a valid hotel');
+    }
+
+    var order = {
+      type: 'reservation',
+      deviceId: device._id,
+      hotelId: hotel._id,
+      reservation: reservation,
+      requestedAt: new Date(),
+      read: false,
+      open: true,
+      userId: user._id
+    }
+
+    return Orders.insert(order, {validate: false});
+  }
 });

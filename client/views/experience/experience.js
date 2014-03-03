@@ -1,32 +1,24 @@
-Template.experience.helpers({
-  experienceState: function() {
-    return Session.get('experienceState');
-  }
-});
-
-Template.experienceDetails.helpers({
+var callToActionHelpers = {
   callToActionIsReserve: function() {
     return this.callToAction === "reserve";
   },
   callToActionIsPurchase: function() {
     return this.callToAction === "purchase";
   }
-});
+}
 
-Template.buyExperience.helpers({
-  showConfirmation: function() {
-    return Session.get('showConfirmation');
+Template.experience.helpers(_.extend(callToActionHelpers, {
+  experienceState: function() {
+    return Session.get('experienceState');
+  }
+}));
+
+Template.experience.events({
+  'click .close': function (e, tmpl) {
+    e.preventDefault();
+    mixpanel.track("Close button clicked");
+    Session.set('experienceState', '');
   }
 });
 
-Template.buyExperience.events({
-  'click .btn': function () {
-    Meteor.call('buyExperience', this, function (error, result) {
-      if (error)
-        throw new Meteor.error(error);
-
-      Session.set('showConfirmation', true);
-
-    });
-  }
-});
+Template.experienceDetails.helpers(_.extend(callToActionHelpers, {}));
