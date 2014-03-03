@@ -1,3 +1,9 @@
+Template.experience.helpers({
+  experienceState: function() {
+    return Session.get('experienceState');
+  }
+});
+
 Template.experienceDetails.helpers({
   callToActionIsReserve: function() {
     return this.callToAction === "reserve";

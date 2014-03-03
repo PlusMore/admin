@@ -83,7 +83,11 @@ var filters = {
 
 var helpers = {
   analyticsRequest: function() {
-    // console.log('Make analytics request here', this, Meteor.user());
+    if (Meteor.isClient) {
+      console.log('mixpanel request');
+      var name = Router.current().route.name;
+      mixpanel.track("page view", {name: name});
+    }
   },
   showLoadingBar: function() {
     if (this.ready()) {

@@ -10,12 +10,7 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav nav-justified">
-        <li class="{{activeRouteClass 'orders'}}">
-          <a href="{{pathFor 'orders'}}" class="menu-item orders">
-            <i class="fa fa-shopping-cart icon"></i>
-            <span class="text">Orders</span>
-          </a>
-        </li>
+
        <!--  <li class="{{activeRouteClass 'frontDesk'}}">
           <a href="{{pathFor 'frontDesk'}}" class="menu-item front-desk">
             <i class="fa fa-shopping-cart icon"></i>
@@ -31,6 +26,12 @@
         {{#each categories}}
           {{> categoryLink}}
         {{/each}}
+        <li class="{{activeRouteClass 'orders'}}">
+          <a href="{{pathFor 'orders'}}" class="menu-item orders">
+            <i class="fa fa-shopping-cart icon"></i>
+            <span class="text">Orders</span>
+          </a>
+        </li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>

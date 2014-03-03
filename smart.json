@@ -11,6 +11,7 @@
     "inspector": {},
     "nprogress": {},
     "font-awesome": {},
-    "accounts-entry": {}
+    "accounts-entry": {},
+    "percolatestudio-mixpanel": {}
   }
 }

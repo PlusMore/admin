@@ -24,25 +24,40 @@
     }
   }
 
+
   & > .content {
     background-color: rgba(0,0,0,.91);
     color: #fff;
     padding: 20px 30.5px;
 
-
-    h1 {
-      font-weight: 100;
-      font-size: 33pt;
-      margin-bottom: 5px;
+    &.action-form {
+      border-left: 1px solid rgba(255,255,255,.3);
+      opacity: 0;
     }
 
-    p.lead {
-      font-weight: 100;
-      font-size: 16pt;
-      margin-bottom: 0;
+    .close {
+      color: #fff;
+      opacity: 1;
     }
 
-    .buy {
+    .experience-header {
+      margin-bottom: 20px;
+
+      h1 {
+        font-weight: 100;
+        font-size: 4em;
+        margin-bottom: 5px;
+      }
+
+      p.lead {
+        font-weight: 100;
+        font-size: 16pt;
+        margin-bottom: 0;
+      }
+    }
+
+
+    .buy, .reserve {
       .price-container {
         font-weight: 100;
         font-size: 65pt;
@@ -58,12 +73,13 @@
       }
 
       button.btn {
-        font-size: 25pt;
+        font-size: 2em;
         font-weight: 200;
         padding: 5px 40px;
         margin-left: 5px;
         background-color: white;
         color: rgb(0, 0, 0);
+        border-radius: 0;
       }
     }
 
@@ -97,6 +113,16 @@
       font-size: 13pt;
     }
   }
+
+  &.in-progress {
+    & > .content {
+      &.action-form {
+        transition: 500ms all linear;
+        opacity: 1;
+      }
+    }
+  }
+
 }
 
 @media (max-width: 767px) {
