@@ -6,6 +6,12 @@
   left: 0;
   z-index: 3000;
 
+  background-color: #fff;
+  -webkit-background-size: cover !important;
+  -moz-background-size: cover !important;
+  -o-background-size: cover !important;
+  background-size: cover !important;
+
   & > .back {
     & > a {
       color: rgb(255, 255, 255);
@@ -24,25 +30,62 @@
     }
   }
 
+
   & > .content {
+    transition: 500ms all linear;
     background-color: rgba(0,0,0,.91);
     color: #fff;
     padding: 20px 30.5px;
 
+    &.action-form {
+      border-left: 1px solid rgba(255,255,255,.3);
+      display: none;
 
-    h1 {
-      font-weight: 100;
-      font-size: 33pt;
-      margin-bottom: 5px;
+      form {
+        margin-top: 30px;
+
+        legend {
+          color: #fff;
+          text-transform: uppercase;
+        }
+
+        .buttons {
+          .btn {
+            margin-top: 20px;
+            font-size: 2em;
+            font-weight: 200;
+            color: rgb(0, 0, 0);
+            border-radius: 0;
+            text-transform: uppercase;
+          }
+        }
+      }
     }
 
-    p.lead {
-      font-weight: 100;
-      font-size: 16pt;
-      margin-bottom: 0;
+    .close {
+      color: #fff;
+      opacity: 1;
+      text-shadow: none;
     }
 
-    .buy {
+    .experience-header {
+      margin-bottom: 20px;
+
+      h1 {
+        font-weight: 100;
+        font-size: 4em;
+        margin-bottom: 5px;
+      }
+
+      p.lead {
+        font-weight: 100;
+        font-size: 16pt;
+        margin-bottom: 0;
+      }
+    }
+
+
+    .buy, .reserve {
       .price-container {
         font-weight: 100;
         font-size: 65pt;
@@ -58,12 +101,13 @@
       }
 
       button.btn {
-        font-size: 25pt;
+        font-size: 2em;
         font-weight: 200;
         padding: 5px 40px;
-        margin-left: 5px;
         background-color: white;
         color: rgb(0, 0, 0);
+        border-radius: 0;
+        text-transform: uppercase;
       }
     }
 
@@ -97,6 +141,41 @@
       font-size: 13pt;
     }
   }
+
+  &.in-progress {
+    & > .content {
+      &.action-form {
+        display: block;
+
+        form {
+          display: block;
+        }
+
+        .confirmation {
+          display: none;
+        }
+      }
+    }
+  }
+  &.complete {
+    & > .content {
+      &.action-form {
+        display: block;
+
+        form {
+          display: none;
+        }
+
+        .confirmation {
+          display: block;
+        }
+      }
+    }
+  }
+
+
+
+
 }
 
 @media (max-width: 767px) {

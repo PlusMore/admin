@@ -14,6 +14,12 @@ Orders = new Meteor.Collection('orders', {
     },
     hotelId: {
       type: String
+    },
+    userId: {
+      type: String
+    },
+    type: {
+      type: String
     }
   })
 });
@@ -45,7 +51,6 @@ Meteor.methods({
       hotelId: forHotelId
     });
 
-    debugger;
     check(order, Orders);
 
 

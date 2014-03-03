@@ -15,6 +15,29 @@ a:hover {
   margin-left: auto;
 }
 
+.main-container {
+  position: absolute;
+  top: 51px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  width: 100%;
+
+  background : #A5DFF9;
+  background : rgba(165, 223, 249, 1);
+  filter: alpha(opacity=60) progid:DXImageTransform.Microsoft.Alpha(opacity=60) ;
+  background:url('/backgrounds/body-bg-blue.png');
+  background-size: 101% 101%;
+  background-repeat: no-repeat;
+
+  // some smart packages may add an additional container
+  & > .container {
+    padding: 0;
+    margin: 0;
+  }
+}
+
 span.gc-cs-link {
   color: #2a6496;
   text-decoration: none;
