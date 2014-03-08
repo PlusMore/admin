@@ -12,17 +12,28 @@
           text-transform: uppercase;
           letter-spacing: .1em;
           cursor: pointer;
+          padding: 13px 0px !important;
 
           & > .icon {
+
             display: block;
             margin: 0 auto;
-            font-size: 70px;
+            font-size: 60px;
+
+            &:before {
+              display: block;
+            }
+
+            &.fa {
+              font-size: 70px;
+            }
           }
 
-          &.orders > .text {
-            margin-left: 9px;
+          & > .text {
+            font-size: 14px;
+            display: block;
+            margin-top: 4px;
           }
-
         }
       }
       &.back {

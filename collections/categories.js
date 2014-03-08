@@ -18,8 +18,7 @@ Categories = new Meteor.Collection('categories', {
     },
     iconClass: {
       type: String,
-      label: 'Icon Class',
-      optional: true
+      label: 'Icon Class'
     }
   })
 });
