@@ -33,7 +33,7 @@ Meteor.startup(function() {
         "Device": device.location
       });
     } else {
-      mixpanel.indentify(user._id);
+      mixpanel.identify(user._id);
       mixpanel.people.set({
         '$email': user.emails[0].address
       });

@@ -20,7 +20,16 @@
 
 <template name="category">
   <div class="category section">
-    {{quickForm schema=categorySchema doc=this type="update" buttonClasses="btn btn-primary" buttonContent="Update Category"}}
+    <h3>Edit Category</h3>
+    {{#autoForm schema=categorySchema doc=this id=this._id}}
+      {{afQuickField 'name'}}
+      {{afQuickField 'active'}}
+      {{afQuickField 'iconClass' firstOption="--Select an icon--" options=categoryIconOptions}}
+      <button type="reset" class="btn btn-default">Reset</button>
+      &nbsp;
+      <button type="submit" class="btn btn-primary update">Update Category</button>
+    {{/autoForm}}
+    <br />
     {{#autoForm schema=categorySchema doc=this}}
       <button type="submit" class="btn btn-danger remove">
       <i class="fa fa-trash-o"></i> Delete</button>
@@ -31,6 +40,13 @@
 <template name="addCategory">
   <div class="section">
     <h3>Add Category</h3>
-    {{quickForm schema=categorySchema type="insert" buttonClasses="btn btn-primary" buttonContent="Add Category"}}
+    {{#autoForm schema=categorySchema}}
+      {{afQuickField 'name'}}
+      {{afQuickField 'active'}}
+      {{afQuickField 'iconClass' firstOption="--Select an icon--" options=categoryIconOptions}}
+      <button type="reset" class="btn btn-default">Reset</button>
+      &nbsp;
+      <button type="submit" class="btn btn-primary insert">Add Category</button>
+    {{/autoForm}}
   </div>
 </template>
