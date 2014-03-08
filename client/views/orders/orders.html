@@ -1,4 +1,5 @@
 <template name="orders">
+  <div class="orders-list">
   {{#if orders}}
   <div class="orders">
     {{#each orders}}
@@ -10,11 +11,16 @@
     <p class="lead">You have no open orders.</p>
   </div>
   {{/if}}
+  </div>
+
 </template>
 
 <template name="order">
-  <div class="order">
-    <h1>Title</h1>
-    <p>Stuff</p>
+  <div class="order section">
+    {{#if isReservation}}
+      <h3>Reservation for {{experience.title}}</h3>
+      <p class="lead">Party of {{reservation.partySize}}</p>
+
+    {{/if}}
   </div>
 </template>

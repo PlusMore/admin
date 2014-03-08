@@ -19,7 +19,7 @@
 </template>
 
 <template name="category">
-  <div class="category">
+  <div class="category section">
     {{quickForm schema=categorySchema doc=this type="update" buttonClasses="btn btn-primary" buttonContent="Update Category"}}
     {{#autoForm schema=categorySchema doc=this}}
       <button type="submit" class="btn btn-danger remove">
