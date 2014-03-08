@@ -12,6 +12,10 @@
     "nprogress": {},
     "font-awesome": {},
     "accounts-entry": {},
-    "percolatestudio-mixpanel": {}
+    "percolatestudio-mixpanel": {},
+    "bower": {}
+  },
+  "bower": {
+    "eonasdan-bootstrap-datetimepicker": "2.1.30"
   }
 }

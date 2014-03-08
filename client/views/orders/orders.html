@@ -12,15 +12,25 @@
   </div>
   {{/if}}
   </div>
-
 </template>
 
 <template name="order">
   <div class="order section">
     {{#if isReservation}}
-      <h3>Reservation for {{experience.title}}</h3>
-      <p class="lead">Party of {{reservation.partySize}}</p>
-
+      <h3>
+        Reservation for {{experience.title}}
+        <small class="pull-right">
+          {{#if open}}
+            (In Progress)
+          {{else}}
+            Confirmed
+          {{/if}}
+        </small>
+      </h3>
+      <p class="lead">{{reservation.partyName}} - Party of {{reservation.partySize}}</p>
+      {{#with experience}}
+      <a class="btn btn-default" href="{{pathFor 'experience' this}}">See Details</a>
+      {{/with}}
     {{/if}}
   </div>
 </template>
