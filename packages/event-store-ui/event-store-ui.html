@@ -1,13 +1,15 @@
 <template name="ESEvents">
-  {{#if hasEvents}}
-  <ul>
-    {{#each events}}
-      {{> ESEvent}}
-    {{/each}}
-  </ul>
-  {{else}}
-    <p class="lead">No Events.</p>
-  {{/if}}
+  <div class="container">
+    {{#if hasEvents}}
+    <ul>
+      {{#each events}}
+        {{> ESEvent}}
+      {{/each}}
+    </ul>
+    {{else}}
+      <p class="lead">No Events.</p>
+    {{/if}}
+  </div>
 </template>
 
 <template name="ESEvent">

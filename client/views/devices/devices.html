@@ -1,10 +1,16 @@
 <template name="devices">
-  <h3>Devices</h3>
-  <ul>
-    {{#each devices}}
-      <li>
-        <a href="{{pathFor 'device' this}}">{{location}}</a>
-      </li>
-    {{/each}}
-  </ul>
+  <div class="container">
+    <div class="row">
+      <div class="section">
+        <h3>Devices</h3>
+        <ul>
+          {{#each devices}}
+            <li>
+              <a href="{{pathFor 'device' this}}">{{location}}</a>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
 </template>

@@ -1,22 +1,24 @@
 <template name="manageExperiences">
-  <h1>Manage Experiences</h1>
+  <div class="container">
+    <h1>Manage Experiences</h1>
 
-  {{#if isInRole 'admin'}}
-    <h4>Manage Categories</h4>
+    {{#if isInRole 'admin'}}
+      <h4>Manage Categories</h4>
+      <div class="row">
+        <div class="col-md-6">
+        <a href="{{pathFor 'categories'}}" class="btn btn-default">Manage Experience Categories</a>
+        </div>
+      </div>
+    {{/if}}
+
+    <h4>Upload an image to create a new experience</h4>
     <div class="row">
       <div class="col-md-6">
-      <a href="{{pathFor 'categories'}}" class="btn btn-default">Manage Experience Categories</a>
+        {{> uploadExperiencePhoto}}
       </div>
     </div>
-  {{/if}}
-
-  <h4>Upload an image to create a new experience</h4>
-  <div class="row">
-    <div class="col-md-6">
-      {{> uploadExperiencePhoto}}
-    </div>
+    {{> myExperiences}}
   </div>
-  {{> myExperiences}}
 </template>
 
 <template name="uploadExperiencePhoto">

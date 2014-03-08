@@ -1,11 +1,17 @@
 <template name="categories">
-  {{> addCategory}}
-  {{> categoriesList}}
+  <div class="container">
+    <div class="row">
+      {{> addCategory}}
+    </div>
+    <div class="row">
+      {{> categoriesList}}
+    </div>
+  </div>
 </template>
 
 <template name="categoriesList">
-  <h3>Categories: </h3>
-    <div class="row categories">
+    <div class="categories">
+      <h3>Categories: </h3>
       {{#each categories}}
         {{> category}}
       {{/each}}
@@ -23,6 +29,8 @@
 </template>
 
 <template name="addCategory">
-  <h3>Add Category</h3>
-  {{quickForm schema=categorySchema type="insert" buttonClasses="btn btn-primary" buttonContent="Add Category"}}
+  <div class="section">
+    <h3>Add Category</h3>
+    {{quickForm schema=categorySchema type="insert" buttonClasses="btn btn-primary" buttonContent="Add Category"}}
+  </div>
 </template>
