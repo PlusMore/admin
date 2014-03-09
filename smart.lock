@@ -14,7 +14,8 @@
       "font-awesome": {},
       "accounts-entry": {},
       "percolatestudio-mixpanel": {},
-      "bower": {}
+      "bower": {},
+      "impicker": {}
     },
     "packages": {
       "iron-router": {
@@ -81,6 +82,11 @@
         "git": "https://github.com/mquandalle/meteor-bower.git",
         "tag": "v0.1.2",
         "commit": "780b841593c355d1522982e50e7a59fe35d33fee"
+      },
+      "impicker": {
+        "git": "https://github.com/wulx/impicker.git",
+        "tag": "v1.2.0",
+        "commit": "29a7a52d27b2cf8447fc24946b0fdbf60c4b12a6"
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",

@@ -1,16 +1,12 @@
 <template name="editExperience">
-  <div class="container in-progress-experience section">
+  <div class="in-progress-experience section">
     <h3>Edit Experience</h3>
     <div class="row">
       <!-- Photo -->
       <div class="col-md-4">
         <legend>Photo</legend>
-        {{#if cfsIsUploading "Songs"}}
-          {{cfsQueueProgressBar "ExperiencesFS" fileId=photoId class="uploadBar"}}
-        {{else}}
-          <img src="{{cfsFileUrl 'default1' fileId=photoId collection='ExperiencesFS'}}" class="img-responsive" alt="{{photoId}}">
-          <em>{{photoName}}</em>
-        {{/if}}
+        <img class="img-responsive" src="{{photoUrl}}/convert?w=278&fit=scale&cache=true" />
+        <em>{{photoName}}</em>
       </div>
 
       <!-- edit -->

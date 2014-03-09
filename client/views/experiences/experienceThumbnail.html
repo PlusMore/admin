@@ -1,6 +1,6 @@
 <template name="experienceThumbnail">
     <a href="{{pathFor 'experience' this}}">
-      <img src="{{cfsFileUrl 'default1' fileId=photoId collection='ExperiencesFS'}}" class="img-responsive img-experience" alt="{{photoId}}">
+      <img src="{{photoUrl}}/convert?w=329&fit=scale&cache=true" class="img-responsive img-experience" alt="{{photoId}}">
       <div class="content">
         {{> experienceThumbailDetails}}
       </div>
