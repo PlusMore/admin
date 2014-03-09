@@ -73,40 +73,44 @@ Experiences = new Meteor.Collection('experiences', {
     }
   })
 });
-ExperiencesFS = new CollectionFS('experiences');
-ExperiencesFS.filter({
-  allow: {
-    contentTypes: ['image/*']
-  }
-});
+// ExperiencesFS = new CollectionFS('experiences');
+// ExperiencesFS.filter({
+//   allow: {
+//     contentTypes: ['image/*']
+//   }
+// });
 
 // Allow/Deny
 
 Experiences.allow({
   insert: function(userId, doc) {
-    return can.createExperience(userId);
+    return Roles.userIsInRole(userId, ['admin']);
   },
   update:  function(userId, doc, fieldNames, modifier) {
-    return can.editExperience(userId, doc);
+    return Roles.userIsInRole(userId, ['admin']);
   },
   remove:  function(userId, doc) {
-    return can.removeExperience(userId, doc);
+    return Roles.userIsInRole(userId, ['admin']);
   }
 });
 
-ExperiencesFS.allow({
-  insert: function(userId, file) {
-    return can.createExperience(userId);
-  },
-  update: function (userId, files, fields, modifier) {
-    return _.all(files, function(file) {
-      return can.editExperience(userId, file);
-    });
-  },
-  remove: function(userId, file) {
-    return can.removeExperience(userId, file);
-  }
-});
+// Experiences.allow({
+//   insert: function(userId, doc) {
+//     return true;
+//   }
+// });
+
+// ExperiencesFS.allow({
+//   insert: function(userId, file) {
+//     return Roles.userIsInRole(userId, ['admin']);
+//   },
+//   update: function (userId, files, fields, modifier) {
+//     return Roles.userIsInRole(userId, ['admin']);
+//   },
+//   remove: function(userId, file) {
+//     return Roles.userIsInRole(userId, ['admin']);
+//   }
+// });
 
 // Schemas
 
@@ -133,32 +137,19 @@ Schema.makeReservation = new SimpleSchema({
 // Methods
 
 Meteor.methods({
-  createExperience: function(experience){
-    check(experience, Schema.createExperience);
-
-    if(can.createExperience(Meteor.user()))
-      Experiences.insert(experience);
-  },
-  removeExperience: function(experience){
-    if(can.removeItem(Meteor.user(), experience)){
-      Experiences.remove(experience._id);
-    }else{
-      throw new Meteor.Error(403, 'You do not have the rights to delete this experience.')
+  createExperienceForFilepickerUpload: function (InkBlob) {
+    if (Meteor.isServer) {
+      var id = Experiences.insert({
+        owner: Meteor.userId(),
+        photoUrl: InkBlob.url,
+        photoName: InkBlob.filename,
+        active: false,
+        inProgress: true,
+        created: new Date()
+      }, {validate: false}, function(err, result) {
+        if (err) console.log(err);
+      });
     }
-  },
-  enterExperienceDetails: function(experience) {
-    console.log(experience);
-  },
-  buyExperience: function(experience) {
-    console.log('Attempting to buy {0}'.format(experience));
-
-    Meteor.call('insertEvent', {
-      name: 'bought experience',
-      type: 'domain',
-      userId: 'tablet',
-      payload: experience,
-      message: "Experience {0} bought".format(experience.title)
-    });
   },
   makeReservation: function(reservation) {
     var experienceId = reservation.experienceId;

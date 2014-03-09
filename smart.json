@@ -13,7 +13,8 @@
     "font-awesome": {},
     "accounts-entry": {},
     "percolatestudio-mixpanel": {},
-    "bower": {}
+    "bower": {},
+    "impicker": {}
   },
   "bower": {
     "eonasdan-bootstrap-datetimepicker": "2.1.30"

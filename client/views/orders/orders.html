@@ -1,11 +1,12 @@
 <template name="orders">
-  <div class="orders-list">
-  {{#if orders}}
-  <div class="orders">
-    {{#each orders}}
-      {{> order}}
-    {{/each}}
-  </div>
+  {{#if hasOrders}}
+    <div class="orders-list">
+      <div class="orders">
+        {{#each orders}}
+          {{> order}}
+        {{/each}}
+      </div>
+    </div>
   {{else}}
   <div class="no-orders big-text">
     <p class="lead">You have no open orders.</p>
