@@ -20,7 +20,9 @@
 
 <template name="category">
   <div class="category section">
-    <h3>Edit Category</h3>
+    <header>
+      <h3>Edit Category</h3>
+    </header>
     {{#autoForm schema=categorySchema doc=this id=this._id}}
       {{afQuickField 'name'}}
       {{afQuickField 'active'}}
@@ -39,7 +41,10 @@
 
 <template name="addCategory">
   <div class="section">
-    <h3>Add Category</h3>
+    <header>
+      <h3>Add Category</h3>
+    </header>
+
     {{#autoForm schema=categorySchema}}
       {{afQuickField 'name'}}
       {{afQuickField 'active'}}
