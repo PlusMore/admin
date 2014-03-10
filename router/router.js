@@ -194,7 +194,7 @@ Router.map(function() {
   });
 
   // Device
-  this.route('device', {
+  this.route('welcome', {
     path: '/device',
     layoutTemplate: 'deviceLayout',
     controller: DeviceController
