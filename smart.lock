@@ -14,7 +14,6 @@
       "font-awesome": {},
       "accounts-entry": {},
       "percolatestudio-mixpanel": {},
-      "bower": {},
       "impicker": {}
     },
     "packages": {
@@ -77,11 +76,6 @@
         "git": "https://github.com/percolatestudio/meteor-mixpanel.git",
         "tag": "v0.5.0",
         "commit": "d92c8fd6c0504d3f1c195cf972354ab2e81b4e20"
-      },
-      "bower": {
-        "git": "https://github.com/mquandalle/meteor-bower.git",
-        "tag": "v0.1.2",
-        "commit": "780b841593c355d1522982e50e7a59fe35d33fee"
       },
       "impicker": {
         "git": "https://github.com/wulx/impicker.git",

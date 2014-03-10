@@ -1,3 +1,5 @@
+@import 'imports.import.less';
+
 body {
   padding-top: 60px;
   font-family: 'Helvetica Neue', Helvetica, sans;
@@ -8,9 +10,9 @@ a:hover {
   text-decoration: none;
 }
 
-.section {
+.section, .entry {
   background-color: rgba(255,255,255,0.2);
-  padding: 1px 23px 20px;
+  padding: 23px;
   border-radius: 10px;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -19,6 +21,19 @@ a:hover {
   legend {
     color: #fff;
   }
+
+  a:not(.btn) {
+    color: #fff;
+    font-weight: bold;
+  }
+
+  header {
+    & > h1, & > h2, & > h3, & > h4, & > h5, & > h6,  {
+      padding-top: 0;
+      margin-top: 0;
+    }
+  }
+
 }
 
 .container {
@@ -68,7 +83,16 @@ span.gc-cs-link {
   }
 }
 
-.fill-parent {
+.fill {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: 0;
+}
+
+.fill-parent, .fill-container {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -79,6 +103,30 @@ span.gc-cs-link {
 
 .fill-height {
   height: 100%;
+}
+
+.big-text {
+  .center-block();
+  .container-fixed();
+  .vertical-center();
+  .center();
+  position: fixed;
+
+  & > h1, & > h2, & > h3, & > h4, & > h5, & > h6,  {
+    font-size: 5em;
+    font-weight: 200;
+    text-transform: uppercase;
+    margin-right: 20%;
+    margin-left: 20%;
+    margin-bottom: 4%;
+    margin-top: 0;
+  }
+  & > p.lead {
+    font-size: 3em;
+    font-weight: 100;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
 }
 
 // small

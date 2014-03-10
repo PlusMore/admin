@@ -10,14 +10,16 @@
 </template>
 
 <template name="hotelsList">
-  <h3>Hotels: </h3>
-    <ul class="hotels">
-      {{#each hotels}}
-        <li>
-          <a href="{{pathFor 'hotel' this}}">{{name}}</a>
-        </li>
-      {{/each}}
-    </ul>
+  <header>
+    <h3>Hotels: </h3>
+  </header>
+  <ul class="hotels">
+    {{#each hotels}}
+      <li>
+        <a href="{{pathFor 'hotel' this}}">{{name}}</a>
+      </li>
+    {{/each}}
+  </ul>
 </template>
 
 <template name="hotel">
@@ -40,11 +42,15 @@
 </template>
 
 <template name="editHotel">
-  <h4>Edit Hotel Details</h4>
+  <header>
+    <h4>Edit Hotel Details</h4>
+  </header>
   {{quickForm schema=hotelSchema doc=this type="update" buttonClasses="btn btn-primary" buttonContent="Update hotel"}}
 </template>
 
 <template name="addHotel">
-  <h3>Add Hotel</h3>
+  <header>
+    <h3>Add Hotel</h3>
+  </header>
   {{quickForm schema=hotelSchema type="insert" buttonClasses="btn btn-primary" buttonContent="Add hotel"}}
 </template>

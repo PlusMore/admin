@@ -43,13 +43,6 @@
 
           {{#if isLoggedIn}}
             <li><a href="{{pathFor 'homepage'}}" class="log-out">Log Out</a></li>
-          {{else}}
-            <li class="{{activeRouteClass 'signup'}}">
-              <a href="{{pathFor 'signup'}}">Sign Up</a>
-            </li>
-            <li class="{{activeRouteClass 'entrySignIn'}}">
-              <a href="{{pathFor 'entrySignIn'}}">Log In</a>
-            </li>
           {{/if}}
 
         </ul>
