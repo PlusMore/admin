@@ -1,22 +1,16 @@
 # Plus More
 
-# Void
-
-A starter boilerplate app template for [Meteor](http://meteor.com) using [IronRouter](https://github.com/EventedMind/iron-router).
-
-Void is based on [Telescope](http://telesc.pe) (an open-source social news app) and is bought to you by the [Discover Meteor](https://www.discovermeteor.com) team.
-
 ## Installation
 
-If you already have Meteor and [Meteorite](https://github.com/oortcloud/meteorite/), Void is ready to go. Just clone it locally, run it with `mrt`, and start coding!
+If you already have Meteor and [Meteorite](https://github.com/oortcloud/meteorite/), Plus More is ready to go. Just clone it locally, run it with `mrt`, and start coding!
 
 If not, here are the full instructions:
 
 ```
 curl https://install.meteor.com | /bin/sh
 npm install -g meteorite
-git clone https://github.com/SachaG/Void.git myApp
-cd myApp
+git clone https://github.com/patrickleet/plus-more.git plusmore
+cd plusmore
 mrt
 ```
 
