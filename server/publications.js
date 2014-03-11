@@ -135,4 +135,19 @@ Meteor.publish('hotelUsers', function(options) {
   return Meteor.users.find({hotelId: hotelId}, {fields:{emails:1, roles:1, hotelId:1, profile:1}});
 });
 
+// Orders
+
+Meteor.publish("openPatronOrders", function() {
+  var userId = this.userId,
+      user = Meteor.users.findOne(userId);
+
+  var hotelId = user.hotelId,
+      hotel = Hotels.findOne(hotelId);
+
+  if (hotel) {
+    return [
+      Orders.find({hotelId: hotelId})
+    ]
+  } 
+});
 

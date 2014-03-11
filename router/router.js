@@ -124,7 +124,8 @@ Router.before(filters.isAdmin, {only: [
 
 Router.before(filters.isHotelStaff, {only: [
   'devices',
-  'setup-device'
+  'setup-device',
+  'open-patron-orders'
 ]});
 
 // Ensure user has a device account, otherwise,
@@ -205,6 +206,15 @@ Router.map(function() {
   this.route('orders', {
     layoutTemplate: 'deviceLayout',
     controller: DeviceController
+  });
+
+  this.route('openPatronOrders', {
+    path: 'open-patron-orders',
+    waitOn: function () {
+      return [
+        Meteor.subscribe('openPatronOrders')
+      ]
+    } 
   });
 
   // Front Desk
@@ -309,6 +319,8 @@ Router.map(function() {
       }
     }
   });
+
+
 
   // Pages
 
