@@ -42,7 +42,7 @@ var filters = {
     }
   },
   isDevice: function() {
-    if (!Roles.userIsInRole(Meteor.userId(), ['device', 'admin'])) {
+    if (!Roles.userIsInRole(Meteor.userId(), ['device'])) {
       this.render('notFound');
       this.stop();
     }
@@ -142,8 +142,6 @@ Router.before(filters.ensureDeviceAccount, {only: [
 
 // Show loading bar for any route that loads a subscription
 Router.before(helpers.showLoadingBar, {only: [
-  'experiences',
-  'eperience',
   'manageExperiences'
 ]});
 

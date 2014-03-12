@@ -38,20 +38,6 @@ Meteor.startup(function(){
         roles: [
           'admin'
         ]
-      },
-      {
-        name: 'Content Manager',
-        email: 'cm@plusmore.com',
-        roles: [
-          'content-manager'
-        ]
-      },
-      {
-        name: 'Device Manager',
-        email: 'dm@plusmore.com',
-        roles: [
-          'device-manager'
-        ]
       }
     ];
 
@@ -61,12 +47,49 @@ Meteor.startup(function(){
 
   if (Hotels.find().count() === 0) {
     hotelId = Hotels.insert({
-      name: "Hugo",
-      street: "123 1st Ave",
+      name: "Hugo Hotel NY",
+      street: "525 Greenwich Street",
       city: "New York",
       state: "NY",
-      zip: "10128",
-      phone: "555-555-5555"
+      zip: "10013",
+      phone: "212-922-1220"
+    });
+
+    // Add hotel staff
+    var user = {
+      email: 'hotelstaff@plusmore.com',
+      hotelId: hotelId
+    };
+
+    Meteor.call('addHotelStaff', user);
+  }
+
+  if (Categories.find().count() === 0) {
+    var categories = [
+      {
+        "name" : "Shops",
+        "active" : true,
+        "iconClass" : "icon-shopping"
+      },
+      {
+        "name" : "Dining",
+        "active" : true,
+        "iconClass" : "icon-dining"
+      },
+      {
+        "name" : "Nightlife",
+        "active" : true,
+        "iconClass" : "icon-nightlife"
+      },
+      {
+        "name" : "Attractions",
+        "active" : true,
+        "iconClass" : "icon-attractions"
+      }
+    ];
+
+    _.each(categories, function(category) {
+      Categories.insert(category);
     });
   }
 

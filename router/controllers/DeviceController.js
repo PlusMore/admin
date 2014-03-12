@@ -1,9 +1,12 @@
 DeviceController = RouteController.extend({
   layoutTemplate: 'deviceLayout',
-  waitOn: function() {
-    return [
-      Meteor.subscribe('deviceData')
-    ]
+  // waitOn: function() {
+  //   return [
+  //     Meteor.subscribe('deviceData')
+  //   ]
+  // },
+  before: function() {
+      Session.set('experienceState', '');
   },
   after: function() {
     if (Meteor.user()) {

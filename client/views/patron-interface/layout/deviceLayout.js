@@ -14,5 +14,11 @@ Template.deviceLayout.helpers({
 });
 
 Template.rendered = function () {
-  debugger;
+
 };
+
+Template.preload.helpers({
+  experiences: function () {
+    return Experiences.find();
+  }
+});
