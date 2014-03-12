@@ -12,3 +12,7 @@ Template.deviceLayout.helpers({
     }
   }
 });
+
+Template.rendered = function () {
+  debugger;
+};

@@ -7,7 +7,7 @@ Template.setupDevice.helpers({
         Meteor.logout()
         // attempts to create and login as new device user
         Meteor.loginDevice(deviceId, function(err) {
-          Router.go('device');
+          Router.go('welcome');
         });
       },
       onError: function(operation, error, template) {

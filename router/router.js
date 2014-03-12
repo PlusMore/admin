@@ -134,7 +134,7 @@ Router.before(filters.isHotelStaff, {only: [
 // information somehow? Maybe can change from auto login
 // to a form.
 Router.before(filters.ensureDeviceAccount, {only: [
-  'device',
+  'welcome',
   'experiences',
   'experience',
   'orders'

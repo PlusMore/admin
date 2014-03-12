@@ -113,6 +113,8 @@ Meteor.publish('deviceData', function(deviceId) {
         Experiences.find({active: true})
       ]
     }
+  } else {
+    return null;
   }
 })
 
