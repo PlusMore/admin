@@ -62,21 +62,26 @@ var filters = {
   ensureDeviceAccount: function() {
     console.log('ensure device');
     if (! Meteor.user()) {
+      console.log(1);
       if (Meteor.loggingIn()) {
+        console.log(2);
         this.render('loadingTemplate')
       } else {
+        console.log(3);
         Session.set('deviceIsRegistered', false);
         this.render('registerDevice');
       }
       this.stop();
-    }
-
-    if (!Roles.userIsInRole(Meteor.userId(), ['device'])) {
-      Session.set('deviceIsRegistered', false);
-      this.render('registerDevice');
-      this.stop();
     } else {
-      Session.set('deviceIsRegistered', true);
+      if (!Roles.userIsInRole(Meteor.userId(), ['device'])) {
+        console.log(4);
+        Session.set('deviceIsRegistered', false);
+        this.render('registerDevice');
+        this.stop();
+      } else {
+        console.log(5);
+        Session.set('deviceIsRegistered', true);
+      }
     }
   }
 };
@@ -146,7 +151,7 @@ Router.before(helpers.showLoadingBar, {only: [
 ]});
 
 
-Router.after(helpers.analyticsRequest);
+Router.load(_.debounce(helpers.analyticsRequest, 300));
 
 // Routes
 
