@@ -7,6 +7,9 @@ Template.makeReservationCallToAction.events({
   }
 });
 
+var makeReservationSchema = null;
+var makeReservationForm = null;
+
 Template.makeReservationForm.helpers({
   makeReservationSchema: function () {
     var schema = Schema.makeReservation._schema;
@@ -15,10 +18,10 @@ Template.makeReservationForm.helpers({
       schema.partySize.max = this.maxPartySize;
     }
 
-    var extendedReservationSchema = new SimpleSchema(schema);
+    makeReservationSchema = makeReservationSchema || new SimpleSchema(schema);
 
-    var form = new AutoForm(extendedReservationSchema);
-    form.hooks({
+    makeReservationForm = makeReservationForm || new AutoForm(makeReservationSchema);
+    makeReservationForm.hooks({
       onSubmit: function (doc) {
         doc.experienceId = _this._id;
         Meteor.call('makeReservation', doc, function (err, result) {
@@ -28,6 +31,6 @@ Template.makeReservationForm.helpers({
         return false;
       }
     });
-    return form;
+    return makeReservationForm;
   }
 });
