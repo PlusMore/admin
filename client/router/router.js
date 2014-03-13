@@ -60,26 +60,20 @@ var filters = {
     }
   },
   ensureDeviceAccount: function() {
-    console.log('ensure device');
-    if (! Meteor.user()) {
-      console.log(1);
-      if (Meteor.loggingIn()) {
-        console.log(2);
+    if (! Meteor.user()) {  
+      if (Meteor.loggingIn()) {    
         this.render('loadingTemplate')
-      } else {
-        console.log(3);
+      } else {    
         Session.set('deviceIsRegistered', false);
         this.render('registerDevice');
       }
       this.stop();
     } else {
-      if (!Roles.userIsInRole(Meteor.userId(), ['device'])) {
-        console.log(4);
+      if (!Roles.userIsInRole(Meteor.userId(), ['device'])) {    
         Session.set('deviceIsRegistered', false);
         this.render('registerDevice');
         this.stop();
-      } else {
-        console.log(5);
+      } else {    
         Session.set('deviceIsRegistered', true);
       }
     }
@@ -88,8 +82,7 @@ var filters = {
 
 var helpers = {
   analyticsRequest: function() {
-    if (Meteor.isClient) {
-      console.log('mixpanel request');
+    if (Meteor.isClient) {  
       var name = Router.current().route.name;
       mixpanel.track("page view", {name: name});
     }

@@ -13,10 +13,6 @@ Template.deviceLayout.helpers({
   }
 });
 
-Template.rendered = function () {
-
-};
-
 Template.preload.helpers({
   experiences: function () {
     return Experiences.find();
