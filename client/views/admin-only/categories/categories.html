@@ -1,0 +1,57 @@
+<template name="categories">
+  <div class="container">
+    <div class="row">
+      {{> addCategory}}
+    </div>
+    <div class="row">
+      {{> categoriesList}}
+    </div>
+  </div>
+</template>
+
+<template name="categoriesList">
+    <div class="categories">
+      <h3>Categories: </h3>
+      {{#each categories}}
+        {{> category}}
+      {{/each}}
+    </div>
+</template>
+
+<template name="category">
+  <div class="category section">
+    <header>
+      <h3>Edit Category</h3>
+    </header>
+    {{#autoForm schema=categorySchema doc=this id=this._id}}
+      {{afQuickField 'name'}}
+      {{afQuickField 'active'}}
+      {{afQuickField 'iconClass' firstOption="--Select an icon--" options=categoryIconOptions}}
+      <button type="reset" class="btn btn-default">Reset</button>
+      &nbsp;
+      <button type="submit" class="btn btn-primary update">Update Category</button>
+    {{/autoForm}}
+    <br />
+    {{#autoForm schema=categorySchema doc=this}}
+      <button type="submit" class="btn btn-danger remove">
+      <i class="fa fa-trash-o"></i> Delete</button>
+    {{/autoForm}}
+  </div>
+</template>
+
+<template name="addCategory">
+  <div class="section">
+    <header>
+      <h3>Add Category</h3>
+    </header>
+
+    {{#autoForm schema=categorySchema}}
+      {{afQuickField 'name'}}
+      {{afQuickField 'active'}}
+      {{afQuickField 'iconClass' firstOption="--Select an icon--" options=categoryIconOptions}}
+      <button type="reset" class="btn btn-default">Reset</button>
+      &nbsp;
+      <button type="submit" class="btn btn-primary insert">Add Category</button>
+    {{/autoForm}}
+  </div>
+</template>

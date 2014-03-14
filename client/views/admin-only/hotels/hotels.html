@@ -1,0 +1,56 @@
+<template name="hotels">
+  <div class="container">
+    <div class="section">
+      {{> addHotel}}
+    </div>
+    <div class="section">
+      {{> hotelsList}}
+    </div>
+  </div>
+</template>
+
+<template name="hotelsList">
+  <header>
+    <h3>Hotels: </h3>
+  </header>
+  <ul class="hotels">
+    {{#each hotels}}
+      <li>
+        <a href="{{pathFor 'hotel' this}}">{{name}}</a>
+      </li>
+    {{/each}}
+  </ul>
+</template>
+
+<template name="hotel">
+  <div class="container">
+    {{#with hotel}}
+      <div class="hotel section">
+        <a href="{{pathFor 'hotels'}}">Back to Hotels</a>
+        <h3>{{name}}</h3>
+        {{> editHotel}}
+        {{> hotelStaff}}
+        <br />
+        {{#autoForm schema=hotelSchema doc=this}}
+          <button type="submit" class="btn btn-danger remove">
+          <i class="fa fa-trash-o"></i> Delete Hotel</button>
+        {{/autoForm}}
+      </div>
+    {{/with}}
+  </div>
+
+</template>
+
+<template name="editHotel">
+  <header>
+    <h4>Edit Hotel Details</h4>
+  </header>
+  {{quickForm schema=hotelSchema doc=this type="update" buttonClasses="btn btn-primary" buttonContent="Update hotel"}}
+</template>
+
+<template name="addHotel">
+  <header>
+    <h3>Add Hotel</h3>
+  </header>
+  {{quickForm schema=hotelSchema type="insert" buttonClasses="btn btn-primary" buttonContent="Add hotel"}}
+</template>

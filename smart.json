@@ -4,6 +4,15 @@
     "iron-router": {},
     "bootstrap-3": {},
     "roles": {},
-    "autoform": {}
+    "autoform": {},
+    "fastclick": {},
+    "collection2": {},
+    "collectionFS": {},
+    "inspector": {},
+    "nprogress": {},
+    "font-awesome": {},
+    "accounts-entry": {},
+    "percolatestudio-mixpanel": {},
+    "impicker": {}
   }
 }
