@@ -24,13 +24,10 @@ Accounts.registerLoginHandler(function (options) {
     meteorUserId = meteorUser._id;
   }
 
-  var stampedLoginToken = Accounts._generateStampedLoginToken();
-  Meteor.users.update(
-    meteorUserId, {$push: {'services.resume.loginTokens': Accounts._hashStampedToken(stampedLoginToken)}});
+  return {userId: meteorUserId};
+});
 
-  return {
-    token: stampedLoginToken.token,
-    tokenExpires: Accounts._tokenExpiration(stampedLoginToken.when),
-    id: meteorUserId
-  };
+Accounts.addAutopublishFields({
+  forLoggedInUser: ['deviceId'],
+  forOtherUsers: ['deviceId']
 });
