@@ -18,7 +18,7 @@ createUser = function(user) {
   id = Accounts.createUser({
     email: user.email,
     profile: { name: user.name },
-    password: 'plusmore'
+    password: '+plusmore+'
   });
 
   if (user.roles.length > 0) {

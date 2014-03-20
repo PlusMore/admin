@@ -200,17 +200,17 @@ Meteor.methods({
       var url = stripTrailingSlash(Meteor.absoluteUrl()) + Router.routes["patronOrder"].path({_id: orderId})
 
       Email.send({
-        to: 'pat@plusmoretablets.com',
-        from: "order-service@plusmoretablets.com",
+        to: 'order-service@plusmoretablets.com',
+        from: "noreply@plusmoretablets.com",
         subject: "Device in {0} at {1} has requested a reservation.\n\n".format(device.location, hotel.name), 
         text: "Device in {0} at {1} has requested a reservation.\n\n".format(device.location, hotel.name) 
             + "Reservation Details:\n"
-            + "\tFor:\t{0}".format(experience.title)
+            + "\tFor:\t{0}\n".format(experience.title)
             + "\tParty Name:\t{0}\n".format(reservation.partyName)
             + "\tParty Size:\t{0}\n".format(reservation.partySize)
-            + "\tPhone #:\t{0}".format(reservation.phoneNumber)
-            + "\tEmail:\t{0}".format(reservation.emailAddress)
-            + "\n\nTo respond to this request, click the link below\n\n"
+            + "\tPhone #:\t{0}\n".format(reservation.phoneNumber)
+            + "\tEmail:\t{0}\n".format(reservation.emailAddress)
+            + "\nTo respond to this request, click the link below\n\n"
             + url
       });
     }

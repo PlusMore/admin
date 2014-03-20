@@ -1,5 +1,5 @@
 Accounts.emailTemplates.siteName = "Plus More";
-Accounts.emailTemplates.from = "Plus More Admin <admin@plusmoretablets.com>";
+Accounts.emailTemplates.from = "noreply@plusmoretablets.com";
 Accounts.emailTemplates.enrollAccount.subject = function (user) {
     return "Welcome to Plus More";
 };
