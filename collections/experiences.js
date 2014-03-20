@@ -210,7 +210,12 @@ Meteor.methods({
             + "\tParty Size:\t{0}\n".format(reservation.partySize)
             + "\tPhone #:\t{0}\n".format(reservation.phoneNumber)
             + "\tEmail:\t{0}\n".format(reservation.emailAddress)
-            + "\nTo respond to this request, click the link below\n\n"
+            + "\nVenue Info"
+            + "\n\t{0}".format(experience.venueName)
+            + "\n\t{0}".format(experience.street)
+            + "\n\t{0}, {1} {2}".format(experience.city, experience.state, experience.zip)
+            + "\n\t{0}".format(experience.phone)
+            + "\n\nTo respond to this request, click the link below\n\n"
             + url
       });
     }
