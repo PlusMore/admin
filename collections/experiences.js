@@ -205,11 +205,11 @@ Meteor.methods({
         subject: "Device in {0} at {1} has requested a reservation.\n\n".format(device.location, hotel.name), 
         text: "Device in {0} at {1} has requested a reservation.\n\n".format(device.location, hotel.name) 
             + "Reservation Details:\n"
-            + "\tFor:\t{0}\n".format(experience.title)
+            + "\tFor:\t\t{0}\n".format(experience.title)
             + "\tParty Name:\t{0}\n".format(reservation.partyName)
             + "\tParty Size:\t{0}\n".format(reservation.partySize)
-            + "\tPhone #:\t{0}\n".format(reservation.phoneNumber)
-            + "\tEmail:\t{0}\n".format(reservation.emailAddress)
+            + "\tPhone #:\t\t{0}\n".format(reservation.phoneNumber)
+            + "\tEmail:\t\t{0}\n".format(reservation.emailAddress)
             + "\nVenue Info"
             + "\n\t{0}".format(experience.venueName)
             + "\n\t{0}".format(experience.street)
