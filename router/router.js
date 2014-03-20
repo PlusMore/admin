@@ -17,7 +17,10 @@ Router.configure({
 // Filters
 
 var filters = {
-
+  baseSubscriptions: function() {
+    this.subscribe('userHotelData').wait();
+    this.subscribe('userDeviceData').wait();
+  },
   isLoggedIn: function() {
     if (! Meteor.user()) {
       if (Meteor.loggingIn()) {
@@ -36,28 +39,13 @@ var filters = {
     }
   },
   isAdmin: function() {
-    if (!Roles.userIsInRole(Meteor.userId(), ['admin'])) {
-      this.render('notFound');
-      this.stop();
-    }
+    return Roles.userIsInRole(Meteor.userId(), ['admin']);
   },
   isDevice: function() {
-    if (!Roles.userIsInRole(Meteor.userId(), ['device'])) {
-      this.render('notFound');
-      this.stop();
-    }
+    return Roles.userIsInRole(Meteor.userId(), ['device']);
   },
-  isHotelStaff: function() {
-    if (!Roles.userIsInRole(Meteor.userId(), ['hotel-staff', 'admin'])) {
-      this.render('notFound');
-      this.stop();
-    }
-  },
-  isContentManager: function() {
-    if (!Roles.userIsInRole(Meteor.userId(), ['content-manager', 'admin'])) {
-      this.render('notFound');
-      this.stop();
-    }
+  isHotelStaff: function(router) {
+    return Roles.userIsInRole(Meteor.userId(), ['hotel-staff', 'admin']);
   },
   ensureDeviceAccount: function() {
     if (! Meteor.user()) {  
@@ -97,34 +85,7 @@ var helpers = {
   }
 };
 
-// If logged in, redirect requests to account pages to dashboard
-Router.before(filters.isLoggedOut, {only: [
-  "entrySignIn",
-  "entrySignUp",
-  "homepage"
-]});
-
-// // Check authenticated
-// Router.before(filters.isLoggedIn, {only: [
-//   'dashboard',
-//   'manageExperiences',
-//   'categories',
-//   'hotel',
-//   'hotels'
-// ]});
-
-// Check admin
-Router.before(filters.isAdmin, {only: [
-  'categories',
-  'hotel',
-  'hotels'
-]});
-
-Router.before(filters.isHotelStaff, {only: [
-  'devices',
-  'setup-device',
-  'open-patron-orders'
-]});
+Router.before(filters.baseSubscriptions);
 
 // Ensure user has a device account, otherwise,
 // redirect to device list?
@@ -150,13 +111,13 @@ Router.load(_.debounce(helpers.analyticsRequest, 300));
 
 Router.map(function() {
 
-  // Device Manager
+  // Hotel Staff
   this.route('setupDevice', {
     path: '/setup-device',
     layoutTemplate: 'deviceLayout',
     before: function() {
       if (Meteor.isClient) {
-        AccountsEntry.signInRequired(this);
+        AccountsEntry.signInRequired(this, filters.isHotelStaff());
       }
     },
     after: function() {
@@ -175,7 +136,7 @@ Router.map(function() {
     path: '/devices',
     before: function() {
       if (Meteor.isClient) {
-        AccountsEntry.signInRequired(this);
+        AccountsEntry.signInRequired(this, filters.isHotelStaff());
       }
     },
     waitOn: function() {
@@ -195,25 +156,11 @@ Router.map(function() {
     }
   });
 
-  // Device
-  this.route('welcome', {
-    path: '/device',
-    layoutTemplate: 'deviceLayout',
-    controller: DeviceController
-  });
-
-  // Orders
-
-  this.route('orders', {
-    layoutTemplate: 'deviceLayout',
-    controller: DeviceController
-  });
-
   this.route('openPatronOrders', {
     path: 'open-patron-orders',
     before: function() {
       if (Meteor.isClient) {
-        AccountsEntry.signInRequired(this);
+        AccountsEntry.signInRequired(this, filters.isHotelStaff());
       }
     },
     waitOn: function () {
@@ -224,24 +171,40 @@ Router.map(function() {
   });
 
   this.route('patronOrder', {
-    path: 'patron-order/:_id'  
+    path: 'patron-order/:_id',
+    before: function() {
+      if (Meteor.isClient) {
+        AccountsEntry.signInRequired(this, filters.isHotelStaff());
+      }
+    },
+    waitOn: function() {
+      return [
+        Meteor.subscribe('patronOrder', this.params._id)
+      ]
+    }  
   });
 
-  // Front Desk
+  // Patron Interface
+  this.route('welcome', {
+    path: '/device',
+    layoutTemplate: 'deviceLayout',
+    controller: DeviceController
+  });
+
+  this.route('orders', {
+    layoutTemplate: 'deviceLayout',
+    controller: DeviceController
+  });
 
   this.route('frontDesk', {
     layoutTemplate: 'deviceLayout',
     controller: DeviceController,
   });
 
-  // Transportation
-
   this.route('transportation', {
     layoutTemplate: 'deviceLayout',
     controller: DeviceController
   });
-
-  // Experiences
 
   this.route('experiences', {
     path: '/experiences/:category?',
@@ -268,13 +231,13 @@ Router.map(function() {
     }
   });
 
-  // Manage Experiences
+  // Admin
 
   this.route('manageExperiences', {
     path: '/manage-experiences',
     before: function() {
       if (Meteor.isClient) {
-        AccountsEntry.signInRequired(this);
+        AccountsEntry.signInRequired(this, filters.isAdmin());
       }
     },
     waitOn: function() {
@@ -285,8 +248,6 @@ Router.map(function() {
     }
   });
 
-  // Categories
-
   this.route('categories', {
     waitOn: function() {
       return [
@@ -295,7 +256,7 @@ Router.map(function() {
     },
     before: function() {
       if (Meteor.isClient) {
-        AccountsEntry.signInRequired(this);
+        AccountsEntry.signInRequired(this, filters.isAdmin());
       }
     },
     data: function () {
@@ -307,8 +268,6 @@ Router.map(function() {
     }
   });
 
-  // Hotels
-
   this.route('hotels', {
     waitOn: function() {
       return [
@@ -317,7 +276,7 @@ Router.map(function() {
     },
     before: function() {
       if (Meteor.isClient) {
-        AccountsEntry.signInRequired(this);
+        AccountsEntry.signInRequired(this, filters.isAdmin());
       }
     },
     data: function () {
@@ -333,7 +292,7 @@ Router.map(function() {
     path: '/hotel/:_id',
     before: function() {
       if (Meteor.isClient) {
-        AccountsEntry.signInRequired(this);
+        AccountsEntry.signInRequired(this, filters.isAdmin());
       }
     },
     waitOn: function() {
@@ -350,14 +309,11 @@ Router.map(function() {
     }
   });
 
-
-
   // Pages
 
   this.route('homepage', {
     path: '/'
   });
-
 
   // Dashboard
 

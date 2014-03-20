@@ -10,16 +10,25 @@ All publications-related code.
  * Always publish logged-in user's hotelId
  *
  */
-Meteor.publish(null, function () {
-  var userId = this.userId,
-      fields = {hotelId:1},
+Meteor.publish('userHotelData', function () {
+  var userId = this.userId;
+
+  if (userId) {
+    var fields = {hotelId:1},
       user = Meteor.users.findOne({_id:userId}),
       hotelId = user && user.hotelId || null;
-  if (hotelId) {
-    return [
-      Meteor.users.find({_id: userId}, {fields: fields}),
-      Hotels.find({_id: hotelId})
-    ]
+    if (hotelId) {
+      return [
+        Meteor.users.find({_id: userId}, {fields: fields}),
+        Hotels.find({_id: hotelId})
+      ]
+    } else {
+      this.ready();
+      return null;
+    }
+  } else {
+    this.ready();
+    return null;
   }
 });
 
@@ -27,16 +36,25 @@ Meteor.publish(null, function () {
  * Always publish logged-in user's deviceId
  *
  */
-Meteor.publish(null, function () {
-  var userId = this.userId,
-      fields = {deviceId:1},
-      user = Meteor.users.findOne({_id:userId}),
-      deviceId = user && user.deviceId || null;
-  if (deviceId) {
-    return [
-      Meteor.users.find({_id: userId}, {fields: fields}),
-      Devices.find({_id: deviceId})
-    ]
+Meteor.publish('userDeviceData', function () {
+  var userId = this.userId;
+  
+  if (userId) {
+    var fields = {deviceId:1},
+        user = Meteor.users.findOne({_id:userId}),
+        deviceId = user && user.deviceId || null;
+    if (deviceId) {
+      return [
+        Meteor.users.find({_id: userId}, {fields: fields}),
+        Devices.find({_id: deviceId})
+      ]
+    } else {
+      this.ready();
+      return null;
+    }
+  } else {
+    this.ready();
+    return null;
   }
 });
 
@@ -143,7 +161,9 @@ Meteor.publish("openPatronOrders", function() {
   var userId = this.userId,
       user = Meteor.users.findOne(userId);
 
-  var hotelId = user.hotelId,
+  var hotelId = user.hotelId;
+
+  if (hotelId)
       hotel = Hotels.findOne(hotelId);
 
   if (hotel) {
@@ -153,3 +173,6 @@ Meteor.publish("openPatronOrders", function() {
   } 
 });
 
+Meteor.publish('patronOrder', function(id) {
+  return Orders.find(id);
+});
