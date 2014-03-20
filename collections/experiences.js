@@ -192,6 +192,29 @@ Meteor.methods({
       userId: user._id
     }
 
-    return Orders.insert(order, {validate: false});
+    var orderId = Orders.insert(order, {validate: false});
+
+    this.unblock();
+
+    if (Meteor.isServer) {
+      var url = stripTrailingSlash(Meteor.absoluteUrl()) + Router.routes["patronOrder"].path({_id: orderId})
+
+      Email.send({
+        to: 'pat@plusmoretablets.com',
+        from: "order-service@plusmoretablets.com",
+        subject: "Device in {0} at {1} has requested a reservation.\n\n".format(device.location, hotel.name), 
+        text: "Device in {0} at {1} has requested a reservation.\n\n".format(device.location, hotel.name) 
+            + "Reservation Details:\n"
+            + "\tFor:\t{0}".format(experience.title)
+            + "\tParty Name:\t{0}\n".format(reservation.partyName)
+            + "\tParty Size:\t{0}\n".format(reservation.partySize)
+            + "\tPhone #:\t{0}".format(reservation.phoneNumber)
+            + "\tEmail:\t{0}".format(reservation.emailAddress)
+            + "\n\nTo respond to this request, click the link below\n\n"
+            + url
+      });
+    }
+
+    return orderId;
   }
 });

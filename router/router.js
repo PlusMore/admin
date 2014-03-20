@@ -104,14 +104,14 @@ Router.before(filters.isLoggedOut, {only: [
   "homepage"
 ]});
 
-// Check authenticated
-Router.before(filters.isLoggedIn, {only: [
-  'dashboard',
-  'manageExperiences',
-  'categories',
-  'hotel',
-  'hotels'
-]});
+// // Check authenticated
+// Router.before(filters.isLoggedIn, {only: [
+//   'dashboard',
+//   'manageExperiences',
+//   'categories',
+//   'hotel',
+//   'hotels'
+// ]});
 
 // Check admin
 Router.before(filters.isAdmin, {only: [
@@ -173,6 +173,11 @@ Router.map(function() {
 
   this.route('devices', {
     path: '/devices',
+    before: function() {
+      if (Meteor.isClient) {
+        AccountsEntry.signInRequired(this);
+      }
+    },
     waitOn: function() {
       return [
         Meteor.subscribe('devices')
@@ -206,11 +211,20 @@ Router.map(function() {
 
   this.route('openPatronOrders', {
     path: 'open-patron-orders',
+    before: function() {
+      if (Meteor.isClient) {
+        AccountsEntry.signInRequired(this);
+      }
+    },
     waitOn: function () {
       return [
         Meteor.subscribe('openPatronOrders')
       ]
     } 
+  });
+
+  this.route('patronOrder', {
+    path: 'patron-order/:_id'  
   });
 
   // Front Desk
@@ -258,6 +272,11 @@ Router.map(function() {
 
   this.route('manageExperiences', {
     path: '/manage-experiences',
+    before: function() {
+      if (Meteor.isClient) {
+        AccountsEntry.signInRequired(this);
+      }
+    },
     waitOn: function() {
       return [
         Meteor.subscribe('myExperiences'),
@@ -273,6 +292,11 @@ Router.map(function() {
       return [
         Meteor.subscribe('categories')
       ]
+    },
+    before: function() {
+      if (Meteor.isClient) {
+        AccountsEntry.signInRequired(this);
+      }
     },
     data: function () {
       return {
@@ -291,6 +315,11 @@ Router.map(function() {
         Meteor.subscribe('hotels')
       ]
     },
+    before: function() {
+      if (Meteor.isClient) {
+        AccountsEntry.signInRequired(this);
+      }
+    },
     data: function () {
       return {
         hotels: function() {
@@ -302,6 +331,11 @@ Router.map(function() {
 
   this.route('hotel', {
     path: '/hotel/:_id',
+    before: function() {
+      if (Meteor.isClient) {
+        AccountsEntry.signInRequired(this);
+      }
+    },
     waitOn: function() {
       return [
         Meteor.subscribe('hotel', this.params._id),
@@ -328,26 +362,12 @@ Router.map(function() {
   // Dashboard
 
   this.route('dashboard', {
-    path: '/dashboard'
-  });
-
-  // Accounts-entry
-  this.route('signUpContentManager', {
-    template: 'entrySignUp',
-    path: '/sign-up/content-manager',
+    path: '/dashboard',
     before: function() {
-      Session.set('userSignUpType', 'content-manager');
+      if (Meteor.isClient) {
+        AccountsEntry.signInRequired(this);
+      }
     }
   });
 
-  this.route('signUpDeviceManager', {
-    template: 'entrySignUp',
-    path: '/sign-up/device-manager',
-    before: function() {
-      Session.set('userSignUpType', 'device-manager');
-    }
-  });
-
-  // Accounts
-  this.route('signup');
 });

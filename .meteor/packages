@@ -22,8 +22,6 @@ inspector
 accounts-ui
 accounts-entry
 nprogress
-event-store
-event-store-ui
 font-awesome
 accounts-plusmore-device
 percolatestudio-mixpanel

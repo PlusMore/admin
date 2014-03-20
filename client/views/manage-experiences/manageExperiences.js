@@ -13,14 +13,6 @@ Template.uploadExperiencePhoto.events({
         result.pop(photoId);
 
         var photo = ExperiencesFS.findOne(photoId);
-
-        Meteor.call('insertEvent', {
-          name: 'experience photo uploaded',
-          type: 'application',
-          userId: userId,
-          payload: photo,
-          message: "Photo {0} uploaded by {1}".format(photoId, userId)
-        });
       }
     }
     return result;
