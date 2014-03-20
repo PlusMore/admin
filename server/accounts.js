@@ -1,13 +1,9 @@
-Accounts.onCreateUser(function(options, user) {
-  // We still want the default hook's 'profile' behavior.
-  if (options.profile) {
-    user.profile = options.profile;
-    if (user.profile.signUpRole) {
-      user.roles = [
-        user.profile.signUpRole
-      ]
-    }
-  }
-
-  return user;
-});
+Accounts.emailTemplates.siteName = "Plus More";
+Accounts.emailTemplates.from = "noreply@plusmoretablets.com";
+Accounts.emailTemplates.enrollAccount.subject = function (user) {
+    return "Welcome to Plus More";
+};
+Accounts.emailTemplates.enrollAccount.text = function (user, url) {
+   return "To activate your account, simply click the link below:\n\n"
+     + url;
+};

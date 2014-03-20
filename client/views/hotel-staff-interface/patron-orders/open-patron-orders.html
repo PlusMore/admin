@@ -1,18 +1,20 @@
 <template name="openPatronOrders">
-  {{#if hasOrders}}
-    <div class="patron-orders-list">
-      <div class="open-patron-orders">
-        <h3>Open Orders</h3>
-        {{#each open-patron-orders}}
-          {{> patronOrder}}
-        {{/each}}
+  <div class="container">
+    {{#if hasOrders}}
+      <div class="patron-orders-list">
+        <div class="open-patron-orders">
+          <h3>Open Orders</h3>
+          {{#each open-patron-orders}}
+            {{> patronOrder}}
+          {{/each}}
+        </div>
       </div>
+    {{else}}
+    <div class="no-open-patron-orders big-text">
+      <p class="lead">No open open-patron-orders.</p>
     </div>
-  {{else}}
-  <div class="no-open-patron-orders big-text">
-    <p class="lead">No open open-patron-orders.</p>
-  </div>
-  {{/if}}
+    {{/if}}
+    </div>  
   </div>
 </template>
 
