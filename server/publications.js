@@ -174,5 +174,9 @@ Meteor.publish("openPatronOrders", function() {
 });
 
 Meteor.publish('patronOrder', function(id) {
-  return Orders.find(id);
+  var order = Orders.findOne(id);
+  return [
+    Orders.find(id),
+    Experiences.find(order.reservation.experienceId)
+  ] 
 });

@@ -1,3 +1,11 @@
+<template name="patronOrderPage">
+  <div class="container">
+    {{#with order}}
+      {{> patronOrder}}
+    {{/with}}
+  </div>
+</template>
+
 <template name="patronOrder">
   <div class="order section">
     {{#if isReservation}}

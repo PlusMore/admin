@@ -167,7 +167,7 @@ Router.map(function() {
     } 
   });
 
-  this.route('patronOrder', {
+  this.route('patronOrderPage', {
     path: 'patron-order/:_id',
     before: function() {
       filters.isLoggedIn(this, filters.isHotelStaff());
@@ -176,7 +176,15 @@ Router.map(function() {
       return [
         Meteor.subscribe('patronOrder', this.params._id)
       ]
-    }  
+    },
+    data: function() {
+      var order = Orders.findOne(this.params._id);
+      var experience = Experiences.findOne(order.reservation.experienceId)
+      return {
+        order: order,
+        experience: experience
+      }
+    }
   });
 
   // Patron Interface
