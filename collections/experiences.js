@@ -201,7 +201,7 @@ Meteor.methods({
     this.unblock();
 
     if (Meteor.isServer) {
-      var url = stripTrailingSlash(Meteor.absoluteUrl()) + Router.routes["patronOrder"].path({_id: orderId})
+      var url = stripTrailingSlash(Meteor.absoluteUrl()) + Router.routes["patronOrderPage"].path({_id: orderId});
 
       Email.send({
         to: 'order-service@plusmoretablets.com',
