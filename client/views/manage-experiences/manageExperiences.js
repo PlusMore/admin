@@ -21,6 +21,6 @@ Template.uploadExperiencePhoto.events({
 
 Template.myExperiences.helpers({
   experiences: function() {
-    return Experiences.find({owner: Meteor.userId()});
+    return Experiences.find({owner: Meteor.userId()}, {sort: {category: 1, sortOrder: 1}});
   }
 });

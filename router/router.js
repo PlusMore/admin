@@ -218,7 +218,7 @@ Router.map(function() {
     controller: DeviceController,
     data: function () {
       return {
-        experiences: Experiences.find({category: this.params.category})
+        experiences: Experiences.find({category: this.params.category}, {sort: {sortOrder: 1}})
       };
     }
   });

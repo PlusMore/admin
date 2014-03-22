@@ -128,7 +128,7 @@ Meteor.publish('deviceData', function(deviceId) {
         Hotels.find(device.hotelId),
         Orders.find({userId: this.userId}),
         Categories.find({active: true}),
-        Experiences.find({active: true})
+        Experiences.find({active: true}, {sort: {sortOrder: 1}})
       ]
     }
   } else {

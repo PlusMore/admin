@@ -70,6 +70,10 @@ Experiences = new Meteor.Collection('experiences', {
     category: {
       type: String,
       label: 'Category'
+    },
+    sortOrder: {
+      type: Number,
+      label: 'Sort Order'
     }
   })
 });
