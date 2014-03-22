@@ -7,7 +7,7 @@
 </template>
 
 <template name="patronOrder">
-  <div class="order section">
+  <div class="patron-order section">
     {{#if isReservation}}
       <h3>
         Reservation for {{experience.title}}
@@ -19,10 +19,15 @@
           {{/if}}
         </small>
       </h3>
+      
       <p class="lead">{{reservation.partyName}} - Party of {{reservation.partySize}}</p>
-      {{#with experience}}
-      <a class="btn btn-default" href="{{pathFor 'experience' this}}">See Details</a>
-      {{/with}}
+      
+      {{#if needsConfirmation}}
+        <a class="btn btn-default confirm-reservation">Confirm Reservation</a>
+      {{else}}
+        <p>Confirmed on {{confirmationDate}}</p>
+      {{/if}}
+
     {{/if}}
   </div>
 </template>

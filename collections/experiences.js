@@ -77,12 +77,6 @@ Experiences = new Meteor.Collection('experiences', {
     }
   })
 });
-// ExperiencesFS = new CollectionFS('experiences');
-// ExperiencesFS.filter({
-//   allow: {
-//     contentTypes: ['image/*']
-//   }
-// });
 
 // Allow/Deny
 
@@ -98,45 +92,8 @@ Experiences.allow({
   }
 });
 
-// Experiences.allow({
-//   insert: function(userId, doc) {
-//     return true;
-//   }
-// });
-
-// ExperiencesFS.allow({
-//   insert: function(userId, file) {
-//     return Roles.userIsInRole(userId, ['admin']);
-//   },
-//   update: function (userId, files, fields, modifier) {
-//     return Roles.userIsInRole(userId, ['admin']);
-//   },
-//   remove: function(userId, file) {
-//     return Roles.userIsInRole(userId, ['admin']);
-//   }
-// });
-
 // Schemas
 
-Schema.makeReservation = new SimpleSchema({
-  partySize: {
-    type: Number,
-    label: 'How many people in your party?',
-    min: 1
-  },
-  partyName: {
-    type: String,
-    label: 'Your Party\'s name'
-  },
-  phoneNumber: {
-    type: String,
-    label: 'Phone number (for confirmation)'
-  },
-  emailAddress: {
-    type: String,
-    label: "Email address"
-  }
-});
 
 // Methods
 
@@ -154,76 +111,5 @@ Meteor.methods({
         if (err) console.log(err);
       });
     }
-  },
-  makeReservation: function(reservation) {
-    var experienceId = reservation.experienceId;
-    var experience = Experiences.findOne(experienceId);
-    if (!experience) {
-      throw new Meteor.Error(403, 'Invalid Experience');
-    }
-
-    // get some validation rules from experience
-    var schema = Schema.makeReservation._schema;
-    if (experience.maxPartySize) {
-      schema.partySize.max = experience.maxPartySize;
-    }
-    schema.experienceId = {
-      type: String
-    }
-    var extendedReservationSchema = new SimpleSchema(schema);
-    check(reservation, extendedReservationSchema);
-
-    var user = Meteor.user();
-    var deviceId = user.deviceId;
-    var device = Devices.findOne(deviceId);
-    if (!device) {
-      throw new Meteor.Error(403, 'Not a proper device');
-    }
-
-    var hotel = Hotels.findOne(device.hotelId);
-    if (!hotel) {
-      throw new Meteor.Error(403, 'Not a valid hotel');
-    }
-
-    var order = {
-      type: 'reservation',
-      deviceId: device._id,
-      hotelId: hotel._id,
-      reservation: reservation,
-      requestedAt: new Date(),
-      read: false,
-      open: true,
-      userId: user._id
-    }
-
-    var orderId = Orders.insert(order, {validate: false});
-
-    this.unblock();
-
-    if (Meteor.isServer) {
-      var url = stripTrailingSlash(Meteor.absoluteUrl()) + Router.routes["patronOrderPage"].path({_id: orderId});
-
-      Email.send({
-        to: 'order-service@plusmoretablets.com',
-        from: "noreply@plusmoretablets.com",
-        subject: "Device in {0} at {1} has requested a reservation.\n\n".format(device.location, hotel.name), 
-        text: "Device in {0} at {1} has requested a reservation.\n\n".format(device.location, hotel.name) 
-            + "Reservation Details:\n"
-            + "\tFor:\t\t{0}\n".format(experience.title)
-            + "\tParty Name:\t{0}\n".format(reservation.partyName)
-            + "\tParty Size:\t{0}\n".format(reservation.partySize)
-            + "\tPhone #:\t\t{0}\n".format(reservation.phoneNumber)
-            + "\tEmail:\t\t{0}\n".format(reservation.emailAddress)
-            + "\nVenue Info"
-            + "\n\t{0}".format(experience.venueName)
-            + "\n\t{0}".format(experience.street)
-            + "\n\t{0}, {1} {2}".format(experience.city, experience.state, experience.zip)
-            + "\n\t{0}".format(experience.phone)
-            + "\n\nTo respond to this request, click the link below\n\n"
-            + url
-      });
-    }
-
-    return orderId;
   }
 });

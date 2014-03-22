@@ -4,5 +4,15 @@ Template.patronOrder.helpers({
   },
   experience: function() {
     return Experiences.findOne(this.reservation.experienceId);
+  },
+  needsConfirmation: function() {
+    return this.open;
+  }
+});
+
+Template.patronOrder.events({
+  'click .btn.confirm-reservation': function(event) {
+    event.preventDefault();
+    Meteor.call('confirmPatronReservation', this._id);
   }
 });
