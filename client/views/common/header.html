@@ -8,8 +8,8 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        {{#if isHotelStaff}}
-        <a class="navbar-brand" href="{{pathFor 'homepage'}}">Plus More @ {{hotelName}}</a>
+        {{#if isLoggedIn}}
+        <a class="navbar-brand" href="{{pathFor 'dashboard'}}">Plus More {{#if isHotelStaff}}@ {{hotelName}}{{/if}}</a>
         {{else}}
         <a class="navbar-brand" href="{{pathFor 'homepage'}}">Plus More</a>
         {{/if}}

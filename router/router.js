@@ -21,15 +21,18 @@ var filters = {
     this.subscribe('userHotelData').wait();
     this.subscribe('userDeviceData').wait();
   },
-  isLoggedIn: function() {
+  isLoggedIn: function(router, extraCondition) {
     if (! Meteor.user()) {
       if (Meteor.loggingIn()) {
-        this.render(this.loadingTemplate);
+        router.render(this.loadingTemplate);
       }
       else {
-        this.render('entrySignIn');
+        Session.set('fromWhere', router.path)
+        // this.render('entrySignIn');
+        var path = Router.routes['entrySignIn'].path();
+        Router.go(path);
       }
-      this.stop();
+      router.stop();
     }
   },
   isLoggedOut: function() {
@@ -116,9 +119,7 @@ Router.map(function() {
     path: '/setup-device',
     layoutTemplate: 'deviceLayout',
     before: function() {
-      if (Meteor.isClient) {
-        AccountsEntry.signInRequired(this, filters.isHotelStaff());
-      }
+      filters.isLoggedIn(this, filters.isHotelStaff());
     },
     after: function() {
       var hotel = Hotels.findOne(Meteor.user().hotelId);
@@ -135,9 +136,7 @@ Router.map(function() {
   this.route('devices', {
     path: '/devices',
     before: function() {
-      if (Meteor.isClient) {
-        AccountsEntry.signInRequired(this, filters.isHotelStaff());
-      }
+      filters.isLoggedIn(this, filters.isHotelStaff());
     },
     waitOn: function() {
       return [
@@ -159,9 +158,7 @@ Router.map(function() {
   this.route('openPatronOrders', {
     path: 'open-patron-orders',
     before: function() {
-      if (Meteor.isClient) {
-        AccountsEntry.signInRequired(this, filters.isHotelStaff());
-      }
+      filters.isLoggedIn(this, filters.isHotelStaff());
     },
     waitOn: function () {
       return [
@@ -173,9 +170,7 @@ Router.map(function() {
   this.route('patronOrder', {
     path: 'patron-order/:_id',
     before: function() {
-      if (Meteor.isClient) {
-        AccountsEntry.signInRequired(this, filters.isHotelStaff());
-      }
+      filters.isLoggedIn(this, filters.isHotelStaff());
     },
     waitOn: function() {
       return [
@@ -236,9 +231,7 @@ Router.map(function() {
   this.route('manageExperiences', {
     path: '/manage-experiences',
     before: function() {
-      if (Meteor.isClient) {
-        AccountsEntry.signInRequired(this, filters.isAdmin());
-      }
+      filters.isLoggedIn(this, filters.isAdmin());
     },
     waitOn: function() {
       return [
@@ -255,9 +248,7 @@ Router.map(function() {
       ]
     },
     before: function() {
-      if (Meteor.isClient) {
-        AccountsEntry.signInRequired(this, filters.isAdmin());
-      }
+      filters.isLoggedIn(this, filters.isAdmin());
     },
     data: function () {
       return {
@@ -275,9 +266,7 @@ Router.map(function() {
       ]
     },
     before: function() {
-      if (Meteor.isClient) {
-        AccountsEntry.signInRequired(this, filters.isAdmin());
-      }
+      filters.isLoggedIn(this, filters.isAdmin());
     },
     data: function () {
       return {
@@ -291,9 +280,7 @@ Router.map(function() {
   this.route('hotel', {
     path: '/hotel/:_id',
     before: function() {
-      if (Meteor.isClient) {
-        AccountsEntry.signInRequired(this, filters.isAdmin());
-      }
+      filters.isLoggedIn(this, filters.isAdmin());
     },
     waitOn: function() {
       return [
@@ -320,9 +307,7 @@ Router.map(function() {
   this.route('dashboard', {
     path: '/dashboard',
     before: function() {
-      if (Meteor.isClient) {
-        AccountsEntry.signInRequired(this);
-      }
+      filters.isLoggedIn(this);
     }
   });
 
