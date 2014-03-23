@@ -174,7 +174,7 @@ Meteor.methods({
         to: reservation.emailAddress,
         from: 'order-service@plusmoretablets.com',
         subject: 'You reservation for {0} has been confirmed.'.format(experience.title),
-        text: "Your reservation for {0} has been confirmed\n\n".format(experience.title)
+        text: "Your reservation for {0} has been confirmed.\n\n".format(experience.title)
             + "Reservation Details:\n"
             + "\tFor: {0}\n".format(experience.title)
             + "\tWhen: {0} at {1}:{2} {3}\n".format(formattedDate, reservation.timeHour, reservation.timeMinute, reservation.timePeriod)
