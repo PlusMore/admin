@@ -15,7 +15,6 @@ roles
 autoform
 collection2
 fastclick
-collectionFS
 underscore
 jquery
 inspector
@@ -28,3 +27,4 @@ percolatestudio-mixpanel
 plus-more-fonts
 impicker
 jquery-idle-timer
+moment

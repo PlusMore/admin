@@ -54,12 +54,27 @@ Schema.makeReservation = new SimpleSchema({
     type: String,
     label: 'Your Party\'s name'
   },
+  date: {
+    type: Date,
+    label: "Date"
+  },
+  timeHour: {
+    type: String,
+    label: "Time"
+  },
+  timeMinute: {
+    type: String
+  },
+  timePeriod: {
+    type: String
+  },
   phoneNumber: {
     type: String,
     label: 'Phone number (for confirmation)'
   },
   emailAddress: {
     type: String,
+    regEx: SchemaRegEx.Email,
     label: "Email address"
   }
 });
@@ -112,6 +127,8 @@ Meteor.methods({
 
     if (Meteor.isServer) {
       var url = stripTrailingSlash(Meteor.absoluteUrl()) + Router.routes["patronOrderPage"].path({_id: orderId});
+      var date = moment(reservation.date);
+      var formattedDate = date.format("dddd, MMM Do YYYY");
 
       Email.send({
         to: 'order-service@plusmoretablets.com',
@@ -120,6 +137,7 @@ Meteor.methods({
         text: "Device in {0} at {1} has requested a reservation.\n\n".format(device.location, hotel.name) 
             + "Reservation Details:\n"
             + "\tFor: {0}\n".format(experience.title)
+            + "\tWhen?: {0} at {1}:{2} {3}\n".format(formattedDate, reservation.timeHour, reservation.timeMinute, reservation.timePeriod)
             + "\tParty Name: {0}\n".format(reservation.partyName)
             + "\tParty Size: {0}\n".format(reservation.partySize)
             + "\tPhone #: {0}\n".format(reservation.phoneNumber)
@@ -149,6 +167,8 @@ Meteor.methods({
     if (Meteor.server) {
       var experience = Experiences.findOne(order.reservation.experienceId);
       var reservation = order.reservation;
+      var date = moment(reservation.date);
+      var formattedDate = date.format("dddd, MMM Do YYYY");
 
       Email.send({
         to: reservation.emailAddress,
@@ -157,6 +177,7 @@ Meteor.methods({
         text: "Your reservation for {0} has been confirmed\n\n".format(experience.title)
             + "Reservation Details:\n"
             + "\tFor: {0}\n".format(experience.title)
+            + "\tWhen?: {0} at {1}:{2} {3}\n".format(formattedDate, reservation.timeHour, reservation.timeMinute, reservation.timePeriod)
             + "\tParty Name: {0}\n".format(reservation.partyName)
             + "\tParty Size: {0}\n".format(reservation.partySize)
             + "\tPhone #: {0}\n".format(reservation.phoneNumber)

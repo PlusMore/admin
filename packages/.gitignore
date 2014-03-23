@@ -6,8 +6,6 @@ autoform
 moment
 fastclick
 collection2
-collectionFS
-cfs-public-folder
 inspector
 nprogress
 font-awesome
@@ -16,4 +14,6 @@ accounts-t9n
 accounts-entry
 percolatestudio-mixpanel
 impicker
-/cfs-public-folder
+/collection2
+/bootstrap-3-timepicker
+/simple-schema

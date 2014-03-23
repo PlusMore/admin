@@ -5,13 +5,31 @@
 </template>
 
 <template name="makeReservationForm">
-  <div class="row">
+  <div class="row make-reservation-form">
     <div class="col-xs-12">
       {{#autoForm schema=makeReservationSchema}}
         <legend>Make a Reservation</legend>
-        {{afQuickField 'partySize'}}
+        <div class="col-xs-12 no-padding">
+          <div class="col-xs-5 no-padding date">
+            {{afQuickField 'date'}}
+          </div>
+          <div class="col-xs-7 no-padding time">
+            <div class="form-group{{#if afFieldIsInvalid 'timeHour'}} has-error{{/if}}">
+              {{afFieldLabel "timeHour"}}
+              <div class="time-picker">
+                {{afFieldInput "timeHour" class="time-component" options=hourOptions}}
+                {{afFieldInput "timeMinute" class="time-component" options=minuteOptions}}
+                {{afFieldInput "timePeriod" class="time-component" options=timePeriodOptions}}
+              </div>
+              {{#if afFieldIsInvalid "timeHour"}}
+                <span class="help-block">{{afFieldMessage "timeHour"}}</span>
+              {{/if}}
+            </div>
+          </div>  
+        </div>
         {{afQuickField 'partyName'}}
-        {{afQuickField 'phoneNumber'}}
+        {{afQuickField 'partySize'}}
+        {{afQuickField 'phoneNumber' type="tel"}}
         {{afQuickField 'emailAddress'}}
         <div class="buttons">
           <button type="submit" data-meteor-method="makeReservation" class="btn btn-default btn-lg col-xs-12">Submit</button>

@@ -34,3 +34,51 @@ Template.makeReservationForm.helpers({
     return makeReservationForm;
   }
 });
+
+Template.makeReservationForm.rendered = function () {
+  $(this.find('.time input')).timepicker();
+};
+
+Handlebars.registerHelper("hourOptions", function() {
+  var hours = [1,2,3,4,5,6,7,8,9,10,11,12];
+  var hourOptions = [];
+
+  _.each(hours, function(hour) {
+    hourOptions.push({
+      label: hour,
+      value: hour
+    });
+  });
+
+  return hourOptions;
+});
+
+Handlebars.registerHelper("minuteOptions", function() {
+  var minutes = ['00', '30'];
+  var minuteOptions = [];
+
+  _.each(minutes, function(minute) {
+    minuteOptions.push({
+      label: minute,
+      value: minute
+    });
+  });
+
+  return minuteOptions;
+});
+
+Handlebars.registerHelper("timePeriodOptions", function() {
+  var timePeriods = ['AM', 'PM'];
+  var timePeriodOptions = [];
+
+  _.each(timePeriods, function(timePeriod) {
+    timePeriodOptions.push({
+      label: timePeriod,
+      value: timePeriod
+    });
+  });
+
+  return timePeriodOptions;
+});
+
+

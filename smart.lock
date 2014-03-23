@@ -8,7 +8,6 @@
       "autoform": {},
       "fastclick": {},
       "collection2": {},
-      "collectionFS": {},
       "inspector": {},
       "nprogress": {},
       "font-awesome": {},
@@ -44,13 +43,8 @@
       },
       "collection2": {
         "git": "https://github.com/aldeed/meteor-collection2.git",
-        "tag": "v0.3.8",
-        "commit": "69aff2a21ba3c382f915e1f9dbcca2ad38edb6d5"
-      },
-      "collectionFS": {
-        "git": "https://github.com/raix/Meteor-CollectionFS.git",
-        "tag": "v0.3.7",
-        "commit": "34d9fb363472e44c6dba4a1473a9e106e107f5a9"
+        "tag": "v0.3.9",
+        "commit": "fdda9b5c87e9dcb5cb67087ecb6c9f21352d0cc2"
       },
       "inspector": {
         "git": "https://github.com/broth-eu/meteor-inspector.git",
@@ -84,18 +78,13 @@
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.2.40",
-        "commit": "d22892daa943e3567916effeaafd794ca6af5cd2"
+        "tag": "v0.2.42",
+        "commit": "85ce399ec94ecc6b9b2fdb114bddaceba82f3a03"
       },
       "moment": {
         "git": "https://github.com/acreeger/meteor-moment.git",
         "tag": "v2.5.1",
         "commit": "8c9bc5d3fc96705057737cb9743d555417f6e551"
-      },
-      "cfs-public-folder": {
-        "git": "https://github.com/nooitaf/meteor-cfs-public-folder.git",
-        "tag": "v0.0.3",
-        "commit": "581c716424b374efb6f611110002621f9cc9212b"
       },
       "just-i18n": {
         "git": "https://github.com/subhog/meteor-just-i18n.git",
