@@ -137,7 +137,7 @@ Meteor.methods({
         text: "Device in {0} at {1} has requested a reservation.\n\n".format(device.location, hotel.name) 
             + "Reservation Details:\n"
             + "\tFor: {0}\n".format(experience.title)
-            + "\tWhen?: {0} at {1}:{2} {3}\n".format(formattedDate, reservation.timeHour, reservation.timeMinute, reservation.timePeriod)
+            + "\tWhen: {0} at {1}:{2} {3}\n".format(formattedDate, reservation.timeHour, reservation.timeMinute, reservation.timePeriod)
             + "\tParty Name: {0}\n".format(reservation.partyName)
             + "\tParty Size: {0}\n".format(reservation.partySize)
             + "\tPhone #: {0}\n".format(reservation.phoneNumber)
@@ -177,7 +177,7 @@ Meteor.methods({
         text: "Your reservation for {0} has been confirmed\n\n".format(experience.title)
             + "Reservation Details:\n"
             + "\tFor: {0}\n".format(experience.title)
-            + "\tWhen?: {0} at {1}:{2} {3}\n".format(formattedDate, reservation.timeHour, reservation.timeMinute, reservation.timePeriod)
+            + "\tWhen: {0} at {1}:{2} {3}\n".format(formattedDate, reservation.timeHour, reservation.timeMinute, reservation.timePeriod)
             + "\tParty Name: {0}\n".format(reservation.partyName)
             + "\tParty Size: {0}\n".format(reservation.partySize)
             + "\tPhone #: {0}\n".format(reservation.phoneNumber)
