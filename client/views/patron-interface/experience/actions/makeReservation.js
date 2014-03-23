@@ -23,6 +23,7 @@ Template.makeReservationForm.helpers({
     makeReservationForm = makeReservationForm || new AutoForm(makeReservationSchema);
     makeReservationForm.hooks({
       onSubmit: function (doc) {
+        $(this.template.find('.buttons button[type=submit]')).prop('disabled', true).text('Submitting...');
         doc.experienceId = _this._id;
         Meteor.call('makeReservation', doc, function (err, result) {
           if (err) throw new Meteor.Error(500, 'Something went wrong', err);
@@ -64,7 +65,17 @@ Handlebars.registerHelper("minuteOptions", function() {
 });
 
 Handlebars.registerHelper("timePeriodOptions", function() {
-  var timePeriods = ['AM', 'PM'];
+  var timePeriods;
+  var now = new Date();
+  var mNow = moment(now);
+
+  var currentTimePeriod = mNow.format('A');
+  if (currentTimePeriod === "PM") {
+    timePeriods = ['PM', 'AM'];
+  } else {
+    timePeriods = ['AM', 'PM'];
+  }
+
   var timePeriodOptions = [];
 
   _.each(timePeriods, function(timePeriod) {
