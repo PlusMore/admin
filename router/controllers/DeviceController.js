@@ -5,15 +5,18 @@ DeviceController = RouteController.extend({
   //     Meteor.subscribe('deviceData')
   //   ]
   // },
-  before: function() {
+  onBeforeAction: function() {
       Session.set('experienceState', '');
   },
-  after: function() {
+  onData: function() {
     if (Meteor.user()) {
       var deviceId = Meteor.user().deviceId,
           device = Devices.findOne(deviceId);
 
-      Session.set('deviceId', device._id);
+      if (device)
+      {
+        Session.set('deviceId', device._id);
+      }
     }
   }
 });

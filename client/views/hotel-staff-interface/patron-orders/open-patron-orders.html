@@ -4,16 +4,15 @@
       <div class="patron-orders-list">
         <div class="open-patron-orders">
           <h3>Open Orders</h3>
-          {{#each open-patron-orders}}
+          {{#each openPatronOrders}}
             {{> patronOrder}}
           {{/each}}
         </div>
       </div>
     {{else}}
-    <div class="no-open-patron-orders big-text">
-      <p class="lead">No open open-patron-orders.</p>
-    </div>
+      <div class="no-open-patron-orders big-text">
+        <p class="lead">No open open-patron-orders.</p>
+      </div>
     {{/if}}
-    </div>  
-  </div>
+  </div>  
 </template>

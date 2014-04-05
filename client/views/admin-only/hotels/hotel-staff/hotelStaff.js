@@ -12,10 +12,9 @@ Template.hotelStaffItem.helpers({
 
 Template.addHotelStaff.helpers({
   addHotelStaffSchema: function() {
-    var addHotelStaffSchema = new AutoForm(Schema.addHotelStaff);
-    return addHotelStaffSchema;
+    return Schema.addHotelStaff;
   },
   hotelId: function() {
-    return this._templateData._id;
+    return this._id;
   }
 });

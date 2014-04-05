@@ -1,17 +1,17 @@
 Template.hotel.helpers({
-  hotelSchema: function() {
+  hotels: function() {
     return Hotels;
   }
 });
 
 Template.addHotel.helpers({
-  hotelSchema: function() {
+  hotels: function() {
     return Hotels;
   }
 });
 
 Template.editHotel.helpers({
-  hotelSchema: function() {
+  hotels: function() {
     return Hotels;
   }
 });

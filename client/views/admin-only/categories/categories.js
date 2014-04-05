@@ -1,11 +1,11 @@
 Template.addCategory.helpers({
-  categorySchema: function() {
+  categories: function() {
     return Categories;
   }
 });
 
 Template.category.helpers({
-  categorySchema: function() {
+  categories: function() {
     return Categories;
   }
 });

@@ -23,19 +23,18 @@
     <header>
       <h3>Edit Category</h3>
     </header>
-    {{#autoForm schema=categorySchema doc=this id=this._id}}
-      {{afQuickField 'name'}}
-      {{afQuickField 'active'}}
-      {{afQuickField 'iconClass' firstOption="--Select an icon--" options=categoryIconOptions}}
+    {{#autoForm collection=categories doc=this id=this._id type="update"}}
+      {{> afQuickField name='name'}}
+      {{> afQuickField name='active'}}
+      {{> afQuickField name='iconClass' firstOption="--Select an icon--" options=categoryIconOptions}}
       <button type="reset" class="btn btn-default">Reset</button>
       &nbsp;
       <button type="submit" class="btn btn-primary update">Update Category</button>
     {{/autoForm}}
-    <br />
-    {{#autoForm schema=categorySchema doc=this}}
-      <button type="submit" class="btn btn-danger remove">
-      <i class="fa fa-trash-o"></i> Delete</button>
-    {{/autoForm}}
+    <hr class="soften" />
+    {{#afDeleteButton collection=categories doc=this}}
+      <i class="fa fa-trash-o"></i> Delete
+    {{/afDeleteButton}}
   </div>
 </template>
 
@@ -44,11 +43,10 @@
     <header>
       <h3>Add Category</h3>
     </header>
-
-    {{#autoForm schema=categorySchema}}
-      {{afQuickField 'name'}}
-      {{afQuickField 'active'}}
-      {{afQuickField 'iconClass' firstOption="--Select an icon--" options=categoryIconOptions}}
+    {{#autoForm collection=categories type="insert"}}
+      {{> afQuickField name='name'}}
+      {{> afQuickField name='active'}}
+      {{> afQuickField name='iconClass' firstOption="--Select an icon--" options=categoryIconOptions}}
       <button type="reset" class="btn btn-default">Reset</button>
       &nbsp;
       <button type="submit" class="btn btn-primary insert">Add Category</button>

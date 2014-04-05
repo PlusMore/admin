@@ -15,14 +15,14 @@
 
 <template name="addHotelStaff">
   <h4>Add Hotel Users</h4>
-  {{#autoForm schema=addHotelStaffSchema id="addHotelStaffForm"}}
+  {{#autoForm schema=addHotelStaffSchema id="addHotelStaffForm" type="method" meteormethod="addHotelStaff"}}
     <fieldset>
-      {{afFieldInput 'hotelId' type="hidden" value=hotelId }}
-      <div class="form-group{{#if afFieldIsInvalid 'email'}} has-error{{/if}}">
-            {{afFieldLabel "email"}}
-            {{afFieldInput "email"}}
-            {{#if afFieldIsInvalid "email"}}
-            <span class="help-block">{{afFieldMessage "email"}}</span>
+      {{> afFieldInput name='hotelId' type="hidden" value=hotelId }}
+      <div class="form-group {{#if afFieldIsInvalid name='email'}}has-error{{/if}}">
+            {{> afFieldLabel name="email"}}
+            {{> afFieldInput name="email"}}
+            {{#if afFieldIsInvalid name="email"}}
+            <span class="help-block">{{afFieldMessage name="email"}}</span>
             {{/if}}
         </div>
         <div>

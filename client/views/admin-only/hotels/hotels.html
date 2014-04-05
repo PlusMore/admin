@@ -16,7 +16,7 @@
   <ul class="hotels">
     {{#each hotels}}
       <li>
-        <a href="{{pathFor 'hotel' this}}">{{name}}</a>
+        <a href="{{pathFor 'hotel'}}">{{name}}</a>
       </li>
     {{/each}}
   </ul>
@@ -30,11 +30,10 @@
         <h3>{{name}}</h3>
         {{> editHotel}}
         {{> hotelStaff}}
-        <br />
-        {{#autoForm schema=hotelSchema doc=this}}
-          <button type="submit" class="btn btn-danger remove">
-          <i class="fa fa-trash-o"></i> Delete Hotel</button>
-        {{/autoForm}}
+        <hr class="soften" />
+        {{#afDeleteButton collection=hotels doc=this id="removeHotel"}}
+          <i class="fa fa-trash-o"></i> Delete Hotel
+        {{/afDeleteButton}}
       </div>
     {{/with}}
   </div>
@@ -45,12 +44,12 @@
   <header>
     <h4>Edit Hotel Details</h4>
   </header>
-  {{quickForm schema=hotelSchema doc=this type="update" buttonClasses="btn btn-primary" buttonContent="Update hotel"}}
+  {{> quickForm collection=hotels doc=this type="update" buttonClasses="btn btn-primary" buttonContent="Update hotel"}}
 </template>
 
 <template name="addHotel">
   <header>
     <h3>Add Hotel</h3>
   </header>
-  {{quickForm schema=hotelSchema type="insert" buttonClasses="btn btn-primary" buttonContent="Add hotel"}}
+  {{> quickForm collection=hotels type="insert" buttonClasses="btn btn-primary" buttonContent="Add hotel"}}
 </template>
