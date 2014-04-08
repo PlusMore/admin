@@ -1,6 +1,6 @@
 <template name="orders">
   {{#if hasOrders}}
-    <div class="orders-list">
+    <div class="orders-list touch-scrollable">
       <div class="orders">
         {{#each orders}}
           {{> order}}
@@ -8,11 +8,10 @@
       </div>
     </div>
   {{else}}
-  <div class="no-orders big-text">
-    <p class="lead">You have no open orders.</p>
-  </div>
+    <div class="no-orders big-text">
+      <p class="lead">You have no open orders.</p>
+    </div>
   {{/if}}
-  </div>
 </template>
 
 <template name="order">
@@ -33,7 +32,7 @@
       
       <p class="lead">{{reservation.partyName}} - Party of {{reservation.partySize}}</p>
       {{#with experience}}
-      <a class="btn btn-default" href="{{pathFor 'experience' this}}">See Details</a>
+      <a class="btn btn-default" href="{{pathFor 'experience'}}">See Details</a>
       {{/with}}
     {{/if}}
   </div>

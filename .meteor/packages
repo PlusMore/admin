@@ -4,7 +4,6 @@
 # but you can also edit it by hand.
 
 standard-app-packages
-preserve-inputs
 iron-router
 accounts-base
 accounts-password
@@ -15,18 +14,16 @@ roles
 autoform
 collection2
 fastclick
-collectionFS
 underscore
 jquery
 inspector
 accounts-ui
 accounts-entry
 nprogress
-event-store
-event-store-ui
 font-awesome
 accounts-plusmore-device
 percolatestudio-mixpanel
 plus-more-fonts
 impicker
 jquery-idle-timer
+moment

@@ -1,38 +1,18 @@
 <template name="openPatronOrders">
-  {{#if hasOrders}}
-    <div class="patron-orders-list">
-      <div class="open-patron-orders">
-        <h3>Open Orders</h3>
-        {{#each open-patron-orders}}
-          {{> patronOrder}}
-        {{/each}}
+  <div class="container">
+    {{#if hasOrders}}
+      <div class="patron-orders-list">
+        <div class="open-patron-orders">
+          <h3>Open Orders</h3>
+          {{#each openPatronOrders}}
+            {{> patronOrder}}
+          {{/each}}
+        </div>
       </div>
-    </div>
-  {{else}}
-  <div class="no-open-patron-orders big-text">
-    <p class="lead">No open open-patron-orders.</p>
-  </div>
-  {{/if}}
-  </div>
-</template>
-
-<template name="patronOrder">
-  <div class="order section">
-    {{#if isReservation}}
-      <h3>
-        Reservation for {{experience.title}}
-        <small class="pull-right">
-          {{#if open}}
-            (In Progress)
-          {{else}}
-            Confirmed
-          {{/if}}
-        </small>
-      </h3>
-      <p class="lead">{{reservation.partyName}} - Party of {{reservation.partySize}}</p>
-      {{#with experience}}
-      <a class="btn btn-default" href="{{pathFor 'experience' this}}">See Details</a>
-      {{/with}}
+    {{else}}
+      <div class="no-open-patron-orders big-text">
+        <p class="lead">No open open-patron-orders.</p>
+      </div>
     {{/if}}
-  </div>
+  </div>  
 </template>

@@ -3,13 +3,13 @@
     <div class="register-device section col-md-6">
       <h3>Setup This Device</h3>
 
-      {{#autoForm schema=setupDeviceSchema id="setupDeviceForm"}}
+      {{#autoForm schema=setupDeviceSchema id="setupDeviceForm" type="method" meteormethod="setupDevice"}}
         <fieldset>
-          {{afFieldInput 'hotelId' type="hidden" value=hotelId }}
+          {{> afFieldInput name='hotelId' type="hidden" value=hotelId }}
 
-          {{afQuickField "type" firstOption="(Select Device Type)" options=deviceTypes}}
+          {{> afQuickField name="type" firstOption="(Select Device Type)" options=deviceTypes}}
 
-          {{afQuickField 'location'}}
+          {{> afQuickField name='location'}}
 
           <div>
             <button type="reset" class="btn btn-default">Reset</button>

@@ -10,16 +10,6 @@ Schema.addHotelStaff = new SimpleSchema({
 });
 
 Meteor.methods({
-  createDeviceManagerAccount: function(user) {
-    var userId = Accounts.createUser(user);
-    Roles.addUsersToRoles(userId, 'device-manager');
-    return userId;
-  },
-  createContentManagerAccount: function (user) {
-    var userId = Accounts.createUser(user);
-    Roles.addUsersToRoles(userId, 'content-manager');
-    return userId;
-  },
   addHotelStaff: function (user) {
     check(user, Schema.addHotelStaff);
 
