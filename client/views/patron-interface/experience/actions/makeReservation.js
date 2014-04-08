@@ -7,9 +7,6 @@ Template.makeReservationCallToAction.events({
   }
 });
 
-var makeReservationSchema = null;
-var makeReservationForm = null;
-
 Template.makeReservationForm.helpers({
   makeReservationSchema: function () {
     var schema = Schema.makeReservation._schema;
@@ -17,22 +14,21 @@ Template.makeReservationForm.helpers({
     if (this.maxPartySize) {
       schema.partySize.max = this.maxPartySize;
     }
+    return new SimpleSchema(schema); 
+  }
+});
 
-    makeReservationSchema = makeReservationSchema || new SimpleSchema(schema);
-
-    makeReservationForm = makeReservationForm || new AutoForm(makeReservationSchema);
-    makeReservationForm.hooks({
-      onSubmit: function (doc) {
-        $(this.template.find('.buttons button[type=submit]')).prop('disabled', true).text('Submitting...');
-        doc.experienceId = _this._id;
-        Meteor.call('makeReservation', doc, function (err, result) {
-          if (err) throw new Meteor.Error(500, 'Something went wrong', err);
-          Session.set('experienceState', 'complete');
-        });
-        return false;
-      }
-    });
-    return makeReservationForm;
+AutoForm.hooks({
+  makeReservation: {
+    onSubmit: function (doc) {
+      $(this.template.find('.buttons button[type=submit]')).prop('disabled', true).text('Submitting...');
+      doc.experienceId = Session.get('currentExperienceId');;
+      Meteor.call('makeReservation', doc, function (err, result) {
+        if (err) throw new Meteor.Error(500, 'Something went wrong', err);
+        Session.set('experienceState', 'complete');
+      });
+      return false;
+    } 
   }
 });
 

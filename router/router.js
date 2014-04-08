@@ -21,7 +21,27 @@ var filters = {
     this.subscribe('userHotelData').wait();
     this.subscribe('userDeviceData').wait();
   },
-  isLoggedIn: function(router, extraCondition) {
+  identify: function () {
+    var user = Meteor.user();
+
+    if (! user)
+      return;
+      
+    var device = Devices.findOne(user.deviceId);
+
+    if (device) {
+      mixpanel.identify(user._id);
+      mixpanel.people.set({
+        "Device": device.location
+      });
+    } else if (user.emails && user.emails[0].address) {
+      mixpanel.identify(user._id);
+      mixpanel.people.set({
+        '$email': user.emails[0].address
+      });
+    }
+  },
+  isLoggedIn: function(pause, router, extraCondition) {
     if (! Meteor.user()) {
       if (Meteor.loggingIn()) {
         router.render(this.loadingTemplate);
@@ -32,12 +52,12 @@ var filters = {
         var path = Router.routes['entrySignIn'].path();
         Router.go(path);
       }
-      router.stop();
+      pause()
     }
   },
-  isLoggedOut: function() {
+  isLoggedOut: function(pause) {
     if (Meteor.user()) {
-      this.stop();
+      pause();
       Router.go('dashboard');
     }
   },
@@ -47,23 +67,23 @@ var filters = {
   isDevice: function() {
     return Roles.userIsInRole(Meteor.userId(), ['device']);
   },
-  isHotelStaff: function(router) {
+  isHotelStaff: function() {
     return Roles.userIsInRole(Meteor.userId(), ['hotel-staff', 'admin']);
   },
-  ensureDeviceAccount: function() {
+  ensureDeviceAccount: function(pause) {
     if (! Meteor.user()) {  
       if (Meteor.loggingIn()) {    
-        this.render('loadingTemplate')
+        this.render(this.loadingTemplate);
       } else {    
         Session.set('deviceIsRegistered', false);
         this.render('registerDevice');
       }
-      this.stop();
+      pause();
     } else {
       if (!Roles.userIsInRole(Meteor.userId(), ['device'])) {    
         Session.set('deviceIsRegistered', false);
         this.render('registerDevice');
-        this.stop();
+        pause();
       } else {    
         Session.set('deviceIsRegistered', true);
       }
@@ -78,24 +98,29 @@ var helpers = {
       mixpanel.track("page view", {name: name});
     }
   },
-  showLoadingBar: function() {
+  showLoadingBar: function(pause) {
     if (this.ready()) {
       NProgress.done();
     } else {
       NProgress.start();
-      this.stop();
     }
   }
 };
+Router.onBeforeAction('loading');
+Router.onBeforeAction(filters.baseSubscriptions);
 
-Router.before(filters.baseSubscriptions);
+Router.onBeforeAction(filters.identify);
+
+Router.onBeforeAction(filters.isLoggedIn, {only: {
+
+}});
 
 // Ensure user has a device account, otherwise,
 // redirect to device list?
 // TODO: Need to think about this.. Can we get patron's
 // information somehow? Maybe can change from auto login
 // to a form.
-Router.before(filters.ensureDeviceAccount, {only: [
+Router.onBeforeAction(filters.ensureDeviceAccount, {only: [
   'welcome',
   'experiences',
   'experience',
@@ -103,12 +128,12 @@ Router.before(filters.ensureDeviceAccount, {only: [
 ]});
 
 // Show loading bar for any route that loads a subscription
-Router.before(helpers.showLoadingBar, {only: [
+Router.onBeforeAction(helpers.showLoadingBar, {only: [
   'manageExperiences'
 ]});
 
 
-Router.load(_.debounce(helpers.analyticsRequest, 300));
+Router.onRun(_.debounce(helpers.analyticsRequest, 300));
 
 // Routes
 
@@ -118,47 +143,60 @@ Router.map(function() {
   this.route('setupDevice', {
     path: '/setup-device',
     layoutTemplate: 'deviceLayout',
-    before: function() {
-      filters.isLoggedIn(this, filters.isHotelStaff());
+    onBeforeAction: function(pause) {
+      filters.isLoggedIn(pause, this, filters.isHotelStaff());
     },
-    after: function() {
-      var hotel = Hotels.findOne(Meteor.user().hotelId);
-      Session.set('hotelName', hotel.name);
-      Session.set('hotelId', hotel.id);
+    onData: function() {
+      if (Meteor.user()) {  
+        var hotel = Hotels.findOne(Meteor.user().hotelId);
+        if (hotel) {
+          Session.set('hotelName', hotel.name);
+          Session.set('hotelId', hotel.id);
+        }
+      }
     },
     data: function () {
-      return {
-        hotel: Hotels.findOne(Meteor.user().hotelId)
+      if (Meteor.user()) {
+        return {
+          hotel: Hotels.findOne(Meteor.user().hotelId)
+        }
       }
     }
   });
 
   this.route('devices', {
     path: '/devices',
-    before: function() {
-      filters.isLoggedIn(this, filters.isHotelStaff());
+    onBeforeAction: function(pause) {
+      filters.isLoggedIn(pause, this, filters.isHotelStaff());
     },
     waitOn: function() {
       return [
         Meteor.subscribe('devices')
       ]
     },
-    after: function() {
-      var hotel = Hotels.findOne(Meteor.user().hotelId);
-      Session.set('hotelName', hotel.name);
-      Session.set('hotelId', hotel.id);
+    onRun: function() {
+      if (Meteor.user()) {
+        var hotel = Hotels.findOne(Meteor.user().hotelId);
+        if (hotel) {
+          Session.set('hotelName', hotel.name);
+          Session.set('hotelId', hotel.id);    
+        }
+      }
+      
     },
     data: function () {
-      return {
-        devices: Devices.find({hotelId: Meteor.user().hotelId})
+      if (Meteor.user()) {
+        return {
+          devices: Devices.find({hotelId: Meteor.user().hotelId})
+        }
       }
     }
   });
 
   this.route('openPatronOrders', {
     path: 'open-patron-orders',
-    before: function() {
-      filters.isLoggedIn(this, filters.isHotelStaff());
+    onBeforeAction: function(pause) {
+      filters.isLoggedIn(pause, this, filters.isHotelStaff());
     },
     waitOn: function () {
       return [
@@ -169,8 +207,8 @@ Router.map(function() {
 
   this.route('patronOrderPage', {
     path: 'patron-order/:_id',
-    before: function() {
-      filters.isLoggedIn(this, filters.isHotelStaff());
+    onBeforeAction: function(pause) {
+      filters.isLoggedIn(pause, this, filters.isHotelStaff());
     },
     waitOn: function() {
       return [
@@ -179,10 +217,12 @@ Router.map(function() {
     },
     data: function() {
       var order = Orders.findOne(this.params._id);
-      var experience = Experiences.findOne(order.reservation.experienceId)
-      return {
-        order: order,
-        experience: experience
+      if (order) {
+        var experience = Experiences.findOne(order.reservation.experienceId)
+        return {
+          order: order,
+          experience: experience
+        }
       }
     }
   });
@@ -211,7 +251,7 @@ Router.map(function() {
 
   this.route('experiences', {
     path: '/experiences/:category?',
-    before: function() {
+    onBeforeAction: function() {
       Session.set('experienceState', '');
     },
     layoutTemplate: 'deviceLayout',
@@ -227,6 +267,9 @@ Router.map(function() {
     path: '/experience/:_id',
     controller: DeviceController,
     layoutTemplate: 'deviceLayout',
+    onRun: function () {
+      Session.set('currentExperienceId', this.params._id);
+    },
     data: function () {
       return {
         experience: Experiences.findOne(this.params._id)
@@ -238,8 +281,8 @@ Router.map(function() {
 
   this.route('manageExperiences', {
     path: '/manage-experiences',
-    before: function() {
-      filters.isLoggedIn(this, filters.isAdmin());
+    onBeforeAction: function(pause) {
+      filters.isLoggedIn(pause, this, filters.isAdmin());
     },
     waitOn: function() {
       return [
@@ -255,8 +298,8 @@ Router.map(function() {
         Meteor.subscribe('categories')
       ]
     },
-    before: function() {
-      filters.isLoggedIn(this, filters.isAdmin());
+    onBeforeAction: function(pause) {
+      filters.isLoggedIn(pause, this, filters.isAdmin());
     },
     data: function () {
       return {
@@ -273,8 +316,8 @@ Router.map(function() {
         Meteor.subscribe('hotels')
       ]
     },
-    before: function() {
-      filters.isLoggedIn(this, filters.isAdmin());
+    onBeforeAction: function(pause) {
+      filters.isLoggedIn(pause, this, filters.isAdmin());
     },
     data: function () {
       return {
@@ -287,8 +330,8 @@ Router.map(function() {
 
   this.route('hotel', {
     path: '/hotel/:_id',
-    before: function() {
-      filters.isLoggedIn(this, filters.isAdmin());
+    onBeforeAction: function(pause) {
+      filters.isLoggedIn(pause, this, filters.isAdmin());
     },
     waitOn: function() {
       return [
@@ -314,8 +357,8 @@ Router.map(function() {
 
   this.route('dashboard', {
     path: '/dashboard',
-    before: function() {
-      filters.isLoggedIn(this);
+    onBeforeAction: function(pause) {
+      filters.isLoggedIn(pause, this);
     }
   });
 

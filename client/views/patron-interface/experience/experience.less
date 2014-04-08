@@ -37,7 +37,8 @@
     color: #fff;
     padding: 20px 30.5px;
     height: 100%;
-    position: relative;
+    overflow: auto;
+    zoom: 1;
 
     &.action-form {
       border-left: 1px solid rgba(255,255,255,.3);
@@ -192,15 +193,6 @@
 @media (min-width: 768px) {}
 
 @media (min-width: 992px) {
-  .experience {
-    & > .content {
-      position: absolute;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      overflow: scroll;
-    }
-  }
 }
 
 @media (min-width: 1200px) {}
