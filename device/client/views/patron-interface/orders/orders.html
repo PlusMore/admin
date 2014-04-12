@@ -1,0 +1,39 @@
+<template name="orders">
+  {{#if hasOrders}}
+    <div class="orders-list touch-scrollable">
+      <div class="orders">
+        {{#each orders}}
+          {{> order}}
+        {{/each}}
+      </div>
+    </div>
+  {{else}}
+    <div class="no-orders big-text">
+      <p class="lead">You have no open orders.</p>
+    </div>
+  {{/if}}
+</template>
+
+<template name="order">
+  <div class="order section">
+    {{#if isReservation}}
+      <header>
+        <h3>
+          Reservation for {{experience.title}}
+          <small class="pull-right">
+            {{#if open}}
+              (In Progress)
+            {{else}}
+              Confirmed
+            {{/if}}
+          </small>
+        </h3>
+      </header>
+      
+      <p class="lead">{{reservation.partyName}} - Party of {{reservation.partySize}}</p>
+      {{#with experience}}
+      <a class="btn btn-default" href="{{pathFor 'experience'}}">See Details</a>
+      {{/with}}
+    {{/if}}
+  </div>
+</template>
