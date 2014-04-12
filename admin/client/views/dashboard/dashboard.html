@@ -15,10 +15,11 @@
       {{#if isInRole 'hotel-staff'}}
         <div class="section">
           <header>
-            <h3>Setup this Device</h3>
+            <h3>Welcome to Plus More</h3>
           </header>
 
-          <a class="btn btn-default" href="{{pathFor 'setupDevice'}}">Device Setup</a>
+          <a class="btn btn-default" href="{{pathFor 'devices'}}">See Devices</a>
+          <a class="btn btn-default" href="{{pathFor 'openPatronOrders'}}">See Open Orders</a>
         </div>
       {{/if}}
     </div>

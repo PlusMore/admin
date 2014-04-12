@@ -19,27 +19,6 @@ Router.configure({
 var filters = {
   baseSubscriptions: function() {
     this.subscribe('userHotelData').wait();
-    this.subscribe('userDeviceData').wait();
-  },
-  identify: function () {
-    var user = Meteor.user();
-
-    if (! user)
-      return;
-      
-    var device = Devices.findOne(user.deviceId);
-
-    if (device) {
-      mixpanel.identify(user._id);
-      mixpanel.people.set({
-        "Device": device.location
-      });
-    } else if (user.emails && user.emails[0].address) {
-      mixpanel.identify(user._id);
-      mixpanel.people.set({
-        '$email': user.emails[0].address
-      });
-    }
   },
   isLoggedIn: function(pause, router, extraCondition) {
     if (! Meteor.user()) {
@@ -64,34 +43,25 @@ var filters = {
   isAdmin: function() {
     return Roles.userIsInRole(Meteor.userId(), ['admin']);
   },
-  isDevice: function() {
-    return Roles.userIsInRole(Meteor.userId(), ['device']);
-  },
   isHotelStaff: function() {
     return Roles.userIsInRole(Meteor.userId(), ['hotel-staff', 'admin']);
-  },
-  ensureDeviceAccount: function(pause) {
-    if (! Meteor.user()) {  
-      if (Meteor.loggingIn()) {    
-        this.render(this.loadingTemplate);
-      } else {    
-        Session.set('deviceIsRegistered', false);
-        this.render('registerDevice');
-      }
-      pause();
-    } else {
-      if (!Roles.userIsInRole(Meteor.userId(), ['device'])) {    
-        Session.set('deviceIsRegistered', false);
-        this.render('registerDevice');
-        pause();
-      } else {    
-        Session.set('deviceIsRegistered', true);
-      }
-    }
   }
 };
 
 var helpers = {
+  identify: function () {
+    var user = Meteor.user();
+
+    if (! user)
+      return;
+      
+    if (user.emails && user.emails[0].address) {
+      mixpanel.identify(user._id);
+      mixpanel.people.set({
+        '$email': user.emails[0].address
+      });
+    }
+  },
   analyticsRequest: function() {
     if (Meteor.isClient) {  
       var name = Router.current().route.name;
@@ -109,11 +79,7 @@ var helpers = {
 Router.onBeforeAction('loading');
 Router.onBeforeAction(filters.baseSubscriptions);
 
-Router.onBeforeAction(filters.identify);
-
-Router.onBeforeAction(filters.isLoggedIn, {only: {
-
-}});
+Router.onBeforeAction(helpers.identify);
 
 // Ensure user has a device account, otherwise,
 // redirect to device list?
@@ -138,31 +104,6 @@ Router.onRun(_.debounce(helpers.analyticsRequest, 300));
 // Routes
 
 Router.map(function() {
-
-  // Hotel Staff
-  this.route('setupDevice', {
-    path: '/setup-device',
-    layoutTemplate: 'deviceLayout',
-    onBeforeAction: function(pause) {
-      filters.isLoggedIn(pause, this, filters.isHotelStaff());
-    },
-    onData: function() {
-      if (Meteor.user()) {  
-        var hotel = Hotels.findOne(Meteor.user().hotelId);
-        if (hotel) {
-          Session.set('hotelName', hotel.name);
-          Session.set('hotelId', hotel.id);
-        }
-      }
-    },
-    data: function () {
-      if (Meteor.user()) {
-        return {
-          hotel: Hotels.findOne(Meteor.user().hotelId)
-        }
-      }
-    }
-  });
 
   this.route('devices', {
     path: '/devices',
@@ -226,58 +167,6 @@ Router.map(function() {
       }
     }
   });
-
-  // Patron Interface
-  this.route('welcome', {
-    path: '/device',
-    layoutTemplate: 'deviceLayout',
-    controller: DeviceController
-  });
-
-  this.route('orders', {
-    layoutTemplate: 'deviceLayout',
-    controller: DeviceController
-  });
-
-  this.route('frontDesk', {
-    layoutTemplate: 'deviceLayout',
-    controller: DeviceController,
-  });
-
-  this.route('transportation', {
-    layoutTemplate: 'deviceLayout',
-    controller: DeviceController
-  });
-
-  this.route('experiences', {
-    path: '/experiences/:category?',
-    onBeforeAction: function() {
-      Session.set('experienceState', '');
-    },
-    layoutTemplate: 'deviceLayout',
-    controller: DeviceController,
-    data: function () {
-      return {
-        experiences: Experiences.find({category: this.params.category}, {sort: {sortOrder: 1}})
-      };
-    }
-  });
-
-  this.route('experience', {
-    path: '/experience/:_id',
-    controller: DeviceController,
-    layoutTemplate: 'deviceLayout',
-    onRun: function () {
-      Session.set('currentExperienceId', this.params._id);
-    },
-    data: function () {
-      return {
-        experience: Experiences.findOne(this.params._id)
-      };
-    }
-  });
-
-  // Admin
 
   this.route('manageExperiences', {
     path: '/manage-experiences',

@@ -8,6 +8,12 @@ start:
 	MONGO_OPLOG_URL=$(MONGO_OPLOG_URL) \
 	meteor -p 4000
 
+start-production:
+	USE_JSESSIONID=$(USE_JSESSIONID) \
+	MONGO_URL=$(MONGO_URL) \
+	MONGO_OPLOG_URL=$(MONGO_OPLOG_URL) \
+	meteor -p 4000 --production
+
 ddp:
 	ddp-analyzer-proxy
 
