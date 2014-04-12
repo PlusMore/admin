@@ -22,3 +22,14 @@ Meteor.startup(function() {
   // Initialize Mixpanel Analytics
   mixpanel.init('37f6902be1f2618c7cf2a5b37dbef276'); //YOUR TOKEN
 });
+
+Meteor.startup(function() {
+  Deps.autorun(function () {
+    var deviceId = Session.get('deviceId'),
+      device = Devices.findOne(deviceId);
+
+    if (device) {
+      Meteor.subscribe('deviceData');
+    }
+  });
+});

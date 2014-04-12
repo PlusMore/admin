@@ -4,12 +4,8 @@ Meteor.startup(function () {
   });
 
   AccountsEntry.config({
-    homeRoute: '/',
-    dashboardRoute: '/dashboard'
+    homeRoute: Router.routes['welcome'].path(),
+    dashboardRoute: Router.routes['setupDevice'].path()
   });
-
-  AccountsEntry.setProfile = function(profile) {
-    profile.signUpRole = Session.get('userSignUpType');
-  }
 });
 

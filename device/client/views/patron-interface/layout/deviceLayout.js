@@ -3,10 +3,18 @@ Template.deviceLayout.helpers({
     var isRegistered = Session.get('deviceIsRegistered')
 
     if (isRegistered) {
-      var devicePage = Router.current().route.name;
-      if (devicePage) {
-        return devicePage + "-container";
+      var current = Router.current();
+      if (current) {
+        var devicePage = Router.current().route.name;
+        if (devicePage) {
+          return devicePage + "-container";
+        }
+      } else {
+        return "";
       }
+
+
+      
     } else {
       return 'unregistered';
     }

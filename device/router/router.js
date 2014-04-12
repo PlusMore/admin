@@ -9,7 +9,7 @@ Client-side Router.
 // Config
 
 Router.configure({
-  layoutTemplate: 'layout',
+  layoutTemplate: 'deviceLayout',
   loadingTemplate: 'loading',
   notFoundTemplate: 'notFound'
 });
@@ -20,26 +20,6 @@ var filters = {
   baseSubscriptions: function() {
     this.subscribe('userHotelData').wait();
     this.subscribe('userDeviceData').wait();
-  },
-  identify: function () {
-    var user = Meteor.user();
-
-    if (! user)
-      return;
-      
-    var device = Devices.findOne(user.deviceId);
-
-    if (device) {
-      mixpanel.identify(user._id);
-      mixpanel.people.set({
-        "Device": device.location
-      });
-    } else if (user.emails && user.emails[0].address) {
-      mixpanel.identify(user._id);
-      mixpanel.people.set({
-        '$email': user.emails[0].address
-      });
-    }
   },
   isLoggedIn: function(pause, router, extraCondition) {
     if (! Meteor.user()) {
@@ -92,6 +72,26 @@ var filters = {
 };
 
 var helpers = {
+  identify: function () {
+    var user = Meteor.user();
+
+    if (! user)
+      return;
+      
+    var device = Devices.findOne(user.deviceId);
+
+    if (device) {
+      mixpanel.identify(user._id);
+      mixpanel.people.set({
+        "Device": device.location
+      });
+    } else if (user.emails && user.emails[0].address) {
+      mixpanel.identify(user._id);
+      mixpanel.people.set({
+        '$email': user.emails[0].address
+      });
+    }
+  },
   analyticsRequest: function() {
     if (Meteor.isClient) {  
       var name = Router.current().route.name;
@@ -109,11 +109,7 @@ var helpers = {
 Router.onBeforeAction('loading');
 Router.onBeforeAction(filters.baseSubscriptions);
 
-Router.onBeforeAction(filters.identify);
-
-Router.onBeforeAction(filters.isLoggedIn, {only: {
-
-}});
+Router.onBeforeAction(helpers.identify);
 
 // Ensure user has a device account, otherwise,
 // redirect to device list?
@@ -126,12 +122,6 @@ Router.onBeforeAction(filters.ensureDeviceAccount, {only: [
   'experience',
   'orders'
 ]});
-
-// Show loading bar for any route that loads a subscription
-Router.onBeforeAction(helpers.showLoadingBar, {only: [
-  'manageExperiences'
-]});
-
 
 Router.onRun(_.debounce(helpers.analyticsRequest, 300));
 
@@ -164,47 +154,6 @@ Router.map(function() {
     }
   });
 
-  this.route('devices', {
-    path: '/devices',
-    onBeforeAction: function(pause) {
-      filters.isLoggedIn(pause, this, filters.isHotelStaff());
-    },
-    waitOn: function() {
-      return [
-        Meteor.subscribe('devices')
-      ]
-    },
-    onRun: function() {
-      if (Meteor.user()) {
-        var hotel = Hotels.findOne(Meteor.user().hotelId);
-        if (hotel) {
-          Session.set('hotelName', hotel.name);
-          Session.set('hotelId', hotel.id);    
-        }
-      }
-      
-    },
-    data: function () {
-      if (Meteor.user()) {
-        return {
-          devices: Devices.find({hotelId: Meteor.user().hotelId})
-        }
-      }
-    }
-  });
-
-  this.route('openPatronOrders', {
-    path: 'open-patron-orders',
-    onBeforeAction: function(pause) {
-      filters.isLoggedIn(pause, this, filters.isHotelStaff());
-    },
-    waitOn: function () {
-      return [
-        Meteor.subscribe('openPatronOrders')
-      ]
-    } 
-  });
-
   this.route('patronOrderPage', {
     path: 'patron-order/:_id',
     onBeforeAction: function(pause) {
@@ -229,23 +178,19 @@ Router.map(function() {
 
   // Patron Interface
   this.route('welcome', {
-    path: '/device',
-    layoutTemplate: 'deviceLayout',
+    path: '/',
     controller: DeviceController
   });
 
   this.route('orders', {
-    layoutTemplate: 'deviceLayout',
     controller: DeviceController
   });
 
   this.route('frontDesk', {
-    layoutTemplate: 'deviceLayout',
     controller: DeviceController,
   });
 
   this.route('transportation', {
-    layoutTemplate: 'deviceLayout',
     controller: DeviceController
   });
 
@@ -254,7 +199,6 @@ Router.map(function() {
     onBeforeAction: function() {
       Session.set('experienceState', '');
     },
-    layoutTemplate: 'deviceLayout',
     controller: DeviceController,
     data: function () {
       return {
@@ -265,7 +209,6 @@ Router.map(function() {
 
   this.route('experience', {
     path: '/experience/:_id',
-    controller: DeviceController,
     layoutTemplate: 'deviceLayout',
     onRun: function () {
       Session.set('currentExperienceId', this.params._id);
@@ -274,91 +217,6 @@ Router.map(function() {
       return {
         experience: Experiences.findOne(this.params._id)
       };
-    }
-  });
-
-  // Admin
-
-  this.route('manageExperiences', {
-    path: '/manage-experiences',
-    onBeforeAction: function(pause) {
-      filters.isLoggedIn(pause, this, filters.isAdmin());
-    },
-    waitOn: function() {
-      return [
-        Meteor.subscribe('myExperiences'),
-        Meteor.subscribe('categories')
-      ]
-    }
-  });
-
-  this.route('categories', {
-    waitOn: function() {
-      return [
-        Meteor.subscribe('categories')
-      ]
-    },
-    onBeforeAction: function(pause) {
-      filters.isLoggedIn(pause, this, filters.isAdmin());
-    },
-    data: function () {
-      return {
-        categories: function() {
-          return Categories.find();
-        }
-      }
-    }
-  });
-
-  this.route('hotels', {
-    waitOn: function() {
-      return [
-        Meteor.subscribe('hotels')
-      ]
-    },
-    onBeforeAction: function(pause) {
-      filters.isLoggedIn(pause, this, filters.isAdmin());
-    },
-    data: function () {
-      return {
-        hotels: function() {
-          return Hotels.find();
-        }
-      }
-    }
-  });
-
-  this.route('hotel', {
-    path: '/hotel/:_id',
-    onBeforeAction: function(pause) {
-      filters.isLoggedIn(pause, this, filters.isAdmin());
-    },
-    waitOn: function() {
-      return [
-        Meteor.subscribe('hotel', this.params._id),
-        Meteor.subscribe('hotelUsers', {hotelId: this.params._id})
-      ]
-    },
-    data: function() {
-      return {
-        hotel: Hotels.findOne(this.params._id),
-        hotelStaff: Meteor.users.find({hotelId: this.params._id})
-      }
-    }
-  });
-
-  // Pages
-
-  this.route('homepage', {
-    path: '/'
-  });
-
-  // Dashboard
-
-  this.route('dashboard', {
-    path: '/dashboard',
-    onBeforeAction: function(pause) {
-      filters.isLoggedIn(pause, this);
     }
   });
 
