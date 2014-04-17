@@ -20,5 +20,6 @@ Meteor.startup(function () {
 
 Meteor.startup(function() {
   // Initialize Mixpanel Analytics
-  mixpanel.init('37f6902be1f2618c7cf2a5b37dbef276'); //YOUR TOKEN
+  mixpanel.init(Meteor.settings.public.mixpanel); //YOUR TOKEN
+
 });
