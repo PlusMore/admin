@@ -41,6 +41,10 @@
 
               <div class="reservationOptions hidden">
                 {{> afQuickField name='maxPartySize'}}
+                {{> afQuickField name='reservationStartTime' class='timepicker'}}
+                {{> afQuickField name='reservationEndTime' class='timepicker'}}
+                {{> afFieldInput name="reservationStartMinutes" type="hidden"}}
+                {{> afFieldInput name="reservationEndMinutes" type="hidden"}}
               </div>
 
               <div class="purchaseOptions hidden">

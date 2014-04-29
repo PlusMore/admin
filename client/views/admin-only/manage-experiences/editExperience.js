@@ -13,6 +13,19 @@ var setCallToActionOptions = function(callToAction, experienceTemplate) {
 
 Template.editExperience.rendered = function () {
   setCallToActionOptions(this.data.callToAction, this);
+
+  $(this.$('.timepicker')).pickatime({
+    onSet: function(selection) {
+      var minutes = selection.select;
+      var controlName = this.$node.attr('name');
+      var $reservationOptionsEl = this.$node.closest('.reservationOptions')
+      if (controlName === 'reservationStartTime') {
+        $reservationOptionsEl.find('[name=reservationStartMinutes]').val(minutes);
+      } else if (controlName === 'reservationEndTime') {
+        $reservationOptionsEl.find('[name=reservationEndMinutes]').val(minutes);
+      }
+    }
+  });
 }
 
 Template.editExperience.helpers({
