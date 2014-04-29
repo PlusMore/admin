@@ -7,35 +7,58 @@
 </template>
 
 <template name="patronOrder">
-  <div class="patron-order section">
+  <div class="patron-order section col-md-12 {{status}}">
     {{#if isReservation}}
-      <h3>
-        Reservation for {{experience.title}}
-        <small class="pull-right">
-          {{#if isPending}}
-            (In Progress)
-          {{/if}}
-          {{#if isConfirmed}}
-            Confirmed
-          {{/if}}
-          {{#if isCancelled}}
-            Cancelled
-          {{/if}}
-        </small>
-      </h3>
+      <header>
+        <h3>
+          Reservation for {{experience.title}}
+          <small class="pull-right">
+            {{#if isPending}}
+              (In Progress)
+            {{/if}}
+            {{#if isConfirmed}}
+              Confirmed
+            {{/if}}
+            {{#if isCancelled}}
+              Cancelled
+            {{/if}}
+          </small>
+        </h3>
+      </header>
       
-      <p class="lead">{{reservation.partyName}} - Party of {{reservation.partySize}}</p>
+      
       
       {{#if isCancelled}}
         <p>Cancelled on {{cancelledDate}}</p>
       {{else}}
+        
+      {{/if}}
+
+      {{#if isCancelled}}
+        <p class="lead">{{reservation.partyName}} - Party of {{reservation.partySize}}</p>
+        <p>Cancelled {{cancelledDateMomentAgo}}</p>
+      {{else}}
+        <div class="reservation-details">
+          <p>{{when}}</p>
+          <p>{{reservation.partyName}} - Party of {{reservation.partySize}}</p>
+        </div>
+        <div class="venue">
+          {{#with experience}}
+            <strong>{{venueName}}</strong>
+            <span>{{street}}</span>
+            <span>{{city}}, {{state}}</span>
+          {{/with}}
+        </div>
+       
         {{#if needsAction}}
           <a class="btn btn-default confirm-reservation">Confirm Reservation</a>
+          <p>Requested {{requestedDateTimeAgo}}</p>
         {{else}}
           <p>Confirmed on {{confirmationDate}}</p>
         {{/if}}
         <hr class="soften" />
         <a class="btn btn-danger cancel-reservation">Cancel Reservation</a>
+        
       {{/if}}
 
       

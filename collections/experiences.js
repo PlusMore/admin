@@ -31,6 +31,20 @@ Experiences = new Meteor.Collection('experiences', {
       label: 'Max Party Size',
       optional: true
     },
+    reservationStartTime: {
+      type: String,
+      label: 'Start Time'
+    },
+    reservationEndTime: {
+      type: String,
+      label: 'End Time'
+    },
+    reservationStartMinutes: {
+      type: Number
+    },
+    reservationEndMinutes: {
+      type: Number
+    },
     venueName: {
       type: String,
       label: 'Venue Name'

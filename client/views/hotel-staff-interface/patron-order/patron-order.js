@@ -17,6 +17,15 @@ Template.patronOrder.helpers({
   },
   isCancelled: function() {
     return (this.status === 'cancelled');
+  },
+  cancelledDateMomentAgo: function() {
+    return moment(this.cancelledDate).fromNow();
+  },
+  requestedDateTimeAgo: function() {
+    return moment(this.requestedAt).fromNow();
+  },
+  when: function() {
+    return moment(this.reservation.dateDatetime).calendar();
   }
 });
 
@@ -27,6 +36,8 @@ Template.patronOrder.events({
   },
   'click .btn.cancel-reservation': function(event) {
     event.preventDefault();
-    Meteor.call('cancelPatronReservation', this._id);
+    if (confirm("Are you sure you want to cancel this reservation?")) {
+      Meteor.call('cancelPatronReservation', this._id);
+    }
   }
 });
