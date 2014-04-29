@@ -109,7 +109,7 @@ Meteor.methods({
     if (Meteor.server) {
       var experience = Experiences.findOne(order.reservation.experienceId);
       var reservation = order.reservation;
-      var date = moment(reservation.date);
+      var date = moment(reservation.dateDatetime);
       var formattedDate = date.format("dddd, MMM Do YYYY");
 
       Email.send({
@@ -119,7 +119,7 @@ Meteor.methods({
         text: "Your reservation for {0} has been confirmed.\n\n".format(experience.title)
             + "Reservation Details:\n"
             + "\tFor: {0}\n".format(experience.title)
-            + "\tWhen: {0} at {1}:{2} {3}\n".format(formattedDate, reservation.timeHour, reservation.timeMinute, reservation.timePeriod)
+            + "\tWhen: {0} ({1})\n".format(formattedDate, date.calendar())
             + "\tParty Name: {0}\n".format(reservation.partyName)
             + "\tParty Size: {0}\n".format(reservation.partySize)
             + "\tPhone #: {0}\n".format(reservation.phoneNumber)
