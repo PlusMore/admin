@@ -49,25 +49,6 @@ var filters = {
 };
 
 var helpers = {
-  identify: function () {
-    var user = Meteor.user();
-
-    if (! user)
-      return;
-      
-    if (user.emails && user.emails[0].address) {
-      mixpanel.identify(user._id);
-      mixpanel.people.set({
-        '$email': user.emails[0].address
-      });
-    }
-  },
-  analyticsRequest: function() {
-    if (Meteor.isClient) {  
-      var name = Router.current().route.name;
-      mixpanel.track("page view", {name: name});
-    }
-  },
   showLoadingBar: function(pause) {
     if (this.ready()) {
       NProgress.done();
@@ -78,8 +59,6 @@ var helpers = {
 };
 Router.onBeforeAction('loading');
 Router.onBeforeAction(filters.baseSubscriptions);
-
-Router.onBeforeAction(helpers.identify);
 
 // Ensure user has a device account, otherwise,
 // redirect to device list?
@@ -97,9 +76,6 @@ Router.onBeforeAction(filters.ensureDeviceAccount, {only: [
 Router.onBeforeAction(helpers.showLoadingBar, {only: [
   'manageExperiences'
 ]});
-
-
-Router.onRun(_.debounce(helpers.analyticsRequest, 300));
 
 // Routes
 
@@ -168,14 +144,27 @@ Router.map(function() {
     }
   });
 
-  this.route('manageExperiences', {
+  this.route('manageExperiencesCategories', {
     path: '/manage-experiences',
     onBeforeAction: function(pause) {
       filters.isLoggedIn(pause, this, filters.isAdmin());
     },
     waitOn: function() {
       return [
-        Meteor.subscribe('myExperiences'),
+        Meteor.subscribe('categories')
+      ]
+    }
+  });
+
+  this.route('manageExperiences', {
+    path: '/manage-experiences/:category',
+    onBeforeAction: function(pause) {
+      filters.isLoggedIn(pause, this, filters.isAdmin());
+      Session.set('manageExperiencesCategory', this.params.category);
+    },
+    waitOn: function() {
+      return [
+        Meteor.subscribe('myExperiences', this.params.category),
         Meteor.subscribe('categories')
       ]
     }

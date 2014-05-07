@@ -50,43 +50,6 @@ Orders.allow({
   }
 });
 
-// Schemas
-
-Schema.makeReservation = new SimpleSchema({
-  partySize: {
-    type: Number,
-    label: 'How many people in your party?',
-    min: 1
-  },
-  partyName: {
-    type: String,
-    label: 'Your Party\'s name'
-  },
-  date: {
-    type: Date,
-    label: "Date"
-  },
-  timeHour: {
-    type: String,
-    label: "Time"
-  },
-  timeMinute: {
-    type: String
-  },
-  timePeriod: {
-    type: String
-  },
-  phoneNumber: {
-    type: String,
-    label: 'Phone number (for confirmation)'
-  },
-  emailAddress: {
-    type: String,
-    regEx: SchemaRegEx.Email,
-    label: "Email address"
-  }
-});
-
 Meteor.methods({
   markAsRead: function(orderId) {
     var order = Orders.findOne(orderId);

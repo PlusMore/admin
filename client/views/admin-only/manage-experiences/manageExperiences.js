@@ -19,8 +19,14 @@ Template.uploadExperiencePhoto.events({
   }
 });
 
+Template.manageExperiences.helpers({
+  categoryName: function () {
+    return Session.get('manageExperiencesCategory');
+  }
+});
+
 Template.myExperiences.helpers({
   experiences: function() {
-    return Experiences.find({owner: Meteor.userId()}, {sort: {category: 1, sortOrder: 1}});
+    return Experiences.find({owner: Meteor.userId(), category: Session.get('manageExperiencesCategory')}, {sort: {category: 1, sortOrder: 1}});
   }
 });

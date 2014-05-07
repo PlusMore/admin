@@ -12,7 +12,7 @@ Template.filepickerUpload.events({
     e.preventDefault();
 
     filepicker.pick(function(InkBlob) {
-      Meteor.call('createExperienceForFilepickerUpload', InkBlob);
+      Meteor.call('createExperienceForFilepickerUpload', InkBlob, Session.get('manageExperiencesCategory'));
     });
   }
 });
