@@ -149,6 +149,7 @@ Meteor.methods({
         owner: Meteor.userId(),
         photoUrl: InkBlob.url,
         photoName: InkBlob.filename,
+        photoSize: InkBlob.size,
         active: false,
         inProgress: true,
         created: new Date(),
@@ -157,5 +158,20 @@ Meteor.methods({
         if (err) console.log(err);
       });
     }
+  },
+  changeExperiencePhoto: function(InkBlob, experienceId) {
+    check(InkBlob, Object);
+    check(experienceId, String);
+
+    var experience = Experiences.findOne(experienceId);
+    if (!experience) {
+      throw new Meteor.Error(500, 'Not a valid experience', details);
+    }
+
+    Experiences.upsert(experienceId, {$set: {
+      photoUrl: InkBlob.url,
+      photoName: InkBlob.filename,
+      photoSize: InkBlob.size
+    }}, {validate: false})
   }
 });
