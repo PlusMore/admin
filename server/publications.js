@@ -38,8 +38,8 @@ Meteor.publish('singleExperience', function(id) {
   return Experiences.find(id);
 });
 
-Meteor.publish('myExperiences', function() {
-  return Experiences.find({owner: this.userId});
+Meteor.publish('myExperiences', function(category) {
+  return Experiences.find({owner: this.userId, category: category});
 });
 
 // Categories

@@ -6,6 +6,23 @@ All code related to the Experiences collection goes here.
 
 /+ ---------------------------------------------------- */
 
+EventDate = new SimpleSchema({
+  date: {
+    type: Date,
+  },
+  dateString: {
+    type: String,
+    label: 'Date'
+  },
+  startTime: {
+    type: String,
+    label: 'Start Time',
+  },
+  startTimeMinutes: {
+    type: Number
+  }
+});
+
 Experiences = new Meteor.Collection('experiences', {
   schema: new SimpleSchema({
     title: {
@@ -33,17 +50,21 @@ Experiences = new Meteor.Collection('experiences', {
     },
     reservationStartTime: {
       type: String,
-      label: 'Start Time'
+      label: 'Start Time',
+      optional: true
     },
     reservationEndTime: {
       type: String,
-      label: 'End Time'
+      label: 'End Time',
+      optional: true
     },
     reservationStartMinutes: {
-      type: Number
+      type: Number,
+      optional: true
     },
     reservationEndMinutes: {
-      type: Number
+      type: Number,
+      optional: true
     },
     venueName: {
       type: String,
@@ -88,6 +109,16 @@ Experiences = new Meteor.Collection('experiences', {
     sortOrder: {
       type: Number,
       label: 'Sort Order'
+    },
+    event: {
+      type: Boolean,
+      label: 'Event',
+      optional: true
+    },
+    eventDates: {
+      type: [EventDate],
+      label: 'Event Dates',
+      optional: true
     }
   })
 });
@@ -112,18 +143,35 @@ Experiences.allow({
 // Methods
 
 Meteor.methods({
-  createExperienceForFilepickerUpload: function (InkBlob) {
+  createExperienceForFilepickerUpload: function (InkBlob, category) {
     if (Meteor.isServer) {
       var id = Experiences.insert({
         owner: Meteor.userId(),
         photoUrl: InkBlob.url,
         photoName: InkBlob.filename,
+        photoSize: InkBlob.size,
         active: false,
         inProgress: true,
-        created: new Date()
+        created: new Date(),
+        category: category || null
       }, {validate: false}, function(err, result) {
         if (err) console.log(err);
       });
     }
+  },
+  changeExperiencePhoto: function(InkBlob, experienceId) {
+    check(InkBlob, Object);
+    check(experienceId, String);
+
+    var experience = Experiences.findOne(experienceId);
+    if (!experience) {
+      throw new Meteor.Error(500, 'Not a valid experience', details);
+    }
+
+    Experiences.upsert(experienceId, {$set: {
+      photoUrl: InkBlob.url,
+      photoName: InkBlob.filename,
+      photoSize: InkBlob.size
+    }}, {validate: false})
   }
 });

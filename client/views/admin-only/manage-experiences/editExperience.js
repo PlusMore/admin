@@ -31,15 +31,24 @@ Template.editExperience.rendered = function () {
 Template.editExperience.helpers({
   experiences: function() {
     return Experiences;
+  },
+  photoSizeFriendly: function() {
+    return this.photoSize ? parseInt(this.photoSize/1024) + ' Kb' : '';
   }
 });
-
-
 
 Template.editExperience.events({
   'change [name=callToAction]': function(event, experienceTemplate) {
     var callToAction = $(event.currentTarget).val();
     setCallToActionOptions(callToAction, experienceTemplate);
+  },
+  'click .btn-change-photo': function(e, experienceTemplate) {
+    e.preventDefault();
+
+    var experienceId = this._id;
+    filepicker.pick(function(InkBlob) {
+      Meteor.call('changeExperiencePhoto', InkBlob, experienceId);
+    });
   }
 });
 

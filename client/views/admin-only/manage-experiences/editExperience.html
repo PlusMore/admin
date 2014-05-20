@@ -9,7 +9,10 @@
       <div class="col-md-4">
         <legend>Photo</legend>
         <img class="img-responsive" src="{{photoUrl}}/convert?w=278&fit=scale&cache=true" />
-        <em>{{photoName}}</em>
+        <em>{{photoName}} {{#if photoSize}}({{photoSizeFriendly}}){{/if}}</em>
+        <div >
+          <button class="btn btn-default btn-change-photo">Change Photo</button>
+        </div>
       </div>
 
       <!-- edit -->

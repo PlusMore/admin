@@ -1,0 +1,24 @@
+<template name="manageExperiencesCategories">
+  <div class="container">
+    <h1>Select Category</h1>
+    {{#each categories}}
+      <div class="section">
+        <a href="{{categoryLink}}">{{name}}</a>
+      </div>
+    {{/each}}
+
+    {{#if isInRole 'admin'}}
+      <div class="section">
+        <header>
+          <h3>Manage Categories</h3>
+        </header>
+
+        <div class="row">
+          <div class="col-md-6">
+          <a href="{{pathFor 'categories'}}" class="btn btn-default">Manage Experience Categories</a>
+          </div>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</template>
