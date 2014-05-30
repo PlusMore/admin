@@ -37,8 +37,8 @@
       },
       "autoform": {
         "git": "https://github.com/aldeed/meteor-autoform.git",
-        "tag": "v0.8.1",
-        "commit": "385051a5e4bbea3b2a54965800f5f530987ef432"
+        "tag": "v0.10.0",
+        "commit": "4b298a025679a7e51892a884c11301c1d6bf19b3"
       },
       "fastclick": {
         "git": "https://github.com/percolatestudio/meteor-fastclick",
