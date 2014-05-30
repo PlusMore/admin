@@ -1,0 +1,12 @@
+<template name="hotelsList">
+  <header>
+    <h3>Hotels: </h3>
+  </header>
+  <div class="hotels">
+    {{#each hotels}}
+      <div class='section'>
+        <a href="{{pathFor 'hotel'}}">{{name}}</a>
+      </div>
+    {{/each}}
+  </div>
+</template>

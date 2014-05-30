@@ -1,0 +1,20 @@
+<template name="hotel">
+  <div class="container">
+    {{#with hotel}}
+      <div class="section">
+        <a href="{{pathFor 'hotels'}}">Back to Hotels</a>
+      </div>
+      <h3>{{name}}</h3>
+      <div class="section">
+        {{> editHotel}}
+        <hr class="soften" />
+        {{#afDeleteButton collection=hotels doc=this id="removeHotel"}}
+          <i class="fa fa-trash-o"></i> Delete Hotel
+        {{/afDeleteButton}}
+      </div>
+      <div class="section">
+        {{> hotelStaff}}
+      </div>
+    {{/with}}
+  </div>
+</template>

@@ -188,6 +188,10 @@ Router.map(function() {
     }
   });
 
+  this.route('addHotel', {
+    path: '/add-hotel'
+  });
+
   this.route('hotels', {
     waitOn: function() {
       return [
