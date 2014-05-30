@@ -31,6 +31,10 @@ Hotels = new Meteor.Collection('hotels', {
     phone: {
       type: String,
       label: 'Phone'
+    },
+    trackAnalytics: {
+      type: Boolean,
+      label: "Track Analytics"
     }
   })
 });

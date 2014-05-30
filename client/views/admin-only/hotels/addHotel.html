@@ -1,0 +1,13 @@
+<template name="addHotel">
+  <div class="container">
+    <div class="section">
+      <a href="{{pathFor 'hotels'}}">Back to Hotels</a>
+    </div>
+    <div class="section">
+      <header>
+        <h3>Add Hotel</h3>
+      </header>
+      {{> quickForm collection=hotels type="insert" buttonClasses="btn btn-primary" buttonContent="Add hotel"}}  
+    </div>
+  </div>
+</template>
