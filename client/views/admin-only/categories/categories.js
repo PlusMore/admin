@@ -14,11 +14,18 @@ Handlebars.registerHelper("categoryIconOptions", function() {
   var actions = [
       'icon-attractions'
     , 'icon-car'
-    , 'icon-frontdesk'
+    , 'icon-front-desk'
     , 'icon-nightlife'
     , 'icon-orders'
-    , 'icon-shopping'
+    , 'icon-shops'
     , 'icon-dining'
+    , 'icon-binoculars'
+    , 'icon-salon'
+    , 'icon-building'
+    , 'icon-mail'
+    , 'icon-time'
+    , 'icon-vip'
+    , 'icon-prize'
   ];
   var callToActionOptions = [];
 
