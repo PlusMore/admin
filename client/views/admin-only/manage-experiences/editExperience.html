@@ -32,11 +32,20 @@
             <div class="col-md-4">
               <legend>Venue Info</legend>
               {{> afQuickField name='venueName'}}
-              {{> afQuickField name='street'}}
+
+              <div class="form-group">
+                <label class="control-label" for="venueName">Address Search</label>
+                <input type="text" name="address" class="form-control" >
+              </div>      
+<pre>({{geo.latitude}}, {{geo.longitude}})
+{{geo.streetNumber}} {{geo.streetName}}
+{{geo.city}} {{geo.state}} ({{geo.stateCode}}), {{geo.zipcode}}
+{{geo.country}} ({{geo.countryCode}})</pre>    
+              <!-- {{> afQuickField name='street'}}
               {{> afQuickField name='city'}}
               {{> afQuickField name='state'}}
-              {{> afQuickField name='zip'}}
-              {{> afQuickField name='phone'}}
+              {{> afQuickField name='zip'}} -->
+              {{> afQuickField name='phone'}} 
             </div>
             <div class="col-md-4">
               <legend>Order Info</legend>
@@ -76,6 +85,21 @@
       </div>
     </div>
   </div>
+</template>
 
-
+<template name="geocodeInfo">
+[ 
+  { 
+    latitude: 40.7842202,
+    longitude: -73.9523748,
+    country: 'United States',
+    city: 'New York',
+    state: 'New York',
+    stateCode: 'NY',
+    zipcode: '10128',
+    streetName: 'Lexington Avenue',
+    streetNumber: '1428',
+    countryCode: 'US' 
+  } 
+]
 </template>

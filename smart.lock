@@ -17,7 +17,10 @@
       "pickadate": {
         "git": "https://github.com/patrickleet/meteor-pickadate.git",
         "branch": "master"
-      }
+      },
+      "geocoder": {},
+      "migrations": {},
+      "googlemaps": {}
     },
     "packages": {
       "iron-router": {
@@ -37,8 +40,8 @@
       },
       "autoform": {
         "git": "https://github.com/aldeed/meteor-autoform.git",
-        "tag": "v0.10.0",
-        "commit": "4b298a025679a7e51892a884c11301c1d6bf19b3"
+        "tag": "v0.11.0",
+        "commit": "efdffcdf836a45c50c39696ede15399177ccb9fa"
       },
       "fastclick": {
         "git": "https://github.com/percolatestudio/meteor-fastclick",
@@ -47,8 +50,8 @@
       },
       "collection2": {
         "git": "https://github.com/aldeed/meteor-collection2.git",
-        "tag": "v0.4.0",
-        "commit": "5648f7c53ee98f3ac8fbe82a55e6fd78fc67cfbc"
+        "tag": "v0.4.1",
+        "commit": "a9ffc9b285c3af8ad631f9cda4851b0ffc30c5ce"
       },
       "inspector": {
         "git": "https://github.com/broth-eu/meteor-inspector.git",
@@ -84,6 +87,21 @@
         "git": "https://github.com/patrickleet/meteor-pickadate.git",
         "branch": "master",
         "commit": "5158805cbe4fa2d116a851964d2cdf1459524156"
+      },
+      "geocoder": {
+        "git": "https://github.com/aldeed/meteor-geocoder.git",
+        "tag": "v0.2.0",
+        "commit": "788b7eb97b3a481ca1d298bc2849fa6b624412f9"
+      },
+      "migrations": {
+        "git": "https://github.com/rantav/meteor-migrations.git",
+        "tag": "v0.0.2",
+        "commit": "4e75c06b8e94961567765c4dea20a007816ad274"
+      },
+      "googlemaps": {
+        "git": "https://github.com/drewjw81/meteor-googlemaps.git",
+        "tag": "v0.0.2",
+        "commit": "da8785c82cfd7de0111f898ef10728e7ed24e361"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",

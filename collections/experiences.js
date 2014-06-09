@@ -70,22 +70,6 @@ Experiences = new Meteor.Collection('experiences', {
       type: String,
       label: 'Venue Name'
     },
-    street: {
-      type: String,
-      max: 100
-    },
-    city: {
-      type: String,
-      max: 50
-    },
-    state: {
-      type: String,
-      regEx: /^A[LKSZRAEP]|C[AOT]|D[EC]|F[LM]|G[AU]|HI|I[ADLN]|K[SY]|LA|M[ADEHINOPST]|N[CDEHJMVY]|O[HKR]|P[ARW]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]$/
-    },
-    zip: {
-      type: String,
-      regEx: /^[0-9]{5}$/
-    },
     phone: {
       type: String,
       label: 'Phone'
@@ -109,16 +93,6 @@ Experiences = new Meteor.Collection('experiences', {
     sortOrder: {
       type: Number,
       label: 'Sort Order'
-    },
-    event: {
-      type: Boolean,
-      label: 'Event',
-      optional: true
-    },
-    eventDates: {
-      type: [EventDate],
-      label: 'Event Dates',
-      optional: true
     }
   })
 });
@@ -165,13 +139,41 @@ Meteor.methods({
 
     var experience = Experiences.findOne(experienceId);
     if (!experience) {
-      throw new Meteor.Error(500, 'Not a valid experience', details);
+      throw new Meteor.Error(500, 'Not a valid experience');
     }
 
     Experiences.upsert(experienceId, {$set: {
       photoUrl: InkBlob.url,
       photoName: InkBlob.filename,
       photoSize: InkBlob.size
-    }}, {validate: false})
+    }}, {validate: false});
+  },
+  geocodeExperienceAddress: function(id, address) {    
+    if (Meteor.isServer) {
+      check(id, String);
+      check(address, String);
+
+      if (!id) {
+        throw new Meteor.Error(500, 'ID not provided');
+      }
+
+      if (!address) {
+        throw new Meteor.Error(500, 'Address not provided');
+      }
+
+      var experience = Experiences.findOne(id);
+      if (!experience) {
+        throw new Meteor.Error(500, 'Not a valid experience');
+      }
+
+      var geocoder = new GeoCoder();
+      console.log(address, address);
+      var geo = geocoder.geocode(address);
+      console.log('geo', geo[0]);
+      
+      return Experiences.update(id, {$set: {
+        geo: geo[0]
+      }}, {validate: false});  
+    }
   }
 });

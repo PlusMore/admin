@@ -27,3 +27,6 @@ impicker
 jquery-idle-timer
 moment
 pickadate
+geocoder
+migrations
+googlemaps

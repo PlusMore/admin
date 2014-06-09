@@ -14,7 +14,10 @@
     "percolatestudio-mixpanel": {},
     "impicker": {},
     "pickadate": {
-        "git": "https://github.com/patrickleet/meteor-pickadate.git"
-    }
+      "git": "https://github.com/patrickleet/meteor-pickadate.git"
+    },
+    "geocoder": {},
+    "migrations": {},
+    "googlemaps": {}
   }
 }

@@ -33,3 +33,6 @@ impicker
 /impicker
 /moment
 /pickadate
+/geocoder
+/migrations
+/googlemaps
