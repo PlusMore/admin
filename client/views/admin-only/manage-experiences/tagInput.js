@@ -5,13 +5,16 @@ Template.tagInput.helpers({
 });
 
 Template.tagInput.rendered = function () {
+  var that = this;
   this.$('.tag-input').selectize({
     create: function(input) {
+      var tag = Experiences.addTag(input, {_id: that.data._id});
       debugger;
       return {
-        value: input,
-        text: input
-      }
-    }
+        text: input,
+        value: input
+      };
+    },
+    options: Meteor.tags.find({collection: 'experiences'}).fetch()
   });
 };

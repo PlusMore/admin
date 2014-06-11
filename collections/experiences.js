@@ -93,11 +93,20 @@ Experiences = new Meteor.Collection('experiences', {
     sortOrder: {
       type: Number,
       label: 'Sort Order'
+    },
+    tags: {
+      type: [String],
+      optional: true
     }
   })
 });
 
 Tags.TagsMixin(Experiences);
+
+Experiences.allowTags(function (userId) {
+    // only allow if user is admin
+    return Roles.userIsInRole(userId, ['admin']);
+});
 
 // Allow/Deny
 
