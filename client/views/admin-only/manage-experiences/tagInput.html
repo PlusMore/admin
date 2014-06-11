@@ -1,3 +1,7 @@
 <template name="tagInput">
-  <input type="text" class='tag-input' />
+  <select class='tag-input' name='tags[]' multiple="multiple">
+    {{#each experienceTags}}
+      <option value="{{this}}" selected="true">{{this}}</option>
+    {{/each}}
+  </select>
 </template>

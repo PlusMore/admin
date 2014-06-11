@@ -1,6 +1,6 @@
 Template.tagInput.helpers({
   experienceTags: function () {
-    Meteor.tags.find({collection: 'experiences'})
+    return this.tags;
   }
 });
 
@@ -43,7 +43,7 @@ Template.tagInput.rendered = function () {
     },
     onItemRemove: function(value) {
       console.log('remove tag: ', value);
-      Experiences.removeTag(value, {_id, that.data._id});
+      Experiences.removeTag(value, {_id: that.data._id});
     }
   });
 };
