@@ -13,12 +13,13 @@ Template.tagInput.rendered = function () {
     create: function(input, cb) {
       console.log('create tag: ', input)
       Experiences.addTag(input, {_id: that.data._id});
-      if (cb) {
-        cb(input);
+      var tag =  Meteor.tags.findOne({collection: 'experiences', name: input});
 
+      if (cb) {
+        cb(tag);
       } 
 
-      return Meteor.tags.findOne({collection: 'experiences', name: input});
+      return tag;
     },
     options: Meteor.tags.find({collection: 'experiences'}).fetch(),
     render: {
