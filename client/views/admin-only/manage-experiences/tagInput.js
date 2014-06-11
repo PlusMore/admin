@@ -40,6 +40,10 @@ Template.tagInput.rendered = function () {
     onItemAdd: function(value, $item) {
       console.log('add tag: ', value);
       Experiences.addTag(value, {_id: that.data._id});
+    },
+    onItemRemove: function(value) {
+      console.log('remove tag: ', value);
+      Experiences.removeTag(value, {_id, that.data._id});
     }
   });
 };
