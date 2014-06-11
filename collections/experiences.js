@@ -97,6 +97,8 @@ Experiences = new Meteor.Collection('experiences', {
   })
 });
 
+Tags.TagsMixin(Experiences);
+
 // Allow/Deny
 
 Experiences.allow({

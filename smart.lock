@@ -20,7 +20,12 @@
       },
       "geocoder": {},
       "migrations": {},
-      "googlemaps": {}
+      "googlemaps": {},
+      "tags": {
+        "git": "https://github.com/apendua/meteor-tags.git",
+        "branch": "simple-ui"
+      },
+      "selectize": {}
     },
     "packages": {
       "iron-router": {
@@ -102,6 +107,16 @@
         "git": "https://github.com/drewjw81/meteor-googlemaps.git",
         "tag": "v0.0.2",
         "commit": "da8785c82cfd7de0111f898ef10728e7ed24e361"
+      },
+      "tags": {
+        "git": "https://github.com/apendua/meteor-tags.git",
+        "branch": "simple-ui",
+        "commit": "e0919b349128ed5bcf00996c4f3d494879bebe9a"
+      },
+      "selectize": {
+        "git": "https://github.com/andrewreedy/meteor-selectize.git",
+        "tag": "v0.0.1",
+        "commit": "2bf47922a6b964ca58ad58cfa0e92c9cf9ea8be3"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",

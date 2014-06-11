@@ -30,3 +30,5 @@ pickadate
 geocoder
 migrations
 googlemaps
+tags
+selectize
