@@ -36,3 +36,5 @@ impicker
 /geocoder
 /migrations
 /googlemaps
+/tags
+/selectize
