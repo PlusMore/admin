@@ -77,14 +77,14 @@ Meteor.startup(function() {
         var profileInfo = {};
         if (user && user.profile) {
           
-          if (profile.name) {
-            profileInfo['$name'] = profile.name;
+          if (user.profile.name) {
+            profileInfo['$name'] = user.profile.name;
           }
-          if (profile.firstName) {
-            profileInfo['$first_name'] = profile.firstName;
+          if (user.profile.firstName) {
+            profileInfo['$first_name'] = user.profile.firstName;
           }
-          if (profile.lastName) {
-            profileInfo['$last_name'] = profile.lastName;
+          if (user.profile.lastName) {
+            profileInfo['$last_name'] = user.profile.lastName;
           }
         } 
         if (typeof profileInfo['$name'] === 'undefined') {
