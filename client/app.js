@@ -55,9 +55,9 @@ Meteor.startup(function() {
         var emailProperties = {};
 
         if (user && user.emails && user.emails.length > 0) {
-          emailProperties.['$email'] = user.emails[0].address;
+          emailProperties['$email'] = user.emails[0].address;
         } else {
-          emailProperties.['$email']  = 'anonymous';            
+          emailProperties['$email']  = 'anonymous';            
         }
         _.extend(properties, emailProperties);
         
@@ -98,9 +98,7 @@ Meteor.startup(function() {
 
         mixpanel.track(key, properties);
         console.log('Tracked metric: ', key, properties);
-      });
-          
-
+      }
     }
   });
 
