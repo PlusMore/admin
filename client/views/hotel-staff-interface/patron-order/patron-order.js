@@ -24,8 +24,8 @@ Template.patronOrder.helpers({
   requestedDateTimeAgo: function() {
     return moment(this.requestedAt).fromNow();
   },
-  when: function() {
-    return moment(this.reservation.dateDatetime).calendar();
+  confirmationDateTimeAgo: function() {
+    return moment(this.confirmationDate).fromNow();
   }
 });
 
