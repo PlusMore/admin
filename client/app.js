@@ -60,7 +60,6 @@ Meteor.startup(function() {
           emailProperties['$email']  = 'anonymous';            
         }
         _.extend(properties, emailProperties);
-        
 
         if (user && user.deviceId) {
           var deviceId = user.deviceId,
@@ -87,9 +86,11 @@ Meteor.startup(function() {
             profileInfo['$last_name'] = user.profile.lastName;
           }
         } 
+
         if (typeof profileInfo['$name'] === 'undefined') {
           profileInfo['$name'] = device.location
         }
+
         _.extend(properties, profileInfo)
 
         _.extend(properties, {
@@ -98,9 +99,10 @@ Meteor.startup(function() {
 
         mixpanel.track(key, properties);
         console.log('Tracked metric: ', key, properties);
-      }
+      });
     }
   });
+  
 
   App.helpers = {
   };
