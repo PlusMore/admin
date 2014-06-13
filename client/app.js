@@ -52,13 +52,15 @@ Meteor.startup(function() {
 
       Deps.nonreactive(function() {
         var user = Meteor.user();
-        var email;
+        var emailProperties = {};
 
         if (user && user.emails && user.emails.length > 0) {
-          email = user.emails[0].address;
+          emailProperties.['$email'] = user.emails[0].address;
         } else {
-          email = 'anonymous';            
+          emailProperties.['$email']  = 'anonymous';            
         }
+        _.extend(properties, emailProperties);
+        
 
         if (user && user.deviceId) {
           var deviceId = user.deviceId,
@@ -72,8 +74,25 @@ Meteor.startup(function() {
           });
         }
 
+        var profileInfo = {};
+        if (user && user.profile) {
+          
+          if (profile.name) {
+            profileInfo['$name'] = profile.name;
+          }
+          if (profile.firstName) {
+            profileInfo['$first_name'] = profile.firstName;
+          }
+          if (profile.lastName) {
+            profileInfo['$last_name'] = profile.lastName;
+          }
+        } 
+        if (typeof profileInfo['$name'] === 'undefined') {
+          profileInfo['$name'] = device.location
+        }
+        _.extend(properties, profileInfo)
+
         _.extend(properties, {
-          "Email": email,
           "Path": IronLocation.path()
         });
 
