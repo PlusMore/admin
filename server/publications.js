@@ -42,6 +42,12 @@ Meteor.publish('myExperiences', function(category) {
   return Experiences.find({owner: this.userId, category: category});
 });
 
+// Tags
+
+Meteor.publish('tags', function(collectionName) {
+  return Meteor.tags.find({collection: collectionName})
+});
+
 // Categories
 Meteor.publish('categories', function() {
   return Categories.find();

@@ -49,6 +49,14 @@ Template.editExperience.events({
     filepicker.pick(function(InkBlob) {
       Meteor.call('changeExperiencePhoto', InkBlob, experienceId);
     });
+  },
+  'change [name=address]': function(e, experienceTemplate) {
+    var experienceId = experienceTemplate.data._id;
+    var address = $(experienceTemplate.find('[name=address]')).val()
+    if (address) {
+      console.log('geocoding ' + address);
+      Meteor.call('geocodeExperienceAddress', experienceId, address);
+    }
   }
 });
 

@@ -39,7 +39,7 @@
         <p>Cancelled {{cancelledDateMomentAgo}}</p>
       {{else}}
         <div class="reservation-details">
-          <p>{{when}}</p>
+          <p>{{reservation.when}}</p>
           <p>{{reservation.partyName}} - Party of {{reservation.partySize}}</p>
         </div>
         <div class="venue">
@@ -54,7 +54,7 @@
           <a class="btn btn-default confirm-reservation">Confirm Reservation</a>
           <p>Requested {{requestedDateTimeAgo}}</p>
         {{else}}
-          <p>Confirmed on {{confirmationDate}}</p>
+          <p>Confirmed {{confirmationDateTimeAgo}}</p>
         {{/if}}
         <hr class="soften" />
         <a class="btn btn-danger cancel-reservation">Cancel Reservation</a>

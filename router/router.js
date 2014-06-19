@@ -165,6 +165,7 @@ Router.map(function() {
     waitOn: function() {
       return [
         Meteor.subscribe('myExperiences', this.params.category),
+        Meteor.subscribe('tags', 'experiences'),
         Meteor.subscribe('categories')
       ]
     }
