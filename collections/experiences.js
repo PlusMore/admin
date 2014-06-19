@@ -97,6 +97,11 @@ Experiences = new Meteor.Collection('experiences', {
     tags: {
       type: [String],
       optional: true
+    },
+    yelpId: {
+      type: String,
+      label: "Yelp ID"
+      optional: true
     }
   })
 });

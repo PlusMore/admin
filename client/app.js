@@ -61,18 +61,6 @@ Meteor.startup(function() {
         }
         _.extend(properties, emailProperties);
 
-        if (user && user.deviceId) {
-          var deviceId = user.deviceId,
-              device = Devices.findOne(deviceId),
-              hotel = Hotels.findOne(device.hotelId);
-
-          _.extend(properties, {
-            "Device Id": user.deviceId,
-            "Device Location": device.location,
-            "Hotel Name": hotel.name
-          });
-        }
-
         var profileInfo = {};
         if (user && user.profile) {
           
@@ -87,11 +75,22 @@ Meteor.startup(function() {
           }
         } 
 
-        if (typeof profileInfo['$name'] === 'undefined') {
-          profileInfo['$name'] = device.location
-        }
+        if (user && user.deviceId) {
+          var deviceId = user.deviceId,
+              device = Devices.findOne(deviceId),
+              hotel = Hotels.findOne(device.hotelId);
 
-        _.extend(properties, profileInfo)
+          _.extend(properties, {
+            "Device Id": user.deviceId,
+            "Device Location": device.location,
+            "Hotel Name": hotel.name
+          });
+
+          if (typeof profileInfo['$name'] === 'undefined') {
+            profileInfo['$name'] = device.location
+          }
+        }
+        _.extend(properties, profileInfo);
 
         _.extend(properties, {
           "Path": IronLocation.path()
