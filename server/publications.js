@@ -81,6 +81,10 @@ Meteor.publish('hotelUsers', function(options) {
   return Meteor.users.find({hotelId: hotelId}, {fields:{emails:1, roles:1, hotelId:1, profile:1}});
 });
 
+Meteor.publish('yelpconfig', function() {
+  return Accounts.loginServiceConfiguration.find({service: 'yelp'});
+});
+
 // Orders
 Meteor.publish("openPatronOrders", function() {
   var userId = this.userId,
