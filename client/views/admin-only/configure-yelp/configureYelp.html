@@ -1,0 +1,10 @@
+<template name='configureYelp'> 
+  <div class="container">
+    <div class="section">
+      <h1>Yelp API Access Configuration</h1>
+      <p class="lead">Do not change if you don't know what you are doing.</p>
+      <p>{{currentConfig}}</p>
+      {{> quickForm schema=configureYelp doc=this id='configureYelp' type='method' meteormethod='configureYelp' buttonClasses="btn btn-primary" buttonContent="Configure Yelp"}}  
+    </div>  
+  </div>
+</template>

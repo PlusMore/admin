@@ -100,7 +100,7 @@ Experiences = new Meteor.Collection('experiences', {
     },
     yelpId: {
       type: String,
-      label: "Yelp ID"
+      label: "Yelp ID",
       optional: true
     }
   })

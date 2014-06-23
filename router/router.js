@@ -230,6 +230,22 @@ Router.map(function() {
     }
   });
 
+  // yelp config
+  this.route('configureYelp', {
+    path: 'configure-yelp',
+    onBeforeAction: function(pause) {
+      filters.isLoggedIn(pause, this, filters.isAdmin());
+    },
+    waitOn: function() {
+      return [
+        Meteor.subscribe('yelpconfig')
+      ]
+    },
+    data: function() {
+      return Accounts.loginServiceConfiguration.findOne({service: 'yelp'});
+    }
+  });
+
   // Pages
 
   this.route('homepage', {
