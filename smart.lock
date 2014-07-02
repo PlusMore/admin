@@ -25,7 +25,8 @@
         "git": "https://github.com/apendua/meteor-tags.git",
         "branch": "simple-ui"
       },
-      "selectize": {}
+      "selectize": {},
+      "bootstrap-errors": {}
     },
     "packages": {
       "iron-router": {
@@ -35,8 +36,8 @@
       },
       "bootstrap-3": {
         "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
-        "tag": "v3.1.1-1",
-        "commit": "63dd38968828bb8963636df93e9a1c45e2dfe67e"
+        "tag": "v3.2.0-1",
+        "commit": "17a63902fc6cf1096c5289d963c66cf28b474727"
       },
       "roles": {
         "git": "https://github.com/alanning/meteor-roles.git",
@@ -45,8 +46,8 @@
       },
       "autoform": {
         "git": "https://github.com/aldeed/meteor-autoform.git",
-        "tag": "v0.13.3",
-        "commit": "23a7ba0754f353513fda44f666b600e69c62a208"
+        "tag": "v0.13.5",
+        "commit": "27dd5b912eeba687b228a6a7c2c14eef63b12cca"
       },
       "fastclick": {
         "git": "https://github.com/percolatestudio/meteor-fastclick",
@@ -117,6 +118,11 @@
         "git": "https://github.com/andrewreedy/meteor-selectize.git",
         "tag": "v0.0.1",
         "commit": "2bf47922a6b964ca58ad58cfa0e92c9cf9ea8be3"
+      },
+      "bootstrap-errors": {
+        "git": "https://github.com/lezed1/meteor-bootstrap-errors.git",
+        "tag": "v0.3.1",
+        "commit": "f85d792683a423bfb6747460d4516b7404871260"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
