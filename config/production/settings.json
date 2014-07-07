@@ -1,0 +1,17 @@
+{
+  "public": {
+    "mixpanel": "aea97f2a24f15d245f6ab2e09043e8fe",
+    "filepicker": "A2yOQB3VHRfe2n6QnJ5vZz"
+  },
+  "apps": {
+    "admin": {
+      "url": "http://admin.plusmoretablets.com"
+    },
+    "device": {
+      "url": "http://device.plusmoretablets.com"
+    },
+    "hotel": {
+      "url": "http://hotel.plusmoretablets.com"
+    }
+  }
+}
