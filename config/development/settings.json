@@ -1,6 +1,7 @@
 {
   "public": {
-    "mixpanel": "aea97f2a24f15d245f6ab2e09043e8fe"
+    "mixpanel": "aea97f2a24f15d245f6ab2e09043e8fe",
+    "filepicker": "A2yOQB3VHRfe2n6QnJ5vZz"
   },
   "apps": {
     "admin": {
