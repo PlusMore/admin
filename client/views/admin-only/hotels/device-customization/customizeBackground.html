@@ -1,0 +1,16 @@
+<template name="customizeBackground">
+  <div class="section">
+    <header>
+      <h3>Choose a Background Image</h3>
+    </header>
+
+   
+      <legend>Photo</legend>
+      <img class="img-responsive" src="{{photoSrc}}" />
+      <em>{{photoName}} {{#if photoSize}}({{photoSizeFriendly}}){{/if}}</em>
+      <div >
+        <button class="btn btn-default btn-change-photo">Change Photo</button>
+      </div>
+   
+  </div>
+</template>

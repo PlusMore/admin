@@ -52,3 +52,27 @@ Hotels.allow({
     return Roles.userIsInRole(userId, ['admin']);
   }
 });
+
+Meteor.methods({
+  changeHotelPhoto: function(InkBlob, hotelId) {
+    check(InkBlob, Object);
+    var user = Meteor.user();
+    
+    if (user && Roles.userIsInRole(user, ['admin'])) {
+      if (hotelId) {
+        var hotel = Hotels.findOne();
+        if (!hotel) {
+          Errors.throw('No hotel found for user');
+        }
+
+        Hotels.upsert(hotelId, {$set: {
+          photoUrl: InkBlob.url,
+          photoName: InkBlob.filename,
+          photoSize: InkBlob.size
+        }}, {validate: false});  
+      }
+    } else {
+      Errors.throw('You do not have proper access to this functionality.')
+    }
+  }
+});

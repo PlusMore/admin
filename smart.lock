@@ -25,7 +25,8 @@
         "git": "https://github.com/apendua/meteor-tags.git",
         "branch": "simple-ui"
       },
-      "selectize": {}
+      "selectize": {},
+      "bootstrap-errors": {}
     },
     "packages": {
       "iron-router": {
@@ -35,18 +36,18 @@
       },
       "bootstrap-3": {
         "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
-        "tag": "v3.1.1-1",
-        "commit": "63dd38968828bb8963636df93e9a1c45e2dfe67e"
+        "tag": "v3.2.0-1",
+        "commit": "17a63902fc6cf1096c5289d963c66cf28b474727"
       },
       "roles": {
         "git": "https://github.com/alanning/meteor-roles.git",
-        "tag": "v1.2.9",
-        "commit": "969b17fac5dfec66b6b12bfce4e37471d1a241d4"
+        "tag": "v1.2.10",
+        "commit": "7ccb35de0a6cb0c9a0c3666badd04757e39c09a6"
       },
       "autoform": {
         "git": "https://github.com/aldeed/meteor-autoform.git",
-        "tag": "v0.11.0",
-        "commit": "efdffcdf836a45c50c39696ede15399177ccb9fa"
+        "tag": "v0.13.5",
+        "commit": "27dd5b912eeba687b228a6a7c2c14eef63b12cca"
       },
       "fastclick": {
         "git": "https://github.com/percolatestudio/meteor-fastclick",
@@ -55,8 +56,8 @@
       },
       "collection2": {
         "git": "https://github.com/aldeed/meteor-collection2.git",
-        "tag": "v0.4.1",
-        "commit": "a9ffc9b285c3af8ad631f9cda4851b0ffc30c5ce"
+        "tag": "v0.4.2",
+        "commit": "4ff4b707bec8be434919730bf101325adb215444"
       },
       "inspector": {
         "git": "https://github.com/broth-eu/meteor-inspector.git",
@@ -65,8 +66,8 @@
       },
       "nprogress": {
         "git": "https://github.com/zhouzhuojie/meteor-nprogress.git",
-        "tag": "v0.0.4",
-        "commit": "8333206b751a24fac1fbd1b03fa37621bcefe50c"
+        "tag": "v0.0.5",
+        "commit": "bb88a057166e0f1386ab8bc0a1e080b48aa59159"
       },
       "font-awesome": {
         "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
@@ -117,6 +118,11 @@
         "git": "https://github.com/andrewreedy/meteor-selectize.git",
         "tag": "v0.0.1",
         "commit": "2bf47922a6b964ca58ad58cfa0e92c9cf9ea8be3"
+      },
+      "bootstrap-errors": {
+        "git": "https://github.com/lezed1/meteor-bootstrap-errors.git",
+        "tag": "v0.3.1",
+        "commit": "f85d792683a423bfb6747460d4516b7404871260"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",

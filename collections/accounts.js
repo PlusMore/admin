@@ -6,6 +6,10 @@ Schema.addHotelStaff = new SimpleSchema({
   },
   hotelId: {
     type: String
+  },
+  isManager: {
+    type: Boolean,
+    label: "Manager"
   }
 });
 
@@ -14,7 +18,11 @@ Meteor.methods({
     check(user, Schema.addHotelStaff);
 
     if (!this.isSimulation) {
-      var roles = ['hotel-staff', 'device-manager']
+      var roles = ['hotel-staff']
+
+      if (user.isManager) {
+        roles.push('hotel-manager');
+      }
       var userId = Accounts.createUser({
         email: user.email,
         roles: roles,

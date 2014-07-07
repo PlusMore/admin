@@ -2,15 +2,31 @@
   <h3>Hotel Staff</h3>
   {{> addHotelStaff}}
 
-  <ul>
+  <div>
+    <legend>Users</legend>
     {{#each hotelStaff}}
       {{> hotelStaffItem}}
     {{/each}}
-  </ul>
+  </div>
+  
 </template>
 
 <template name="hotelStaffItem">
-  <li>{{emailAddress}}</li>
+  <div class='section'>
+    <div>
+      <label for="email">Email:&nbsp;</label><span>{{emailAddress}} </span>
+    </div>
+    
+    <div>
+      <label for="roles">Roles:</label>
+      <ul class="roles">
+        {{#each roles}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul>  
+    </div>
+    
+  </div>
 </template>
 
 <template name="addHotelStaff">
@@ -18,17 +34,12 @@
   {{#autoForm schema=addHotelStaffSchema id="addHotelStaffForm" type="method" meteormethod="addHotelStaff"}}
     <fieldset>
       {{> afFieldInput name='hotelId' type="hidden" value=hotelId }}
-      <div class="form-group {{#if afFieldIsInvalid name='email'}}has-error{{/if}}">
-            {{> afFieldLabel name="email"}}
-            {{> afFieldInput name="email"}}
-            {{#if afFieldIsInvalid name="email"}}
-            <span class="help-block">{{afFieldMessage name="email"}}</span>
-            {{/if}}
-        </div>
-        <div>
-          <button type="submit" data-meteor-method="addHotelStaff" class="btn btn-primary">Add Hotel Staff</button>
-          <button type="reset" class="btn btn-default">Reset</button>
-        </div>
+      {{> afQuickField name='email'}}
+      {{> afQuickField name='isManager'}}
+      <div>
+        <button type="reset" class="btn btn-default">Reset</button>
+        <button type="submit" data-meteor-method="addHotelStaff" class="btn btn-primary">Add Hotel Staff</button>
+      </div>
     </fieldset>
   {{/autoForm}}
 </template>
