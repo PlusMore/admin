@@ -75,6 +75,7 @@ Meteor.methods({
 
       Email.send({
         to: reservation.emailAddress,
+        bcc: 'order-service@plusmoretablets.com',
         from: 'order-service@plusmoretablets.com',
         subject: 'Confirmed - Reservation for {0}'.format(experience.title),
         text: "Your reservation for {0} has been confirmed.\n\n".format(experience.title)
@@ -107,6 +108,7 @@ Meteor.methods({
 
       Email.send({
         to: reservation.emailAddress,
+        bcc: 'order-service@plusmoretablets.com',
         from: 'order-service@plusmoretablets.com',
         subject: 'Cancelled - Reservation for {0}'.format(experience.title),
         text: "Your reservation for {0} has been cancelled.\n\n".format(experience.title)
