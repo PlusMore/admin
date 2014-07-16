@@ -80,7 +80,7 @@ Meteor.methods({
         text: "Your reservation for {0} has been confirmed.\n\n".format(experience.title)
             + "Reservation Details:\n"
             + "For: {0}\n".format(experience.title)
-            + "When: {0}\n".format(moment(reservation.date).calendar())
+            + "When: {0}\n".format(reservation.when)
             + "Party Name: {0}\n".format(reservation.partyName)
             + "Party Size: {0}\n".format(reservation.partySize)
             + "\nVenue Info"
@@ -112,7 +112,7 @@ Meteor.methods({
         text: "Your reservation for {0} has been cancelled.\n\n".format(experience.title)
             + "Reservation Details:\n"
             + "For: {0}\n".format(experience.title)
-            + "When: {0}\n".format(moment(reservation.date).calendar())       
+            + "When: {0}\n".format(reservation.when)       
             + "Party Name: {0}\n".format(reservation.partyName)
             + "Party Size: {0}\n".format(reservation.partySize)
             + "\nVenue Info"

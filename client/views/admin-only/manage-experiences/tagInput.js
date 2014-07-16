@@ -1,9 +1,3 @@
-Template.tagInput.helpers({
-  experienceTags: function () {
-    return this.tags;
-  }
-});
-
 Template.tagInput.rendered = function () {
   var that = this;
   this.$('.tag-input').selectize({
