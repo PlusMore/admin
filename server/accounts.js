@@ -14,6 +14,14 @@ Accounts.emailTemplates.enrollAccount.text = function (user, url) {
     + url;
 };
 
+Accounts.emailTemplates.verifyEmail.text = function (user, url) {
+  var spliturl = url.split('/#');
+  url = Meteor.settings.apps.admin.url + '/#' + spliturl[1];
+  
+  return "To verify your account email, simply click the link below.:\n\n"
+    + url;
+};
+
 Accounts.onCreateUser(function(options, user) {
   user.roles = ['admin'];
   // We still want the default hook's 'profile' behavior.
