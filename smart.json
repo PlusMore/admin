@@ -8,9 +8,7 @@
     "fastclick": {},
     "collection2": {},
     "inspector": {},
-    "nprogress": {},
     "font-awesome": {},
-    "accounts-entry": {},
     "percolatestudio-mixpanel": {},
     "impicker": {},
     "pickadate": {
@@ -24,6 +22,11 @@
       "branch": "simple-ui"
     },
     "selectize": {},
-    "bootstrap-errors": {}
+    "bootstrap-errors": {},
+    "accounts-ui-bootstrap-3": {},
+    "iron-transitioner": {
+      "git": "https://github.com/percolatestudio/iron-transitioner.git",
+      "branch": "blaze"
+    }
   }
 }

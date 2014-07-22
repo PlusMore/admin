@@ -9,9 +9,7 @@
       "fastclick": {},
       "collection2": {},
       "inspector": {},
-      "nprogress": {},
       "font-awesome": {},
-      "accounts-entry": {},
       "percolatestudio-mixpanel": {},
       "impicker": {},
       "pickadate": {
@@ -26,7 +24,12 @@
         "branch": "simple-ui"
       },
       "selectize": {},
-      "bootstrap-errors": {}
+      "bootstrap-errors": {},
+      "accounts-ui-bootstrap-3": {},
+      "iron-transitioner": {
+        "git": "https://github.com/percolatestudio/iron-transitioner.git",
+        "branch": "blaze"
+      }
     },
     "packages": {
       "iron-router": {
@@ -46,8 +49,8 @@
       },
       "autoform": {
         "git": "https://github.com/aldeed/meteor-autoform.git",
-        "tag": "v0.13.5",
-        "commit": "27dd5b912eeba687b228a6a7c2c14eef63b12cca"
+        "tag": "v0.15.1",
+        "commit": "723aed684ef9d16e94424cde6389b8e4a03d546e"
       },
       "fastclick": {
         "git": "https://github.com/percolatestudio/meteor-fastclick",
@@ -64,20 +67,10 @@
         "tag": "v0.2.2",
         "commit": "d3e5e4a760133f8d97b6457befc6e8ea1b42a010"
       },
-      "nprogress": {
-        "git": "https://github.com/zhouzhuojie/meteor-nprogress.git",
-        "tag": "v0.0.5",
-        "commit": "bb88a057166e0f1386ab8bc0a1e080b48aa59159"
-      },
       "font-awesome": {
         "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
         "tag": "v4.1.0",
         "commit": "ce6b1e92715d1938babc5d69c655c17e387f5926"
-      },
-      "accounts-entry": {
-        "git": "https://github.com/Differential/accounts-entry.git",
-        "tag": "v0.7.3",
-        "commit": "7facaa045d3720eeeba3420c28e48d5709188fe3"
       },
       "percolatestudio-mixpanel": {
         "git": "https://github.com/percolatestudio/meteor-mixpanel.git",
@@ -124,6 +117,16 @@
         "tag": "v0.3.1",
         "commit": "f85d792683a423bfb6747460d4516b7404871260"
       },
+      "accounts-ui-bootstrap-3": {
+        "git": "https://github.com/mangasocial/meteor-accounts-ui-bootstrap-3.git",
+        "tag": "v0.3.3",
+        "commit": "2e50b605d8d5ed68e48c4529a65f13552d8af3f9"
+      },
+      "iron-transitioner": {
+        "git": "https://github.com/percolatestudio/iron-transitioner.git",
+        "branch": "blaze",
+        "commit": "5ec6137bef1ed42606465c939aed937669c984e7"
+      },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
         "tag": "v0.2.4",
@@ -131,18 +134,13 @@
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.5.1",
-        "commit": "a29956b34d03a4591dbd0eaed9d37009ef48b8db"
+        "tag": "v0.6.0",
+        "commit": "418ec496612fb2afc853e342f0d2269b6674a2fe"
       },
       "moment": {
         "git": "https://github.com/acreeger/meteor-moment.git",
         "tag": "v2.6.0",
         "commit": "26156df681750fd6e6ed77043eef32b6653ebbdf"
-      },
-      "accounts-t9n": {
-        "git": "https://github.com/softwarerero/meteor-accounts-t9n.git",
-        "tag": "v0.0.5",
-        "commit": "ad9539a8818049d5d9fa050d8b2a1f62706483b1"
       }
     }
   }

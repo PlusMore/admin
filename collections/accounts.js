@@ -1,7 +1,6 @@
 Schema.addHotelStaff = new SimpleSchema({
   email: {
     type: String,
-    regEx: SchemaRegEx.Email,
     label: "E-mail address"
   },
   hotelId: {

@@ -17,9 +17,6 @@ fastclick
 underscore
 jquery
 inspector
-accounts-ui
-accounts-entry
-nprogress
 font-awesome
 percolatestudio-mixpanel
 plus-more-fonts
@@ -33,3 +30,5 @@ googlemaps
 tags
 selectize
 bootstrap-errors
+accounts-ui-bootstrap-3
+iron-transitioner

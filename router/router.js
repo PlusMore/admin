@@ -17,29 +17,6 @@ Router.configure({
 // Filters
 
 var filters = {
-  baseSubscriptions: function() {
-    this.subscribe('userHotelData').wait();
-  },
-  isLoggedIn: function(pause, router, extraCondition) {
-    if (! Meteor.user()) {
-      if (Meteor.loggingIn()) {
-        router.render(this.loadingTemplate);
-      }
-      else {
-        Session.set('fromWhere', router.path)
-        // this.render('entrySignIn');
-        var path = Router.routes['entrySignIn'].path();
-        Router.go(path);
-      }
-      pause()
-    }
-  },
-  isLoggedOut: function(pause) {
-    if (Meteor.user()) {
-      pause();
-      Router.go('dashboard');
-    }
-  },
   isAdmin: function() {
     return Roles.userIsInRole(Meteor.userId(), ['admin']);
   },
@@ -48,44 +25,23 @@ var filters = {
   }
 };
 
-var helpers = {
-  showLoadingBar: function(pause) {
-    if (this.ready()) {
-      NProgress.done();
-    } else {
-      NProgress.start();
-    }
-  }
-};
 Router.onBeforeAction('loading');
-Router.onBeforeAction(filters.baseSubscriptions);
-
-// Ensure user has a device account, otherwise,
-// redirect to device list?
-// TODO: Need to think about this.. Can we get patron's
-// information somehow? Maybe can change from auto login
-// to a form.
-Router.onBeforeAction(filters.ensureDeviceAccount, {only: [
-  'welcome',
-  'experiences',
-  'experience',
-  'orders'
-]});
-
-// Show loading bar for any route that loads a subscription
-Router.onBeforeAction(helpers.showLoadingBar, {only: [
-  'manageExperiences'
-]});
 
 // Routes
 
 Router.map(function() {
 
+  this.route('verifyEmail', {
+    path: '/verify-email/:token',
+    action: function() {
+      Accounts.verifyEmail(this.params.token, function () {
+        Accounts._loginButtonsSession.set('justVerifiedEmail', true);
+      });
+    }
+  });
+
   this.route('devices', {
     path: '/devices',
-    onBeforeAction: function(pause) {
-      filters.isLoggedIn(pause, this, filters.isHotelStaff());
-    },
     waitOn: function() {
       return [
         Meteor.subscribe('devices')
@@ -112,9 +68,6 @@ Router.map(function() {
 
   this.route('openPatronOrders', {
     path: 'open-patron-orders',
-    onBeforeAction: function(pause) {
-      filters.isLoggedIn(pause, this, filters.isHotelStaff());
-    },
     waitOn: function () {
       return [
         Meteor.subscribe('openPatronOrders')
@@ -124,9 +77,6 @@ Router.map(function() {
 
   this.route('patronOrderPage', {
     path: 'patron-order/:_id',
-    onBeforeAction: function(pause) {
-      filters.isLoggedIn(pause, this, filters.isHotelStaff());
-    },
     waitOn: function() {
       return [
         Meteor.subscribe('patronOrder', this.params._id)
@@ -146,9 +96,6 @@ Router.map(function() {
 
   this.route('manageExperiencesCategories', {
     path: '/manage-experiences',
-    onBeforeAction: function(pause) {
-      filters.isLoggedIn(pause, this, filters.isAdmin());
-    },
     waitOn: function() {
       return [
         Meteor.subscribe('categories')
@@ -158,10 +105,6 @@ Router.map(function() {
 
   this.route('manageExperiences', {
     path: '/manage-experiences/:category',
-    onBeforeAction: function(pause) {
-      filters.isLoggedIn(pause, this, filters.isAdmin());
-      Session.set('manageExperiencesCategory', this.params.category);
-    },
     waitOn: function() {
       return [
         Meteor.subscribe('myExperiences', this.params.category),
@@ -176,9 +119,6 @@ Router.map(function() {
       return [
         Meteor.subscribe('categories')
       ]
-    },
-    onBeforeAction: function(pause) {
-      filters.isLoggedIn(pause, this, filters.isAdmin());
     },
     data: function () {
       return {
@@ -199,9 +139,6 @@ Router.map(function() {
         Meteor.subscribe('hotels')
       ]
     },
-    onBeforeAction: function(pause) {
-      filters.isLoggedIn(pause, this, filters.isAdmin());
-    },
     data: function () {
       return {
         hotels: function() {
@@ -213,9 +150,6 @@ Router.map(function() {
 
   this.route('hotel', {
     path: '/hotel/:_id',
-    onBeforeAction: function(pause) {
-      filters.isLoggedIn(pause, this, filters.isAdmin());
-    },
     waitOn: function() {
       return [
         Meteor.subscribe('hotel', this.params._id),
@@ -233,9 +167,6 @@ Router.map(function() {
   // yelp config
   this.route('configureYelp', {
     path: 'configure-yelp',
-    onBeforeAction: function(pause) {
-      filters.isLoggedIn(pause, this, filters.isAdmin());
-    },
     waitOn: function() {
       return [
         Meteor.subscribe('yelpconfig')
@@ -255,10 +186,7 @@ Router.map(function() {
   // Dashboard
 
   this.route('dashboard', {
-    path: '/dashboard',
-    onBeforeAction: function(pause) {
-      filters.isLoggedIn(pause, this);
-    }
+    path: '/dashboard'
   });
 
 });
