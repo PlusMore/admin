@@ -31,15 +31,6 @@ Router.onBeforeAction('loading');
 
 Router.map(function() {
 
-  this.route('verifyEmail', {
-    path: '/verify-email/:token',
-    action: function() {
-      Accounts.verifyEmail(this.params.token, function () {
-        Accounts._loginButtonsSession.set('justVerifiedEmail', true);
-      });
-    }
-  });
-
   this.route('devices', {
     path: '/devices',
     waitOn: function() {
@@ -107,10 +98,15 @@ Router.map(function() {
     path: '/manage-experiences/:category',
     waitOn: function() {
       return [
-        Meteor.subscribe('myExperiences', this.params.category),
+        Meteor.subscribe('experiences', this.params.category),
         Meteor.subscribe('tags', 'experiences'),
         Meteor.subscribe('categories')
       ]
+    },
+    data: function () {
+      return {
+        experiences: Experiences.find({category: this.params.category},{sort: {category: 1, sortOrder: 1}})
+      }
     }
   });
 

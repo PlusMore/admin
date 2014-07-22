@@ -24,9 +24,3 @@ Template.manageExperiences.helpers({
     return Session.get('manageExperiencesCategory');
   }
 });
-
-Template.myExperiences.helpers({
-  experiences: function() {
-    return Experiences.find({owner: Meteor.userId(), category: Session.get('manageExperiencesCategory')}, {sort: {category: 1, sortOrder: 1}});
-  }
-});
