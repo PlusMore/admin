@@ -189,10 +189,10 @@ Router.map(function() {
   this.route('userAdmin', {
     path: '/user-admin',
     template: 'adminusers',
-    before: function() {
-      if (!Roles.userIsInRole(Meteor.user(), ['admin','user-admin'])) {
-        this.redirect("/");
-      }
+    onBeforeAction: function() {
+      // if (!Roles.userIsInRole(Meteor.user(), ['admin','user-admin'])) {
+      //   this.redirect("/");
+      // }
     }
   });
 
