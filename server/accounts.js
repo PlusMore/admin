@@ -44,3 +44,13 @@ Accounts.validateLoginAttempt(function(attempt) {
     }
   }
 });
+
+Meteor.startup(function () {
+  createUserAdminRoles();
+  try {
+    Roles.createRole('hotel-manager');
+    Roles.createRole('hotel-staff');
+  } catch (error) {
+
+  }
+});
