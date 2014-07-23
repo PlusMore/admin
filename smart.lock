@@ -29,7 +29,8 @@
       "iron-transitioner": {
         "git": "https://github.com/percolatestudio/iron-transitioner.git",
         "branch": "blaze"
-      }
+      },
+      "accounts-admin-ui": {}
     },
     "packages": {
       "iron-router": {
@@ -49,8 +50,8 @@
       },
       "autoform": {
         "git": "https://github.com/aldeed/meteor-autoform.git",
-        "tag": "v0.15.1",
-        "commit": "723aed684ef9d16e94424cde6389b8e4a03d546e"
+        "tag": "v0.15.2",
+        "commit": "112f2bc5e4961929cffcc671d5435cdc12974311"
       },
       "fastclick": {
         "git": "https://github.com/percolatestudio/meteor-fastclick",
@@ -127,6 +128,11 @@
         "branch": "blaze",
         "commit": "5ec6137bef1ed42606465c939aed937669c984e7"
       },
+      "accounts-admin-ui": {
+        "git": "https://github.com/kenyee/meteor-accounts-admin-ui.git",
+        "tag": "v1.0.6",
+        "commit": "54391c3adc6d76731a7e203f14500a9d46ce7d91"
+      },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
         "tag": "v0.2.4",
@@ -141,6 +147,16 @@
         "git": "https://github.com/acreeger/meteor-moment.git",
         "tag": "v2.6.0",
         "commit": "26156df681750fd6e6ed77043eef32b6653ebbdf"
+      },
+      "jquery-ui": {
+        "git": "https://github.com/TimHeckel/meteor-jquery-ui.git",
+        "tag": "v1.9.2",
+        "commit": "c437d45edcf1367df8d5ffa8bad2867758030bd2"
+      },
+      "jqbootstrapvalidation": {
+        "git": "https://github.com/nate-strauser/meteor-jqbootstrapvalidation.git",
+        "tag": "v0.1.0",
+        "commit": "2af4625d41a9b24311544a53790f14fa38c27b10"
       }
     }
   }
