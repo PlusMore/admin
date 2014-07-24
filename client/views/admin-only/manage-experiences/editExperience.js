@@ -14,7 +14,7 @@ var setCallToActionOptions = function(callToAction, experienceTemplate) {
 Template.editExperience.rendered = function () {
   setCallToActionOptions(this.data.callToAction, this);
 
-  $(this.$('.timepicker')).pickatime({
+  this.$('.timepicker').pickatime({
     onSet: function(selection) {
       var minutes = selection.select;
       var controlName = this.$node.attr('name');
