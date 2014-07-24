@@ -18,9 +18,3 @@ Template.uploadExperiencePhoto.events({
     return result;
   }
 });
-
-Template.manageExperiences.helpers({
-  categoryName: function () {
-    return Session.get('manageExperiencesCategory');
-  }
-});

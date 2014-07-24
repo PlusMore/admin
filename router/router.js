@@ -105,7 +105,8 @@ Router.map(function() {
     },
     data: function () {
       return {
-        experiences: Experiences.find({category: this.params.category},{sort: {category: 1, sortOrder: 1}})
+        experiences: Experiences.find({category: this.params.category},{sort: {category: 1, sortOrder: 1}}),
+        categoryName: this.params.category
       }
     }
   });
