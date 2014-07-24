@@ -27,6 +27,10 @@
     "iron-transitioner": {
       "git": "https://github.com/percolatestudio/iron-transitioner.git",
       "branch": "blaze"
+    },
+    "plus-more-icons": {
+      "git": "https://github.com/PlusMore/plus-more-icons.git",
+      "tag": "v1.1"
     }
   }
 }
