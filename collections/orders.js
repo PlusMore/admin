@@ -40,13 +40,13 @@ Orders = new Meteor.Collection('orders', {
 
 Orders.allow({
   insert: function(userId, doc){
-    return false;
+    return Roles.userIsInRole(userId, ['admin']);
   },
   update:  function(userId, doc, fieldNames, modifier){
-    return false;
+    return Roles.userIsInRole(userId, ['admin']);
   },
   remove:  function(userId, doc){
-    return false;
+    return Roles.userIsInRole(userId, ['admin']);
   }
 });
 
