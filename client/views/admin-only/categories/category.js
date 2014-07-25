@@ -4,6 +4,10 @@ Template.category.helpers({
   }
 });
 
+Template.category.rendered = function () {
+  this.$('input[name=name]').prop('readonly', true);
+};
+
 Handlebars.registerHelper("categoryIconOptions", function() {
   var actions = [
       'icon-attractions'

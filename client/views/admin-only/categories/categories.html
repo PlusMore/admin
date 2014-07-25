@@ -8,9 +8,12 @@
             </div>
             <div class="modal-body">
               {{#each categories}}
-                <a href="{{pathFor 'category'}}" class="list-item {{enabledClass}}"><i class="icon {{iconClass}}">
+                <a href="{{categoryLink}}" class="category list-item {{enabledClass}}"><i class="icon {{iconClass}}">
                   </i>{{name}}
-                  <span class="pull-right">{{isActive}}</span>
+                  <div class="pull-right">
+                    <span class='isActive'>{{isActive}}</span>
+                    <a href="{{pathFor 'category'}}" class="btn btn-default btn-xs">Edit Category</a>
+                  </div>
                 </a>
               {{/each}}
             </div>

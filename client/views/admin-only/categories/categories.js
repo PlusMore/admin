@@ -4,5 +4,8 @@ Template.categories.helpers({
   },
   isActive: function () {
     return this.active ? 'Enabled' : 'Disabled';
+  },
+  categoryLink: function() {
+    return Router.routes['experiences'].path({category: this.name});
   }
 });

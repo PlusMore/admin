@@ -85,33 +85,38 @@ Router.map(function() {
     }
   });
 
-  this.route('manageExperiencesCategories', {
-    path: '/manage-experiences',
-    waitOn: function() {
-      return [
-        Meteor.subscribe('categories')
-      ]
-    }
-  });
-
-  this.route('manageExperiences', {
-    path: '/manage-experiences/:category',
+  this.route('experiences', {
+    path: '/experiences/:category',
     waitOn: function() {
       return [
         Meteor.subscribe('experiences', this.params.category),
-        Meteor.subscribe('tags', 'experiences'),
-        Meteor.subscribe('categories')
+        Meteor.subscribe('category', this.params.category)
       ]
     },
     data: function () {
       return {
         experiences: Experiences.find({category: this.params.category},{sort: {category: 1, sortOrder: 1}}),
-        categoryName: this.params.category
+        category: Categories.findOne({name: this.params.category})
       }
     }
   });
 
+  this.route('experience', {
+    path: '/experience/:_id',
+    waitOn: function() {
+      return [
+        Meteor.subscribe('singleExperience', this.params._id),
+        Meteor.subscribe('tags', 'experiences'),
+        Meteor.subscribe('categories')
+      ]
+    },
+    data: function() {
+      return Experiences.findOne(this.params._id);
+    }
+  })
+
   this.route('categories', {
+    path: '/experience-categories',
     waitOn: function() {
       return [
         Meteor.subscribe('categories')

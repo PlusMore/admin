@@ -10,11 +10,19 @@
     h1, h2, h3, h4, h5, h6 {
       font-weight: 100;
       letter-spacing: 1px;
+
+      i.icon {
+        vertical-align: middle;
+      }
     }
   }
 
   .modal-body {
     border-bottom: none;
+
+    &.extra {
+      border-bottom: 1px solid rgba(255,255,255,.5);
+    }
   }
 
   .modal-footer {
@@ -26,6 +34,11 @@
       font-weight: 200;
       letter-spacing: 1px;
     }
+  }
+
+  legend {
+    color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,.5);
   }
 
 

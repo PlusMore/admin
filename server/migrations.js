@@ -1,5 +1,6 @@
 // Add a migration. Usually you want to add it at server startup.
 Meteor.startup(function(){
+  // geocode experiences
   Meteor.Migrations.add('geocode experiences', function(log) {
     // log writes to the console as well as to the database. 
     log.info("Geocoding Experiences for all experiences which do not have geo data");

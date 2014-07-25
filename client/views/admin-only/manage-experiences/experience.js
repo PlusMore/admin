@@ -11,7 +11,7 @@ var setCallToActionOptions = function(callToAction, experienceTemplate) {
   }
 }
 
-Template.editExperience.rendered = function () {
+Template.experience.rendered = function () {
   setCallToActionOptions(this.data.callToAction, this);
 
   this.$('.timepicker').pickatime({
@@ -28,21 +28,24 @@ Template.editExperience.rendered = function () {
   });
 }
 
-Template.editExperience.helpers({
+Template.experience.helpers({
   experiences: function() {
     return Experiences;
   },
   photoSizeFriendly: function() {
     return this.photoSize ? parseInt(this.photoSize/1024) + ' Kb' : '';
+  },
+  pageTitle: function() {
+    return this.title || 'New Experience';
   }
 });
 
-Template.editExperience.events({
+Template.experience.events({
   'change [name=callToAction]': function(event, experienceTemplate) {
     var callToAction = $(event.currentTarget).val();
     setCallToActionOptions(callToAction, experienceTemplate);
   },
-  'click .btn-change-photo': function(e, experienceTemplate) {
+  'click .edit-experience-image': function(e, experienceTemplate) {
     e.preventDefault();
 
     var experienceId = this._id;
