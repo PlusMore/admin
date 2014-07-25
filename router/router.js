@@ -126,6 +126,24 @@ Router.map(function() {
     }
   });
 
+  this.route('addCategory', {
+    path: '/add-category'
+  });
+
+  this.route('category', {
+    path: '/category/:_id',
+    waitOn: function() {
+      return [
+        Meteor.subscribe('category', this.params._id)
+      ];
+    },
+    data: function() {
+      return {
+        category: Categories.findOne(this.params._id)
+      };
+    }
+  });
+
   this.route('addHotel', {
     path: '/add-hotel'
   });

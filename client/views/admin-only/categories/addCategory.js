@@ -1,13 +1,14 @@
-Template.addHotel.helpers({
-  hotels: function() {
-    return Hotels;
+Template.addCategory.helpers({
+  categories: function() {
+    return Categories;
   }
 });
 
+
 AutoForm.hooks({
-  addHotel: {
+  addCategory: {
     onSuccess: function(operation, result, template) {
-      Router.go('hotels');      
+      Router.go('categories');      
     },
     onError: function(operation, error, template) {
       console.log(error);

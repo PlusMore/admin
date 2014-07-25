@@ -1,4 +1,4 @@
-<template name="addHotel">
+<template name="addCategory">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -17,19 +17,14 @@
               Add Hotel
             </h3>
           </div>
-          {{#autoForm collection=hotels id='addHotel' type="insert"}}
+          {{#autoForm collection=categories id='addCategory' type="insert"}}
             <div class="modal-body">
               {{> afQuickField name='name'}}
-              {{> afQuickField name='street'}}
-              {{> afQuickField name='city'}}
-              {{> afQuickField name='state'}}
-              {{> afQuickField name='zip'}}
-              {{> afQuickField name='phone'}}
-              {{> afQuickField name='trackAnalytics'}}
-              {{> afQuickField name='hotelServicesEnabled'}}
+              {{> afQuickField name='iconClass' firstOption="--Select an icon--" options=categoryIconOptions}}
+              {{> afQuickField name='active'}}
             </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-default">Add Hotel</button>
+              <button type="submit" class="btn btn-default">Add Category</button>
             </div>
           {{/autoForm}}
         </div><!-- /.modal-content -->
