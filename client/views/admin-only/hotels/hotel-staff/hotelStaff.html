@@ -1,45 +1,16 @@
 <template name="hotelStaff">
-  <h3>Hotel Staff</h3>
-  {{> addHotelStaff}}
-
-  <div>
-    <legend>Users</legend>
+  {{#if hasUsers}}
     {{#each hotelStaff}}
       {{> hotelStaffItem}}
     {{/each}}
-  </div>
-  
+  {{else}}
+    <span class='list-item'>There are no users. Add one by clicking the 'Add New User' button below.</span>
+  {{/if}}
 </template>
 
 <template name="hotelStaffItem">
-  <div class='section'>
-    <div>
-      <label for="email">Email:&nbsp;</label><span>{{emailAddress}} </span>
-    </div>
-    
-    <div>
-      <label for="roles">Roles:</label>
-      <ul class="roles">
-        {{#each roles}}
-          <li>{{this}}</li>
-        {{/each}}
-      </ul>  
-    </div>
-    
-  </div>
-</template>
-
-<template name="addHotelStaff">
-  <h4>Add Hotel Users</h4>
-  {{#autoForm schema=addHotelStaffSchema id="addHotelStaffForm" type="method" meteormethod="addHotelStaff"}}
-    <fieldset>
-      {{> afFieldInput name='hotelId' type="hidden" value=hotelId }}
-      {{> afQuickField name='email'}}
-      {{> afQuickField name='isManager'}}
-      <div>
-        <button type="reset" class="btn btn-default">Reset</button>
-        <button type="submit" data-meteor-method="addHotelStaff" class="btn btn-primary">Add Hotel Staff</button>
-      </div>
-    </fieldset>
-  {{/autoForm}}
+  <a class='list-item'>
+    {{emailAddress}}
+    <span class="pull-right">{{role}}</span>
+  </a>
 </template>

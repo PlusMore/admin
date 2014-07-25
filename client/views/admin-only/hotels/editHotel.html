@@ -1,6 +1,29 @@
 <template name="editHotel">
-  <header>
-    <h4>Edit Hotel Details</h4>
-  </header>
-  {{> quickForm collection=hotels id='editHotel' doc=this type="update" buttonClasses="btn btn-lg btn-primary" buttonContent="Update hotel"}}
+  <div class="modal-content inline">
+    <div class="modal-header">
+      <h3 class="modal-title">
+        {{name}}
+        <!-- <div class="pull-right">
+          {{#afDeleteButton collection=hotels doc=this id="removeHotel"}}
+            <i class="fa fa-trash-o"></i> Delete Hotel
+          {{/afDeleteButton}}
+        </div> -->
+      </h3>
+    </div>
+    {{#autoForm collection=hotels id='editHotel' doc=this type="update"}}
+      <div class="modal-body">
+        {{> afQuickField name='name'}}
+        {{> afQuickField name='street'}}
+        {{> afQuickField name='city'}}
+        {{> afQuickField name='state'}}
+        {{> afQuickField name='zip'}}
+        {{> afQuickField name='phone'}}
+        {{> afQuickField name='trackAnalytics'}}
+        {{> afQuickField name='hotelServicesEnabled'}}
+      </div>
+      <div class="modal-footer">
+        <button type="submit" data-meteor-method="addHotelStaff" class="btn btn-default">Update Hotel Info</button>
+      </div>
+    {{/autoForm}}
+  </div><!-- /.modal-content -->
 </template>

@@ -161,6 +161,21 @@ Router.map(function() {
     }
   });
 
+  this.route('addHotelStaff', {
+    path: '/hotel/:_id/add-hotel-staff',
+    waitOn: function() {
+      return [
+        Meteor.subscribe('hotel', this.params._id),
+        Meteor.subscribe('hotelUsers', {hotelId: this.params._id})
+      ];
+    },
+    data: function() {
+      return {
+        hotel: Hotels.findOne(this.params._id)
+      }
+    }
+  });
+
   // yelp config
   this.route('configureYelp', {
     path: 'configure-yelp',
