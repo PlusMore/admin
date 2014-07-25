@@ -1,16 +1,13 @@
 <template name="customizeBackground">
-  <div class="section">
-    <header>
-      <h3>Choose a Background Image</h3>
-    </header>
-
-   
-      <legend>Photo</legend>
-      <img class="img-responsive" src="{{photoSrc}}" />
-      <em>{{photoName}} {{#if photoSize}}({{photoSizeFriendly}}){{/if}}</em>
-      <div >
-        <button class="btn btn-default btn-change-photo">Change Photo</button>
+  <div id='add-custom-background' class="modal-content inline">
+      <div class="modal-header">
+        <h3 class="modal-title">Add Custom Background</h3>
       </div>
-   
-  </div>
+      <div class="modal-body">
+          <img class="img-responsive background-image" src="{{photoSrc}}" />
+      </div>
+      <div class='modal-footer'>
+        <button class="btn btn-default btn-change-photo">Change Background</button>
+      </div>
+    </div><!-- /.modal-content -->
 </template>
