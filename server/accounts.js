@@ -10,16 +10,16 @@ Accounts.emailTemplates.enrollAccount.text = function (user, url) {
     url = Meteor.settings.apps.hotel.url + '/#' + spliturl[1];
   }
 
-  return "To activate your account, simply click the link below:\n\n"
-    + url;
+  return "To activate your account, simply click the link below:\n\n" + 
+          url;
 };
 
 Accounts.emailTemplates.verifyEmail.text = function (user, url) {
   var spliturl = url.split('/#');
   url = Meteor.settings.apps.admin.url + '/#' + spliturl[1];
   
-  return "To verify your account email, simply click the link below.:\n\n"
-    + url;
+  return "To verify your account email, simply click the link below.:\n\n" + 
+          url;
 };
 
 var quotemeta = function (str) {
@@ -34,7 +34,6 @@ var testEmailDomain = function (email, domain) {
 };
 
 Accounts.validateNewUser(function (user) {
-  console.log('validate new user')
   var adminDomain = 'plusmoretablets.com';
   var emailIsGood = false;
 
@@ -159,7 +158,6 @@ Accounts.validateLoginAttempt(function(attempt) {
   if (attempt.user) {
     if (!attempt.user.emails[0].verified) {
       throw new Meteor.Error(300, 'Please verify your email address by clicking the link in the verification email that was sent to ' + attempt.user.emails[0].address + '.');
-      return false;
     } else {
       return true;
     }
@@ -171,7 +169,7 @@ Meteor.methods({
     check(user, Schema.addHotelStaff);
 
     if (Roles.userIsInRole(Meteor.user(), ['admin'])) {
-      var roles = ['hotel-staff']
+      var roles = ['hotel-staff'];
       if (user.isManager) {
         roles.push('hotel-manager');
       }

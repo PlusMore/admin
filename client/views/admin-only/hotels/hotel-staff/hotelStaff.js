@@ -14,12 +14,12 @@ Template.hotelStaffItem.helpers({
   role: function() {
     if (Roles.userIsInRole(this, ['hotel-staff'])) {
       if (Roles.userIsInRole(this, ['hotel-manager'])) {
-        return 'Manager'
+        return 'Manager';
       } else {
-        return 'Staff'
+        return 'Staff';
       }
     } else {
-      return 'Invalid'
+      return 'Invalid';
     }
   }
 });

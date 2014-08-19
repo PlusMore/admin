@@ -9,7 +9,7 @@ var setCallToActionOptions = function(callToAction, experienceTemplate) {
   } else if (callToAction === "reserve") {
     $(experienceTemplate.find('.reservationOptions')).removeClass('hidden');
   }
-}
+};
 
 Template.experience.rendered = function () {
   setCallToActionOptions(this.data.callToAction, this);
@@ -18,7 +18,7 @@ Template.experience.rendered = function () {
     onSet: function(selection) {
       var minutes = selection.select;
       var controlName = this.$node.attr('name');
-      var $reservationOptionsEl = this.$node.closest('.reservationOptions')
+      var $reservationOptionsEl = this.$node.closest('.reservationOptions');
       if (controlName === 'reservationStartTime') {
         $reservationOptionsEl.find('[name=reservationStartMinutes]').val(minutes);
       } else if (controlName === 'reservationEndTime') {
@@ -26,7 +26,7 @@ Template.experience.rendered = function () {
       }
     }
   });
-}
+};
 
 Template.experience.helpers({
   experiences: function() {
@@ -55,7 +55,7 @@ Template.experience.events({
   },
   'change [name=address]': function(e, experienceTemplate) {
     var experienceId = experienceTemplate.data._id;
-    var address = $(experienceTemplate.find('[name=address]')).val()
+    var address = $(experienceTemplate.find('[name=address]')).val();
     if (address) {
       console.log('geocoding ' + address);
       Meteor.call('geocodeExperienceAddress', experienceId, address);

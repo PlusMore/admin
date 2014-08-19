@@ -14,7 +14,7 @@ Meteor.startup(function() {
     }
 
     return false;
-  }
+  };
 
   _.extend(App, {
     identify: function() {
@@ -87,7 +87,7 @@ Meteor.startup(function() {
           });
 
           if (typeof profileInfo['$name'] === 'undefined') {
-            profileInfo['$name'] = device.location
+            profileInfo['$name'] = device.location;
           }
         }
         _.extend(properties, profileInfo);
@@ -127,5 +127,5 @@ Meteor.startup(function() {
         "Name": currentRoute.route.name
       });
     }
-  })
+  });
 });

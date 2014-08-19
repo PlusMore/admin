@@ -78,17 +78,17 @@ Meteor.methods({
         bcc: 'order-service@plusmoretablets.com',
         from: 'order-service@plusmoretablets.com',
         subject: 'Confirmed - Reservation for {0}'.format(experience.title),
-        text: "Your reservation for {0} has been confirmed.\n\n".format(experience.title)
-            + "Reservation Details:\n"
-            + "For: {0}\n".format(experience.title)
-            + "When: {0}\n".format(reservation.when)
-            + "Party Name: {0}\n".format(reservation.partyName)
-            + "Party Size: {0}\n".format(reservation.partySize)
-            + "\nVenue Info"
-            + "\n{0}".format(experience.venueName)
-            + "\n{0}".format(experience.street)
-            + "\n{0}, {1} {2}".format(experience.city, experience.state, experience.zip)
-            + "\n\nIf you have any questions, you may respond directly to this email."
+        text: "Your reservation for {0} has been confirmed.\n\n".format(experience.title) + 
+              "Reservation Details:\n" + 
+              "For: {0}\n".format(experience.title) + 
+              "When: {0}\n".format(reservation.when) + 
+              "Party Name: {0}\n".format(reservation.partyName) + 
+              "Party Size: {0}\n".format(reservation.partySize) + 
+              "\nVenue Info" + 
+              "\n{0}".format(experience.venueName) + 
+              "\n{0}".format(experience.street) + 
+              "\n{0}, {1} {2}".format(experience.city, experience.state, experience.zip) + 
+              "\n\nIf you have any questions, you may respond directly to this email."
       });
     }
   },
@@ -111,17 +111,17 @@ Meteor.methods({
         bcc: 'order-service@plusmoretablets.com',
         from: 'order-service@plusmoretablets.com',
         subject: 'Cancelled - Reservation for {0}'.format(experience.title),
-        text: "Your reservation for {0} has been cancelled.\n\n".format(experience.title)
-            + "Reservation Details:\n"
-            + "For: {0}\n".format(experience.title)
-            + "When: {0}\n".format(reservation.when)       
-            + "Party Name: {0}\n".format(reservation.partyName)
-            + "Party Size: {0}\n".format(reservation.partySize)
-            + "\nVenue Info"
-            + "\n{0}".format(experience.venueName)
-            + "\n{0}".format(experience.street)
-            + "\n{0}, {1} {2}".format(experience.city, experience.state, experience.zip)
-            + "\n\nIf you have any questions, you may respond directly to this email."
+        text: "Your reservation for {0} has been cancelled.\n\n".format(experience.title) + 
+              "Reservation Details:\n" + 
+              "For: {0}\n".format(experience.title) + 
+              "When: {0}\n".format(reservation.when)        + 
+              "Party Name: {0}\n".format(reservation.partyName) + 
+              "Party Size: {0}\n".format(reservation.partySize) + 
+              "\nVenue Info" + 
+              "\n{0}".format(experience.venueName) + 
+              "\n{0}".format(experience.street) + 
+              "\n{0}, {1} {2}".format(experience.city, experience.state, experience.zip) + 
+              "\n\nIf you have any questions, you may respond directly to this email."
       });
     }
   }

@@ -8,4 +8,4 @@ flash = function (message, messageType) {
 		message: message,
 		type: type
 	});
-}
+};

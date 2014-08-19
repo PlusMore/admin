@@ -76,7 +76,7 @@ Meteor.methods({
         }}, {validate: false});  
       }
     } else {
-      Errors.throw('You do not have proper access to this functionality.')
+      Errors.throw('You do not have proper access to this functionality.');
     }
   }
 });

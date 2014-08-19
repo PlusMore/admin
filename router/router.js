@@ -36,7 +36,7 @@ Router.map(function() {
     waitOn: function() {
       return [
         Meteor.subscribe('devices')
-      ]
+      ];
     },
     onRun: function() {
       if (Meteor.user()) {
@@ -52,7 +52,7 @@ Router.map(function() {
       if (Meteor.user()) {
         return {
           devices: Devices.find({hotelId: Meteor.user().hotelId})
-        }
+        };
       }
     }
   });
@@ -62,7 +62,7 @@ Router.map(function() {
     waitOn: function () {
       return [
         Meteor.subscribe('openPatronOrders')
-      ]
+      ];
     } 
   });
 
@@ -71,7 +71,7 @@ Router.map(function() {
     waitOn: function() {
       return [
         Meteor.subscribe('patronOrder', this.params._id)
-      ]
+      ];
     },
     data: function() {
       var order = Orders.findOne(this.params._id);
@@ -80,7 +80,7 @@ Router.map(function() {
         return {
           order: order,
           experience: experience
-        }
+        };
       }
     }
   });
@@ -91,13 +91,13 @@ Router.map(function() {
       return [
         Meteor.subscribe('experiences', this.params.category),
         Meteor.subscribe('category', this.params.category)
-      ]
+      ];
     },
     data: function () {
       return {
         experiences: Experiences.find({category: this.params.category},{sort: {category: 1, sortOrder: 1}}),
         category: Categories.findOne({name: this.params.category})
-      }
+      };
     }
   });
 
@@ -108,26 +108,26 @@ Router.map(function() {
         Meteor.subscribe('singleExperience', this.params._id),
         Meteor.subscribe('tags', 'experiences'),
         Meteor.subscribe('categories')
-      ]
+      ];
     },
     data: function() {
       return Experiences.findOne(this.params._id);
     }
-  })
+  });
 
   this.route('categories', {
     path: '/experience-categories',
     waitOn: function() {
       return [
         Meteor.subscribe('categories')
-      ]
+      ];
     },
     data: function () {
       return {
         categories: function() {
           return Categories.find();
         }
-      }
+      };
     }
   });
 
@@ -157,14 +157,14 @@ Router.map(function() {
     waitOn: function() {
       return [
         Meteor.subscribe('hotels')
-      ]
+      ];
     },
     data: function () {
       return {
         hotels: function() {
           return Hotels.find();
         }
-      }
+      };
     }
   });
 
@@ -174,13 +174,13 @@ Router.map(function() {
       return [
         Meteor.subscribe('hotel', this.params._id),
         Meteor.subscribe('hotelUsers', {hotelId: this.params._id})
-      ]
+      ];
     },
     data: function() {
       return {
         hotel: Hotels.findOne(this.params._id),
         hotelStaff: Meteor.users.find({hotelId: this.params._id})
-      }
+      };
     }
   });
 
@@ -195,7 +195,7 @@ Router.map(function() {
     data: function() {
       return {
         hotel: Hotels.findOne(this.params._id)
-      }
+      };
     }
   });
 
@@ -205,7 +205,7 @@ Router.map(function() {
     waitOn: function() {
       return [
         Meteor.subscribe('yelpconfig')
-      ]
+      ];
     },
     data: function() {
       return Accounts.loginServiceConfiguration.findOne({service: 'yelp'});

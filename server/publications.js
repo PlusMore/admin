@@ -21,7 +21,7 @@ Meteor.publish('userHotelData', function () {
       return [
         Meteor.users.find({_id: userId}, {fields: fields}),
         Hotels.find({_id: hotelId})
-      ]
+      ];
     } else {
       this.ready();
       return null;
@@ -45,7 +45,7 @@ Meteor.publish('experiences', function(category) {
 // Tags
 
 Meteor.publish('tags', function(collectionName) {
-  return Meteor.tags.find({collection: collectionName})
+  return Meteor.tags.find({collection: collectionName});
 });
 
 // Categories
@@ -60,8 +60,9 @@ Meteor.publish('category', function(name) {
 // Devices
 Meteor.publish('devices', function(hotelId) {
   var userId = this.userId,
-      user = Meteor.users.findOne(userId),
-      hotelId = user.hotelId;
+      user = Meteor.users.findOne(userId);
+
+  hotelId = hotelId || user.hotelId;
 
   return Devices.find({hotelId: hotelId});
 });
@@ -102,7 +103,7 @@ Meteor.publish("openPatronOrders", function() {
   if (hotel) {
     return [
       Orders.find({hotelId: hotelId})
-    ]
+    ];
   } 
 });
 
@@ -111,5 +112,5 @@ Meteor.publish('patronOrder', function(id) {
   return [
     Orders.find(id),
     Experiences.find(order.reservation.experienceId)
-  ] 
+  ];
 });
