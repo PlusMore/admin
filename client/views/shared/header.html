@@ -9,9 +9,9 @@
           <span class="icon-bar"></span>
         </button>
         {{#if isLoggedIn}}
-        <a class="navbar-brand" href="{{pathFor 'dashboard'}}">Plus More {{#if isHotelStaff}}@ {{hotelName}}{{/if}}</a>
+          <a class="navbar-brand" href="{{pathFor 'dashboard'}}">PlusMore</a>
         {{else}}
-        <a class="navbar-brand" href="{{pathFor 'homepage'}}">Plus More</a>
+          <a class="navbar-brand" href="{{pathFor 'homepage'}}">PlusMore</a>
         {{/if}}
       </div>
       <div class="collapse navbar-collapse">
@@ -21,18 +21,16 @@
             <li class="{{activeRouteClass 'hotels'}}">
               <a href="{{pathFor 'hotels'}}">Hotels</a>
             </li>
+            <li class="{{activeRouteClass 'categories'}}">
+              <a href="{{pathFor 'categories'}}">Experiences</a>
+            </li>
             <li class="{{activeRouteClass 'configureYelp'}}">
-              <a href="{{pathFor 'configureYelp'}}">Configure Yelp</a>
+              <a href="{{pathFor 'configureYelp'}}">Yelp API</a>
             </li>
           {{/if}}
 
           {{#if canSeeContentManagerPages}}
-            <li class="{{activeRouteClass 'categories'}}">
-              <a href="{{pathFor 'categories'}}">Manage Categories</a>
-            </li>
-            <li class="{{activeRouteClass 'manageExperiencesCategories'}} {{activeRouteClass 'manageExperiences'}} ">
-              <a href="{{pathFor 'manageExperiencesCategories'}}">Manage Experiences</a>
-            </li>
+            
           {{/if}}
 
           {{#if isHotelStaff}}
@@ -51,10 +49,5 @@
         </ul>
       </div><!--/.nav-collapse -->
     </div>
-  </div>
-  <div class="messages">
-    {{#each messages}}
-    <p class="message message-{{type}}">{{message}}</p>
-    {{/each}}
   </div>
 </template>

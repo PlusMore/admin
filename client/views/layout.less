@@ -1,0 +1,60 @@
+@import '/client/style/imports.import.less';
+
+#layout {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
+
+  & > .content {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: scroll;
+    background: rgba(0,0,0, .5);
+    padding-top: 70px;
+
+    .transitioner-panes .container {
+      padding: 50px;
+      padding-top: 52px;
+      margin-right: auto;
+      margin-left: auto;
+      position: absolute;
+      overflow: hidden;
+      width: 100%;
+      &:before,
+      &:after {
+        content:"";
+        display:table;
+      }
+      &:after {
+        clear:both;
+      }
+
+      zoom:1; /* For IE 6/7 (trigger hasLayout) */
+
+    }
+  }
+}
+
+div[class*="-overlay"] {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  
+  visibility: hidden;
+
+  &.show {
+    visibility: visible;
+  }
+}

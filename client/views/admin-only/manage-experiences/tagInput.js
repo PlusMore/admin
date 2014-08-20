@@ -1,9 +1,3 @@
-Template.tagInput.helpers({
-  experienceTags: function () {
-    return this.tags;
-  }
-});
-
 Template.tagInput.rendered = function () {
   var that = this;
   this.$('.tag-input').selectize({
@@ -11,7 +5,6 @@ Template.tagInput.rendered = function () {
     labelField: 'name',
     searchField: ['name'],
     create: function(input, cb) {
-      console.log('create tag: ', input)
       Experiences.addTag(input, {_id: that.data._id});
       var tag =  Meteor.tags.findOne({collection: 'experiences', name: input});
 

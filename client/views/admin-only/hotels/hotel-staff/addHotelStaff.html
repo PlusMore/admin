@@ -1,0 +1,33 @@
+<template name="addHotelStaff">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        {{#with hotel}}
+          <a class='back' href="{{pathFor 'hotel'}}">
+            <i class="icon icon-back"></i>
+            Back to {{name}}
+          </a>
+        {{/with}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="modal-content inline">
+          <div class="modal-header">
+            <h3 class="modal-title">Create User</h3>
+          </div>
+          {{#autoForm schema=addHotelStaffSchema id="addHotelStaffForm" type="method" meteormethod="addHotelStaff"}}
+            <div class="modal-body">
+              {{> afFieldInput name='hotelId' type="hidden" value=hotel._id }}
+              {{> afQuickField name='email'}}
+              {{> afQuickField name='isManager'}}
+            </div>
+            <div class="modal-footer">
+              <button type="submit" data-meteor-method="addHotelStaff" class="btn btn-default">Create User</button>
+            </div>
+          {{/autoForm}}  
+        </div><!-- /.modal-content -->        
+      </div>    
+    </div>
+  </div>
+</template>

@@ -1,10 +1,25 @@
 <template name='configureYelp'> 
   <div class="container">
-    <div class="section">
-      <h1>Yelp API Access Configuration</h1>
-      <p class="lead">Do not change if you don't know what you are doing.</p>
-      <p>{{currentConfig}}</p>
-      {{> quickForm schema=configureYelp doc=this id='configureYelp' type='method' meteormethod='configureYelp' buttonClasses="btn btn-primary" buttonContent="Configure Yelp"}}  
-    </div>  
+    <div class="row">
+      <div class="col-md-12">
+          <div class="modal-content inline">
+            <div class="modal-header">
+              <h3 class="modal-title">Yelp API Access Configuration</h3>
+            </div>
+            {{#autoForm schema=configureYelp doc=this id='configureYelp' type='method' meteormethod='configureYelp'}}
+            <div class="modal-body">
+              <p class="lead">Do not change if you don't know what you are doing.</p>
+              {{> afQuickField name='consumerKey'}}
+              {{> afQuickField name='consumerSecret'}}
+              {{> afQuickField name='accessToken'}}
+              {{> afQuickField name='accessTokenSecret'}}
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-default">Update Yelp Configuration</button>
+            </div>
+            {{/autoForm}}
+          </div><!-- /.modal-content -->
+      </div>    
+    </div>
   </div>
 </template>

@@ -1,0 +1,60 @@
+@import 'imports.import.less';
+
+.modal-content.inline {
+  box-shadow: none;
+  background-color: rgba(0,0,0,.4);
+  margin-bottom: 30px;
+
+  .modal-header {
+    border-bottom: 1px solid rgba(255,255,255,.5);
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 100;
+      letter-spacing: 1px;
+
+      i.icon {
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .modal-body {
+    border-bottom: none;
+
+    &.extra {
+      border-bottom: 1px solid rgba(255,255,255,.5);
+    }
+  }
+
+  .modal-footer {
+    border-top: 1px solid rgba(255,255,255,.5);
+
+    .btn {
+      font-size: 16px;
+      padding: 6px 20px;
+      font-weight: 200;
+      letter-spacing: 1px;
+    }
+  }
+
+  legend {
+    color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,.5);
+  }
+
+
+  // inactive 
+  &.inactive {
+    .modal-header {
+      border-bottom: none;
+    }
+
+    .modal-body {
+      display: none;
+    }
+
+    .modal-footer {
+      display: none;
+    }
+  }
+
+}

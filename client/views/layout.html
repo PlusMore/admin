@@ -1,7 +1,46 @@
 <template name="layout">
-  {{> header}}
-  <div class="main-container touch-scrollable">
-    {{> yield}}
+  
+  <div id='layout' style="background-image: url('{{hotelPhotoUrl}}')">
+    
+    {{> header}}
+
+    <div class="content">
+      {{#if currentUser}}
+        <div class="container-fluid">
+          <div class="messages row">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  {{> meteorErrors}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            {{> yield region='aside'}}
+            {{> yield}}
+          </div>
+          
+        </div>
+      {{else}}
+        {{#if loggingIn}}
+          {{> loggingInOverlay}}
+        {{else}}
+          <div class="container-fluid">
+            <div class="messages row">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12">
+                    {{> meteorErrors}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            {{> login}}
+          </div>
+        {{/if}}
+      {{/if}}  
+    </div>
+    
   </div>
-  {{> footer}}
 </template>

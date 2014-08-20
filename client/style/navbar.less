@@ -1,13 +1,9 @@
-.navbar-plusmore {
-  background : #A5DFF9;
-  background : rgba(165, 223, 249, 1);
-  filter: alpha(opacity=60) progid:DXImageTransform.Microsoft.Alpha(opacity=60) ;
-  background:url('/backgrounds/header-bg-blue.png');
-  background-size: 101% 101%;
-  background-repeat: no-repeat;
-  background-position-x: -2px;
-  width: 100%;
+@import '/client/style/imports.import.less';
 
+.navbar-plusmore {
+  width: 100%;
+  background: rgba(0,0,0,.3);
+  border: none;
 
   a.navbar-brand {
     color: #fff;
@@ -18,28 +14,34 @@
 
   .nav {
     li {
-      background: transparent;
+      background: none;
+      .transition(all 600ms ease-in-out);
+
       &:hover, &:active, &:focus, &:visited {
-        background: transparent;
+        background: none;
       }
 
       &.inactive {
-        background: transparent;
+        background: none;
         &:hover, &:active, &:focus, &:visited {
-          background: transparent;
+          background: none;
         }
       }
 
       &.active {
-        background-color: #fff;
+        background: rgba(255,255,255,1);
         border-bottom: 1px solid #fff;
 
         &:hover, &:active {
-          background-color: #fff;
+          background: #fff;
         }
         a {
           color: #000;
           &:hover, &:active, &:focus , &:visited {
+            color: #000;
+          }
+
+          span.text {
             color: #000;
           }
         }
@@ -51,13 +53,6 @@
           background: transparent;
         }
       }
-
     }
-
   }
-
-
-
-
-
 }

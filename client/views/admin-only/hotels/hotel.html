@@ -1,21 +1,29 @@
 <template name="hotel">
   <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a class='back' href="{{pathFor 'hotels'}}">
+          <i class="icon icon-back"></i>
+          Back to Hotels
+        </a>
+      </div>
+    </div>
     {{#with hotel}}
-      <div class="section">
-        <a href="{{pathFor 'hotels'}}">Back to Hotels</a>
+      <div class="row">
+        <div class="col-md-12">         
+          {{> editHotel}}
+        </div>    
       </div>
-      <h3>{{name}}</h3>
-      <div class="section">
-        {{> editHotel}}
-        <hr class="soften" />
-        {{#afDeleteButton collection=hotels doc=this id="removeHotel"}}
-          <i class="fa fa-trash-o"></i> Delete Hotel
-        {{/afDeleteButton}}
+      <div class="row">
+        <div class="col-md-12">
+          {{> manageHotelUsers}}
+        </div>
       </div>
-      <div class="section">
-        {{> hotelStaff}}
+      <div class="row">
+        <div class="col-md-12">
+          {{> customizeBackground}}
+        </div>
       </div>
-      {{> customizeBackground}}
     {{/with}}
   </div>
 </template>

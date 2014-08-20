@@ -1,0 +1,101 @@
+<template name="experience">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a class='back' href="{{pathFor 'experiences'}}">
+          <i class="icon icon-back"></i>
+          Back to {{category}}
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+          <div class="modal-content inline">
+            <div class="modal-header">
+              <h3 class="modal-title">
+                {{pageTitle}}
+                <div class="pull-right">
+                  {{#afDeleteButton collection=experiences doc=this class="pull-right"}}
+                    <i class="fa fa-trash-o"></i> Delete
+                  {{/afDeleteButton}}
+                </div>
+              </h3>
+            </div>
+            
+
+            <div class="extra modal-body">
+              <div class="row">
+                <div class="col-md-12">
+                  {{> tagInput}}
+                </div>
+              </div>
+            </div>
+
+            <div class="extra modal-body">
+              <div class="row">
+                <!-- Photo -->
+                <div class="col-md-12 experience-image-container">
+                  <img class="img-responsive edit-experience-image" src="{{photoUrl}}?cache=true" />
+                    <em>{{photoName}} {{#if photoSize}}({{photoSizeFriendly}}){{/if}}</em>
+                </div>
+
+              </div>
+            </div>
+
+            {{#autoForm collection=experiences doc=this id='editExperience' type="update"}}
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <legend>Experience Details</legend>
+                    {{> afQuickField name="category" firstOption="--Select a Category--" options=categoryOptions}}
+                    {{> afQuickField name='sortOrder'}}
+                    {{> afQuickField name='active'}}
+                    {{> afQuickField name='title'}}
+                    {{> afQuickField name='lead'}}
+                    {{> afQuickField name='description' rows="4"}}
+                    {{> afQuickField name='website'}}
+                  </div>
+                  <div class="col-md-4">
+                    <legend>Venue Info</legend>
+                    {{> afQuickField name='yelpId'}}
+                    {{> afQuickField name='venueName'}}
+
+                    <div class="form-group">
+                      <label class="control-label" for="venueName">Address Search</label>
+                      <input type="text" name="address" class="form-control" >
+                    </div>      
+<pre>({{geo.latitude}}, {{geo.longitude}})
+{{geo.streetNumber}} {{geo.streetName}}
+{{geo.city}} {{geo.state}} ({{geo.stateCode}}), {{geo.zipcode}}
+{{geo.country}} ({{geo.countryCode}})</pre>    
+
+                    {{> afQuickField name='phone'}} 
+                  </div>
+                  <div class="col-md-4">
+                    <legend>Order Info</legend>
+                    {{> afQuickField name="callToAction" firstOption="--Select a call to action--" options=callToActionOptions}}
+
+                    <div class="reservationOptions hidden">
+                      {{> afQuickField name='maxPartySize'}}
+                      {{> afQuickField name='reservationStartTime' class='timepicker'}}
+                      {{> afQuickField name='reservationEndTime' class='timepicker'}}
+                      {{> afFieldInput name="reservationStartMinutes" type="hidden"}}
+                      {{> afFieldInput name="reservationEndMinutes" type="hidden"}}
+                    </div>
+
+                    <div class="purchaseOptions hidden">
+                      {{> afQuickField name='price'}}
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-default">Update Experience</button>
+              </div>
+            {{/autoForm}} 
+          </div><!-- /.modal-content -->
+      </div>    
+    </div>
+  </div>
+</template>

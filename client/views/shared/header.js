@@ -6,7 +6,7 @@ Template.header.helpers({
     var active = _.any(args, function(name) {
       var currentPath, pathForName, _ref, _ref1;
 
-      currentPath = (_ref = (_ref1 = Router.current()) != null ? _ref1.path : void 0) != null ? _ref : location.pathname;
+      currentPath = (_ref = (_ref1 = Router.current()) !== null ? _ref1.path : void 0) !== null ? _ref : location.pathname;
       pathForName = Router.path(name);
 
       if (pathForName === '/') {
@@ -42,10 +42,10 @@ Template.header.helpers({
   hotelName: function() {
     return Session.get('hotelName');
   }
-})
+});
 
 Template.header.events({
   'click .log-out': function () {
     Meteor.logout();
   }
-})
+});
