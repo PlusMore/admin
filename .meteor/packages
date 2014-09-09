@@ -17,7 +17,6 @@ jquery
 broth:inspector@0.2.2
 natestrauser:font-awesome@4.1.0
 percolatestudio:percolatestudio-mixpanel@0.5.0
-plus-more-fonts
 mrt:impicker@1.2.0
 moment
 pickadate
@@ -31,4 +30,3 @@ iron:router
 ian:bootstrap-3
 ian:accounts-ui-bootstrap-3
 jeremy:selectize
-
