@@ -2,160 +2,34 @@
   "meteor": {},
   "dependencies": {
     "basePackages": {
-      "bootstrap-3": {},
-      "iron-router": {},
-      "roles": {},
-      "autoform": {},
-      "fastclick": {},
-      "collection2": {},
-      "inspector": {},
-      "font-awesome": {},
-      "percolatestudio-mixpanel": {},
-      "impicker": {},
       "pickadate": {
         "git": "https://github.com/patrickleet/meteor-pickadate.git",
         "branch": "master"
       },
-      "geocoder": {},
-      "migrations": {},
-      "googlemaps": {},
       "tags": {
         "git": "https://github.com/patrickleet/meteor-tags.git",
         "tag": "v1.3"
       },
-      "selectize": {},
-      "bootstrap-errors": {},
-      "accounts-ui-bootstrap-3": {},
       "plus-more-icons": {
         "git": "https://github.com/PlusMore/plus-more-icons.git",
         "tag": "v1.1"
       }
     },
     "packages": {
-      "bootstrap-3": {
-        "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
-        "tag": "v3.2.0-1",
-        "commit": "17a63902fc6cf1096c5289d963c66cf28b474727"
-      },
-      "iron-router": {
-        "git": "https://github.com/EventedMind/iron-router.git",
-        "tag": "v0.8.1",
-        "commit": "74e867557fd9cb81173e048e5f81cf4a0a1160a8"
-      },
-      "roles": {
-        "git": "https://github.com/alanning/meteor-roles.git",
-        "tag": "v1.2.10",
-        "commit": "7ccb35de0a6cb0c9a0c3666badd04757e39c09a6"
-      },
-      "autoform": {
-        "git": "https://github.com/aldeed/meteor-autoform.git",
-        "tag": "v0.16.1",
-        "commit": "34a447fd3a1b3164c78f865aabbac3ddc2d033fb"
-      },
-      "fastclick": {
-        "git": "https://github.com/percolatestudio/meteor-fastclick",
-        "tag": "v0.6.7",
-        "commit": "fcb3bfd34d9f6874e626b4e24e8f54107938db41"
-      },
-      "collection2": {
-        "git": "https://github.com/aldeed/meteor-collection2.git",
-        "tag": "v0.4.3",
-        "commit": "cb470de2cfeebeccbf76d4cc0a39ad4afc76d553"
-      },
-      "inspector": {
-        "git": "https://github.com/broth-eu/meteor-inspector.git",
-        "tag": "v0.2.2",
-        "commit": "d3e5e4a760133f8d97b6457befc6e8ea1b42a010"
-      },
-      "font-awesome": {
-        "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
-        "tag": "v4.1.0",
-        "commit": "ce6b1e92715d1938babc5d69c655c17e387f5926"
-      },
-      "percolatestudio-mixpanel": {
-        "git": "https://github.com/percolatestudio/meteor-mixpanel.git",
-        "tag": "v0.5.0",
-        "commit": "d92c8fd6c0504d3f1c195cf972354ab2e81b4e20"
-      },
-      "impicker": {
-        "git": "https://github.com/wulx/impicker.git",
-        "tag": "v1.2.0",
-        "commit": "29a7a52d27b2cf8447fc24946b0fdbf60c4b12a6"
-      },
       "pickadate": {
         "git": "https://github.com/patrickleet/meteor-pickadate.git",
         "branch": "master",
         "commit": "5158805cbe4fa2d116a851964d2cdf1459524156"
-      },
-      "geocoder": {
-        "git": "https://github.com/aldeed/meteor-geocoder.git",
-        "tag": "v0.3.0",
-        "commit": "237ced1ba81cce27daf0fc1438b93c03ee58b7f5"
-      },
-      "migrations": {
-        "git": "https://github.com/rantav/meteor-migrations.git",
-        "tag": "v0.0.2",
-        "commit": "4e75c06b8e94961567765c4dea20a007816ad274"
-      },
-      "googlemaps": {
-        "git": "https://github.com/drewjw81/meteor-googlemaps.git",
-        "tag": "v0.0.2",
-        "commit": "da8785c82cfd7de0111f898ef10728e7ed24e361"
       },
       "tags": {
         "git": "https://github.com/patrickleet/meteor-tags.git",
         "tag": "v1.3",
         "commit": "909efb275c640ef38ef70e39df3a9b119e453728"
       },
-      "selectize": {
-        "git": "https://github.com/andrewreedy/meteor-selectize.git",
-        "tag": "v0.0.1",
-        "commit": "2bf47922a6b964ca58ad58cfa0e92c9cf9ea8be3"
-      },
-      "bootstrap-errors": {
-        "git": "https://github.com/lezed1/meteor-bootstrap-errors.git",
-        "tag": "v0.3.1",
-        "commit": "f85d792683a423bfb6747460d4516b7404871260"
-      },
-      "accounts-ui-bootstrap-3": {
-        "git": "https://github.com/mangasocial/meteor-accounts-ui-bootstrap-3.git",
-        "tag": "v0.3.3",
-        "commit": "2e50b605d8d5ed68e48c4529a65f13552d8af3f9"
-      },
       "plus-more-icons": {
         "git": "https://github.com/PlusMore/plus-more-icons.git",
         "tag": "v1.1",
         "commit": "7731481318f52ecbecedbee106eaf9162762c527"
-      },
-      "iron-layout": {
-        "git": "https://github.com/EventedMind/iron-layout.git",
-        "tag": "v0.2.0",
-        "commit": "4a2d53e35ba036b0c189c7ceca34be494d4c6c97"
-      },
-      "simple-schema": {
-        "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.6.0",
-        "commit": "418ec496612fb2afc853e342f0d2269b6674a2fe"
-      },
-      "moment": {
-        "git": "https://github.com/acreeger/meteor-moment.git",
-        "tag": "v2.6.0",
-        "commit": "26156df681750fd6e6ed77043eef32b6653ebbdf"
-      },
-      "blaze-layout": {
-        "git": "https://github.com/EventedMind/blaze-layout.git",
-        "tag": "v0.2.5",
-        "commit": "273e3ab7d005d91a1a59c71bd224533b4dae2fbd"
-      },
-      "iron-core": {
-        "git": "https://github.com/EventedMind/iron-core.git",
-        "tag": "v0.2.0",
-        "commit": "0e48b5dc50d03f01025b7b900fb5ce2f13d52cad"
-      },
-      "iron-dynamic-template": {
-        "git": "https://github.com/EventedMind/iron-dynamic-template.git",
-        "tag": "v0.2.1",
-        "commit": "4dd1185c4d9d616c9abdb3f33e4a7d5a88db7e18"
       }
     }
   }
