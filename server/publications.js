@@ -53,8 +53,8 @@ Meteor.publish('categories', function() {
   return Categories.find();
 });
 
-Meteor.publish('category', function(name) {
-  return Categories.find({name: name});
+Meteor.publish('category', function(id) {
+  return Categories.find(id);
 });
 
 // Devices
