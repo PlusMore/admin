@@ -3,20 +3,26 @@
     <div class="modal-header">
       <h3 class="modal-title">
         {{name}}
-        <!-- <div class="pull-right">
-          {{#afDeleteButton collection=hotels doc=this id="removeHotel"}}
-            <i class="fa fa-trash-o"></i> Delete Hotel
-          {{/afDeleteButton}}
-        </div> -->
       </h3>
     </div>
     {{#autoForm collection=hotels id='editHotel' doc=this type="update"}}
       <div class="modal-body">
         {{> afQuickField name='name'}}
-        {{> afQuickField name='street'}}
+
+        <div class="form-group">
+          <label class="control-label" for="venueName">Address Search</label>
+          <input type="text" name="address" class="form-control" >
+        </div>      
+<pre>({{geo.latitude}}, {{geo.longitude}})
+{{geo.streetNumber}} {{geo.streetName}}
+{{geo.city}} {{geo.state}} ({{geo.stateCode}}), {{geo.zipcode}}
+{{geo.country}} ({{geo.countryCode}})</pre>    
+
+
+<!--         {{> afQuickField name='street'}}
         {{> afQuickField name='city'}}
         {{> afQuickField name='state'}}
-        {{> afQuickField name='zip'}}
+        {{> afQuickField name='zip'}} -->
         {{> afQuickField name='phone'}}
         {{> afQuickField name='trackAnalytics'}}
         {{> afQuickField name='hotelServicesEnabled'}}

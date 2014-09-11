@@ -11,4 +11,14 @@ Meteor.startup(function(){
       Meteor.call('geocodeExperienceAddress', experience._id, address);
     });
   });
+
+  Meteor.Migrations.add('geocode old hotels', function(log) {
+    // log writes to the console as well as to the database. 
+    log.info("Geocoding Hotels for all experiences which do not have geo data");
+    Hotels.find({geo: {$exists : false}}).forEach(function (hotel) {
+      var address = "{0}, {1}, {2}".format(hotel.street, hotel.city, hotel.state);
+      log.info("Adding geo for {0} to Experience {1}".format(address, hotel._id));
+      Meteor.call('geocodeHotelAddress', hotel._id, address);
+    });
+  });
 });
