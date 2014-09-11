@@ -31,40 +31,14 @@ Router.onBeforeAction('loading');
 
 Router.map(function() {
 
-  this.route('devices', {
-    path: '/devices',
-    waitOn: function() {
-      return [
-        Meteor.subscribe('devices')
-      ];
-    },
-    onRun: function() {
-      if (Meteor.user()) {
-        var hotel = Hotels.findOne(Meteor.user().hotelId);
-        if (hotel) {
-          Session.set('hotelName', hotel.name);
-          Session.set('hotelId', hotel.id);    
-        }
-      }
-      
-    },
-    data: function () {
-      if (Meteor.user()) {
-        return {
-          devices: Devices.find({hotelId: Meteor.user().hotelId})
-        };
-      }
-    }
-  });
-
-  this.route('openPatronOrders', {
-    path: 'open-patron-orders',
-    waitOn: function () {
-      return [
-        Meteor.subscribe('openPatronOrders')
-      ];
-    } 
-  });
+  // this.route('openPatronOrders', {
+  //   path: 'open-patron-orders',
+  //   waitOn: function () {
+  //     return [
+  //       Meteor.subscribe('openPatronOrders')
+  //     ];
+  //   } 
+  // });
 
   this.route('patronOrderPage', {
     path: 'patron-order/:_id',
@@ -82,6 +56,22 @@ Router.map(function() {
           experience: experience
         };
       }
+    }
+  });
+
+  this.route('categories', {
+    path: '/experience-categories',
+    waitOn: function() {
+      return [
+        Meteor.subscribe('categories')
+      ];
+    },
+    data: function () {
+      return {
+        categories: function() {
+          return Categories.find();
+        }
+      };
     }
   });
 
@@ -112,22 +102,6 @@ Router.map(function() {
     },
     data: function() {
       return Experiences.findOne(this.params._id);
-    }
-  });
-
-  this.route('categories', {
-    path: '/experience-categories',
-    waitOn: function() {
-      return [
-        Meteor.subscribe('categories')
-      ];
-    },
-    data: function () {
-      return {
-        categories: function() {
-          return Categories.find();
-        }
-      };
     }
   });
 
