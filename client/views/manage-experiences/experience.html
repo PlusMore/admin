@@ -15,9 +15,9 @@
               <h3 class="modal-title">
                 {{pageTitle}}
                 <div class="pull-right">
-                  {{#afDeleteButton collection=experiences doc=this class="pull-right"}}
-                    <i class="fa fa-trash-o"></i> Delete
-                  {{/afDeleteButton}}
+                  {{#autoForm collection=experiences doc=this type='remove' class="pull-right"}}
+                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete</button>
+                  {{/autoForm}}
                 </div>
               </h3>
             </div>
