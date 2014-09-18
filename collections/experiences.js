@@ -23,89 +23,94 @@ EventDate = new SimpleSchema({
   }
 });
 
-Experiences = new Meteor.Collection('experiences', {
-  schema: new SimpleSchema({
-    title: {
-      type: String,
-      label: 'Title'
-    },
-    lead: {
-      type: String,
-      label: 'Lead'
-    },
-    price: {
-      type: Number,
-      label: "Price (Optional)",
-      optional: true
-    },
-    callToAction: {
-      type: String,
-      label: 'Call to Action',
-      optional: true
-    },
-    maxPartySize: {
-      type: Number,
-      label: 'Max Party Size',
-      optional: true
-    },
-    reservationStartTime: {
-      type: String,
-      label: 'Start Time',
-      optional: true
-    },
-    reservationEndTime: {
-      type: String,
-      label: 'End Time',
-      optional: true
-    },
-    reservationStartMinutes: {
-      type: Number,
-      optional: true
-    },
-    reservationEndMinutes: {
-      type: Number,
-      optional: true
-    },
-    venueName: {
-      type: String,
-      label: 'Venue Name'
-    },
-    phone: {
-      type: String,
-      label: 'Phone'
-    },
-    website: {
-      type: String,
-      label: 'Website'
-    },
-    description: {
-      type: String,
-      label: 'Description'
-    },
-    active: {
-      type: Boolean,
-      label: 'Is Active?'
-    },
-    category: {
-      type: String,
-      label: 'Category'
-    },
-    sortOrder: {
-      type: Number,
-      label: 'Sort Order'
-    },
-    tags: {
-      type: [String],
-      optional: true
-    },
-    yelpId: {
-      type: String,
-      label: "Yelp ID",
-      optional: true
-    }
-  })
+Experiences = new Meteor.Collection('experiences');
+
+Schema.Experience = new SimpleSchema({
+  title: {
+    type: String,
+    label: 'Title'
+  },
+  lead: {
+    type: String,
+    label: 'Lead'
+  },
+  price: {
+    type: Number,
+    label: "Price (Optional)",
+    optional: true
+  },
+  callToAction: {
+    type: String,
+    label: 'Call to Action',
+    optional: true
+  },
+  maxPartySize: {
+    type: Number,
+    label: 'Max Party Size',
+    optional: true
+  },
+  reservationStartTime: {
+    type: String,
+    label: 'Start Time',
+    optional: true
+  },
+  reservationEndTime: {
+    type: String,
+    label: 'End Time',
+    optional: true
+  },
+  reservationStartMinutes: {
+    type: Number,
+    optional: true
+  },
+  reservationEndMinutes: {
+    type: Number,
+    optional: true
+  },
+  venueName: {
+    type: String,
+    label: 'Venue Name'
+  },
+  phone: {
+    type: String,
+    label: 'Phone'
+  },
+  website: {
+    type: String,
+    label: 'Website'
+  },
+  description: {
+    type: String,
+    label: 'Description'
+  },
+  active: {
+    type: Boolean,
+    label: 'Is Active?'
+  },
+  category: {
+    type: String,
+    label: 'Category'
+  },
+  sortOrder: {
+    type: Number,
+    label: 'Sort Order'
+  },
+  tags: {
+    type: [String],
+    optional: true
+  },
+  tagGroups: {
+    type: [String],
+    optional: true
+  },
+  yelpId: {
+    type: String,
+    label: "Yelp ID",
+    optional: true
+  }
 });
 
+Experiences.attachSchema(Schema.Experience);
 Tags.TagsMixin(Experiences);
 
 Experiences.allowTags(function (userId) {

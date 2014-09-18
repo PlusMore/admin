@@ -4,10 +4,6 @@
     "pickadate": {
       "git": "https://github.com/patrickleet/meteor-pickadate.git"
     },
-    "tags": {
-      "git": "https://github.com/patrickleet/meteor-tags.git",
-      "tag": "v1.3"
-    },
     "plus-more-icons": {
       "git": "https://github.com/PlusMore/plus-more-icons.git",
       "tag": "v1.1"

@@ -22,7 +22,6 @@ pickadate
 aldeed:geocoder@0.3.0
 mrt:migrations@0.0.2
 mrt:googlemaps@0.0.2
-tags
 lezed1:bootstrap-errors@0.3.1
 plus-more-icons
 iron:router
@@ -30,4 +29,3 @@ ian:bootstrap-3
 ian:accounts-ui-bootstrap-3
 jeremy:selectize
 mrt:moment
-
