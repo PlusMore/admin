@@ -1,0 +1,10 @@
+<template name="experienceFilterGroupTags">
+  <div class="form-group">
+    <label class="control-label">{{filterGroup}} Tags</label>
+    <select class='tag-input' multiple="multiple">
+      {{#each filterTags}}
+        <option value="{{this}}" selected="true">{{this}}</option>
+      {{/each}}
+    </select>
+  </div> 
+</template>

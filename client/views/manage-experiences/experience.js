@@ -40,6 +40,21 @@ Template.experience.helpers({
   },
   pageTitle: function() {
     return this.title || 'New Experience';
+  },
+  categoryFilterGroups: function() {
+    // need current doc's id, as well as the name of the tag in array of objects
+    var that = this;
+    var filterGroups = Categories.findOne({_id: this.categoryId}).filterGroupTags;
+    var result = [];
+
+    _.each(filterGroups, function(filterGroup) {
+      result.push({
+        experienceId: that._id,
+        collection: 'experiences',
+        filterGroup: filterGroup
+      });
+    });
+    return result;
   }
 });
 
