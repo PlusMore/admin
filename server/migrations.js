@@ -21,4 +21,17 @@ Meteor.startup(function(){
       Meteor.call('geocodeHotelAddress', hotel._id, address);
     });
   });
+
+  Meteor.Migrations.add('set categoryId for experiences', function(log) {
+    log.info("Adding CategoryId to Experiences");
+    Experiences.find({categoryId: {$exists: false}}).forEach(function (experience) {
+      var categoryName = experience.category;
+      log.info('Found category name:' + categoryName);
+      var category = Categories.findOne({name: categoryName});
+      if (category) {
+        log.info('Updating experience ' +  experience.title + ': Adding CategoryId (' + category._id + ') for ' + category.name + ' Category');
+        Experiences.update({_id: experience._id}, {$set: {categoryId: category._id}});
+      }
+    });
+  });
 });

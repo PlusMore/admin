@@ -91,6 +91,9 @@ Schema.Experience = new SimpleSchema({
     type: String,
     label: 'Category'
   },
+  categoryId: {
+    type: String
+  },
   sortOrder: {
     type: Number,
     label: 'Sort Order'
