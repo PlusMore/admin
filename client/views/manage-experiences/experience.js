@@ -55,6 +55,32 @@ Template.experience.helpers({
       });
     });
     return result;
+  },
+  categoryOptions: function() {
+    var categories = Categories.find().fetch();
+    var categoryOptions = [];
+
+    _.each(categories, function(category) {
+      categoryOptions.push({
+        label: category.name,
+        value: category._id
+      });
+    });
+
+    return categoryOptions;
+  },
+  callToActionOptions: function() {
+    var actions = ['Reserve'];
+    var callToActionOptions = [];
+
+    _.each(actions, function(action) {
+      callToActionOptions.push({
+        label: action,
+        value: action.toLowerCase()
+      });
+    });
+
+    return callToActionOptions;
   }
 });
 
@@ -79,32 +105,4 @@ Template.experience.events({
       Meteor.call('geocodeExperienceAddress', experienceId, address);
     }
   }
-});
-
-Handlebars.registerHelper("categoryOptions", function() {
-  var categories = Categories.find().fetch();
-  var categoryOptions = [];
-
-  _.each(categories, function(category) {
-    categoryOptions.push({
-      label: category.name,
-      value: category.name
-    });
-  });
-
-  return categoryOptions;
-});
-
-Handlebars.registerHelper("callToActionOptions", function() {
-  var actions = ['Reserve'];
-  var callToActionOptions = [];
-
-  _.each(actions, function(action) {
-    callToActionOptions.push({
-      label: action,
-      value: action.toLowerCase()
-    });
-  });
-
-  return callToActionOptions;
 });
