@@ -6,7 +6,7 @@ All code related to the Items collection goes here.
 
 /+ ---------------------------------------------------- */
 
-Categories = new Meteor.Collection('categories')
+Categories = new Meteor.Collection('categories');
 
 Schema.Category = new SimpleSchema({
   name: {
@@ -24,7 +24,11 @@ Schema.Category = new SimpleSchema({
 });
 
 Categories.attachSchema(Schema.Category);
-
+Tags.TagsMixin(Categories);
+Categories.allowTags(function (userId) {
+  // only allow if user is admin
+  return Roles.userIsInRole(userId, ['admin']);
+});
 // Allow/Deny
 
 Categories.allow({

@@ -113,7 +113,8 @@ Router.map(function() {
     path: '/category/:_id',
     waitOn: function() {
       return [
-        Meteor.subscribe('category', this.params._id)
+        Meteor.subscribe('category', this.params._id),
+        Meteor.subscribe('tags', 'categories')
       ];
     },
     data: function() {

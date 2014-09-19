@@ -59,7 +59,7 @@ natestrauser:font-awesome@4.2.0
 npm-bcrypt@0.7.7
 observe-sequence@1.0.2
 ordered-dict@1.0.0
-patrickleet:tags@1.0.0
+patrickleet:tags@1.1.0
 percolatestudio:fastclick@0.6.7
 percolatestudio:percolatestudio-mixpanel@0.5.0
 pickadate@0.0.0

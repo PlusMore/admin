@@ -98,14 +98,6 @@ Schema.Experience = new SimpleSchema({
     type: Number,
     label: 'Sort Order'
   },
-  tags: {
-    type: [String],
-    optional: true
-  },
-  tagGroups: {
-    type: [String],
-    optional: true
-  },
   yelpId: {
     type: String,
     label: "Yelp ID",
@@ -117,8 +109,8 @@ Experiences.attachSchema(Schema.Experience);
 Tags.TagsMixin(Experiences);
 
 Experiences.allowTags(function (userId) {
-    // only allow if user is admin
-    return Roles.userIsInRole(userId, ['admin']);
+  // only allow if user is admin
+  return Roles.userIsInRole(userId, ['admin']);
 });
 
 // Allow/Deny
