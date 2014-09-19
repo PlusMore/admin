@@ -2,10 +2,12 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <a class='back' href="{{pathFor 'experiences'}}">
-          <i class="icon icon-back"></i>
-          Back to {{category}}
-        </a>
+        {{#with experienceCategory}}
+          <a class='back' href="{{pathFor 'experiences'}}">
+            <i class="icon icon-back"></i>
+            Back to {{name}}
+          </a>
+        {{/with}}
       </div>
     </div>
     <div class="row">

@@ -32,6 +32,9 @@ Template.experience.helpers({
   experiences: function() {
     return Experiences;
   },
+  experienceCategory: function() {
+    return Categories.findOne({_id: this.categoryId});
+  },
   photoSizeFriendly: function() {
     return this.photoSize ? parseInt(this.photoSize/1024) + ' Kb' : '';
   },

@@ -76,17 +76,17 @@ Router.map(function() {
   });
 
   this.route('experiences', {
-    path: '/experiences/:category',
+    path: '/experiences/:_id',
     waitOn: function() {
       return [
-        Meteor.subscribe('experiences', this.params.category),
-        Meteor.subscribe('category', this.params.category)
+        Meteor.subscribe('experiences', this.params._id),
+        Meteor.subscribe('category', this.params._id)
       ];
     },
     data: function () {
       return {
-        experiences: Experiences.find({category: this.params.category},{sort: {category: 1, sortOrder: 1}}),
-        category: Categories.findOne({name: this.params.category})
+        experiences: Experiences.find({categoryId: this.params._id},{sort: {category: 1, sortOrder: 1}}),
+        category: Categories.findOne({_id: this.params._id})
       };
     }
   });

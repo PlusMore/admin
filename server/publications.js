@@ -38,8 +38,8 @@ Meteor.publish('singleExperience', function(id) {
   return Experiences.find(id);
 });
 
-Meteor.publish('experiences', function(category) {
-  return Experiences.find({category: category});
+Meteor.publish('experiences', function(categoryId) {
+  return Experiences.find({categoryId: categoryId});
 });
 
 // Tags

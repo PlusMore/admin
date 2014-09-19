@@ -6,22 +6,24 @@ All code related to the Items collection goes here.
 
 /+ ---------------------------------------------------- */
 
-Categories = new Meteor.Collection('categories', {
-  schema: new SimpleSchema({
-    name: {
-      type: String,
-      label: 'Name'
-    },
-    active: {
-      type: Boolean,
-      label: 'Show this category in device dashboard'
-    },
-    iconClass: {
-      type: String,
-      label: 'Icon Class'
-    }
-  })
+Categories = new Meteor.Collection('categories')
+
+Schema.Category = new SimpleSchema({
+  name: {
+    type: String,
+    label: 'Name'
+  },
+  active: {
+    type: Boolean,
+    label: 'Show this category in device dashboard'
+  },
+  iconClass: {
+    type: String,
+    label: 'Icon Class'
+  }
 });
+
+Categories.attachSchema(Schema.Category);
 
 // Allow/Deny
 
