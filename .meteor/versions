@@ -52,9 +52,9 @@ mobile-status-bar@1.0.0
 mongo-livedata@1.0.4
 mongo@1.0.5
 mrt:googlemaps@0.0.2
-mrt:impicker@1.2.0
 mrt:migrations@0.0.2
 mrt:moment@2.8.1
+natestrauser:filepicker-plus@1.2.2
 natestrauser:font-awesome@4.2.0
 npm-bcrypt@0.7.7
 observe-sequence@1.0.2

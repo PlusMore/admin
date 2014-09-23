@@ -1,10 +1,10 @@
 Template.filepickerUpload.events({
   'click button' : function (e) {
     e.preventDefault();
-    var _this = this;
+    var that = this;
 
     filepicker.pick(function(InkBlob) {
-      Meteor.call('createExperienceForFilepickerUpload', InkBlob, _this.name);
+      Meteor.call('createExperienceForFilepickerUpload', InkBlob, that._id);
     });
   }
 });
