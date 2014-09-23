@@ -24,6 +24,23 @@ Schema.Hotel = new SimpleSchema({
   hotelServicesEnabled: {
     type: Boolean,
     label: "Enable Hotel Services"
+  },
+  photoUrl: {
+    type: String,
+    optional: true
+  },
+  photoName: {
+    type: String,
+    optional: true
+  },
+  photoSize: {
+    type: Number,
+    optional: true
+  },
+  geo: {
+    type: Object,
+    blackbox: true,
+    optional: true
   }
 });
 
