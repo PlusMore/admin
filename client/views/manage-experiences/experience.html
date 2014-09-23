@@ -2,10 +2,12 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <a class='back' href="{{pathFor 'experiences'}}">
-          <i class="icon icon-back"></i>
-          Back to {{category}}
-        </a>
+        {{#with experienceCategory}}
+          <a class='back' href="{{pathFor 'experiences'}}">
+            <i class="icon icon-back"></i>
+            Back to {{name}}
+          </a>
+        {{/with}}
       </div>
     </div>
     <div class="row">
@@ -15,9 +17,9 @@
               <h3 class="modal-title">
                 {{pageTitle}}
                 <div class="pull-right">
-                  {{#afDeleteButton collection=experiences doc=this class="pull-right"}}
-                    <i class="fa fa-trash-o"></i> Delete
-                  {{/afDeleteButton}}
+                  {{#autoForm collection=experiences doc=this type='remove' class="pull-right"}}
+                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete</button>
+                  {{/autoForm}}
                 </div>
               </h3>
             </div>
@@ -26,10 +28,20 @@
             <div class="extra modal-body">
               <div class="row">
                 <div class="col-md-12">
-                  {{> tagInput}}
+                  {{> experienceTagInput}}
                 </div>
               </div>
             </div>
+
+            {{#each categoryFilterGroups}}
+              <div class="extra modal-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    {{> experienceFilterGroupTags}}
+                  </div>
+                </div>
+              </div>
+            {{/each}}
 
             <div class="extra modal-body">
               <div class="row">
@@ -47,7 +59,7 @@
                 <div class="row">
                   <div class="col-md-4">
                     <legend>Experience Details</legend>
-                    {{> afQuickField name="category" firstOption="--Select a Category--" options=categoryOptions}}
+                    {{> afQuickField name="categoryId" firstOption="--Select a Category--" options=categoryOptions}}
                     {{> afQuickField name='sortOrder'}}
                     {{> afQuickField name='active'}}
                     {{> afQuickField name='title'}}

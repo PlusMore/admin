@@ -1,41 +1,42 @@
-Orders = new Meteor.Collection('orders', {
-  schema: new SimpleSchema({
-    read: {
-      type: Boolean
-    },
-    open: {
-      type: Boolean
-    },
-    requestedAt: {
-      type: Date
-    },
-    deviceId: {
-      type: String
-    },
-    hotelId: {
-      type: String
-    },
-    userId: {
-      type: String
-    },
-    type: {
-      type: String
-    },
-    confirmationDate: {
-      type: Date,
-      optional: true
-    },
-    status: {
-      type: String,
-      optional: true
-    },
-    cancelledDate: {
-      type: Date,
-      optional: true
-    }
-  })
+Orders = new Meteor.Collection('orders');
+
+Schema.Order = new SimpleSchema({
+  read: {
+    type: Boolean
+  },
+  open: {
+    type: Boolean
+  },
+  requestedAt: {
+    type: Date
+  },
+  deviceId: {
+    type: String
+  },
+  hotelId: {
+    type: String
+  },
+  userId: {
+    type: String
+  },
+  type: {
+    type: String
+  },
+  confirmationDate: {
+    type: Date,
+    optional: true
+  },
+  status: {
+    type: String,
+    optional: true
+  },
+  cancelledDate: {
+    type: Date,
+    optional: true
+  }
 });
 
+Orders.attachSchema(Schema.Order);
 // Allow/Deny
 
 Orders.allow({

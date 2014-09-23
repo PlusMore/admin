@@ -32,11 +32,55 @@ Template.experience.helpers({
   experiences: function() {
     return Experiences;
   },
+  experienceCategory: function() {
+    return Categories.findOne({_id: this.categoryId});
+  },
   photoSizeFriendly: function() {
     return this.photoSize ? parseInt(this.photoSize/1024) + ' Kb' : '';
   },
   pageTitle: function() {
     return this.title || 'New Experience';
+  },
+  categoryFilterGroups: function() {
+    // need current doc's id, as well as the name of the tag in array of objects
+    var that = this;
+    var filterGroups = Categories.findOne({_id: this.categoryId}).filterGroupTags;
+    var result = [];
+
+    _.each(filterGroups, function(filterGroup) {
+      result.push({
+        experienceId: that._id,
+        collection: 'experiences',
+        filterGroup: filterGroup
+      });
+    });
+    return result;
+  },
+  categoryOptions: function() {
+    var categories = Categories.find().fetch();
+    var categoryOptions = [];
+
+    _.each(categories, function(category) {
+      categoryOptions.push({
+        label: category.name,
+        value: category._id
+      });
+    });
+
+    return categoryOptions;
+  },
+  callToActionOptions: function() {
+    var actions = ['Reserve'];
+    var callToActionOptions = [];
+
+    _.each(actions, function(action) {
+      callToActionOptions.push({
+        label: action,
+        value: action.toLowerCase()
+      });
+    });
+
+    return callToActionOptions;
   }
 });
 
@@ -61,32 +105,4 @@ Template.experience.events({
       Meteor.call('geocodeExperienceAddress', experienceId, address);
     }
   }
-});
-
-Handlebars.registerHelper("categoryOptions", function() {
-  var categories = Categories.find().fetch();
-  var categoryOptions = [];
-
-  _.each(categories, function(category) {
-    categoryOptions.push({
-      label: category.name,
-      value: category.name
-    });
-  });
-
-  return categoryOptions;
-});
-
-Handlebars.registerHelper("callToActionOptions", function() {
-  var actions = ['Reserve'];
-  var callToActionOptions = [];
-
-  _.each(actions, function(action) {
-    callToActionOptions.push({
-      label: action,
-      value: action.toLowerCase()
-    });
-  });
-
-  return callToActionOptions;
 });

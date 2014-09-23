@@ -1,20 +1,26 @@
-Template.tagInput.rendered = function () {
+Template.filterGroupTagInput.helpers({
+  filterGroupTags: function () {
+    return this.category.filterGroupTags;
+  }
+});
+Template.filterGroupTagInput.rendered = function () {
   var that = this;
   this.$('.tag-input').selectize({
     valueField: 'name',
     labelField: 'name',
     searchField: ['name'],
     create: function(input, cb) {
-      Experiences.addTag(input, {_id: that.data._id});
-      var tag =  Meteor.tags.findOne({collection: 'experiences', name: input});
+      console.log('create tag:' + input);
+      Categories.addTag(input, 'filterGroup', {_id: that.data.category._id});
+      var tag =  Meteor.tags.findOne({collection: 'categories', name: input, group: 'filterGroup'});
 
       if (cb) {
-        cb(tag);
+        return cb(tag);
       } 
 
       return tag;
     },
-    options: Meteor.tags.find({collection: 'experiences'}).fetch(),
+    options: Meteor.tags.find({collection: 'categories', group: 'filterGroup'}).fetch(),
     render: {
         item: function(item, escape) {
             return '<div>' +
@@ -32,11 +38,11 @@ Template.tagInput.rendered = function () {
     },
     onItemAdd: function(value, $item) {
       console.log('add tag: ', value);
-      Experiences.addTag(value, {_id: that.data._id});
+      Categories.addTag(value, 'filterGroup', {_id: that.data.category._id});
     },
     onItemRemove: function(value) {
       console.log('remove tag: ', value);
-      Experiences.removeTag(value, {_id: that.data._id});
+      Categories.removeTag(value, 'filterGroup', {_id: that.data.category._id});
     }
   });
 };

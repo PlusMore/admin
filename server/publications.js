@@ -38,8 +38,8 @@ Meteor.publish('singleExperience', function(id) {
   return Experiences.find(id);
 });
 
-Meteor.publish('experiences', function(category) {
-  return Experiences.find({category: category});
+Meteor.publish('experiences', function(categoryId) {
+  return Experiences.find({categoryId: categoryId});
 });
 
 // Tags
@@ -53,8 +53,8 @@ Meteor.publish('categories', function() {
   return Categories.find();
 });
 
-Meteor.publish('category', function(name) {
-  return Categories.find({name: name});
+Meteor.publish('category', function(id) {
+  return Categories.find(id);
 });
 
 // Devices

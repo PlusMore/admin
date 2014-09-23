@@ -9,20 +9,18 @@ accounts-password
 less
 email
 alanning:roles@1.2.10
-aldeed:autoform@0.16.1
-aldeed:collection2@0.4.3
+aldeed:autoform
+aldeed:collection2
 percolatestudio:fastclick@0.6.7
 underscore
 jquery
 broth:inspector@0.2.2
 natestrauser:font-awesome@4.1.0
 percolatestudio:percolatestudio-mixpanel@0.5.0
-mrt:impicker@1.2.0
 pickadate
 aldeed:geocoder@0.3.0
 mrt:migrations@0.0.2
 mrt:googlemaps@0.0.2
-tags
 lezed1:bootstrap-errors@0.3.1
 plus-more-icons
 iron:router
@@ -30,4 +28,6 @@ ian:bootstrap-3
 ian:accounts-ui-bootstrap-3
 jeremy:selectize
 mrt:moment
+patrickleet:tags
+natestrauser:filepicker-plus
 

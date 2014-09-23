@@ -23,94 +23,104 @@ EventDate = new SimpleSchema({
   }
 });
 
-Experiences = new Meteor.Collection('experiences', {
-  schema: new SimpleSchema({
-    title: {
-      type: String,
-      label: 'Title'
-    },
-    lead: {
-      type: String,
-      label: 'Lead'
-    },
-    price: {
-      type: Number,
-      label: "Price (Optional)",
-      optional: true
-    },
-    callToAction: {
-      type: String,
-      label: 'Call to Action',
-      optional: true
-    },
-    maxPartySize: {
-      type: Number,
-      label: 'Max Party Size',
-      optional: true
-    },
-    reservationStartTime: {
-      type: String,
-      label: 'Start Time',
-      optional: true
-    },
-    reservationEndTime: {
-      type: String,
-      label: 'End Time',
-      optional: true
-    },
-    reservationStartMinutes: {
-      type: Number,
-      optional: true
-    },
-    reservationEndMinutes: {
-      type: Number,
-      optional: true
-    },
-    venueName: {
-      type: String,
-      label: 'Venue Name'
-    },
-    phone: {
-      type: String,
-      label: 'Phone'
-    },
-    website: {
-      type: String,
-      label: 'Website'
-    },
-    description: {
-      type: String,
-      label: 'Description'
-    },
-    active: {
-      type: Boolean,
-      label: 'Is Active?'
-    },
-    category: {
-      type: String,
-      label: 'Category'
-    },
-    sortOrder: {
-      type: Number,
-      label: 'Sort Order'
-    },
-    tags: {
-      type: [String],
-      optional: true
-    },
-    yelpId: {
-      type: String,
-      label: "Yelp ID",
-      optional: true
-    }
-  })
+Experiences = new Meteor.Collection('experiences');
+
+Schema.Experience = new SimpleSchema({
+  title: {
+    type: String,
+    label: 'Title'
+  },
+  lead: {
+    type: String,
+    label: 'Lead'
+  },
+  price: {
+    type: Number,
+    label: "Price (Optional)",
+    optional: true
+  },
+  callToAction: {
+    type: String,
+    label: 'Call to Action',
+    optional: true
+  },
+  maxPartySize: {
+    type: Number,
+    label: 'Max Party Size',
+    optional: true
+  },
+  reservationStartTime: {
+    type: String,
+    label: 'Start Time',
+    optional: true
+  },
+  reservationEndTime: {
+    type: String,
+    label: 'End Time',
+    optional: true
+  },
+  reservationStartMinutes: {
+    type: Number,
+    optional: true
+  },
+  reservationEndMinutes: {
+    type: Number,
+    optional: true
+  },
+  venueName: {
+    type: String,
+    label: 'Venue Name'
+  },
+  phone: {
+    type: String,
+    label: 'Phone'
+  },
+  website: {
+    type: String,
+    label: 'Website'
+  },
+  description: {
+    type: String,
+    label: 'Description'
+  },
+  active: {
+    type: Boolean,
+    label: 'Is Active?'
+  },
+  categoryId: {
+    type: String,
+    label: 'Category'
+  },
+  sortOrder: {
+    type: Number,
+    label: 'Sort Order'
+  },
+  yelpId: {
+    type: String,
+    label: "Yelp ID",
+    optional: true
+  },
+  photoUrl: {
+    type: String
+  },
+  photoName: {
+    type: String
+  },
+  photoSize: {
+    type: Number
+  },
+  geo: {
+    type: Object,
+    blackbox: true
+  }
 });
 
+Experiences.attachSchema(Schema.Experience);
 Tags.TagsMixin(Experiences);
 
 Experiences.allowTags(function (userId) {
-    // only allow if user is admin
-    return Roles.userIsInRole(userId, ['admin']);
+  // only allow if user is admin
+  return Roles.userIsInRole(userId, ['admin']);
 });
 
 // Allow/Deny
@@ -133,21 +143,19 @@ Experiences.allow({
 // Methods
 
 Meteor.methods({
-  createExperienceForFilepickerUpload: function (InkBlob, category) {
-    if (Meteor.isServer) {
-      var id = Experiences.insert({
-        owner: Meteor.userId(),
-        photoUrl: InkBlob.url,
-        photoName: InkBlob.filename,
-        photoSize: InkBlob.size,
-        active: false,
-        inProgress: true,
-        created: new Date(),
-        category: category || null
-      }, {validate: false}, function(err, result) {
-        if (err) console.log(err);
-      });
-    }
+  createExperienceForFilepickerUpload: function (InkBlob, categoryId) {
+    console.log('file uploaded: ', InkBlob);
+    var id = Experiences.insert({
+      owner: Meteor.userId(),
+      photoUrl: InkBlob.url,
+      photoName: InkBlob.filename,
+      photoSize: InkBlob.size,
+      active: false,
+      created: new Date(),
+      categoryId: categoryId
+    }, {validate: false}, function(err, result) {
+      if (err) console.log('Error creating experience:', err);
+    });
   },
   changeExperiencePhoto: function(InkBlob, experienceId) {
     check(InkBlob, Object);

@@ -11,4 +11,27 @@ Meteor.startup(function(){
       Meteor.call('geocodeExperienceAddress', experience._id, address);
     });
   });
+
+  Meteor.Migrations.add('geocode old hotels', function(log) {
+    // log writes to the console as well as to the database. 
+    log.info("Geocoding Hotels for all experiences which do not have geo data");
+    Hotels.find({geo: {$exists : false}}).forEach(function (hotel) {
+      var address = "{0}, {1}, {2}".format(hotel.street, hotel.city, hotel.state);
+      log.info("Adding geo for {0} to Experience {1}".format(address, hotel._id));
+      Meteor.call('geocodeHotelAddress', hotel._id, address);
+    });
+  });
+
+  Meteor.Migrations.add('set categoryId for experiences', function(log) {
+    log.info("Adding CategoryId to Experiences");
+    Experiences.find({categoryId: {$exists: false}}).forEach(function (experience) {
+      var categoryName = experience.category;
+      log.info('Found category name:' + categoryName);
+      var category = Categories.findOne({name: categoryName});
+      if (category) {
+        log.info('Updating experience ' +  experience.title + ': Adding CategoryId (' + category._id + ') for ' + category.name + ' Category');
+        Experiences.update({_id: experience._id}, {$set: {categoryId: category._id}});
+      }
+    });
+  });
 });

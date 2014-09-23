@@ -31,40 +31,14 @@ Router.onBeforeAction('loading');
 
 Router.map(function() {
 
-  this.route('devices', {
-    path: '/devices',
-    waitOn: function() {
-      return [
-        Meteor.subscribe('devices')
-      ];
-    },
-    onRun: function() {
-      if (Meteor.user()) {
-        var hotel = Hotels.findOne(Meteor.user().hotelId);
-        if (hotel) {
-          Session.set('hotelName', hotel.name);
-          Session.set('hotelId', hotel.id);    
-        }
-      }
-      
-    },
-    data: function () {
-      if (Meteor.user()) {
-        return {
-          devices: Devices.find({hotelId: Meteor.user().hotelId})
-        };
-      }
-    }
-  });
-
-  this.route('openPatronOrders', {
-    path: 'open-patron-orders',
-    waitOn: function () {
-      return [
-        Meteor.subscribe('openPatronOrders')
-      ];
-    } 
-  });
+  // this.route('openPatronOrders', {
+  //   path: 'open-patron-orders',
+  //   waitOn: function () {
+  //     return [
+  //       Meteor.subscribe('openPatronOrders')
+  //     ];
+  //   } 
+  // });
 
   this.route('patronOrderPage', {
     path: 'patron-order/:_id',
@@ -85,18 +59,34 @@ Router.map(function() {
     }
   });
 
-  this.route('experiences', {
-    path: '/experiences/:category',
+  this.route('categories', {
+    path: '/experience-categories',
     waitOn: function() {
       return [
-        Meteor.subscribe('experiences', this.params.category),
-        Meteor.subscribe('category', this.params.category)
+        Meteor.subscribe('categories')
       ];
     },
     data: function () {
       return {
-        experiences: Experiences.find({category: this.params.category},{sort: {category: 1, sortOrder: 1}}),
-        category: Categories.findOne({name: this.params.category})
+        categories: function() {
+          return Categories.find();
+        }
+      };
+    }
+  });
+
+  this.route('experiences', {
+    path: '/experiences/:_id',
+    waitOn: function() {
+      return [
+        Meteor.subscribe('experiences', this.params._id),
+        Meteor.subscribe('category', this.params._id)
+      ];
+    },
+    data: function () {
+      return {
+        experiences: Experiences.find({categoryId: this.params._id},{sort: {category: 1, sortOrder: 1}}),
+        category: Categories.findOne({_id: this.params._id})
       };
     }
   });
@@ -115,22 +105,6 @@ Router.map(function() {
     }
   });
 
-  this.route('categories', {
-    path: '/experience-categories',
-    waitOn: function() {
-      return [
-        Meteor.subscribe('categories')
-      ];
-    },
-    data: function () {
-      return {
-        categories: function() {
-          return Categories.find();
-        }
-      };
-    }
-  });
-
   this.route('addCategory', {
     path: '/add-category'
   });
@@ -139,7 +113,8 @@ Router.map(function() {
     path: '/category/:_id',
     waitOn: function() {
       return [
-        Meteor.subscribe('category', this.params._id)
+        Meteor.subscribe('category', this.params._id),
+        Meteor.subscribe('tags', 'categories')
       ];
     },
     data: function() {

@@ -6,6 +6,6 @@ Template.categories.helpers({
     return this.active ? 'Enabled' : 'Disabled';
   },
   categoryLink: function() {
-    return Router.routes['experiences'].path({category: this.name});
+    return Router.routes['experiences'].path({_id: this._id});
   }
 });
