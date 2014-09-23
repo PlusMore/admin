@@ -99,6 +99,19 @@ Schema.Experience = new SimpleSchema({
     type: String,
     label: "Yelp ID",
     optional: true
+  },
+  photoUrl: {
+    type: String
+  },
+  photoName: {
+    type: String
+  },
+  photoSize: {
+    type: Number
+  },
+  geo: {
+    type: Object,
+    blackbox: true
   }
 });
 
@@ -131,20 +144,18 @@ Experiences.allow({
 
 Meteor.methods({
   createExperienceForFilepickerUpload: function (InkBlob, categoryId) {
-    if (Meteor.isServer) {
-      var id = Experiences.insert({
-        owner: Meteor.userId(),
-        photoUrl: InkBlob.url,
-        photoName: InkBlob.filename,
-        photoSize: InkBlob.size,
-        active: false,
-        inProgress: true,
-        created: new Date(),
-        categoryId: categoryId
-      }, {validate: false}, function(err, result) {
-        if (err) console.log(err);
-      });
-    }
+    console.log('file uploaded: ', InkBlob);
+    var id = Experiences.insert({
+      owner: Meteor.userId(),
+      photoUrl: InkBlob.url,
+      photoName: InkBlob.filename,
+      photoSize: InkBlob.size,
+      active: false,
+      created: new Date(),
+      categoryId: categoryId
+    }, {validate: false}, function(err, result) {
+      if (err) console.log('Error creating experience:', err);
+    });
   },
   changeExperiencePhoto: function(InkBlob, experienceId) {
     check(InkBlob, Object);
