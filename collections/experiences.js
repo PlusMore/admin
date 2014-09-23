@@ -87,12 +87,9 @@ Schema.Experience = new SimpleSchema({
     type: Boolean,
     label: 'Is Active?'
   },
-  category: {
+  categoryId: {
     type: String,
     label: 'Category'
-  },
-  categoryId: {
-    type: String
   },
   sortOrder: {
     type: Number,
@@ -133,7 +130,7 @@ Experiences.allow({
 // Methods
 
 Meteor.methods({
-  createExperienceForFilepickerUpload: function (InkBlob, category) {
+  createExperienceForFilepickerUpload: function (InkBlob, categoryId) {
     if (Meteor.isServer) {
       var id = Experiences.insert({
         owner: Meteor.userId(),
@@ -143,7 +140,7 @@ Meteor.methods({
         active: false,
         inProgress: true,
         created: new Date(),
-        category: category || null
+        categoryId: categoryId
       }, {validate: false}, function(err, result) {
         if (err) console.log(err);
       });
