@@ -26,6 +26,11 @@ Template.patronOrder.helpers({
   },
   confirmationDateTimeAgo: function() {
     return moment(this.confirmationDate).fromNow();
+  },
+  when: function() {
+    var when = moment(this.reservation.date).zone(this.reservation.zone);
+    when = when.format('MMMM Do YYYY, h:mm a') + " (" + when.calendar() + ")";
+    return when;
   }
 });
 
