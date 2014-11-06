@@ -74,6 +74,9 @@ Meteor.methods({
       var experience = Experiences.findOne(order.reservation.experienceId);
       var reservation = order.reservation;
 
+      var when = moment(reservation.date).zone(reservation.zone);
+      when = when.format('MMMM Do YYYY, h:mm a') + " (" + when.calendar() + ")";
+
       Email.send({
         to: reservation.emailAddress,
         bcc: 'order-service@plusmoretablets.com',
@@ -82,13 +85,13 @@ Meteor.methods({
         text: "Your reservation for {0} has been confirmed.\n\n".format(experience.title) + 
               "Reservation Details:\n" + 
               "For: {0}\n".format(experience.title) + 
-              "When: {0}\n".format(reservation.when) + 
+              "When: {0}\n".format(when) + 
               "Party Name: {0}\n".format(reservation.partyName) + 
               "Party Size: {0}\n".format(reservation.partySize) + 
               "\nVenue Info" + 
               "\n{0}".format(experience.venueName) + 
-              "\n{0}".format(experience.street) + 
-              "\n{0}, {1} {2}".format(experience.city, experience.state, experience.zip) + 
+              "\n{0} {1}".format(experience.geo.streetNumber, experience.geo.streetName) + 
+              "\n{0}, {1} {2}".format(experience.geo.city, experience.geo.state, experience.geo.zipcode) + 
               "\n\nIf you have any questions, you may respond directly to this email."
       });
     }

@@ -43,8 +43,8 @@
         <div class="venue">
           {{#with experience}}
             <strong>{{venueName}}</strong>
-            <span>{{street}}</span>
-            <span>{{city}}, {{state}}</span>
+            <span>{{geo.streetNumber}} {{geo.streetName}}</span>
+            <span>{{geo.city}}, {{geo.state}} {{geo.zipcode}}</span>
           {{/with}}
         </div>
        
