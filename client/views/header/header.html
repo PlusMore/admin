@@ -24,13 +24,12 @@
             <li class="{{activeRouteClass 'categories'}}">
               <a href="{{pathFor 'categories'}}">Experiences</a>
             </li>
+            <li class="{{activeRouteClass 'assets'}}">
+              <a href="{{pathFor 'assets'}}">Assets</a>
+            </li>
             <li class="{{activeRouteClass 'configureYelp'}}">
               <a href="{{pathFor 'configureYelp'}}">Yelp API</a>
             </li>
-          {{/if}}
-
-          {{#if canSeeContentManagerPages}}
-            
           {{/if}}
 
           {{#if isHotelStaff}}

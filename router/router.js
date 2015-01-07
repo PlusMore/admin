@@ -187,6 +187,15 @@ Router.map(function() {
     }
   });
 
+  this.route('assets', {
+    path: '/assets',
+    waitOn: function() {
+      return [
+        Meteor.subscribe('assets', 'general')
+      ];
+    }
+  });
+
   // Pages
 
   this.route('homepage', {
@@ -198,5 +207,7 @@ Router.map(function() {
   this.route('dashboard', {
     path: '/dashboard'
   });
+
+
 
 });

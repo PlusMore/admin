@@ -114,3 +114,10 @@ Meteor.publish('patronOrder', function(id) {
     Experiences.find(order.reservation.experienceId)
   ];
 });
+
+Meteor.publish('assets', function(type) {
+  if(Roles.userIsInRole(this.userId, 'admin')) {
+    return PlusMoreAssets.find();
+  } 
+});
+
