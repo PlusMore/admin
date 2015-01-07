@@ -1,0 +1,10 @@
+<template name="asset">
+  <div class="asset list-item">
+    <a href="{{fileInfo.url}}" target="_blank">{{fileInfo.filename}}</a>
+    <input type="text" value="{{fileInfo.url}}">
+    <div class="pull-right">
+      <span>{{fileInfo.size}} bytes</span>
+      <a href="#" class="btn btn-danger js-delete">Delete</a>
+    </div>
+  </div>
+</template>
