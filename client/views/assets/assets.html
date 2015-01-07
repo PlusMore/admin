@@ -18,15 +18,7 @@
             </div>
             <div class="modal-body">
               {{#each assets}}
-                <div class="asset list-item">
-                  {{#with fileInfo}}
-                    <a href="{{url}}" target="_blank">{{filename}}</a>
-                    <input type="text" value="{{url}}">
-                    <div class="pull-right">
-                      <span>{{size}} bytes</span>
-                    </div>
-                  {{/with}}
-                </div>
+                {{> asset}}
               {{/each}}
             </div>
           </div><!-- /.modal-content -->

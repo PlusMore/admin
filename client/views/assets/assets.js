@@ -14,5 +14,5 @@ Template.assets.events({
         fileInfo: InkBlob
       });
     });
-  }
+  },
 });
