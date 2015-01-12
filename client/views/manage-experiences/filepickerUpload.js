@@ -1,10 +1,10 @@
 Template.filepickerUpload.events({
-  'click button' : function (e) {
+  'click button' : function (e, tmpl) {
     e.preventDefault();
     var that = this;
 
     filepicker.pick(function(InkBlob) {
-      Meteor.call('createExperienceForFilepickerUpload', InkBlob, that._id);
+      Meteor.call('addPhotoToExperienceGallery', InkBlob, that._id);
     });
   }
 });

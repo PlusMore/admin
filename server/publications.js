@@ -38,6 +38,13 @@ Meteor.publish('singleExperience', function(id) {
   return Experiences.find(id);
 });
 
+Meteor.publish('experiencePhotos', function(id) {
+  return PlusMoreAssets.find({
+    type: 'experience',
+    refId: id
+  });
+});
+
 Meteor.publish('experiences', function(categoryId) {
   return Experiences.find({categoryId: categoryId});
 });
