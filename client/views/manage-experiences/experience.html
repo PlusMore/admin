@@ -1,5 +1,6 @@
 <template name="experience">
   <div class="container">
+    
     <div class="row">
       <div class="col-md-12">
         {{#with experienceCategory}}
@@ -10,6 +11,7 @@
         {{/with}}
       </div>
     </div>
+
     <div class="row">
       <div class="col-md-12">
           <div class="modal-content inline">
@@ -109,5 +111,8 @@
           </div><!-- /.modal-content -->
       </div>    
     </div>
+
+    {{> experiencePhotoGallery}}
+
   </div>
 </template>

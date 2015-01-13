@@ -97,7 +97,8 @@ Router.map(function() {
       return [
         Meteor.subscribe('singleExperience', this.params._id),
         Meteor.subscribe('tags', 'experiences'),
-        Meteor.subscribe('categories')
+        Meteor.subscribe('categories'),
+        Meteor.subscribe('experiencePhotos', this.params._id)
       ];
     },
     data: function() {
