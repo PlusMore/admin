@@ -112,6 +112,10 @@ Schema.Experience = new SimpleSchema({
   geo: {
     type: Object,
     blackbox: true
+  },
+  hasPerk: {
+    type: Boolean,
+    label: "Has Perk?"
   }
 });
 
