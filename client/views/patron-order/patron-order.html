@@ -37,14 +37,14 @@
         <p>Cancelled {{cancelledDateMomentAgo}}</p>
       {{else}}
         <div class="reservation-details">
-          <p>{{reservation.when}}</p>
+          <p>{{when}}</p>
           <p>{{reservation.partyName}} - Party of {{reservation.partySize}}</p>
         </div>
         <div class="venue">
           {{#with experience}}
             <strong>{{venueName}}</strong>
-            <span>{{street}}</span>
-            <span>{{city}}, {{state}}</span>
+            <span>{{geo.streetNumber}} {{geo.streetName}}</span>
+            <span>{{geo.city}}, {{geo.state}} {{geo.zipcode}}</span>
           {{/with}}
         </div>
        

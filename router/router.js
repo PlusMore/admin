@@ -97,7 +97,8 @@ Router.map(function() {
       return [
         Meteor.subscribe('singleExperience', this.params._id),
         Meteor.subscribe('tags', 'experiences'),
-        Meteor.subscribe('categories')
+        Meteor.subscribe('categories'),
+        Meteor.subscribe('experiencePhotos', this.params._id)
       ];
     },
     data: function() {
@@ -187,6 +188,15 @@ Router.map(function() {
     }
   });
 
+  this.route('assets', {
+    path: '/assets',
+    waitOn: function() {
+      return [
+        Meteor.subscribe('assets', 'general')
+      ];
+    }
+  });
+
   // Pages
 
   this.route('homepage', {
@@ -198,5 +208,7 @@ Router.map(function() {
   this.route('dashboard', {
     path: '/dashboard'
   });
+
+
 
 });

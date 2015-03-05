@@ -1,5 +1,6 @@
 <template name="experience">
   <div class="container">
+    
     <div class="row">
       <div class="col-md-12">
         {{#with experienceCategory}}
@@ -10,6 +11,7 @@
         {{/with}}
       </div>
     </div>
+
     <div class="row">
       <div class="col-md-12">
           <div class="modal-content inline">
@@ -62,6 +64,7 @@
                     {{> afQuickField name="categoryId" firstOption="--Select a Category--" options=categoryOptions}}
                     {{> afQuickField name='sortOrder'}}
                     {{> afQuickField name='active'}}
+                    {{> afQuickField name='hasPerk'}}
                     {{> afQuickField name='title'}}
                     {{> afQuickField name='lead'}}
                     {{> afQuickField name='description' rows="4"}}
@@ -109,5 +112,8 @@
           </div><!-- /.modal-content -->
       </div>    
     </div>
+
+    {{> experiencePhotoGallery}}
+
   </div>
 </template>

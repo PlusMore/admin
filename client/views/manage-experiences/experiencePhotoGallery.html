@@ -1,0 +1,33 @@
+<template name="experiencePhotoGallery">
+
+  <div class="row">
+    <div class="col-md-12">
+        
+      <div class="modal-content inline">
+        
+        <div class="modal-header">
+          <h3 class="modal-title">
+            Photo Gallery
+          </h3>
+        </div>
+
+        <div class="extra modal-body">
+          {{#each photos}}
+            {{> asset}}
+          {{/each}}
+        </div>
+
+        <div class="modal-footer">
+          {{> photoGalleryUpload}}
+        </div>
+
+      </div><!-- /.modal-content -->
+
+    </div>    
+  </div>
+  
+</template>
+
+<template name='photoGalleryUpload'>
+  <a type="submit" class="btn btn-default">Add Photos</a>
+</template>

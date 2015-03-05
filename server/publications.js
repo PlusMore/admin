@@ -38,6 +38,13 @@ Meteor.publish('singleExperience', function(id) {
   return Experiences.find(id);
 });
 
+Meteor.publish('experiencePhotos', function(id) {
+  return PlusMoreAssets.find({
+    type: 'experience',
+    refId: id
+  });
+});
+
 Meteor.publish('experiences', function(categoryId) {
   return Experiences.find({categoryId: categoryId});
 });
@@ -114,3 +121,10 @@ Meteor.publish('patronOrder', function(id) {
     Experiences.find(order.reservation.experienceId)
   ];
 });
+
+Meteor.publish('assets', function(type) {
+  if(Roles.userIsInRole(this.userId, 'admin')) {
+    return PlusMoreAssets.find();
+  } 
+});
+
