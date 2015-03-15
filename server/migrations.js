@@ -48,7 +48,12 @@ Meteor.startup(function(){
         Devices.update(device._id, {$set: {
           roomId: roomId
         }});
-        console.log('Device roomId set.')
+        console.log('Device roomId set.');
+        Stays.update(device.stayId, {$set: {
+          roomId: roomId,
+          roomName: device.location
+        }});
+        console.log('Stay roomId and Name set')
       }
     });
   });
