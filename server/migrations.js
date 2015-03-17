@@ -34,4 +34,27 @@ Meteor.startup(function(){
       }
     });
   });
+
+  Meteor.Migrations.add("Create Rooms for Deprecated Device Locations", function() {
+    Devices.find().forEach(function (device) {
+      if (!device.roomId) {
+        console.log('Migrating device ', device.location);
+        var roomId = Rooms.insert({
+          name: device.location,
+          hotelId: device.hotelId,
+          stayId: device.stayId
+        });
+        console.log('Room created ', roomId);
+        Devices.update(device._id, {$set: {
+          roomId: roomId
+        }});
+        console.log('Device roomId set.');
+        Stays.update(device.stayId, {$set: {
+          roomId: roomId,
+          roomName: device.location
+        }});
+        console.log('Stay roomId and Name set')
+      }
+    });
+  });
 });
