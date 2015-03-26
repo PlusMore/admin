@@ -4,6 +4,7 @@ APP_ENV=development
 PORT?=3000
 MONGO_URL?=mongodb://localhost:27017/plusmore
 MONGO_OPLOG_URL?=mongodb://localhost:27017/local
+TAG?=
 
 start:
 	NODE_OPTIONS=$(NODE_OPTIONS) \
@@ -29,3 +30,7 @@ ddp:
 start-ddp:
 	DDP_DEFAULT_CONNECTION_URL=http://localhost:3030 \
 	meteor
+
+tag:
+	git tag -a $(TAG) -m 'tagging release'
+	git push origin $(TAG)
