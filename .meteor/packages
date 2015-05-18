@@ -9,7 +9,7 @@ accounts-password
 less
 email
 alanning:roles@1.2.10
-aldeed:autoform
+aldeed:autoform@=5.1.2
 aldeed:collection2
 underscore
 jquery
