@@ -59,7 +59,7 @@ Meteor.startup(function(){
   });
 
   Meteor.Migrations.add('Add default tax rate to hotels', function() {
-    Hotels.find({taxRate: {$exists: false}}).forEach(function(hotel) {
+    Hotels.find({taxRate: {$exists: false}}).forEach(function (hotel) {
       Hotels.update({_id: hotel._id}, {$set: {taxRate: 0.06}});
       console.log('Hotel tax rate set to 0.06 (6%)');
     });
