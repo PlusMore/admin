@@ -19,6 +19,7 @@ Schema.Hotel = new SimpleSchema({
   },
   taxRate: {
     type: Number,
+    decimal: true,
     min: 0,
     label: "Tax Rate (%)"
   },
