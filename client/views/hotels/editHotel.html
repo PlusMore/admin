@@ -12,11 +12,11 @@
         <div class="form-group">
           <label class="control-label" for="venueName">Address Search</label>
           <input type="text" name="address" class="form-control" >
-        </div>      
+        </div>
 <pre>({{geo.latitude}}, {{geo.longitude}})
 {{geo.streetNumber}} {{geo.streetName}}
 {{geo.city}} {{geo.state}} ({{geo.stateCode}}), {{geo.zipcode}}
-{{geo.country}} ({{geo.countryCode}})</pre>    
+{{geo.country}} ({{geo.countryCode}})</pre>
 
 
 <!--         {{> afQuickField name='street'}}
@@ -24,6 +24,7 @@
         {{> afQuickField name='state'}}
         {{> afQuickField name='zip'}} -->
         {{> afQuickField name='phone'}}
+        {{> afQuickField name='taxRate' step='0.01'}}
         {{> afQuickField name='trackAnalytics'}}
         {{> afQuickField name='hotelServicesEnabled'}}
       </div>
