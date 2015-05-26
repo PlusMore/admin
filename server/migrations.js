@@ -53,15 +53,15 @@ Meteor.startup(function(){
           roomId: roomId,
           roomName: device.location
         }});
-        console.log('Stay roomId and Name set')
+        console.log('Stay roomId and Name set');
       }
     });
   });
 
   Meteor.Migrations.add('Add default tax rate to hotels', function() {
     Hotels.find({taxRate: {$exists: false}}).forEach(function (hotel) {
-      Hotels.update({_id: hotel._id}, {$set: {taxRate: 0.06}});
-      console.log('Hotel tax rate set to 0.06 (6%)');
+      Hotels.update({_id: hotel._id}, {$set: {taxRate: 0.08875}});
+      console.log('Hotel tax rate set to 0.08875 (8.875%)');
     });
-  })
+  });
 });
