@@ -17,6 +17,12 @@ Schema.Hotel = new SimpleSchema({
     type: String,
     label: 'Phone'
   },
+  taxRate: {
+    type: Number,
+    decimal: true,
+    min: 0,
+    label: "Tax Rate (%)"
+  },
   trackAnalytics: {
     type: Boolean,
     label: "Track Analytics"
@@ -64,7 +70,7 @@ Meteor.methods({
   changeHotelPhoto: function(InkBlob, hotelId) {
     check(InkBlob, Object);
     var user = Meteor.user();
-    
+
     if (user && Roles.userIsInRole(user, ['admin'])) {
       if (hotelId) {
         var hotel = Hotels.findOne();
@@ -76,13 +82,13 @@ Meteor.methods({
           photoUrl: InkBlob.url,
           photoName: InkBlob.filename,
           photoSize: InkBlob.size
-        }}, {validate: false});  
+        }}, {validate: false});
       }
     } else {
       Errors.throw('You do not have proper access to this functionality.');
     }
   },
-  geocodeHotelAddress: function(id, address) {    
+  geocodeHotelAddress: function(id, address) {
     if (Meteor.isServer) {
       check(id, String);
       check(address, String);
@@ -104,10 +110,10 @@ Meteor.methods({
       console.log(address, address);
       var geo = geocoder.geocode(address);
       console.log('geo', geo[0]);
-      
+
       return Hotels.update(id, {$set: {
         geo: geo[0]
-      }}, {validate: false});  
+      }}, {validate: false});
     }
   }
 });
