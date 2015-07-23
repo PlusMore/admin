@@ -2,10 +2,10 @@
 Meteor.startup(function(){
   // geocode experiences
   Meteor.Migrations.add('geocode experiences', function(log) {
-    // log writes to the console as well as to the database. 
+    // log writes to the console as well as to the database.
     log.info("Geocoding Experiences for all experiences which do not have geo data");
     Experiences.find({geo: {$exists : false}}).forEach(function (experience) {
-      
+
       var address = "{0}, {1}, {2}".format(experience.street, experience.city, experience.state);
       log.info("Adding geo for {0} to Experience {1}".format(address, experience._id));
       Meteor.call('geocodeExperienceAddress', experience._id, address);
@@ -13,7 +13,7 @@ Meteor.startup(function(){
   });
 
   Meteor.Migrations.add('geocode old hotels', function(log) {
-    // log writes to the console as well as to the database. 
+    // log writes to the console as well as to the database.
     log.info("Geocoding Hotels for all experiences which do not have geo data");
     Hotels.find({geo: {$exists : false}}).forEach(function (hotel) {
       var address = "{0}, {1}, {2}".format(hotel.street, hotel.city, hotel.state);
@@ -53,8 +53,15 @@ Meteor.startup(function(){
           roomId: roomId,
           roomName: device.location
         }});
-        console.log('Stay roomId and Name set')
+        console.log('Stay roomId and Name set');
       }
+    });
+  });
+
+  Meteor.Migrations.add('Add default tax rate to hotels', function() {
+    Hotels.find({taxRate: {$exists: false}}).forEach(function (hotel) {
+      Hotels.update({_id: hotel._id}, {$set: {taxRate: 0.08875}});
+      console.log('Hotel tax rate set to 0.08875 (8.875%)');
     });
   });
 });
