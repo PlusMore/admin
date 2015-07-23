@@ -23,6 +23,11 @@ Schema.Hotel = new SimpleSchema({
     min: 0,
     label: "Tax Rate (%)"
   },
+  importsEmail: {
+    type: String,
+    optional: true,
+    label: "Imports Email Address (optional)"
+  },
   trackAnalytics: {
     type: Boolean,
     label: "Track Analytics"
